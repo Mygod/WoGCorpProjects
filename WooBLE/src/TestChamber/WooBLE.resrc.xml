@@ -1,0 +1,14 @@
+<ResourceManifest>
+	<Resources id="scene_WooBLE">
+		<SetDefaults idprefix="" path="./" />
+<Image id="IMAGE_IMAGES_BLACKSQUARE" path="res/images/blacksquare" />
+<Image id="IMAGE_IMAGES_WHITESQUARE" path="res/images/whitesquare" />
+<Image id="IMAGE_LEVELIMAGES_GEARBALLBUSTER" path="res/images/levelimages/gearBallbuster" />
+<Image id="IMAGE_LEVELIMAGES_SPIKEGRAY_GROUP" path="res/images/levelimages/spikeGray_group" />
+<Image id="IMAGE_FISTYREACHESOUT_BG" path="res/levels/FistyReachesOut/bg" />
+<Image id="IMAGE_IVYTOWER_TOWERLEFT" path="res/levels/IvyTower/TowerLeft" />
+<Image id="IMAGE_WOGCD_GROUNDTILE" path="res/levels/wogcd/groundTile" />
+<Image id="IMAGE_LEVELIMAGES_SPIKEBLACK_GROUP" path="res/images/levelimages/spikeBlack_group" />
+<Image id="IMAGE_UPPERSHAFT_BLASTWALL" path="res/levels/UpperShaft/blastwall" />
+</Resources>
+</ResourceManifest>

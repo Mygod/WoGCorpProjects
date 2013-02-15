@@ -1,0 +1,17 @@
+*.txt
+*.sh
+readme_linux
+3rd_party_linux
+doc\*.*
+src\*.py
+src\*.rc
+src\*.ui
+src\*.qrc
+src\*.class
+src\files.xml.xml
+src\*.bat
+src\images\*.png
+src\images\*.ico
+src\images\*.icns
+src\images\goos\*.png
+src\louie\*.*

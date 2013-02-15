@@ -1,0 +1,34 @@
+<level allowskip="true" autobounds="false" ballsrequired="1" letterboxed="false" strandgeom="false" textcolor="255,255,255" timebugprobability="0" visualdebug="false">
+
+	
+	<camera aspect="normal" endpos="0,0" endzoom="1">
+		<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
+</camera>
+<camera aspect="widescreen" endpos="0,0" endzoom="1">
+		<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
+</camera>
+<levelexit filter="" id="theExit" pos="718.83,386.57" radius="75">
+	</levelexit>
+<pipe>
+<Vertex x="718.83" y="386.57" />
+<Vertex x="923.75" y="386.57" />
+<Vertex x="923.75" y="2033.22" />
+</pipe>
+<BallInstance angle="0" id="goo1" type="common" x="111.4" y="105.54" />
+<BallInstance angle="0" id="goo2" type="common" x="161.24" y="20.52" />
+<BallInstance angle="0" id="goo3" type="common" x="55.7" y="17.59" />
+<fire depth="0" particles="fireArmBurn" radius="50" x="-557.61" y="322.06" />
+<BallInstance angle="0" id="goo9" type="AnchorFriendly" x="-47.11" y="1932.85" />
+<BallInstance angle="0" id="goo10" type="common" x="-41.52" y="1752.4" />
+<BallInstance angle="0" id="goo4" type="Fuse" x="-440.38" y="293.23" />
+<BallInstance angle="0" id="goo5" type="Fuse" x="-350.16" y="293.23" />
+<targetheight y="10000" />
+<BallInstance angle="0" id="goo6" type="balloon" x="-364.19" y="447.3" />
+<BallInstance angle="0" id="goo7" type="balloon" x="-439.97" y="449.74" />
+<BallInstance angle="0" id="goo8" type="Pokey" x="-117.32" y="31.78" />
+<Strand gb1="goo3" gb2="goo1" />
+<Strand gb1="goo2" gb2="goo1" />
+<Strand gb1="goo3" gb2="goo2" />
+<Strand gb1="goo9" gb2="goo10" />
+<Strand gb1="goo4" gb2="goo5" />
+</level>

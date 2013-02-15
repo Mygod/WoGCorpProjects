@@ -1,0 +1,173 @@
+v0.14 RC3
+*Fix: If layers were sorted "on load" one of them could be missing from the display
+*Fix: Autoattach error always showed, even is there was a strand
+*Change: decay and thrust attributes given types and limits and the like.
+*Change: Clean Resources also checks for copies of original files
+- And swaps the resource paths back to the originals
+
+
+v0.14 RC2
+*Fix: Ball always shows as "dirty" after loading. (Orange disk icon)
+- will now only show dirty if elements were sorted on load.
+*Fix: Properties Pane disconnected from element after Save / Play
+- Selected element will also stay selected after testing.
+*Added: Critical Error if ball can autoattach but has no strand
+*Added: Advice if ball is a MOM and is static or sticky so it cannot be popped
+*Added: Advice if ball is a MOM and can be attached. It won't pop while attached.
+
+v0.14 RC1:
+Lots of Changes to Resources, Importing Files and Cloning
+* Clone now copies ALL custom images into the new ball folder
+
+* Import Resources copies ALL custom images into the ball folder
+--- Imported duplicate filenames are not overwritten, files renamed ...2,3 on import.
+--- Sound files now imported to /sounds folder
+
+* Now includes the level name in the resource ID
+--- Uses Full 2DBoy pattern  IMAGE_BALL_{BALLLNAME}_{FILENAME}
+--- This prevents the "Duplicate Resources between 2 balls" problem
+--- Ignores duplicate imports (will not add a file if it's already a resource)
+--- Unique Naming.. will append a number if the imported resource name already exists
+
+* Resource Filenames cannot contain spaces
+--- Existing resources with spaces in the filenames will be flagged as errors.
+--- Resources that are copied to the ball folder will have spaces removed.
+
+* Ensures all files in goomod have lowercase extension  .png  .ogg  
+
+Other things...
+*New: Platform specific file.xml's with hash and size values
+*Change: Refresh pixmap cache and view on Import resources as well as Update Resources
+
+*Check: static=true and draggable=true crashes the game
+* Fix: No error if part image attribute empty
+* Fix: Throw sound "not last" error reported.. even if throw sound was last
+* Fix: Deleted items are now removed from the graphical view immediately.
+
+*Faster: Sorting of Ball Tree.. 
+--- could be slow with lots of layers, or lots of stuff very out of order.
+
+*Added: Critical Error if strand type=rigid but no mass is set
+
+* Removed: Confirmed Unused Attributes
+- <ball> flammable
+- <strand> rope and geom
+
+v0.13 Beta
+* New: Edit Ball filter (All Goo Balls, Custom Only, Original Only)
+* New: Play level filter (All Levels, Custom Only, Original Only)
+* Faster: Dependancy Calculations (Experimental.. ish.. new but seems to work)
+* Fix: Exception if Resource file has <SetDefaults> tag with no path attribute
+* Fix: Exception if Resource Image or Sound are missing id or path attributes.
+* Fix: Incomplete Processing of <SetDefaults> on global resource tree reload
+* Included: debug.bat (in program folder).. for catching the output text from early exceptions.
+* Added: Hyperlink to the Ball Reference guide in the About window.
+* Extended: Statusbar messages for invalid attributes now show for 10s (not 1)
+* More Info: Clearer Warnings and Advice, links to Error descriptions page on goofans.com
+
+
+v0.12 Beta
+* New: Sorts the elements into order on load and save
+- Layers are sorted by the "layer" attribute
+- Everything is rearranged into their "normal" places
+* New: Visual Debug mode in Test Chamber - Toggle Button
+* New: Show/Hide Buttons for "geom" (shape and ranges), strands, markers and shadows
+
+
+v0.11 Beta
+* Some simple GUI interaction added
+- Part graphics can be moved and scaled
+- Part ranges can be moved and resized (Green and Orange Rectangles)
+* Fix : Dirty status icon code moved to refresh timer, seems to update better now.
+* Fix: Bug in cloning where it sometimes only re-id's the first resource in a list
+* Change : Paste Here removed. Paste is still OK.
+* autodisable now explained... moved to Behaviour Category
+* mass attribute added to strands -  Required for testing rigid.
+- Seems to have no effect on spring or rope
+
+More Checks and warnings
+* Now warns if ball name attribute is not an eXaCT match for Resources id.
+- And will offer to correct it for you (on startup)
+* Advice (on save) if no part called "body" was found
+- WooGLE looks for a part called "body" to display the goo image.
+* Advice (on save) regarding throw sound event
+* towermass min_value removed... On save Critical warning if set to -1 -> 1
+* Checks stacking=true vs shape=circle..  which crashes the game.
+* Warning if strand minlen is larger than maxlen (causes problems in the game)
+* Advice if strand burnspeed is set, but fireparticles is not.
+* Advice if strand ignitedelay > ball burntime (means fire will not spread)
+
+v0.1 Beta
+* Tab icons now display "dirty status" of the ball
+-- Blue = Clean / All Changes Saved
+-- Orange = There are unsaved Changes 
+-- Red = The ball is "Read-Only" and has changes
+* Improved Tree and Properties List Handling
+- Auto-Select Ball Root on window open
+- Clears Trees and List when no windows are open
+* Revisions to Model and Visuals to account for special "onfire" state
+* Resource Path validation
+- Files not found will cause Resource Tree issues
+- Verification on entry... you cannot set a path to a file that does not exist
+- CaSe correction on entry (Windows only) 
+
+- version 0.0.5 Alpha
+- Added: New attributes for contains, statescales and shape to ensure valid.
+- Added: Full Dependancy Tree - descends through MOM's and Dispensers
+- Added: Recursion Checks : Critical Warning if A contains B ... eventually.. contains A
+- Changed: Dependancy Calculation Progress window to "hourglass" cursor (faster)
+- Added: custom image resources for custom particle effects go in Global resource.xml.xsl
+- Fix: Double-clicking to the right of a category entry.. causes error output
+- Added: Property List only shows "root" when there are categories
+
+- version 0.0.4 Alpha
+- Fix: Saving resource.xml to the wrong filename
+- Fix: Changing a path/file in a resource requires reload before it updates
+- Fix: Attribute issues that are resolved don't clear the RED on the category (immediately)
+- Fix: DirtyTracker and UndoTracker not checking if value has actually changed
+- Added: Several newly discovered properties of balls (some might not work)
+	New Event :  extinguish
+	New Ball Attributes  isantigravattached thrust decay dragdampeningfactor maxdragforce
+	New Strand type : rigid  (crashed ODE)
+- Added: Range rectangles to ball view
+	 (Initial Position range in Green, x/yrange in Orange)
+- Added: Some "Enhanced" checking of attribute values...
+	 Things that must be set if another attribute is true
+	 Things that can cause glitches (very low drag mass)
+- Added: (Windows Only) Warns if resource file extension (png or ogg) is not lower case
+- Added: (Windows Only) Corrects resource paths to exact case of the actual filename
+- Change: Attenuation... attributes now allowed to be 2 arg
+- Added: Warning if Attenuation is 2 arg, but first arg Non-Zero (on Save or play)
+- Change: particles 'state' now mandatory.. crashed game without it.
+- Change: Now prevents saving of changes to Original Balls and insists you clone them
+
+
+- version 0.0.3 Alpha
+* Test: Entirely new method to Clone Balls
+        Changes all the resource id's with the OLD_BALL_NAME .. to the NEW_BALL_NAME
+	Leaves new Addin id blank, hopefully that'll stop us getting too many with id.myball
+
+* New: Background Colour toolbar. This changes bgcolour per ball / window rather than globally
+
+* New: Ball attributes now appear in collapsable categories that match my write up.
+       Category Items inherit font (Bold and RED) from children
+
+* New: Property List (and Tree list) can now be sorted by column (attribute sorting resets when you swap item)
+
+* New: Running compiled exe without Console Window
+       stdout and stderr redirected to app_path/wooble.log
+
+* Fix: Crashes when invalid parts appear in sinanim (and you try to fix them)
+* Fix: Not commiting changes to sinanim part attribute correctly
+* Fix: Collapses sinvariance trees when CheckBox List window closed
+
+- version 0.0.2: Alpha
+* Lots of changes / tweaks to the XML model
+* new configurable reallist_attribute  (for xrange,yrange,jump,fling,attenuation....)
+* Tabbed MDI Area works "finally"!
+* Lots of code clean-up
+* Corrected files.xml.xml
+* _ (underscore) now allowed in new ball names
+
+- version 0.0.1: Alpha
+* Based on WooGLE v0.75/6 (ish)

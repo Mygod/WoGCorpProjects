@@ -1,0 +1,35 @@
+<!-- Created by Goovie Maker v0.01 -->
+<movie>
+    <actor depth="0" image="IMAGE_BEAUTYANDTHETENTACLE_BG" name="Background" type="image">
+        <keyframe alpha="255" angle="0" interpolation="linear" position="685.93,238.55" scale="2.696,1.226" time="0" />
+<keyframe alpha="255" angle="0" position="291.17,258.83" scale="3.16,1.496" time="100" />
+</actor>
+<actor depth="1" image="IMAGE_BEAUTYANDTHETENTACLE_POST1" name="Post_Loop" type="image">
+<keyframe alpha="255" angle="0" interpolation="linear" position="1241.18,350" scale="2,2" time="0" />
+<keyframe alpha="255" angle="0" position="-697.73,350" scale="2,2" time="1.9" />
+</actor>
+<actor depth="3" image="IMAGE_BEAUTYANDTHETENTACLE_WIRES2" name="Wire_Loop1" type="image">
+<keyframe alpha="255" angle="0" interpolation="linear" position="2249.95,208.12" scale="7.838,0.572" time="0.0" />
+<keyframe alpha="255" angle="0" position="279.89,207.77" scale="7.586,0.572" time="1.9" />
+</actor>
+<actor depth="3" image="IMAGE_BEAUTYANDTHETENTACLE_WIRES2" name="Wire_Loop2" type="image">
+<keyframe alpha="255" angle="0" interpolation="linear" position="279.89,207.77" scale="7.838,0.572" time="0.0" />
+<keyframe alpha="255" angle="0" position="-1691.53,207" scale="7.586,0.572" time="1.9" />
+</actor>
+<actor depth="0" image="IMAGE_BLUSTERYDAY_WINDMILLPROPELLER" name="Windmill Prop" type="image">
+<keyframe alpha="0" angle="0" position="0,0" scale="1,1" time="0.0" />
+<keyframe alpha="255" angle="180" interpolation="linear" position="1420.55,290.4" scale="1,1" time="28" />
+<keyframe alpha="255" angle="0" position="-669.39,355.86" scale="1,1" time="32" />
+</actor>
+<actor depth="0" image="IMAGE_BLUSTERYDAY_WINDMILLBASE" name="WindMill Base" type="image">
+<keyframe alpha="0" angle="0" position="0,0" scale="1,1" time="0.0" />
+<keyframe alpha="255" angle="0.0" interpolation="linear" position="1383.76,458.29" scale="0.8,0.8" time="28" />
+<keyframe alpha="255" angle="0.0" position="-707.86,526.44" scale="0.8,0.8" time="32" />
+</actor>
+<actor align="center" depth="0" font="FONT_SIGNPOST" name="Hello World!" text="TEXT_NEWMOVIE3_STR1" type="text">
+<keyframe alpha="0" angle="0" position="0.0,-32.25" scale="1,1" time="0.0" />
+<keyframe alpha="255" angle="0" interpolation="linear" position="1312.07,413.25" scale="0.5,0.5" time="13" />
+<keyframe alpha="255" angle="720" position="-306.07,233.13" scale="1,1" time="18" />
+<keyframe time="40.0" />
+</actor>
+</movie>

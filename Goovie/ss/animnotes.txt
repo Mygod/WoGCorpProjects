@@ -1,0 +1,40 @@
+MOVIE
+Actor First Frame Cannot be EMPTY... 
+or ALPHA CANNOT BE EMPTY or.... 
+the encoders doing something odd or....
+
+
+
+Alpha only works when Color is also included and Intepolation is set to linear
+Although Color can be 255,255,255 to have no effect.
+
+If Alpha is set but not 255.....
+' Warning if Color is empty or interpolation not linear or both
+
+If color is set to "anything"..
+' Warning if alpha is not set..
+
+
+Color without Alpha... crashes Game... 
+but color with Alpha can be no interpolation.. then colour is fixed and Alpha is always 255.
+
+
+SceneLayer Scale is averaged (sx,sy) ==> (avg(sx,sy),avg(sx,sy))
+Then multiplied by Animation Scale
+
+If Animation doesn't have a scale... then SceneLayerScale is still averaged...
+Represent in WooGLE??
+
+
+Angles
+Takes "shortest" path from Start Angle to End Angle
+
+0 to 359  <=>  0 to -1
+0 to 181  <=>  0 to -179
+0 to 360  <=>  0 to 0  (does nothing)
+
+0 to 180 to 360 = full 360 anti-clockwise
+360 to 180 to 0 = full 360 clockwise
+
+0 to 720  =  full 360 anti-clockwise
+0 to 1080 =  720 anti-clockwise 

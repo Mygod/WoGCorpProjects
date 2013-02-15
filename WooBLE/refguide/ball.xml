@@ -1,0 +1,320 @@
+<h4>General Overview</h4>
+Every Gooball starts with the <tt><ball></tt> tag with a series of attributes (name, shape, mass...)
+Inside the ball tag may live the following tags:
+<tt>part</tt> defining the balls appearence (usually the first part is the body image, followed by eyes and other features).
+<tt>marker</tt> = definition of the cursor when pointing at a ball, or detaching it
+<tt>shadow</tt> = a shadow image/overlay that only shows above geometry.
+<tt>particles</tt> = defined for various states such as sleeping or falling, it adds a particle effect above or beneath the ball
+<tt>strand</tt> = the parts other balls walk on, mainly the definition of the structures physics this ball will form
+<tt>detachstrand</tt> = image and length of detaching visualisation.
+<tt>splat</tt>  = drops of this goo, shown when the player clicks on or releases this ball and when it dies.
+<tt>sound</tt> tags for the soundeffects for various events (attach, throw, death...)
+<tt>sinvariance</tt> for animations of the bodyparts in different states (walking, falling, sleeping...)
+
+All these tags are <i>(strictly)</i> optional and which are present depends on the ball's type.
+A ball with no <tt>part</tt> tags will be invisible, a ball with no <tt>sound</tt> tags will be silent... etc.
+For descriptions of these tags, and more detailed explainations on their attributes... follow the links.
+
+<h4>Core Attributes</h4>
+These attributes are always (or usually) required for any normal functioning ball.
+<dt><tt>name</tt> : Required
+<dd>This is the unique identifier for the ball type. It must be unique in the game. It should also exactly match the folder name in which the files are held, and the <tt>id</tt> entry in the resources file.
+
+<dt><tt>shape</tt> : Required : Examples: rectangle,100,100   circle,30    circle,50,0.25
+<dd>This defines the shape and size of the solid part of the Goo Ball, it's geometry.
+<dd>To specify a square or rectangular ball  <tt>rectangle,{width},{height}</tt>
+<dd>To specify a round ball <tt>circle,{diameter}</tt>
+<dd>An <i>optional</i> variation number may be included as the final parameter. This number defines the variation in size of the balls and thickness of the strands. It can be in the range 0 -> 1, although values above 0.5 are not recommended.
+If 0 is set (or is omitted) all balls will be exactly the size specified, If 1 is specified the balls will range randomly from (almost) 0 -> 2 x size The "original" balls used numbers in the range 0.1 -> 0.3
+<b>The variation can be included on both circle and rectangle balls.</b>
+
+<dt><tt>mass</tt> : Required: Float : Examples 10,20,100,600
+<dd>Defines the normal mass of the ball.
+<dd>See also <tt>towermass</tt> and <tt>dragmass</tt>
+
+<dt><tt>strands</tt> : Required : Integer : Examples 0,1,2,3,4
+<dd>The maximum number of strands this ball will attempt to connect when being attached to a structure.
+<dd>Does not affect the number of strands which can subsequently be attached to it.
+<dd>If 0, this goo will not attach to a structure.
+<dd>If 1, this goo will attach to a structure with only 1 strand.
+<dd>If 2 (or more), this goo will only attach if 2 (or more) strands can be formed.
+
+<dt><tt>material</tt>
+
+
+<dt><tt>towermass</tt> : Required : Float : Examples 3,5,10,200
+<dd>When a ball is "climbing" on a structure, it can have a different mass to when it is walking on the ground.
+<dd>Most of the original balls that can climb have a <tt>towermass</tt> approx. 1/3 -> 1/10 of their normal 
+
+<tt>mass</tt>
+<dd>Note: This value can also be negative... with "interesting" results.
+
+<dt><tt>dragmass</tt> : Optional : Float
+<dd>Defines the masss of the ball while the being dragged by the player
+<dd>Only used on "Block" and "Window" balls in the original game
+<dd>Only affects how the ball reacts to forcefields and other balls while being dragged.</dt>
+
+<h4>Behaviour Attributes</h4>
+These attributes govern the actions of the Goos when they are "left alone"
+
+<dt><tt>climber</tt> : true / false : Default = true
+<dd>Will jump onto and climb on strands
+<dd>NB: Interacts with <tt>climbspeed</tt> to determine if ball actually climbs or not.
+<dd>If <tt>climber</tt> set to false.. the ball will not climb or grab onto strands
+<dd>If set to true (or omitted).. climbing behaviour is determined by <tt>climbspeed</tt>
+
+<dt><tt>antigrav</tt> : float : Default = Not antigrav
+<dd>Antigrav force multiplier when this ball is attached and in a forcefield with <tt>antigrav=true</tt>
+<dd>In a gravity- field - Produces an upward (against gravity direction) force = <tt>antigrav</tt> * 
+
+<tt>mass</tt>
+<dd>eg. Balloon : <tt>mass=20 antigrav=4.5</tt> produces a force of 90 (just sufficient to lift 3xcommon balls 
+
+<tt>mass=30</tt>)
+<dd>In a force field - <tt>mass is irrelevant</tt> and will lift <tt>antigrav</tt> Goo Balls regardless of their 
+
+type / mass.
+<dd>eg. Balloon : <tt>antigrav=4.5</tt> Will lift a structure made of 4 balls <i>of any type</i>. Will not lift 
+
+a structure made of 5.
+<dd>Has a special use on Ugly see <a href=http://goofans.com/world-of-goo/levels/chapter-2-little-miss-world-
+
+of-goo/genetic-sorting-machine>Genetic Sorting Machine</a>
+
+<dt><tt>isantigravunattached</tt> : true / false : Default = true
+<dd>Antigravity force also applies when unattached
+
+<dt><tt>static</tt> : true / false : Default = false
+<dd>The ball is fixed in position and cannot be moved. Used mostly for Anchors and Dispensers.
+
+<dt><tt>staticwhensleeping</tt> : true / false : Default = false
+<dd>Fixed in position and immune to "kicking" when asleep
+
+<dt><tt>wakedist</tt> : float : Default = 0 (no Wake)
+<dd>Wakes sleeping Goos within the given distance
+
+<dt><tt>jump</tt> : float,float : Default = 0 (no jump)
+<dd>Will jump in the air when they "walk" into another Goo Ball
+<dd>The speed of the jump is random in the range given  {min},{max}
+
+<dt><tt>jumponwakeup</tt> true / false : Default = false
+<dd>Will jump in the air when woken, if <tt>jump</tt> values are specified.
+
+<dt><tt>autoattach</tt> true / false : Default = false
+<dd>Attaches automatically (when falling)
+<dd>If strands>1 then requires 2 strands to attach
+<dd>But will also form new strands (up to <tt>strands</tt> max) with other attached balls after is it 
+
+attached.</dt>
+
+<h4>Movement Attributes</h4>
+These attributes govern the Goo Balls motion
+
+<dt><tt>walkspeed</tt> : Float : Required
+<dd>Nominal speed the Goo Ball will walk along the ground.
+<dd>Set to 0 will prevent the ball from walking. Original Balls ranged from 0.05 -> 0.15
+<dd>Actual walking speed is affected by <tt>speedvariance</tt>
+
+<dt><tt>climbspeed</tt> : Float : Required
+<dd>Nominal speed the Goo Ball will climb along strands.
+<dd>Set to 0 will prevent the ball from climbing. Original Balls ranged from 0.9 -> 2.8
+<dd>Actual climbing speed is affected by <tt>speedvariance</tt>
+
+<dt><tt>speedvariance</tt> : Float : Required
+<dd>The variation in speed of walking and climbing from the "nominal" value.
+<dd>Can be in the range 0 -> 1
+<dd>Set to 0, all balls will walk / climb at exactly the same speed
+<dd>Set to 1, some will not move, some will "race" at 2 x nominal speed
+<dd>Original Balls used either 0 or 0.2
+
+<dt><tt>dampening</tt> : Float : Default=0
+<dd>dampening factor for falling / flying movement.
+<dd>Used on balloon-type balls to reduce fast movement and make them "feel" like the have air resistance.
+<dd>Original Balls used values around 0.1, but range seems to be 0 -> whatever
+
+<dt><tt>walkforce</tt> : Float : Default={unknown} but seems to work for most balls
+<dd>Some balls, mainly the square ones, require additional force to be able to "walk"
+<dd>Set to 0 to prevent walking
+<dd>Bone are set to 3000
+<dd>common and common_black (and others) are set to 500
+<dd>common_albino is not set... but is still able to walk OK.</dt>
+
+
+<h4>Player Interaction</h4>
+These attributes control how the Goos respond to the Player.
+<dt><tt>draggable</tt> : true / false : Default = true
+<dd>These balls can be picked up by player
+
+<dt><tt>detachable</tt> : true / false : Default = True
+<dd>Can be detached from a structure
+
+<dt><tt>hingedrag</tt> : true / false : Default = false
+<dd>If False (or omitted) the Goo Ball is grabbed by it's centre point
+<dd>If True the ball is grabbed by whenever it is clicked, and with rotate about that point.
+<dd>Set True on Blocks and Window Balls
+
+<dt><tt>fling</tt> : {Max Arrow Length},{Speed Multiplier} : Default = (no fling)
+<dd>fling is what happens to Bit and Pilot balls when you grab them
+<dd>The first number sets the maximum length of the shooting arrow.
+<dd>The second number is a multiplier to calculate the final speed based on the length when you release the 
+
+mouse button.
+<dd>Original Balls used 200,2.5
+<dd>Setting 2.5,200 gives you the same max speed, but the arrow is so tiny you can't see it
+<dd>The image for the shooting arrow is set by the <tt>detachstand</tt> tag</dt>
+
+
+<h4>Level Interaction</h4>
+These attributes control how the Goos interact with various elements of the level.. pipes, spikes etc.
+<dt><tt>invulnerable</tt> : true / false : Default = false
+<dd>These Goos are NOT killed by objects tagged 'mostlydeadly'
+<dd>But they are killer by objects tagged 'deadly'
+
+<dt><tt>suckable</tt> : true / false : Default = true
+<dd>If set to false, these Goos cannot be collected by the pipe
+
+<dt><tt>autobounds</tt> : true / false : Default = true
+<dd>If set to false, these Goos have NO effect on the autobounds / explored area.
+
+<dt><tt>autoboundsunattached</tt> : true / false : Default = false
+<dd>These Goos affect the autobounds / explored area even when unattached
+
+<dt><tt>sticky</tt> : true / false : Default = false
+<dd>These Goos are always Sticky, and will stick to any geometry object.
+<dd>Used on AnchorSticky and AnchorStickyInvisible
+
+<dt><tt>stickyattached</tt> : true / false : Default = false
+<dd>These Goos are Sticky when they are attached to a structure
+<dd>Used on BombSticky and Pokey
+
+<dt><tt>stickyunattached</tt> : true / false : Default = false
+<dd>These Goos are Sticky when they are attached to a structure 
+<dd>Only used on BombSticky</dt>
+
+
+<h4>Other Ball Interaction</h4>
+These attributes govern how the Goos behave when they encounter other Goos.
+<dt><tt>grumpy</tt> : true / false : Default = false
+<dd>When set to true this Goo will not accept strands.
+
+<dt><tt>collidewithattached</tt> : true / false : Default = false
+<dd>When set to true this ball will collide with attached balls
+<dd>Used on Beauty, Ugly, Blocks, Windows and UndeletePill
+
+<dt><tt>collideattached</tt> : true / false : Default = false
+<dd>When set to true, this ball will collide with other attached balls when it is attached
+<dd>Used (meaningfully) on Balloons and Pilot
+
+<dt><tt>stacking</tt> : true / false : Default = false
+<dd>When set to true, these balls can be stacked.
+<dd>Used on Blocks and Windows
+<dd>Note: Stacking behaviour breaks down in range of an open pipe, and the blocks slide through each other.
+
+<dt><tt>maxattachspeed</tt> : float : Default = unknown (but less than 1000)
+<dd>The maximum speed the ball can be moving be attached to a structure.
+<dd>Set to 1000 for Balloons, Bone and Pokey  (All other balls default)</dt>
+
+
+<h4>Cosmetic Attributes</h4>
+These attributes control the Goos look, but do not significantly affect game play.
+<dt><tt>blinkcolor</tt> : RGB Colour : Default = No Blink
+<dd>If set to a valid RGB colour, the Goo balls will randomly blink their eyes in this colour
+<dd>If Invalid or omitted the Goo Balls will no blink.
+
+<dt><tt>hideeyes</tt> : true / false : Default = true
+<dd>Shrink and hide <tt>part</tt> marked as <tt>eye</tt> when cursor is "far away"
+<dd>Set to false the eyes remain open and "alert" at all times.
+
+<dt><tt>alwayslookatmouse</tt> : true / false : Default = false
+<dd>Set to true the pupils follow the cursor
+<dd>Set to false the pupils follow the direction of movement or stay still.
+
+<dt><tt>statescales</tt> : {statename},{scalefactor} : Default = {All States},{1}
+<dd>Allows the Goos to change size when they are in a particular state.
+<dd>Multiple states and scales allowed <tt>attached,1.75, detaching,1.3, tank,1.0</tt>
+<dd>Each state must be a valid recognised value (state list)
+
+<dt><tt>isbehindstrands</tt> : true / false : Default = false
+<dd>If set to true, the Goo Ball is displayed behind any strands
+<dd> Used on Beauty, Ugly and UndeletePill
+
+<dt><tt>distantsounds</tt> : true / false : Default = true
+<dd>If true or omitted, sounds reduce in volume when ball is far away
+<dd>If false the sound is the same volume wherever you are in the level
+<dd>Only used on UtilProductLauncherScreamer to produce the "Gun Rising" sound effect.
+
+<h4>Burn Attributes</h4>
+These attributes control whether the Goos are flammable, and how the behave when lit.
+<dt><tt>burntime</tt> : float : Default = 0 (No Burn)
+<dd>Number of seconds between ignition and explosion / death
+<dd>Set to 0 to make the ball non-flammable
+
+<dt><tt>detonateforce</tt> : float : Default = 0
+<dd>breaking Force at Goo location when it explodes
+<dd>Set to 0 the Goo will not "explode" and will just die.
+
+<dt><tt>detonateradius</tt> : float : Required if <tt>detonateforce</tt> > 0 
+<dd>Maximum range of explosion
+<dd>The breaking force reduces linearly from <tt>detonateforce</tt> at the center to 0 at this distance.
+<dd>** This is related to the 'break=?' tag of geometry... but Shhh! ;)
+
+<dt><dd>explosionparticles</tt> : {particle effect} : Default={None}
+<dd>Additional particle effect on explosion
+<dd>Since the ball also dies when it explode the "death splat" will display regardless.
+<dd>Must be a Point-Source Non-Repeating particle effect.
+
+<dt><tt>flammable</tt> : true /false : Unused/Irrelavant.
+<dd>Completely overridden by <tt>burntime</tt> in determing flammability.
+<dd>Only set FALSE on water
+
+
+<h4>MOM / Popping Attributes</h4>
+These attributes control whether the Goos are "pop-able", and what they contain
+<dt><tt>contains</tt> : {Number},{BallType} : Default = None (Not pop-able)
+<dd>this ball contains other balls, which will pop into when it touches an object with <tt>'ballbuster'</tt> 
+
+tag.
+<dd>A ball can contain a number of different balls <tt>16,BeautyProduct,2,BeautyProductEye</tt>
+<dd>The game will crash if this attribute creates a circular reference of ball type
+<dd>ie. A ball cannot contain itself.
+<dd> and a parent ball cannot contain a child ball which contains the parent ball.
+
+<dt><tt>popduration</tt> : float : Default = 1 (or 2)
+<dd>Time takens for the "mother" ball to shrink away to nothing.
+<dd>Gradually over this time it releases its child balls.
+<dd>Original Balls set to around 0.25s, but can be longer (much longer)
+
+<dt><tt>popparticles</tt> : {particle effect} : Required if <tt>contains</tt> is set
+<dd>Particles emitted when the ball is "busted" (also replaces death SPLAT with this effect)
+<dd>Must be a Point-Source Non-Repeating particle effect
+
+<dt><tt>popsound</tt> : {Sound Resource} : Required if <tt>contains</tt> is set
+<dd>Sound to play on pop
+
+<dt><tt>popdelay</tt> : {min delay},{max delay} : Default=0,0
+<dd>Gives a random delay between min and max (in seconds) between the ball being "busted" and it popping.
+<dd>Note: <tt>popparticles</t> display immediately on "busting"
+<dd><tt>popsound</tt> plays after the delay when it actually pops.
+
+<h4>Dispenser Attributes</h4>
+<dt><tt>spawn</tt> : {BallType} : Default= None (No dispense)
+<dd>Creates / Dispenses a ball of the given type when it is clicked</dt>
+
+
+<h4>Unknown Attributes</h4>
+These functions of these attributes are currently "a mystery"
+<dt><tt>attenuationdeselect attenuationdrag attenuationdrop attenuationselect</tt>
+<dd>Format : either 2 or 3 numbers seperated by commas
+<dd>eg. <tt>0, 1</tt>  <tt>0.05, 1.2, 1.0</tt> 
+<dd>Used on Blocks, BombSticky,Bone,Pokey and EvilEye
+<dd>All 4 are given, or none are.
+
+<dt><tt>autodisable</tt> : true / false : Default = false (assumed, since only True's are set)
+<dd>Used on Blocks and Windows
+
+<dt><tt>fallingattachment</tt> : true / false : Default = true (assumed, since only False is set)
+<dd>Used only on Hex
+
+<dt><tt>stuckattachment</tt> : true / false : Default = Unknown
+<dd>Set True on AnchorSticky and AnchorStickyInvisible
+<dd>Set False on Bombs, Pokey and some UtilGooGlobber's</dt>

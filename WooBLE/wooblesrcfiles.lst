@@ -1,0 +1,17 @@
+*.txt
+*.sh
+doc\*.*
+src\TestChamber\*.*
+src\*.py
+src\*.rc
+src\*.ui
+src\*.qrc
+src\*.class
+src\files.win.xml
+src\files.linux.xml
+src\files.mac.xml
+src\*.bat
+src\images\*.png
+src\images\wooble.ico
+src\images\wooble.icns
+src\louie\*.*

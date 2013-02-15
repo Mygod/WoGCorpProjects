@@ -1,0 +1,27 @@
+<scene backgroundcolor="0,0,0" maxx="1000" maxy="2000" minx="-1000" miny="-100">
+	<linearforcefield antigrav="true" dampeningfactor="0" force="0,-10" type="gravity" />
+<line anchor="1000.25,319.92" id="right" normal="-1,0" tag="detaching" />
+<line anchor="-874.47,354.06" id="left" normal="1,0" />
+<line anchor="5.86,-3.45" id="ground" normal="0,1" />
+<SceneLayer alpha="1" animdelay="1" depth="-100" image="IMAGE_FISTYREACHESOUT_BG" rotation="0" scalex="4.042" scaley="4.393" tilex="false" tiley="false" x="49.84" y="986.08" />
+<SceneLayer alpha="1" animdelay="1" depth="-0.01" image="IMAGE_IMAGES_WHITESQUARE" rotation="0" scalex="23.557" scaley="21.87" tilex="false" tiley="false" x="-347.51" y="23.81" />
+<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_IVYTOWER_TOWERLEFT" rotation="-4.44" scalex="1.509" scaley="2.123" tilex="false" tiley="false" x="-1019.0" y="1003.32" />
+<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_WOGCD_GROUNDTILE" rotation="0.01" scalex="1.851" scaley="1.081" tilex="false" tiley="false" x="71.14" y="-56.46" />
+<rectangle height="447.75" id="geometry1" rotation="0.0" static="true" tag="deadly" width="123.1" x="-890.92" y="1859.64" />
+<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_LEVELIMAGES_SPIKEBLACK_GROUP" rotation="-90.0" scalex="1.485" scaley="1.233" tilex="false" tiley="false" x="-828.98" y="1819.57" />
+<circle id="geometry2" radius="75" static="true" tag="ballbuster" x="842.34" y="98.66" />
+<SceneLayer alpha="1" anim="rot_1rps" animdelay="1" animspeed="0.2" depth="1" image="IMAGE_LEVELIMAGES_GEARBALLBUSTER" rotation="0" scalex="1" scaley="1" tilex="false" tiley="false" x="843.82" y="97.22" />
+<SceneLayer alpha="1" animdelay="1" depth="-0.01" image="IMAGE_IMAGES_BLACKSQUARE" rotation="0" scalex="21.246" scaley="19.559" tilex="false" tiley="false" x="-567.21" y="38.42" />
+<rectangle height="394.41" id="geometry3" rotation="0.0" static="true" tag="mostlydeadly" width="108.8" x="-890.21" y="1346.58" />
+<SceneLayer alpha="1" animdelay="1" depth="0" id="image1" image="IMAGE_LEVELIMAGES_SPIKEGRAY_GROUP" rotation="-90.0" scalex="1.485" scaley="1.233" tilex="false" tiley="false" x="-829.52" y="1342.15" />
+<rectangle height="57.16" id="geometry4" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" tag="break=1" width="253.54" x="-426.6" y="397.7" />
+<rectangle height="57.16" id="geometry5" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" width="253.54" x="-421.05" y="247.04" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="0" scale="1" text="TEXT_WOOBLE_STR1" x="836.35" y="200.06" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="90.25" scale="1" text="TEXT_WOOBLE_STR2" x="-927.92" y="1731.71" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="90.25" scale="1" text="TEXT_WOOBLE_STR3" x="-917.75" y="1332.87" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="90.25" scale="1" text="TEXT_WOOBLE_STR5" x="-925.34" y="511.55" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="0.59" scale="1" text="TEXT_WOOBLE_STR4" x="-428.98" y="401.48" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="0.59" scale="1" text="TEXT_WOOBLE_STR6" x="-50.93" y="1966.54" />
+<line anchor="-31.14,2027.52" id="" normal="-0.00335,-0.99999" />
+<label align="center" depth="10" font="FONT_OUTLINE_18" id="" rotation="90.25" scale="1" text="TEXT_WOOBLE_STR7" x="968.8" y="1005.96" />
+</scene>

@@ -1,0 +1,63 @@
+Attributes that could meanfully be changed visually....
+
+Shape... size anyway
+	Circle like radius but diameter no centre
+	Rectangle like rectangle, but size only, no center
+
+wakedist   radius
+statescales   uniform scale
+detonateradius radius
+
+Part
+x,y pos or range  rectangle / move  (tl br  , 0 size allowed .. return x,x  and y,y
+scale   always uniform (like Alt or Ctrl scaling whichever it was), but center remains constant
+
+pupilinset  funny inverted radius thing linked to part image size and scale
+
+xrange,yrange  rectangle / move (tl br   at 0 size, empty the attribute)
+
+Strand
+min max len
+thickness
+
+Detachstrand
+maxlen
+
+Ultimately..... a Useable Tool consists of.....
+A QGI with a "tool" in the KEY_TOOL data, and 'TOOL' in the KEY_TYPE data
+The tool is an instance of a ToolDelegate (or subclass thereof)
+ToolDelegate Creation requires...
+view
+element
+item ?
+an attribute (main one to change)
+a state manager
+position_is_center flag
++additional args
+
+The createtools function returns 
+an inner tool (used when the object is clicked internally) 
+and a list of QGI tool handles each with an embeded tool
+which are stored in the view
+All tool_handle_items are set to acceptMouseButtons Qt.NoButton
+
+At present the ToolsFactory is selected primary on the QGI Primitive type (rect, pixmap, ellipse etc)
+The ToolsFactorys are mainly very generic... and bind attributes to tools based merely on type.
+WooGLE requred a couple of "hacks" to differentiate element types using the same primitive for entirely different functions
+eg. BallInstance vs scenelayer, and "Grouped" items which differentiate entires on element.tag
+
+The other limitation in WooGLE was the one-to-one   items_by_element array
+
+but this mostly worked "OK" for WooGLE... "hacks" aside, given the shear number of different element types, attribute types (and names) , but many had very similar functions and identical formats.
+
+For WooBLE....
+Not one of the visually edit-able attributes above matches exactly the function and format of an attribute in WooGLE.
+Hence I think time for a change.....
+
+First change...
+items_by_element and the "select everything that's releated to this element"
+It should now work item by item... 
+each item should be directly bound to an element, an attribute or a list thereof and be given a specific toolfactory model
+the binding is done by setting several new KEY_ values during the item creation / drawing routines
+
+When it is selected...  It unwraps all that and builds the tools and toolitems

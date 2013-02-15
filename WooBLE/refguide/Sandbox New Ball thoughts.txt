@@ -1,0 +1,59 @@
+Re: Am I allowed to?
+Sure, <b>BUT</b>..... right now...  no guarantee that it'll get published soon (if at all).. 
+and actually the same goes for this one... read on.
+
+Recently we've had a lot of people making (or thinking about making)  "new" sandbox levels... but most of them have just been the same as (or very similar to) an old sandbox level.. with just a couple of new dispensers added... often for "not very useful" balls.
+
+So I asked myself... what is a "sandbox level" and what is it / was it / should it be for.
+The "Original" sandbox by MattOG was good because it was new, and it enabled people to "mess about" with different types of Goo, and hopefully they would be inspired by something and make a new level out of it.
+Momo's "no-limits" version was an improvement on this, because introduced the dispensers and included several game features (ball busting, detaching, fire etc) that were missing from the original.
+
+These were both quite useful levels, since WoGEdit wasn't really very good, they did allow people to test out ideas without the hassle of creating a level just to try something.
+
+
+
+
+
+
+Also, since WooBLE we've had loads of "new" balls which are mostly just an old ball with one little thing changed, or a new dispenser that isn't <i>really</i> needed.
+
+OK, in this case I can see you've gone to some trouble to design a level which uses the dispenser.. (plus points to you for that) .. but the dispenser isn't really NEEDED. You could just have used a some Fuses and (counts quickly) 7 or 8 bombs instead.
+
+I'm not saying this, or any sandbox you might produce won't be published, 
+
+Just because you can, doesn't mean that you should!
+
+What follows is not (necessarily) the views, opinions, policies and vague off-topic rantings of goofans.com, its affiliates or its creator and moderators (They can rant for themselves if they want)
+
+I think the title sets the tone... Just because you can, doesn't mean that you should! 
+And just because you upload it, doesn't mean I'll publish it.
+
+Re: Am I allowed to?
+Sure... BUT.... do we really need one?
+
+The "original" sandboxes were created mainly because testing things and trying out ideas was difficult... because the original WoGEdit was hard to use. Now, with WooGLE, it's a lot simpler and quicker to make a quick test level, add 20 of whatever Goo Ball and have a play around. 
+
+OK, maybe the existing sandboxes don't let you create infinite numbers of every possible type of goo ..
+but do we really need to do that?
+
+Also... (and sorry about this)
+We're having a bit of a "downer" on this type of add-in. Where a "new" ball is made, not because it'll be REALLY useful or looks really cool, but because it's easy now, and nobody else has made it before. And then designing a bit of a level so it can be used.
+OK, I can see you've put in some effort making the level, but really it's a level created just to "show off" the ball. It's not like you NEEDED to make this new ball so that this level is possible.. you could have used some Fuses and (counts quickly) 7 or 8 Bombs instead.
+
+
+
+
+We're trying to encourage people to....
+Make new and interesting levels for the original balls... things beyond "My First Level"
+Make "really" new balls and design nice levels for them that NEED the new ball to complete it, or particularly show off some new discovery or effect that the new ball exploits.
+Design a set of "themed" balls and make a whole series of levels for them (like inwog's Metal and Element packs)
+Create graphical theme packs for the original balls (Like TheGooMasters new "Cartoony" ones)
+
+What we're trying to discourage...
+Making a "new" ball by changing one little thing about an original ball, and releasing it with a simple / "Test Chamber" level.
+Making yet another sandbox level, with just a couple more dispensers than the last sandbox level.
+Making dispensers just because you can, and no-one else has made one for that type of ball yet.
+
+
+
+What we don't really want is hundreds of addins all with a "new" ball with one small change that are each used in a "My First Level" or "Test Chamber" thing.

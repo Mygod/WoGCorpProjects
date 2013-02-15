@@ -1,0 +1,63 @@
+-Version 0.05 Beta 
+-Changed: 2dBoyLogo and credits movies now backed-up and restored on Save and Play
+- but Goovie must now wait for WoG process to end before continuing.
+-Changed: Add Image Actor and Add Text Actor toolbar images
+-Fixed: Not decoding labelWrapWidth properly from movie.binltl
+-Fixed: Exe generated text shows as missing resource
+-Fixed: Image actors with no image, or bad image resource, always show at position 0,0
+
+
+- Version 0.04 Alpha/Beta
+*Improved: Rendering performance and slider smoothness.
+- One "side effect" is actors with alpha=0 (ie invisible) cannot be selected in the GUI
+
+*Better: Centres the movie on load, and sets initial scale to 75%
+ 
+*Fixed: Mismatch in Angle Interpolation with the Game
+- Caused the "Pinky Spin" effect
+
+
+- Version 0.03 Alpha
+*Change: Refresh pixmap cache and view on Import resources as well as Update Resources
+*Fix: Exception when adding a final frame to sound transform (typo)
+*Change: Imported Resources now include movie name in the resource ID
+- To avoid the "Duplicate Resources" problem
+- Ignores duplicate imports (will not add a file if it's already a resource)
+- Unique Naming.. will append a number if the imported resource name already exists
+
+- Version 0.02 Alpha
+*Added: Current Time and Movie Length shown with slider.
+
+*Added: Loop attribute to <actor> (default: false)
+-- If false, encoder adds a final keyframe at the endtime of the movie
+-- If true, the actor is allowed to loop for the duration of the movie.
+
+*Added: visible attribute to <actor> 
+-- Note: Invisible actors are omitted from the encoded output, however..
+-- they still "exist" so may affect the movie length is they have high keyframe times.
+
+*Added: color attribute to <keyframe>
+-- Does a "Colorize" on the image / text with the RGB colour entered.
+-- Can be interpolated to a different color in the next frame
+
+*Added: Actors now sorted correctly by depth in encoder
+
+*Added: Background Color
+
+*Added: Linux 64bit encoding (Final Output Untested)
+-- .binltl64 always exported along side the .binltl
+
+*Added: Export Animation from selected actor
+- Exports the animation data as res/anim/{actorname}.anim.binltl
+
+*Added: Files altered by "Preview Movie" are now backed up to GooVieTemp
+-- They are restored when the program quits.
+
+*Change: Imported files are always copied into the movie folder
+*Change: Movie playback now stops when you switch tab
+*Fix: Doesn't switch to resource tab when update / import resources adds 2 or more files.
+*Fix: Static Defaults for unspecifed frame attributes when using tools
+-- Things should not change size / position when you grab a tool handle.
+*Fix: Problems from deleted items not being removed from the view immediately
+
+- Version 0.01 Alpha
