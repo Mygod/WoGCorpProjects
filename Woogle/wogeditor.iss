@@ -1,6 +1,6 @@
 [Setup]
 AppName=World of Goo Level Editor
-AppVerName=World of Goo Level Editor 0.78 RC3
+AppVerName=World of Goo Level Editor 0.78 RC6
 PrivilegesRequired=poweruser
 DefaultDirName={pf}\WOGCorp\WoGEditor
 DefaultGroupName=WOGCorp
@@ -9,16 +9,19 @@ VersionInfoVersion=0.7.8
 VersionInfoCompany=WOGCorp
 ChangesAssociations=true
 VersionInfoDescription=World of Goo Level Editor
-MinVersion=4.1.1998,4.0.1381sp5
+; Mygod EDIT: Compiler forced me to do this
+MinVersion=0,5.0
 SetupIconFile=src\images\wogedit.ico
-OutputBaseFilename=WooGLE_setup
+OutputBaseFilename=WooGLE-0.78-rc6-setup
 AlwaysRestart=false
 CreateAppDir=true
 DirExistsWarning=no
+; Mygod EDIT: Make file as small as possible
+Compression=lzma2/ultra64
 
 [Files]
 Source: src\dist\*.*; DestDir: {app}; Flags: ignoreversion
-Source: include\*.*; DestDir: {app}; Flags: ignoreversion recursesubdirs
+;Source: include\*.*; DestDir: {app}; Flags: ignoreversion recursesubdirs
 Source: version.txt; DestDir: {app}; Flags: ignoreversion
 Source: copying.txt; DestDir: {app}; Flags: ignoreversion
 
@@ -28,7 +31,9 @@ Name: desktopicon; Description: Create a &desktop icon; GroupDescription: Additi
 Name: endecrypt; Description: Add &En/Decrypt to Right-Click menu; Flags: unchecked; GroupDescription: Windows Shell Extensions:
 
 [Icons]
-Name: {group}\World of Goo Level Editor; Filename: {app}\wogeditor.exe; WorkingDir: {app}; Tasks: startmenuicon
+Name: {group}\World of Goo Level Editor; Filename: {app}\wogeditor.exe; WorkingDir: {app}; Tasks: startmenuicon    
+; Mygod EDIT: Add Debug Mode
+Name: {group}\World of Goo Level Editor (Debug Mode); Filename: {app}\debug.bat; WorkingDir: {app}; Tasks: startmenuicon
 Name: {userdesktop}\World of Goo Level Editor; Filename: {app}\wogeditor.exe; WorkingDir: {app}; IconIndex: 0; Tasks: desktopicon
 
 [Registry]

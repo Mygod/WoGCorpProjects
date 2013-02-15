@@ -19,6 +19,13 @@
 from __future__ import with_statement  # Makes "With" work in Python 2.5
 import xml.etree.ElementTree
 import sys
+# Mygod EDIT: The following two lines can fix the bug that when you select a World of 
+# Goo program in a path with some unicode characters, you cannot debug the level, 
+# error messages:
+# UnicodeEncodeError: 'ascii' codec can't encode characters in position 13-16: ordinal
+# not in range(128)
+reload(sys)
+sys.setdefaultencoding(sys.getfilesystemencoding())
 import os
 import os.path
 import glob
@@ -49,7 +56,7 @@ APP_NAME_UPPER = 'WOOGLE'
 APP_NAME_LOWER = 'woogle'
 APP_NAME_PROPER = 'WooGLE'
 STR_DIR_STUB='levels'
-CURRENT_VERSION = "v0.78 RC3"
+CURRENT_VERSION = "v0.78 RC6"
 CREATED_BY = '<!-- Created by ' + APP_NAME_PROPER + ' ' + CURRENT_VERSION + ' -->\n'
 ISSUE_LEVEL_NONE = 0
 ISSUE_LEVEL_ADVICE = 1
@@ -736,7 +743,7 @@ class GameModel(QtCore.QObject):
                         #print tid,"is Global Text ... Localized as ",new_text.get('id')
                         element_with_text.set('text',new_text.get('id'))
                     else:
-                        print "Text resource ",tid,"not found locally or Globally."
+                        print "Text resource ",tid," not found locally or globally."
 
             world._buildDependancyTree()
             #world.make_tree_from_xml( metawog.TREE_LEVEL_DEPENDANCY, metawog.LEVEL_DEPENDANCY_TEMPLATE )
@@ -1105,7 +1112,7 @@ class GameModel(QtCore.QObject):
            # if not, we only do Root Level images and sounds (immediate child of root)
            global_resources = {}
            files_to_copy = set()
-           self._add_dep_to_goomod(model.dependancy_root,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep=include_deps)
+           self._add_dep_to_goomod(name,model.dependancy_root,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep=include_deps)
 
            if len(files_to_copy)>0:
                override_dir = os.path.join(goomod_dir,'override')
@@ -1119,9 +1126,12 @@ class GameModel(QtCore.QObject):
                    src_file = os.path.join(self._wog_dir,file)
                    dest_filename = os.path.splitext(file)
                    dest_file = os.path.join(override_dir,dest_filename[0]+dest_filename[1].lower())
-                   copy2(src_file,dest_file)
-                   files_to_goomod.append(dest_file)
-                   #print "Copied",src_file," to ",dest_file
+                   try: 
+                       copy2(src_file,dest_file)
+                       files_to_goomod.append(dest_file)
+                       #print "Copied",src_file," to ",dest_file
+                   except IOError, e:
+                       print "IO Warning: ", e
 
            #Now create the zip file.
            len_gf = len(goomod_dir)+1
@@ -1132,7 +1142,7 @@ class GameModel(QtCore.QObject):
                 zout.write(file,file_in_zip)
            zout.close()
 
-    def _add_dep_to_goomod(self,element,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep=False):
+    def _add_dep_to_goomod(self,name,element,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep=False):
         # first an any 'image' or 'sound' children at this level
 
         for child in element.getchildren():
@@ -1167,17 +1177,22 @@ class GameModel(QtCore.QObject):
                 file( filename, 'wb' ).write( xml_data )
 #                self._saveUnPackedData( ball_dir, 'resources.xml.xml', ball_tree)
 
-                self._add_dep_to_goomod(ball,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep = False)
+                self._add_dep_to_goomod(name,ball,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep = False)
 
+		# Mygod EDIT: Add support for local animations
+				
             for anim in element.findall('anim'):
-                files_to_copy.add("res/anim/" + anim.get('id','')+".anim.binltl")
+			    if anim in metawog.ANIMATIONS_GLOBAL: 
+			        files_to_copy.add("res/anim/" + anim.get('id','')+".anim.binltl")
+			    else:
+			        files_to_copy.add("res/levels/" + name + "/" + anim.get('id','')+".anim.binltl")
 
         # findall particles (store xml) and call with fulldep=false
             particle_xml = ''
             for effect in element.findall('.//effect'):
                res_element = self.global_world.resolve_reference( metawog.WORLD_GLOBAL, 'effect', effect.get('name') )
                particle_xml+=res_element.to_xml()+"\n"
-               self._add_dep_to_goomod(effect,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep = False)
+               self._add_dep_to_goomod(name,effect,files_to_copy,files_to_goomod,global_resources,compile_dir,goomod_dir,full_dep = False)
 
         # findall materials (store xml)
             material_xml=''
@@ -1955,6 +1970,13 @@ class LevelWorld(ThingWorld):
                  if originalfile !='':
                      element.set('path',originalfile)
         
+    def refreshLocalAnimations(self):
+        localAnims = mainwindow._game_model._loadFileList( os.path.join( self.game_model._res_dir, STR_DIR_STUB, self.name ),
+                                         filename_filter = '.anim.binltl' )
+        localAnims = list(localAnim[:len(localAnim)-12] for localAnim in localAnims)
+        del metawog.ANIMATIONS_LOCAL[:]
+        metawog.ANIMATIONS_LOCAL.extend(metawog.ANIMATIONS_GLOBAL + localAnims + ['ocd_','levelpipe_'])
+		
     def _buildDependancyTree(self):
         self.suspend_undo()
 
@@ -1969,18 +1991,34 @@ class LevelWorld(ThingWorld):
         self._addDependancies(self.scene_root,dependancy_tree.root,current,ball_trace)
 
         #additional non-recursive stuff
+		
+		# Mygod EDIT: Support for local animations
+		
+        self.refreshLocalAnimations()
+		
         for element in self.scene_root.findall('.//SceneLayer'):
             anim = element.get('anim','')
-            if anim!='':
-               if anim not in metawog.ANIMATIONS_ORIGINAL:
-                  if anim not in current['animdep']:
-                    child_attrib = {'id':anim}
-                    if anim in metawog.ANIMATIONS_GLOBAL:
-                        child_attrib['found']="true"
-                    child_element = metaworld.Element( metawog.DEP_ANIM, child_attrib)
-                    dependancy_tree.root._children.append( child_element )
-                    child_element._parent = dependancy_tree.root
-                    current['animdep'].add(child_attrib['id'])
+            if anim!='' and anim not in metawog.ANIMATIONS_ORIGINAL and anim not in current['animdep']:
+				child_attrib = {'id':anim}
+				if anim in metawog.ANIMATIONS_GLOBAL:
+					child_attrib['found']="true"
+				child_element = metaworld.Element( metawog.DEP_ANIM, child_attrib)
+				dependancy_tree.root._children.append( child_element )
+				child_element._parent = dependancy_tree.root
+				current['animdep'].add(child_attrib['id'])
+            id = element.get('id','')
+            if id!='' and id not in metawog.ANIMATIONS_ORIGINAL and id not in current['animdep']:
+				child_attrib = {'id':id}
+				if id in metawog.ANIMATIONS_LOCAL:
+				    child_attrib['found']="true"
+				elif id.startswith('levelpipe_') or id.startswith('ocd_'):
+				    continue
+				child_element = metaworld.Element( metawog.DEP_ANIM, child_attrib)
+				dependancy_tree.root._children.append( child_element )
+				child_element._parent = dependancy_tree.root
+				current['animdep'].add(child_attrib['id'])
+				
+                  
 
         for element in self.resource_root.findall('.//Image'):
             child_attrib = {'found':"true"}
@@ -2511,7 +2549,8 @@ class MainWindow(QtGui.QMainWindow):
         wog_path =  QtGui.QFileDialog.getOpenFileName( self,
              self.tr( 'Select WorldOfGoo program in the folder you want to edit' ),
              r'',
-             self.tr( 'World Of Goo (World*Goo*)' ) )
+			 # Mygod EDIT: Add support for All programs
+             self.tr( 'World of Goo (World*Goo*);;All programs (*)' ) )
         if wog_path.isEmpty(): # user canceled action
             #wog_path="D:\World of Goo.app"
             return
@@ -3081,7 +3120,7 @@ class MainWindow(QtGui.QMainWindow):
                         break
                 _appendChildTag(pipe_element,vertex_meta,attrib)
 
-
+    # Mygod EDIT: Updated About box :P
     def about(self):
         QtGui.QMessageBox.about(self, self.tr("About World of Goo Level Editor " + CURRENT_VERSION),
             self.tr("""<p>World of Goo Level Editor <b>(WooGLE)</b> helps you create new levels for World of Goo.<p>
@@ -3089,7 +3128,8 @@ class MainWindow(QtGui.QMainWindow):
             <a href="http://goofans.com/download/utility/world-of-goo-level-editor">http://goofans.com/download/utility/world-of-goo-level-editor</a></p>
             <p>FAQ, Tutorial and Reference Guide:<br>
             <a href="http://goofans.com/developers/world-of-goo-level-editor">http://goofans.com/developers/world-of-goo-level-editor</a></p>
-            <p>Copyright 2010-, DaftasBrush</p>
+            <p>Copyright 2010, DaftasBrush<br>
+			Copyright 2012-, Mygod</p>
             <p>&nbsp;<br>Original Sourceforge project: (v0.5)
             <a href="http://www.sourceforge.net/projects/wogedit">http://www.sourceforge.net/projects/wogedit</a><br>
             Copyright 2008-2009, NitroZark &lt;nitrozark at users.sourceforget.net&gt;</p>"""))
@@ -3989,7 +4029,8 @@ if __name__ == "__main__":
     # Set keys for settings
     app.setOrganizationName( "WOGCorp" )
     app.setOrganizationDomain( "goofans.com" )
-    app.setApplicationName( "WoG Editor" )
+	# Mygod EDIT: I'm not sure what it's doing here but I changed it from WoG Editor ;)
+    app.setApplicationName( "World of Goo Level Editor" )
 
     if LOG_TO_FILE:
         saveout = sys.stdout

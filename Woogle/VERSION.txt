@@ -1,10 +1,41 @@
-- version 0.78 Final
+- version 0.78 RC6
+*Fixed: Error while packing a goomod with new goo balls or Fish in it
+
+- version 0.78 RC5
+*Fixed: Radians in hinge/@histop & @lostop, rectangle & circle & compgeom/@rotspeed, 
+- motor/@speed
+*Added: Package level animations to goomod
+*Fixed: circle & line & compgeom/@break is missing
+*Fixed: Not recognizing ocd_x and levelpipe_x in SceneLayer/@id
+*Fixed: Not showing a cross when the SceneLayer/@id is invalid
+*Fixed: Installer
+
+- version 0.78 RC4
+=== Daft as Brush ===
 *Fixed: Errors when importing files that contain non-ascii characters in the path
 - Although this is still a problem for GooTool
 *Added: Advice if rotspeed < 0.0005.. body does not rotate.
 *Added: Buttongroup ID now shown as name in Tree View
 *Added: colorize attribute to labels
 *Fixed: MAC Incompatible construction of goomod folder name
+=== Mygod ===
+*Fixed: Editing island1-5, islandUi & MapWorldView
+*Fixed: Make beauties and uglies balls attachable
+*Added: nodrag tag
+*Removed: walkable tag (not implemented)
+*Fixed: Support for context attribute (showing screen instead of s,c,r,e,e,n)
+*Fixed: Make levels with walkable and kindasticky tag runnable
+*Fixed: UnicodeEncodeError when you select a directory with some non-ASCII characters
+- in it
+*Optimized: break=? tag
+*Added: Hide the console window as the default (if you want to show it, run debug.bat)
+*Added: Support for other languages
+*Fixed: Make levels runnable when their levelexit is outside scene bounds
+*Optimized: The icon on the taskbar
+*Optimized: List for id in SceneLayer
+*Removed: Default values for @animloop and @animdelay
+*Fixed: The ids of the SceneLayers appears in SceneLayer/@image and appear automatically
+- while pasting
 
 - version 0.78 RC3
 * Added: A "shed-load" of new attributes to buttons

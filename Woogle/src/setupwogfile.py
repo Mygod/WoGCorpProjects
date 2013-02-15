@@ -12,8 +12,6 @@ setup(
               "script": "wogfile.py" ,
               "icon_resources": [(1,'images/wogedit.ico')]
             }
-        ] ,
-      options={
-            "py2exe":{"includes":["sip"]}
-      }
+        ], 
+		options={"py2exe":{"includes":["sip"]}}
 )

@@ -313,10 +313,11 @@ class SelectTool(BasicTool):
 
              gt1 = p_element.get('type')
              gt2 = r_element.get('type')
-             if gt2 in metawog.BALLS_NO_STRANDS:
-                 QtGui.QMessageBox.warning(self._view, self._view.tr("Invalid Strand!"),
-                                           self._view.tr('You can\'t connect a strand to a ' + gt2) )
-                 return
+			 # Mygod EDIT: Make them have strand would be nice
+             #if gt2 in metawog.BALLS_NO_STRANDS:
+             #    QtGui.QMessageBox.warning(self._view, self._view.tr("Invalid Strand!"),
+             #                              self._view.tr('You can\'t connect a strand to a ' + gt2) )
+             #    return
 
              if (gt1 in metawog.BALLS_MUST_BE_GB1) and (gt2 in metawog.BALLS_MUST_BE_GB1):
                  QtGui.QMessageBox.warning(self._view, self._view.tr("Invalid Strand!"),
@@ -2445,7 +2446,8 @@ class LevelGraphicView(QtGui.QGraphicsView):
             'hinge': self._sceneHingeBuilder,
             'label': self._sceneLabelBuilder,
             'line': self._addSceneLine,
-            'linearforcefield': self._sceneLinearForceFieldBuidler,
+			# Mygod EDIT: Typo
+            'linearforcefield': self._sceneLinearForceFieldBuilder,
             'motor': self._sceneMotorBuilder,
             'particles': self._sceneParticlesBuilder,
             'radialforcefield': self._sceneRadialForceFieldBuilder
@@ -3090,7 +3092,7 @@ class LevelGraphicView(QtGui.QGraphicsView):
         return item
 
 
-    def _sceneLinearForceFieldBuidler( self, scene, element ):
+    def _sceneLinearForceFieldBuilder( self, scene, element ):
         # @todo ? Should we bother: gravity field usually does not have center, width & height
         x, y = self._elementV2Pos( element, 'center' )
         width, height = element.get_native( 'size', (1.0,1.0) )

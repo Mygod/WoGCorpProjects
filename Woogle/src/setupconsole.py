@@ -9,7 +9,7 @@ import sys
 if sys.platform=='win32':
     from distutils.core import setup
     import py2exe
-    setup( windows=[{ "script": "wogeditor.py" ,
+    setup( console=[{ "script": "wogeditor.py" ,
                       "icon_resources": [(1,'images/wogedit.ico')]}], 
 					  options={"py2exe":{"includes":["sip"]}})
 elif sys.platform=='darwin':

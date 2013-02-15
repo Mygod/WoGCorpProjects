@@ -60,7 +60,7 @@ class Ui_EditLevelDialog(object):
         EditLevelDialog.setWindowTitle(QtGui.QApplication.translate("EditLevelDialog", "Select level to edit...", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("EditLevelDialog", "Select level to edit:", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(0, QtGui.QApplication.translate("EditLevelDialog", "All Levels", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.setItemText(1, QtGui.QApplication.translate("EditLevelDialog", "Custom Levels Only", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(1, QtGui.QApplication.translate("EditLevelDialog", "Customizable Levels Only", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setItemText(2, QtGui.QApplication.translate("EditLevelDialog", "Original Levels Only", None, QtGui.QApplication.UnicodeUTF8))
 
     def comboSelectionChanged(self,index):

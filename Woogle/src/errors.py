@@ -1,5 +1,6 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
+# Mygod EDIT: Change 112, 401, 403 from warning to advice or WooGLE will prevent you making goomod
 ISSUE_LEVEL_NONE = 0
 ISSUE_LEVEL_ADVICE = 1
 ISSUE_LEVEL_WARNING = 2
@@ -41,7 +42,7 @@ ERROR_INFO={0:[ISSUE_LEVEL_NONE,''],
     109:[ISSUE_LEVEL_CRITICAL,'You can\'t connect <tt>%s (%s)</tt> to <tt>%s (%s)</tt>'],
     110:[ISSUE_LEVEL_CRITICAL,'<tt>%s (%s)</tt> cannot have any strands!'],
     111:[ISSUE_LEVEL_ADVICE,'Multiple end conditions <tt>%s</tt>'],
-    112:[ISSUE_LEVEL_WARNING,'Gooballs start above the <tt>targetheight</tt>'],
+    112:[ISSUE_LEVEL_ADVICE,'Gooballs start above the <tt>targetheight</tt>'],
     113:[ISSUE_LEVEL_CRITICAL,'Signpost %s uses an Ambient Particle effect <tt>%s</tt>'],
     114:[ISSUE_LEVEL_CRITICAL,'Fire object uses an Ambient Particle effect <tt>%s</tt>'],
 
@@ -64,9 +65,9 @@ ERROR_INFO={0:[ISSUE_LEVEL_NONE,''],
     309:[ISSUE_LEVEL_CRITICAL,'Animation file <tt>%s.anim.binltl</tt> is missing'],
 
 #Global Level Errors
-    401:[ISSUE_LEVEL_WARNING,'the levelexit is outside scene bounds'],
+    401:[ISSUE_LEVEL_ADVICE,'the levelexit is outside scene bounds'],
     402:[ISSUE_LEVEL_CRITICAL,'Resource %s missing'],
-    403:[ISSUE_LEVEL_WARNING,'Resource %s in Global resource file'],
+    403:[ISSUE_LEVEL_ADVICE,'Resource %s in Global resource file'],
 
 #Ball Tree Errors
     501:[ISSUE_LEVEL_WARNING,'Ball is <tt>detachable</tt> but has no <tt>detachstrand</tt>'],

@@ -2,6 +2,9 @@
 from metaworld import *
 from PyQt4 import QtCore, QtGui
 
+# Mygod EDIT: Add supports for all languages
+Languages = ['ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'ar', 'as', 'at', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bm', 'bn', 'bo', 'br', 'bs', 'bt', 'bv', 'bw', 'by', 'bz', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn', 'co', 'cr', 'cu', 'cv', 'cx', 'cy', 'cz', 'de', 'dj', 'dk', 'dm', 'do', 'ec', 'ee', 'eg', 'eh', 'er', 'es', 'et', 'eu', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr', 'ga', 'gb', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'gw', 'gy', 'hk', 'hn', 'hr', 'ht', 'hu', 'ie', 'il', 'im', 'in', 'io', 'iq', 'ir', 'is', 'it', 'je', 'jm', 'jo', 'jp', 'ke', 'kg', 'kh', 'ki', 'km', 'kn', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl', 'no', 'np', 'nr', 'nu', 'nz', 'om', 'pa', 'pe', 'pf', 'pg', 'ph', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'py', 'qa', 're', 'ro', 'ru', 'rw', 'sa', 'sb', 'sc', 'sd', 'se', 'sg', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'sr', 'st', 'sv', 'sy', 'sz', 'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'tt', 'tv', 'tw', 'tz', 'ua', 'ug', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws', 'ye', 'yt', 'za', 'zm', 'zw']
+
 # Declares all file types
 TREE_GLOBAL_FX = describe_tree( 'game.fx' )
 TREE_GLOBAL_MATERIALS = describe_tree( 'game.materials' )
@@ -49,6 +52,7 @@ WORLD_GLOBAL = describe_world( 'game',
     TREE_GLOBAL_FILES
     ] )
 
+	#Mygod EDIT: Make 7 levels editable
 LEVELS_ORIGINAL = set(['AB3','BeautyAndTheTentacle','BeautySchool','BlusteryDay',
                    'BulletinBoardSystem','BurningMan','Chain','Deliverance',
                    'Drool','EconomicDivide','FistyReachesOut','FlyAwayLittleOnes',
@@ -56,8 +60,9 @@ LEVELS_ORIGINAL = set(['AB3','BeautyAndTheTentacle','BeautySchool','BlusteryDay'
                    'GrapeVineVirus','GraphicProcessingUnit','HangLow','HelloWorld',
                    'HTInnovationCommittee','ImmigrationNaturalizationUnit','ImpaleSticky',
                    'IncinerationDestination','InfestyTheWorm',
-                   'island1','island2','island3','island4','island5','IslandUi',
-                   'IvyTower','LeapHole','MapWorldView','MistysLongBonyRoad','MOM',
+                   #'island1','island2','island3','island4','island5','IslandUi',
+                   'IvyTower','LeapHole',#'MapWorldView',
+				   'MistysLongBonyRoad','MOM',
                    'ObservatoryObservationStation','OdeToBridgeBuilder','ProductLauncher',
                    'RedCarpet','RegurgitationPumpingStation','RoadBlocks','SecondHandSmoke',
                    'SuperFuseChallengeTime','TheServer','ThirdWheel','ThrusterTest','TowerOfGoo',
@@ -75,11 +80,14 @@ LEVELS_READONLY_LOWER=set([level_name.lower() for level_name in LEVELS_ORIGINAL.
  # Anchor's and Beauty's (and others) have exactly the same attributes but one can
  # have strands and one can't / shouldn't
  # So we're stuck with a hard-coded list of names that can't have strands
-BALLS_NO_STRANDS = ['Beauty','BeautyProduct','BeautyProductEye','Bit',
-                        'BlockHead','Hex','RectHead','Spam','TimeBug',
-                        'Ugly','UglyProduct','UndeletePill','UndeletePillFizz',
-                        'UtilGooGlobber','UtilProductLauncherScreamer',
-                        'WindowRect','WindowSquare','ZBomb','ZBombMom']
+ # Mygod EDIT: Make them have strand would be nice
+#BALLS_NO_STRANDS = ['Beauty','BeautyProduct','BeautyProductEye','Bit',
+#                        'BlockHead','Hex','RectHead','Spam','TimeBug',
+#                        'Ugly','UglyProduct','UndeletePill','UndeletePillFizz',
+#                        'UtilGooGlobber','UtilProductLauncherScreamer',
+#                        'WindowRect','WindowSquare','ZBomb','ZBombMom'
+#						]
+BALLS_NO_STRANDS = []
 
 #mustbe_gb1 is necessary since these Goos do not have a <strand> entry
 # 2 mustbe_gb1's can't be connected together - causes WOG to crash.
@@ -139,6 +147,7 @@ ANIMATIONS_ORIGINAL = ['ball_counter','ball_counter_ocd','blink','closer','disco
                      'island_name_out','level_name_popup','ocdFlagWave','rot_1rps','treeBlow_leaf1',
                      'treeBlow_leaf2','treeBlow_leaf3','treeBlow_trunk']
 ANIMATIONS_GLOBAL = []
+ANIMATIONS_LOCAL = []
 
 PIPE_RESOURCE = 'IMAGE_GLOBAL_PIPE'
 PIPE_RESOURCE_STUBS=['','_BEND_TL','_BEND_TR','_BEND_BL','_BEND_BR','_CAP_OPEN','_CAP_CLOSED']
@@ -164,7 +173,8 @@ TREE_GLOBAL_FILES.add_elements ([
       elements=[FILE_ELEMENT,FOLDER_ELEMENT])])
 
 LANGUAGE_ATTRIBUTES=[]
-for lang in ['de','es','fr','it','nl','pl']:
+# Mygod EDIT: Add support for ALL languages!
+for lang in Languages:
     LANGUAGE_ATTRIBUTES.append(string_attribute(lang,allow_empty=True,remove_empty=True))
 
 ADDIN_LEVEL_NAME_ATTRIBUTES=[ string_attribute ('text',init="Level Name", mandatory=True, display_id=True,tooltip='Level Name to display in the Game')]
@@ -381,8 +391,10 @@ _describe_resource_file( TREE_LEVEL_RESOURCE, WORLD_LEVEL )
 
 # Values for Tag attribute
 #v0.70 - kindasticky tag removed - came from a mistake by 2dBoy in Second Hand Smoke
-_TAG_VALUES = ('ballbuster', 'break=1', 'break=2', 'deadly', 'detaching', 'geomkiller',
-      'mostlydeadly', 'stopsign', 'unwalkable', 'walkable' )
+# Mygod EDIT: Add nodrag and remove walkable which is not implemented and made allow_any=True
+# And remove break=? too to make break attribute
+_TAG_VALUES = ('ballbuster', 'deadly', 'detaching', 'geomkiller',
+      'mostlydeadly', 'nodrag', 'stopsign', 'unwalkable' )
 
 ELEMENT_BUTTON = describe_element( 'button', groups = 'image', attributes = [
         string_attribute( 'id', display_id = True, mandatory = True ),
@@ -424,7 +436,7 @@ ELEMENT_BUTTON = describe_element( 'button', groups = 'image', attributes = [
 
         bool_attribute( 'overlay',allow_empty=True, remove_empty=True  ),
         bool_attribute( 'screenspace',allow_empty=True, remove_empty=True  ),
-        enum_attribute( 'context', ('screen') ,allow_empty=True, remove_empty=True )
+        enum_attribute( 'context', ['screen'],allow_empty=True, remove_empty=True )
         ] )
 
 ELEMENT_RECTANGLE = describe_element( 'rectangle', groups = 'rect', attributes = [
@@ -437,13 +449,15 @@ ELEMENT_RECTANGLE = describe_element( 'rectangle', groups = 'rect', attributes =
     real_attribute( 'mass', tooltip="Mass of this item.\nRequired if static=false or empty" ),
     reference_attribute( 'material', reference_family = 'material', reference_world = WORLD_GLOBAL,
                           init = '' ,allow_empty=True,remove_empty=True),
-    enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True ),
+    enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True, allow_any=True, 
+					exclude=',break=[^,]+|break=[^,]+,|break=[^,]+' ),
+    real_attribute( 'break', allow_empty=True, remove_empty=True, extract='.*break=([^,]+).*', addition='break=', map_to = ('tag') ),
     reference_attribute( 'image', reference_family = 'image', reference_world = WORLD_LEVEL,
                          init = '', allow_empty=True,remove_empty=True ),
     xy_attribute( 'imagepos', allow_empty=True,remove_empty=True ),
     angle_radians_attribute( 'imagerot',allow_empty=True,remove_empty=True ),
     scale_attribute( 'imagescale', allow_empty=True,remove_empty=True ),
-    real_attribute( 'rotspeed',allow_empty=True,remove_empty=True ),
+    angle_radians_attribute( 'rotspeed',allow_empty=True,remove_empty=True ),
     bool_attribute( 'contacts' ,allow_empty=True,remove_empty=True),
     bool_attribute( 'collide',allow_empty=True,remove_empty=True ),
     bool_attribute( 'nogeomcollisions',allow_empty=True,remove_empty=True)
@@ -468,13 +482,15 @@ ELEMENT_CIRCLE = describe_element( 'circle', groups = 'circle', attributes = [
     real_attribute( 'mass',tooltip="Mass of this item.\nRequired if static=false or empty" ,allow_empty=True,remove_empty=True ),
     reference_attribute( 'material', reference_family = 'material', reference_world = WORLD_GLOBAL,
                           init = '' , allow_empty=True,remove_empty=True),
-    enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True),
+    enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True, allow_any=True, 
+					exclude=',break=[^,]+|break=[^,]+,|break=[^,]+' ),
+    real_attribute( 'break', allow_empty=True, remove_empty=True, extract='.*break=([^,]+).*', addition='break=', map_to = ('tag') ),
     reference_attribute( 'image', reference_family = 'image', reference_world = WORLD_LEVEL,
                          init = '', allow_empty=True,remove_empty=True ),
     xy_attribute( 'imagepos',allow_empty=True,remove_empty=True ),
     angle_radians_attribute( 'imagerot',allow_empty=True,remove_empty=True ),
     scale_attribute( 'imagescale',allow_empty=True,remove_empty=True ),
-    real_attribute( 'rotspeed',allow_empty=True,remove_empty=True ),
+    angle_radians_attribute( 'rotspeed',allow_empty=True,remove_empty=True ),
     bool_attribute( 'contacts' ),
     bool_attribute( 'nogeomcollisions',tooltip="If true, Goo strands cannot go through this object")
     ] )
@@ -496,28 +512,27 @@ TREE_LEVEL_SCENE.add_elements( [
         ],
         elements = [
         describe_element( 'SceneLayer', groups = 'image', attributes = [
-            string_attribute( 'name', display_id = True),
+            string_attribute( 'name', display_id = True, allow_empty = True ),
             reference_attribute( 'image', reference_family = 'image', reference_world = WORLD_LEVEL,
                                  init = '', mandatory = True ),
             xy_attribute( 'center', mandatory = True, init='0,0', map_to = ('x','y') ,position=True),
             scale_attribute( 'scale', default = '1,1',min_value = 0.000001,  map_to = ('scalex', 'scaley'),allow_empty=True,remove_empty=True ),
             angle_degrees_attribute( 'rotation', default = '0',allow_empty=True,remove_empty=True),
             real_attribute( 'depth', mandatory = True, init='0' ),
-            identifier_attribute( 'id', allow_empty = True, remove_empty=True,
-                reference_family = 'image', reference_world = WORLD_LEVEL ),
             bool_attribute( 'tilex', default='false', allow_empty=True,remove_empty=True),
             bool_attribute( 'tiley', default='false',allow_empty=True,remove_empty=True),
             int_attribute ( 'tilecountx',allow_empty=True,remove_empty=True),
             int_attribute ( 'tilecounty',allow_empty=True,remove_empty=True),
             real_attribute( 'alpha', min_value = 0, max_value = 1, default = '1' , allow_empty=True,remove_empty=True),
             rgb_attribute( 'colorize', init = '255,255,255', allow_empty=True,remove_empty=True),
+            enum_attribute( 'id',ANIMATIONS_LOCAL, allow_empty = True, remove_empty=True, ignore_startswiths=['ocd_','levelpipe_'] ),
             enum_attribute( 'anim',ANIMATIONS_GLOBAL, allow_empty=True, remove_empty=True ),     # @todo Animation are filename in res/anim/*.bintl
             real_attribute( 'animspeed',allow_empty=True,remove_empty=True),
-            real_attribute( 'animdelay', default = '0',allow_empty=True,remove_empty=True ),
+            real_attribute( 'animdelay',allow_empty=True,remove_empty=True ),
             bool_attribute( 'animloop',allow_empty=True,remove_empty=True),
             reference_attribute( 'anchor', allow_empty=True, remove_empty=True,
                     reference_family = 'geometry', reference_world = WORLD_LEVEL ),
-            enum_attribute( 'context', ('screen'),allow_empty=True,remove_empty=True )
+            enum_attribute( 'context', ['screen'],allow_empty=True,remove_empty=True )
             ] ),
         ELEMENT_BUTTON,
         describe_element( 'buttongroup', groups = 'image', attributes = [
@@ -552,12 +567,14 @@ TREE_LEVEL_SCENE.add_elements( [
             bool_attribute( 'static', default = 'true' ,tooltip="If static=true this object and its children cannot move\nIf static=false then all children require a mass."),
             reference_attribute( 'material', reference_family = 'material', reference_world = WORLD_GLOBAL,
                                  init = '' ,allow_empty=True,remove_empty=True),
-            enum_attribute( 'tag', _TAG_VALUES, is_list = True,allow_empty=True,remove_empty=True ),
+            enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True, allow_any=True, 
+					exclude=',break=[^,]+|break=[^,]+,|break=[^,]+' ),
+            real_attribute( 'break', allow_empty=True, remove_empty=True, extract='.*break=([^,]+).*', addition='break=', map_to = ('tag') ),
             reference_attribute( 'image', reference_family = 'image', reference_world = WORLD_LEVEL,allow_empty=True,remove_empty=True ),
             xy_attribute( 'imagepos',allow_empty=True,remove_empty=True),
             angle_radians_attribute( 'imagerot',allow_empty=True,remove_empty=True ),
             scale_attribute( 'imagescale',allow_empty=True,remove_empty=True ),
-            real_attribute( 'rotspeed' ,allow_empty=True,remove_empty=True),
+            angle_radians_attribute( 'rotspeed' ,allow_empty=True,remove_empty=True),
             bool_attribute( 'contacts' ),
             bool_attribute( 'nogeomcollisions' )
             ],
@@ -573,7 +590,9 @@ TREE_LEVEL_SCENE.add_elements( [
             reference_attribute( 'material', reference_family = 'material', reference_world = WORLD_GLOBAL,
                                  init = '', allow_empty=True,remove_empty=True ),
            # bool_attribute( 'static', init = 'true' ),
-            enum_attribute( 'tag', _TAG_VALUES, is_list = True , allow_empty=True, remove_empty=True )
+            enum_attribute( 'tag', _TAG_VALUES, is_list = True, allow_empty=True, remove_empty=True, allow_any=True, 
+					exclude=',break=[^,]+|break=[^,]+,|break=[^,]+' ),
+            real_attribute( 'break', allow_empty=True, remove_empty=True, extract='.*break=([^,]+).*', addition='break=', map_to = ('tag') ),
             ] ),
         describe_element( 'linearforcefield', groups = 'physic', attributes = [
             string_attribute( 'id', display_id = True, allow_empty = True ),
@@ -611,8 +630,8 @@ TREE_LEVEL_SCENE.add_elements( [
             reference_attribute( 'body2', allow_empty=True,remove_empty=True,
                 reference_family = 'geometry', reference_world = WORLD_LEVEL ),
             real_attribute( 'bounce' ,allow_empty=True,remove_empty=True),
-            real_attribute( 'histop' ,allow_empty=True,remove_empty=True),
-            real_attribute( 'lostop' ,allow_empty=True,remove_empty=True),
+            angle_radians_attribute( 'histop' ,allow_empty=True,remove_empty=True),
+            angle_radians_attribute( 'lostop' ,allow_empty=True,remove_empty=True),
             real_attribute( 'stopcfm' ,allow_empty=True,remove_empty=True),
             real_attribute( 'stoperp' ,allow_empty=True,remove_empty=True)
             ] ),
@@ -632,7 +651,7 @@ TREE_LEVEL_SCENE.add_elements( [
         describe_element( 'motor', groups = 'physic', attributes = [
             reference_attribute( 'body', reference_family = 'geometry', reference_world = WORLD_LEVEL, mandatory = True ),
             real_attribute( 'maxforce', mandatory = True, init = '20' ),
-            real_attribute( 'speed', mandatory = True, init = '-0.01' )
+            angle_radians_attribute( 'speed', mandatory = True, init = '-0.01' )
             ] ),
         describe_element( 'particles', groups = 'particles', attributes = [
             reference_attribute( 'effect', mandatory = True, display_id = True,
@@ -645,33 +664,28 @@ TREE_LEVEL_SCENE.add_elements( [
         ] )
     ] )
 
+# Mygod EDIT: Add support for ALL languages!
+temp_attributes = [
+    identifier_attribute( 'id', mandatory = True, display_id = True,
+        reference_family = 'TEXT_LEVELNAME_STR', reference_world = WORLD_LEVEL ),
+    text_attribute( 'text', mandatory = True,tooltip="Use | symbol (pipe) to get new pages on signs, and new lines in labels" ),
+    ]
+for language in Languages: 
+    temp_attributes[len(temp_attributes):]=[text_attribute(language,allow_empty=True,remove_empty=True)]
 LEVEL_TREE_TEXT = describe_element( 'strings', groups = 'text', exact_occurrence = 1, attributes = [],
         elements = [
-        describe_element( 'string', groups = 'text', attributes = [
-            identifier_attribute( 'id', mandatory = True, display_id = True,
-                reference_family = 'TEXT_LEVELNAME_STR', reference_world = WORLD_LEVEL ),
-            text_attribute( 'text', mandatory = True,tooltip="Use | symbol (pipe) to get new pages on signs, and new lines in labels" ),
-            text_attribute( 'de' ,allow_empty=True,remove_empty=True),
-            text_attribute( 'es' ,allow_empty=True,remove_empty=True),
-            text_attribute( 'fr' ,allow_empty=True,remove_empty=True),
-            text_attribute( 'it' ,allow_empty=True,remove_empty=True),
-            text_attribute( 'nl' ,allow_empty=True,remove_empty=True),
-            text_attribute( 'pt' ,allow_empty=True,remove_empty=True)
-            ] )
+        describe_element( 'string', groups = 'text', attributes = temp_attributes )
         ] )
-
+	
+temp_attributes = [
+	identifier_attribute( 'id', mandatory = True, display_id = True,
+		reference_family = 'text', reference_world = WORLD_GLOBAL ),
+	string_attribute( 'text', mandatory = True )
+    ]
+for language in Languages: 
+    temp_attributes[len(temp_attributes):]=[string_attribute(language)]
 GLOBAL_TREE_TEXT = describe_element( 'strings', exact_occurrence = 1, attributes = [], elements = [
-        describe_element( 'string',min_occurrence=1 , attributes = [
-            identifier_attribute( 'id', mandatory = True, display_id = True,
-                reference_family = 'text', reference_world = WORLD_GLOBAL ),
-            string_attribute( 'text', mandatory = True ),
-            string_attribute( 'de' ),
-            string_attribute( 'es' ),
-            string_attribute( 'fr' ),
-            string_attribute( 'it' ),
-            string_attribute( 'nl' ),
-            string_attribute( 'pt' )
-            ] )
+        describe_element( 'string',min_occurrence=1 , attributes = temp_attributes )
         ] )
 
 TREE_GLOBAL_TEXT.add_elements( [GLOBAL_TREE_TEXT] )
@@ -700,7 +714,8 @@ DEP_MATERIAL = describe_element('material',groups='material', read_only = True,a
 ])
 
 DEP_ANIM = describe_element('anim',groups='anim', read_only = True,attributes=[
-    enum_attribute( 'id',ANIMATIONS_GLOBAL, read_only=True, display_id=True  ),
+    # Mygod EDIT: Add support for local animations
+    string_attribute( 'id', read_only=True, display_id=True  ),
     bool_attribute('found',read_only = True,mandatory=True,default=False)
 ])
 

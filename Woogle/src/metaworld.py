@@ -26,6 +26,7 @@ import os
 import louie
 import math
 import wogfile
+import re
 from PyQt4 import QtCore
 
 BALL_STATES=['attached','climbing','detaching','dragging','falling',
@@ -98,7 +99,8 @@ def _getRealFilename(path):
     return currentpath
 
 class AttributeMeta(object):
-    def __init__( self, name, attribute_type, init = None, default = None, 
+	# Mygod EDIT: Add exclude, extract & addition attribute
+    def __init__( self, name, attribute_type, init = None, default = None, exclude = None, extract = None, addition = None,
                   allow_empty = False, mandatory = False, display_id = False,
                   map_to = None, remove_empty=False, read_only=False, tooltip=None, min_length=None, category=None):
         """display_id: if True indicates that the attribute may be used to 
@@ -110,6 +112,9 @@ class AttributeMeta(object):
             init = str(init)
         self.init = init
         self.default = default
+        self.exclude = exclude
+        self.extract = extract
+        self.addition = addition
         self.allow_empty = allow_empty
         self.remove_empty = remove_empty
         self.read_only = read_only
@@ -134,8 +139,17 @@ class AttributeMeta(object):
             value = None
         else:
             value = xml_element.get(self.map_to)
+        if value is not None and self.extract is not None:
+            if re.search(self.extract,value):
+				value = re.sub(self.extract,r'\1',value)
+            else:
+				value = None
+        if value is not None and self.exclude is not None:
+			value = re.sub(self.exclude,'',value)
+			if value is '':
+			    value = None
         if value is not None:
-            attributes_by_name[self.name] = value
+		    attributes_by_name[self.name] = value
     
     def to_xml(self, element, attributes_by_name):
         if self.name == 'value':
@@ -143,7 +157,13 @@ class AttributeMeta(object):
         else:
             value = element.get(self.name)
         if value is not None:
-            attributes_by_name[self.map_to] = value
+            if self.addition is not None and value is not None:
+				try: 
+				    attributes_by_name[self.map_to] = attributes_by_name[self.map_to] + ',' + self.addition + value
+				except KeyError:
+				    attributes_by_name[self.map_to] = self.addition + value
+            else:
+			    attributes_by_name[self.map_to] = value
 
     def get( self, element ):
         return element.get( self.name )
@@ -466,7 +486,7 @@ class RealListAttributeMeta(ComponentsAttributeMeta):
 
 class EnumeratedAttributeMeta(ComponentsAttributeMeta):
     def __init__( self, name, values, attribute_type = ENUMERATED_TYPE, allow_any=False,
-                  is_list = False, **kwargs ):
+                  is_list = False, ignore_startswiths = [], **kwargs ):
         if is_list and 'allow_empty' not in kwargs:
             kwargs['allow_empty'] = True
         min_components = not is_list and 1 or 0 
@@ -477,11 +497,15 @@ class EnumeratedAttributeMeta(ComponentsAttributeMeta):
         self.values = values
         self.is_list = is_list
         self.allow_any=allow_any
+        self.ignore_startswiths=ignore_startswiths
 
     def  _is_component_valid( self, index, component, world ): #IGNORE:W0613
         if self.allow_any:
             return None
         if component not in self.values:
+            for i in self.ignore_startswiths:
+			    if component.startswith(i):
+				    return None
             return 'Invalid %(enum)s value: "%(values)s"', {
                 'enum':self.name,
                 'values':','.join(self.values) }
