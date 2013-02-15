@@ -1,0 +1,2 @@
+wogeditor.exe
+pause

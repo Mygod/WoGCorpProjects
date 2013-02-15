@@ -1,0 +1,1 @@
+"C:\Program Files\Winrar\winrar.exe" a WooGLE-src.zip @wogeditsrcfiles.lst

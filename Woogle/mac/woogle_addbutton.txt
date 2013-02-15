@@ -1,0 +1,19 @@
+<!-- res/levels/island1/island1.scene.bin -->
+<scene>
+<buttongroup id="levelMarkerGroup" osx="150,1.08">
+	<button id="lb_WooGLE_Test" depth="0" x="{xpos}" y="{ypos}" scalex="1.008" scaley="0.848" rotation="-0.5" alpha="1" colorize="255,255,255" up="IMAGE_SCENE_ISLAND1_LEVELMARKERA_UP" over="IMAGE_SCENE_ISLAND1_LEVELMARKERA_OVER" onclick="pl_{Level Name}"/>		
+</buttongroup>
+<label id="txt_WooGLE_Test" depth="0.1" x="{xpos+30}" y="{ypos}" align="left" rotation="6.337" scale="0.7" overlay="false" screenspace="false" font="FONT_INGAME36" text="WOOGLE_TEST_NAME"/>
+<SceneLayer id="ocd_WooGLE_Test" name="OCD_flag1" depth="-0.1" x="{xpos}" y="{ypos + 20}" scalex="0.7" scaley="0.7" rotation="17.59" alpha="1" colorize="255,255,255" image="IMAGE_SCENE_ISLAND1_OCD_FLAG1" anim="ocdFlagWave" animspeed="1"/>
+</scene>
+
+<!-- res/islands/island1.xml.bin -->
+<island>
+<level id="WooGLE_Test" name="WOOGLE_TEST_NAME" text="WOOGLE_TEST_TEXT" />
+</island>
+
+<!-- properties/text.xml.bin -->
+<strings>
+<string id="WOOGLE_TEST_NAME" text="{Level Name}" />
+<string id="WOOGLE_TEST_TEXT" text="Testing 1..2..3" />
+</strings>

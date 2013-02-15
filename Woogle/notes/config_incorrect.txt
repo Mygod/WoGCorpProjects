@@ -1,0 +1,34 @@
+Error message on Windows XP:
+"This application has failed to start because the application configuration is incorrect. Reinstalling the application may fix this program."
+
+Error message on Windows Vista:
+"The application has failed to start because its side-by-side configuration is incorrect. Please see the application event log for more detail."
+
+Cause
+
+This error is caused because some files needed for Visual C++ applications have become corrupt or are missing.
+
+Resolution
+
+Re-installing of the C++ runtime environment should fix the issue.
+
+Download the Visual C++ redistributable files from below link: Microsoft Visual C++ Redistributable package
+http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en
+
+
+ OLEAUT32.DLL - C:\Windows\system32\OLEAUT32.DLL
+ USER32.dll - C:\Windows\system32\USER32.dll
+ IMM32.DLL - C:\Windows\system32\IMM32.DLL
+ SHELL32.DLL - C:\Windows\system32\SHELL32.DLL
+ OLE32.dll - C:\Windows\system32\OLE32.dll
+ COMDLG32.DLL - C:\Windows\system32\COMDLG32.DLL
+ WSOCK32.dll - C:\Windows\system32\WSOCK32.dll
+ WINMM.DLL - C:\Windows\system32\WINMM.DLL
+ ADVAPI32.DLL - C:\Windows\system32\ADVAPI32.DLL
+ msvcrt.dll - C:\Windows\system32\msvcrt.dll
+ WS2_32.DLL - C:\Windows\system32\WS2_32.DLL
+ WINSPOOL.DRV - C:\Windows\system32\WINSPOOL.DRV
+ GDI32.dll - C:\Windows\system32\GDI32.dll
+ KERNEL32.dll - C:\Windows\system32\KERNEL32.dll
+
+http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en

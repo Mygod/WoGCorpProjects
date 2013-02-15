@@ -1,0 +1,20 @@
+
+// make the dropdown toolbutton and the associated menu
+QToolBar *ptbar = new QToolBar(...);
+QToolButton *ptbut = new QToolButton( ptbar );
+QMenu *pmenu = new QMenu( ptbut );
+ptbut->setMenu( pmenu );
+ptbut->setPopupMode( QToolButton::MenuButtonPopup );
+
+// now make the actions
+QAction *pact1 = new QAction( ...
+QAction *pact2 = new QAction( ...
+...
+
+// add the actions to the menu
+pmenu->addAction( pact1 );
+pmenu->addAction( pact2 );
+...
+
+// make one of the actions the default, otherwise only a small triangle is shown
+ptbar->setDefaultAction( pact2 ); 

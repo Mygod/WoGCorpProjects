@@ -1,0 +1,3 @@
+<object type="application/x-shockwave-flash" data="http://2rellw.blu.livefilestore.com/y1p8vDcxd0IjsB47Av_gFIio98dNiGIN_5LGuUTNIvNvuGU9ySEKh9xPl_89mq2Z2XPM2ObUlKzXHqXu5dIxxuy_DxTffRE41AF/player.swf" id="audioplayer1
+" height="24" width="290"><param name="movie" value="player.swf" /><param name="FlashVars" value="playerID=audioplayer1&soundFile=http://public.blu.livefilestore.com/y1pCBjCXhY9wjJMtkOatHBFU8ZsMfuJ1XgptextGuod4WKcHJ8p5pErioGDK6tTU_17wO2m1vAQILn35SnO0GZMAw/Let%20me%20Show%20you%20Plan%20A.mp3
+" /><param name="quality" value="high" /><param name="menu" value="false" /><param name="wmode" value="transparent" /></object>
