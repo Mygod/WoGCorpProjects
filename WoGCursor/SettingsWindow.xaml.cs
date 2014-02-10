@@ -6,7 +6,7 @@ using Mygod.Windows;
 
 namespace Mygod.WorldOfGoo.Cursor
 {
-    public partial class SettingsWindow
+    public sealed partial class SettingsWindow
     {
         public SettingsWindow(MainWindow parent)
         {
@@ -29,7 +29,7 @@ namespace Mygod.WorldOfGoo.Cursor
 
         private void ResetToDefault(object sender, RoutedEventArgs e)
         {
-            Settings.Current.ResetToDefault();
+            Settings.ResetToDefault();
         }
 
         private void CheckUpdates(object sender, RoutedEventArgs e)

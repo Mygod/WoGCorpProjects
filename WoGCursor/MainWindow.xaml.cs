@@ -13,15 +13,16 @@ namespace Mygod.WorldOfGoo.Cursor
         public MainWindow()
         {
             InitializeComponent();
-            refreshTimer = new DispatcherTimer(TimeSpan.FromSeconds(1 / Settings.Current.RefreshRate), DispatcherPriority.Render, 
-                                               Refresh, Dispatcher);
-            Settings.Current.ShowOriginalCursorData.DataChanged += Update;
-            Settings.Current.RefreshRateData.DataChanged +=
-                (sender, e) => refreshTimer.Interval = TimeSpan.FromSeconds(1 / Settings.Current.RefreshRate);
-            notifyIcon = new NotifyIcon { Icon = CurrentApp.DrawingIcon, Text = CurrentApp.Title, Visible = true };
+            refreshTimer = new DispatcherTimer(TimeSpan.FromSeconds(1 / Settings.RefreshRate),
+                                               DispatcherPriority.Render, Refresh, Dispatcher);
+            Settings.ShowOriginalCursorData.DataChanged += Update;
+            Settings.RefreshRateData.DataChanged +=
+                (sender, e) => refreshTimer.Interval = TimeSpan.FromSeconds(1 / Settings.RefreshRate);
+            var notifyIcon = new NotifyIcon { Icon = CurrentApp.DrawingIcon, Text = CurrentApp.Title, Visible = true };
             notifyIcon.MouseClick += NotifyIconClicked;
-            notifyIcon.ShowBalloonTip(10000, CurrentApp.Title, "Welcome! Left click here to configure your cursor, right click to quit.",
-                                      ToolTipIcon.Info);
+            notifyIcon.ShowBalloonTip(10000, CurrentApp.Title,
+                                      "Welcome! Left click here to configure your cursor, right click to quit.", ToolTipIcon.Info);
+            GC.KeepAlive(notifyIcon);
         }
 
         // ReSharper disable NotAccessedField.Local
@@ -30,7 +31,6 @@ namespace Mygod.WorldOfGoo.Cursor
 
         private SettingsWindow settingsWindow;
         private SettingsWindow SettingsWindow { get { return settingsWindow ?? (settingsWindow = new SettingsWindow(this)); } }
-        private readonly NotifyIcon notifyIcon;
 
         private void NotifyIconClicked(object sender, MouseEventArgs e)
         {
@@ -81,7 +81,7 @@ namespace Mygod.WorldOfGoo.Cursor
         private void Update(object sender = null, EventArgs e = null)
         {
             if (WoGCursor.Paused) return;
-            if (Settings.Current.ShowOriginalCursor) ShowCursor();
+            if (Settings.ShowOriginalCursor) ShowCursor();
             else HideCursor();
         }
 

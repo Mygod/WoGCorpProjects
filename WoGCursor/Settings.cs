@@ -2,88 +2,82 @@
 using System.ComponentModel;
 using System.Windows.Media;
 using Mygod.IO;
-using Mygod.WorldOfGoo.Cursor.Annotations;
 
 namespace Mygod.WorldOfGoo.Cursor
 {
-    public sealed class Settings : INotifyPropertyChanged
+    public sealed class Settings
     {
-        private Settings()
+        static Settings()
         {
-            settingsFile = new IniFile("Settings.ini");
-            settingsSection = new IniSection(settingsFile, "Settings");
-            foregroundData = new ColorData(settingsSection, "Foreground", Colors.Black);
-            borderData = new ColorData(settingsSection, "Border", Color.FromRgb(0xb8, 0xb8, 0xb8));
-            exhaledRadiusData = new DoubleData(settingsSection, "ExhaledRadius", 9);
-            inhaledRadiusData = new DoubleData(settingsSection, "InhaledRadius", 10);
-            RefreshRateData = new DoubleData(settingsSection, "RefreshRate", 60);
-            borderThicknessData = new DoubleData(settingsSection, "BorderThickness", 3);
-            breathDurationData = new DoubleData(settingsSection, "BreathDuration", 20.0 / 9);
-            lengthData = new Int32Data(settingsSection, "Length", 85);
-            shrinkRateData = new DoubleData(settingsSection, "ShrinkRate", 200.0);
-            ShowOriginalCursorData = new YesNoData(settingsSection, "ShowOriginalCursor", false);
-            smootherCurveData = new YesNoData(settingsSection, "SmootherCurve", true);
-            foregroundData.DataChanged += OnPropertyChanged;
-            borderData.DataChanged += OnPropertyChanged;
-            exhaledRadiusData.DataChanged += OnPropertyChanged;
-            inhaledRadiusData.DataChanged += OnPropertyChanged;
+            var section = new IniFile("Settings.ini")["Settings"];
+            ForegroundData = new ColorData(section, "Foreground", Colors.Black);
+            BorderData = new ColorData(section, "Border", Color.FromRgb(0xb8, 0xb8, 0xb8));
+            ExhaledRadiusData = new DoubleData(section, "ExhaledRadius", 9);
+            InhaledRadiusData = new DoubleData(section, "InhaledRadius", 10);
+            RefreshRateData = new DoubleData(section, "RefreshRate", 60);
+            BorderThicknessData = new DoubleData(section, "BorderThickness", 3);
+            BreathDurationData = new DoubleData(section, "BreathDuration", 20.0 / 9);
+            LengthData = new Int32Data(section, "Length", 85);
+            ShrinkRateData = new DoubleData(section, "ShrinkRate", 200.0);
+            ShowOriginalCursorData = new YesNoData(section, "ShowOriginalCursor");
+            SmootherCurveData = new YesNoData(section, "SmootherCurve", true);
+            ForegroundData.DataChanged += OnPropertyChanged;
+            BorderData.DataChanged += OnPropertyChanged;
+            ExhaledRadiusData.DataChanged += OnPropertyChanged;
+            InhaledRadiusData.DataChanged += OnPropertyChanged;
             RefreshRateData.DataChanged += OnPropertyChanged;
-            borderThicknessData.DataChanged += OnPropertyChanged;
-            breathDurationData.DataChanged += OnPropertyChanged;
-            lengthData.DataChanged += OnPropertyChanged;
-            shrinkRateData.DataChanged += OnPropertyChanged;
+            BorderThicknessData.DataChanged += OnPropertyChanged;
+            BreathDurationData.DataChanged += OnPropertyChanged;
+            LengthData.DataChanged += OnPropertyChanged;
+            ShrinkRateData.DataChanged += OnPropertyChanged;
             ShowOriginalCursorData.DataChanged += OnPropertyChanged;
-            smootherCurveData.DataChanged += OnPropertyChanged;
+            SmootherCurveData.DataChanged += OnPropertyChanged;
         }
 
-        public static readonly Settings Current = new Settings();
+        private static readonly ColorData ForegroundData, BorderData;
+        private static readonly DoubleData ExhaledRadiusData, InhaledRadiusData, BorderThicknessData, BreathDurationData,
+                                           ShrinkRateData;
+        public static readonly DoubleData RefreshRateData;
+        private static readonly Int32Data LengthData;
+        public static readonly YesNoData ShowOriginalCursorData;
+        private static readonly YesNoData SmootherCurveData;
 
-        private readonly IniFile settingsFile;
-        private readonly IniSection settingsSection;
-        private readonly ColorData foregroundData, borderData;
-        private readonly DoubleData exhaledRadiusData, inhaledRadiusData, borderThicknessData, breathDurationData, shrinkRateData;
-        public readonly DoubleData RefreshRateData;
-        private readonly Int32Data lengthData;
-        public readonly YesNoData ShowOriginalCursorData;
-        private readonly YesNoData smootherCurveData;
+        public static Color Foreground { get { return ForegroundData.Get(); } set { ForegroundData.Set(value); } }
+        public static Color Border { get { return BorderData.Get(); } set { BorderData.Set(value); } }
+        public static double ExhaledRadius { get { return ExhaledRadiusData.Get(); } set { ExhaledRadiusData.Set(value); } }
+        public static double InhaledRadius { get { return InhaledRadiusData.Get(); } set { InhaledRadiusData.Set(value); } }
+        public static double BorderThickness { get { return BorderThicknessData.Get(); } set { BorderThicknessData.Set(value); } }
+        public static double BreathDuration { get { return BreathDurationData.Get(); } set { BreathDurationData.Set(value); } }
+        public static double ShrinkRate { get { return ShrinkRateData.Get(); } set { ShrinkRateData.Set(value); } }
+        public static double RefreshRate { get { return RefreshRateData.Get(); } set { RefreshRateData.Set(value); } }
+        public static int Length { get { return LengthData.Get(); } set { LengthData.Set(value); } }
+        public static bool ShowOriginalCursor { get { return ShowOriginalCursorData.Get(); } set { ShowOriginalCursorData.Set(value); } }
+        public static bool SmootherCurve { get { return SmootherCurveData.Get(); } set { SmootherCurveData.Set(value); } }
 
-        public Color Foreground { get { return foregroundData.Get(); } set { foregroundData.Set(value); } }
-        public Color Border { get { return borderData.Get(); } set { borderData.Set(value); } }
-        public double ExhaledRadius { get { return exhaledRadiusData.Get(); } set { exhaledRadiusData.Set(value); } }
-        public double InhaledRadius { get { return inhaledRadiusData.Get(); } set { inhaledRadiusData.Set(value); } }
-        public double BorderThickness { get { return borderThicknessData.Get(); } set { borderThicknessData.Set(value); } }
-        public double BreathDuration { get { return breathDurationData.Get(); } set { breathDurationData.Set(value); } }
-        public double ShrinkRate { get { return shrinkRateData.Get(); } set { shrinkRateData.Set(value); } }
-        public double RefreshRate { get { return RefreshRateData.Get(); } set { RefreshRateData.Set(value); } }
-        public int Length { get { return lengthData.Get(); } set { lengthData.Set(value); } }
-        public bool ShowOriginalCursor { get { return ShowOriginalCursorData.Get(); } set { ShowOriginalCursorData.Set(value); } }
-        public bool SmootherCurve { get { return smootherCurveData.Get(); } set { smootherCurveData.Set(value); } }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged(string propertyName)
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+        private static void OnPropertyChanged(string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            var handler = StaticPropertyChanged;
+            if (handler != null) handler(null, new PropertyChangedEventArgs(propertyName));
         }
-        private void OnPropertyChanged(object sender, EventArgs e)
+        private static void OnPropertyChanged(object sender, EventArgs e)
         {
             OnPropertyChanged(((StringData) sender).DataKey);
         }
 
-        public void ResetToDefault()
+        public static void ResetToDefault()
         {
-            foregroundData.ResetToDefault();
-            borderData.ResetToDefault();
-            exhaledRadiusData.ResetToDefault();
-            inhaledRadiusData.ResetToDefault();
+            ForegroundData.ResetToDefault();
+            BorderData.ResetToDefault();
+            ExhaledRadiusData.ResetToDefault();
+            InhaledRadiusData.ResetToDefault();
             RefreshRateData.ResetToDefault();
-            borderThicknessData.ResetToDefault();
-            breathDurationData.ResetToDefault();
-            shrinkRateData.ResetToDefault();
-            lengthData.ResetToDefault();
+            BorderThicknessData.ResetToDefault();
+            BreathDurationData.ResetToDefault();
+            ShrinkRateData.ResetToDefault();
+            LengthData.ResetToDefault();
             ShowOriginalCursorData.ResetToDefault();
-            smootherCurveData.ResetToDefault();
+            SmootherCurveData.ResetToDefault();
         }
     }
 }
