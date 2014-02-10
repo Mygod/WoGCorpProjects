@@ -1,0 +1,29 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.BackupProfileWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="775"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf" Height="480" Closing="WindowClosing"
+        Title="{StaticResource BackupProfileWindowTitle}" Icon="{x:Static m:CurrentApp.MainIcon}" x:ClassModifier="internal">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button Content="{StaticResource NewBackup}" Name="NewBackupButton" x:FieldModifier="private" Click="NewBackup" />
+            <Button Content="{StaticResource OverwriteBackups}" Name="OverwriteBackupsButton" x:FieldModifier="private" Click="OverwriteBackups" />
+            <Button Content="{StaticResource RestoreBackup}" Name="RestoreBackupButton" x:FieldModifier="private" Click="RestoreBackup" />
+            <Button Content="{StaticResource RenameBackup}" Name="RenameBackupButton" x:FieldModifier="private" Click="RenameBackup" />
+            <Button Content="{StaticResource DeleteBackups}" Name="DeleteBackupsButton" x:FieldModifier="private" Click="DeleteBackups" />
+            <Button Content="{StaticResource SetBackupsDirectory}" Click="SetBackupsDirectory" />
+        </ToolBar>
+        <ListView Name="BackupList" SelectionChanged="SelectedItemChanged" x:FieldModifier="private" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="{StaticResource BackupName}" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="{StaticResource BackupTime}" DisplayMemberBinding="{Binding Time}" />
+                        <GridViewColumn Header="{StaticResource BackupSize}" DisplayMemberBinding="{Binding Size}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

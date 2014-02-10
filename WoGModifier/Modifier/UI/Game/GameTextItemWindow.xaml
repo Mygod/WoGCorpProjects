@@ -1,0 +1,57 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameTextItemWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
+        xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing" Height="250" Width="550">
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
+            <Binding Source="{StaticResource GameTextItemWindowTitle}" />
+            <Binding Path="Parent.Parent.GameParent.Alias" />
+            <Binding Path="Parent.Parent.GameParent.FileName" />
+        </MultiBinding>
+    </Window.Title>
+    <DataGrid Name="SpecificLanguageStringGrid" x:FieldModifier="private" AutoGenerateColumns="False">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="{StaticResource LanguageID}" Binding="{Binding Language}" IsReadOnly="True">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="ToolTip">
+                            <Setter.Value>
+                                <ToolTip>
+                                    <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource LanguageID}" /><LineBreak /><StaticResourceExtension ResourceKey="LanguageIDDescription" />
+                                    </TextBlock>
+                                </ToolTip>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="{StaticResource LanguageName}" Binding="{Binding Language, Converter={StaticResource LanguageNameConverter}}"
+                                IsReadOnly="True" />
+            <DataGridTextColumn Header="{StaticResource Value}" Binding="{Binding Value}">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="ToolTip">
+                            <Setter.Value>
+                                <ToolTip>
+                                    <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource Value}" /><LineBreak /><StaticResourceExtension ResourceKey="TextItemValueDescription" />
+                                    </TextBlock>
+                                </ToolTip>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+        <DataGrid.CommandBindings>
+            <CommandBinding Command="UI:Commands.Insert" Executed="AddSpecificLanguageString" />
+            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="SpecificLanguageStringSelected" Executed="RemoveSpecificLanguageStrings" />
+        </DataGrid.CommandBindings>
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="{StaticResource ContextMenuAddSpecificLanguageString}" Command="UI:Commands.Insert" />
+                <MenuItem Header="{StaticResource ContextMenuRemoveSpecificLanguageStrings}" Command="ApplicationCommands.Delete" />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+    </DataGrid>
+</Window>

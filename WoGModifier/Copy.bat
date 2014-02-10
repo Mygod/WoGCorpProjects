@@ -1,0 +1,1 @@
+﻿copy /y Resources\Texts.xaml bin\Release\Resources\Texts.xaml

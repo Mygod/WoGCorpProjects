@@ -1,0 +1,5 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.HelpWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Closing="Hide"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+        Title="{StaticResource HelpWindowTitle}" Height="480" Width="640" Icon="{x:Static m:CurrentApp.MainIcon}">
+    <WebBrowser Name="Browser" x:FieldModifier="private" />
+</Window>

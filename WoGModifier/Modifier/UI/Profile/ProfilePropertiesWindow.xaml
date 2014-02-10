@@ -1,0 +1,36 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.ProfilePropertiesWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+        SizeToContent="Height" Width="200" Closing="BlockClosing"
+        xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" Icon="{x:Static m:CurrentApp.MainIcon}">
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
+            <Binding Source="{StaticResource PropertiesWindowTitle}" />
+            <Binding Path="Alias" />
+            <Binding Path="FilePath" Converter="{StaticResource FileName}" />
+        </MultiBinding>
+    </Window.Title>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Content="{StaticResource ProfilePropertiesCountryCode}" Target="{Binding ElementName=CountryCodeBox}"
+               ToolTip="{StaticResource CountryCodeToolTip}" />
+        <m:AutoCompleteBox Name="CountryCodeBox" x:FieldModifier="private" VerticalAlignment="Center" Grid.Column="1"
+                               Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
+            <m:AutoCompleteBox.Text>
+                <Binding Path="CountryCode" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ui:NoCommaValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </m:AutoCompleteBox.Text>
+        </m:AutoCompleteBox>
+        <CheckBox Content="{StaticResource ProfilePropertiesFullscreen}" ToolTip="{StaticResource FullscreenToolTip}"
+                  IsChecked="{Binding Fullscreen}" Grid.Row="1" Grid.ColumnSpan="2" />
+    </Grid>
+</Window>

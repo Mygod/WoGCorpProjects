@@ -1,0 +1,57 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.XslTransformerWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+        Title="{StaticResource XslTransformerWindowTitle}" Icon="{x:Static m:CurrentApp.MainIcon}" Height="400" Width="600">
+    <Window.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style TargetType="GridSplitter" BasedOn="{StaticResource {x:Type GridSplitter}}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="{StaticResource XslTransformerSource}" Target="{Binding ElementName=Source}" />
+                <TextBox Name="Source" x:FieldModifier="private" Grid.Row="1" />
+            </Grid>
+            <GridSplitter Grid.Column="1" />
+            <Grid Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="{StaticResource XslTransformerResult}" Target="{Binding ElementName=Result}" />
+                <TextBox Name="Result" x:FieldModifier="private" Grid.Row="1" />
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Row="1" />
+        <Grid Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="{StaticResource XslTransformerXsl}" Target="{Binding ElementName=Xsl}" />
+            <TextBox Name="Xsl" x:FieldModifier="private" Grid.Row="1" />
+        </Grid>
+        <Button Grid.Row="3" Content="{StaticResource XslTransformerTransform}" HorizontalAlignment="Center"
+                Margin="5" Click="Transform" />
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameTextWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
+        xmlns:WoG="clr-namespace:Mygod.WorldOfGoo" xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}"
+        Closing="BlockClosing" Height="400" Width="800">
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
+            <Binding Source="{StaticResource GameTextWindowTitle}" />
+            <Binding Path="Alias" />
+            <Binding Path="FilePath" Converter="{StaticResource FileName}" />
+        </MultiBinding>
+    </Window.Title>
+    <ListBox Name="TextItemList" SelectionMode="Extended" x:FieldModifier="private">
+        <ListBox.Resources>
+            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <EventSetter Event="MouseDoubleClick" Handler="ProcessTextItem" />
+            </Style>
+            <UI:FirstLineConverter x:Key="FirstLineConverter" />
+        </ListBox.Resources>
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type WoG:TextItem}">
+                <TextBlock>
+                    <Run Text="{Binding ID, Mode=OneWay}" /> (<Run Text="{Binding LocalizedText, Mode=OneWay, Converter={StaticResource FirstLineConverter}}" />)
+                </TextBlock>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.CommandBindings>
+            <CommandBinding Command="Save" Executed="SaveText" />
+            <CommandBinding Command="UI:Commands.ControlDefault" Executed="ProcessTextItem" />
+            <CommandBinding Command="Search" Executed="SearchTextItem" />
+            <CommandBinding Command="UI:Commands.Insert" Executed="AddTextItem" />
+            <CommandBinding Command="Copy" Executed="CopyTextItem" />
+            <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveTextItems" />
+        </ListBox.CommandBindings>
+        <ListBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="{StaticResource Save}" Command="Save" />
+                <MenuItem Header="{StaticResource ContextMenuEditTextXml}" Click="EditTextXml" />
+                <MenuItem Header="{StaticResource ContextMenuProcessTextItem}" Command="UI:Commands.ControlDefault" FontWeight="Bold" />
+                <MenuItem Header="{StaticResource ContextMenuSearchTextItem}" Command="Search" />
+                <Separator />
+                <MenuItem Header="{StaticResource ContextMenuAddTextItem}" Command="UI:Commands.Insert" />
+                <MenuItem Header="{StaticResource ContextMenuCopyTextItem}" Command="Copy" />
+                <MenuItem Header="{StaticResource ContextMenuRemoveTextItems}" Command="ApplicationCommands.Delete" />
+            </ContextMenu>
+        </ListBox.ContextMenu>
+    </ListBox>
+</Window>

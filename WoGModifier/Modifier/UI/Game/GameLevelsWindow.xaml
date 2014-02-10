@@ -1,0 +1,59 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameLevelsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
+        xmlns:WoG="clr-namespace:Mygod.WorldOfGoo" xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" 
+        Closing="BlockClosing" Height="400" Width="500">
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
+            <Binding Source="{StaticResource GameLevelsWindowTitle}" />
+            <Binding Path="Alias" />
+            <Binding Path="FilePath" Converter="{StaticResource FileName}" />
+        </MultiBinding>
+    </Window.Title>
+    <ListBox Name="LevelList" SelectionMode="Extended" x:FieldModifier="private">
+        <ListBox.Resources>
+            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <EventSetter Event="MouseDoubleClick" Handler="ExecuteLevel" />
+            </Style>
+            <UI:IDShower x:Key="IDShower" />
+        </ListBox.Resources>
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type WoG:Level}">
+                <TextBlock>
+                    <Run Text="{Binding LocalizedName, Mode=OneWay}" /><Run Text="{Binding Converter={StaticResource IDShower}, Mode=OneWay}" />
+                </TextBlock>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.CommandBindings>
+            <CommandBinding Command="UI:Commands.Process" Executed="ProcessLevels" />
+            <CommandBinding Command="Undo" Executed="ReverseLevels" />
+            <CommandBinding Command="UI:Commands.Restore" Executed="RestoreLevels" />
+            <CommandBinding Command="UI:Commands.Default" Executed="ExecuteLevel" />
+            <CommandBinding Command="UI:Commands.PlayMusic" Executed="PlayMusic" />
+            <CommandBinding Command="Properties" Executed="LevelsProperties" />
+            <CommandBinding Command="Copy" Executed="CopyLevels" />
+            <CommandBinding Command="UI:Commands.Sort" Executed="SortLevels" />
+            <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteLevels" />
+            <CommandBinding Command="Search" Executed="SearchLevel" />
+        </ListBox.CommandBindings>
+        <ListBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="{StaticResource ContextMenuProcessLevels}" Command="UI:Commands.Process" />
+                <MenuItem Header="{StaticResource ContextMenuReverseLevels}" Command="Undo" />
+                <MenuItem Header="{StaticResource ContextMenuRestoreLevels}" Command="UI:Commands.Restore" />
+                <MenuItem Header="{StaticResource ContextMenuExecuteLevel}" Command="UI:Commands.Default" FontWeight="Bold" />
+                <MenuItem Header="{StaticResource ContextMenuPlayLevelMusic}" Command="UI:Commands.PlayMusic" />
+                <Separator />
+                <MenuItem Header="{StaticResource ContextMenuEditLevelSceneBin}" Tag="scene" Click="EditLevelFile" />
+                <MenuItem Header="{StaticResource ContextMenuEditLevelLevelBin}" Tag="level" Click="EditLevelFile" />
+                <MenuItem Header="{StaticResource ContextMenuEditLevelResrcBin}" Tag="resrc" Click="EditLevelFile" />
+                <Separator />
+                <MenuItem Header="{StaticResource ContextMenuCopyLevels}" Command="Copy" />
+                <MenuItem Header="{StaticResource ContextMenuSortLevels}" Command="UI:Commands.Sort" />
+                <MenuItem Header="{StaticResource ContextMenuSearchLevel}" Command="Search" />
+                <MenuItem Header="{StaticResource ContextMenuDeleteLevels}" Command="ApplicationCommands.Delete" />
+                <Separator />
+                <MenuItem Header="{StaticResource ContextMenuProperties}" Command="Properties" />
+            </ContextMenu>
+        </ListBox.ContextMenu>
+    </ListBox>
+</Window>

@@ -1,0 +1,904 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Features Version="4">
+	<Strings>
+		<String ID="ZeroGravityProcessName" Text="Zero gravity" zh-CN="无重力" />
+		<String ID="ZeroGravityProcessDescription" Text="Make selected levels zero gravity" zh-CN="使选中关卡无重力" />
+		<String ID="ZeroGravityProcessNothingChanged" Text="The level has no gravity." zh-CN="该关卡已经无重力了。" />
+		<String ID="ZeroGravityProcessTip" Text="This feature will make all gravities in the selected levels disappear." zh-CN="这将使选中关卡中的所有重力消失。" />
+		<String ID="ZeroGravityReverseName" Text="Restore gravities" zh-CN="恢复重力" />
+		<String ID="ZeroGravityReverseDescription" Text="Restore gravities in the selected levels" zh-CN="恢复选中关卡重力" />
+		<String ID="ZeroGravityReverseNothingChanged" Text="The level has no gravity to restore." zh-CN="该关卡本来就无重力或未被修改过。" />
+		<String ID="ZeroGravityReverseTip" Text="This feature will restore all gravities in the selected levels." zh-CN="这将恢复选中关卡中所有使用此修改器消失的重力。" />
+		<String ID="UndeadGooBallsProcessName" Text="Make goo balls undead" zh-CN="使粘粘球不死" />
+		<String ID="UndeadGooBallsProcessDescription" Text="Make goo balls in the level undead" zh-CN="使选中关卡中的粘粘球不死" />
+		<String ID="UndeadGooBallsProcessNothingChanged" Text="Goo balls in this level is undead already." zh-CN="该关卡的粘粘球已经不死了。" />
+		<String ID="UndeadGooBallsProcessTip" Text="This feature will stop all geometries killing goo balls by removing the deadly tag." zh-CN="这将使选中关卡中所有几何元素都将失去杀死粘粘球的功能。" />
+		<String ID="UndeadGooBallsReverseName" Text="Restore undead goo balls" zh-CN="恢复粘粘球不死" />
+		<String ID="UndeadGooBallsReverseDescription" Text="Restore undead goo balls in the selected levels" zh-CN="恢复选中关卡中的粘粘球不死" />
+		<String ID="UndeadGooBallsReverseNothingChanged" Text="No undead goo balls found in this level." zh-CN="该关卡的粘粘球的不死未被修改过。" />
+		<String ID="UndeadGooBallsReverseTip" Text="It will restore goo balls which has been edited to undead." zh-CN="这将恢复选中关卡中失去杀死粘粘球功能的几何元素的功能。" />
+		<String ID="FireDisappearProcessName" Text="Make all fires disappear" zh-CN="使火消失" />
+		<String ID="FireDisappearProcessDescription" Text="Make all fires in the selected levels disappear" zh-CN="使选中关卡中的火消失" />
+		<String ID="FireDisappearProcessNothingChanged" Text="No fires or all fires in this level have been modified already." zh-CN="该关卡中没有火或已经修改过了。" />
+		<String ID="FireDisappearProcessTip" Text="This feature will make all fires in the level disappear." zh-CN="这将使选中关卡中的所有火消失。" />
+		<String ID="FireDisappearReverseName" Text="Restore fires" zh-CN="恢复火" />
+		<String ID="FireDisappearReverseDescription" Text="Restore disappeared fires in the selected levels" zh-CN="恢复选中关卡中消失的火" />
+		<String ID="FireDisappearReverseNothingChanged" Text="No fire has found to be restored." zh-CN="该关卡中的火似乎未被修改过。" />
+		<String ID="FireDisappearReverseTip" Text="It will restore all fires modified by this modifier." zh-CN="这将恢复选中关卡中所有使用此修改器消失的火。" />
+		<String ID="WakeGooBallsProcessName" Text="Wake up goo balls" zh-CN="叫醒粘粘球" />
+		<String ID="WakeGooBallsProcessDescription" Text="Wake up all goo balls in the selected levels" zh-CN="叫醒选中关卡中的所有粘粘球" />
+		<String ID="WakeGooBallsProcessNothingChanged" Text="No sleeping goo ball has been found." zh-CN="该关卡中没有睡着的粘粘球或已经修改过了。" />
+		<String ID="WakeGooBallsProcessTip" Text="It will wake up all the goo balls in the level." zh-CN="这将叫醒选中关卡中默认睡着的粘粘球。" />
+		<String ID="WakeGooBallsReverseName" Text="Make goo balls sleep" zh-CN="催眠粘粘球" />
+		<String ID="WakeGooBallsReverseDescription" Text="Make modified awake goo balls sleep in the selected levels" zh-CN="催眠选中关卡中被叫醒的粘粘球" />
+		<String ID="WakeGooBallsReverseNothingChanged" Text="No modified sleeping goo ball has been found." zh-CN="该关卡中没有被叫醒的粘粘球。" />
+		<String ID="WakeGooBallsReverseTip" Text="It will make goo balls sleep which modified by this modifier." zh-CN="这将催眠选中关卡中被此修改器叫醒的粘粘球。" />
+		<String ID="PipeSuckAllGooBallsProcessName" Text="Make pipe suck all goo balls" zh-CN="修改管道" />
+		<String ID="PipeSuckAllGooBallsProcessDescription" Text="Make pipe suck all goo balls" zh-CN="使管道吸收所有粘粘球" />
+		<String ID="PipeSuckAllGooBallsProcessNothingChanged" Text="No pipe has been found or the pipe have been modified in the level." zh-CN="该关卡没有管道或已经修改过了。" />
+		<String ID="PipeSuckAllGooBallsProcessTip" Text="It will remove the pipe filter to make the pipe in the level suck all goo balls." zh-CN="这将让选中关卡的管道可以吸收所有粘粘球。" />
+		<String ID="PipeSuckAllGooBallsReverseName" Text="Restore pipe" zh-CN="恢复管道" />
+		<String ID="PipeSuckAllGooBallsReverseDescription" Text="Restore modified pipe which can suck all goo balls" zh-CN="恢复修改的管道" />
+		<String ID="PipeSuckAllGooBallsReverseNothingChanged" Text="No pipe which have been modified in the level has been found." zh-CN="该关卡没有管道或尚未被修改过。" />
+		<String ID="PipeSuckAllGooBallsReverseTip" Text="It will restore modified pipe from sucking all goo balls." zh-CN="这将恢复选中关卡中被修改为吸收所有球的管道的吸收状态。" />
+		<String ID="KillBoundsProcessName" Text="" zh-CN="使关卡全部可见" />
+		<String ID="KillBoundsProcessDescription" Text="" zh-CN="使选中关卡内默认全部可见" />
+		<String ID="KillBoundsProcessNothingChanged" Text="" zh-CN="该关卡已经默认全部可见。" />
+		<String ID="KillBoundsProcessTip" Text="" zh-CN="这将使选中关卡无论粘粘架是否搭建到都可以滚动到任何地方。" />
+		<String ID="KillBoundsReverseName" Text="" zh-CN="恢复关卡可见" />
+		<String ID="KillBoundsReverseDescription" Text="" zh-CN="恢复选中关卡默认可见状态" />
+		<String ID="KillBoundsReverseNothingChanged" Text="" zh-CN="该关卡的默认可见状态尚未被修改过。" />
+		<String ID="KillBoundsReverseTip" Text="" zh-CN="这将使选中关卡被修改的默认是否可以滚动到任何地方的状态恢复。" />
+		<String ID="AllowStrandGeomsProcessName" Text="" zh-CN="使关卡允许穿墙" />
+		<String ID="AllowStrandGeomsProcessDescription" Text="" zh-CN="使选中关卡允许穿墙" />
+		<String ID="AllowStrandGeomsProcessNothingChanged" Text="" zh-CN="该关卡已经允许穿墙。" />
+		<String ID="AllowStrandGeomsProcessTip" Text="" zh-CN="这将让选中关卡搭建粘粘架时可以穿墙。" />
+		<String ID="AllowStrandGeomsReverseName" Text="" zh-CN="恢复关卡允许穿墙状态" />
+		<String ID="AllowStrandGeomsReverseDescription" Text="" zh-CN="恢复选中关卡禁止穿墙" />
+		<String ID="AllowStrandGeomsReverseNothingChanged" Text="" zh-CN="该关卡的穿墙状态未被修改过。" />
+		<String ID="AllowStrandGeomsReverseTip" Text="" zh-CN="这将恢复选中关卡中修改过的关卡使其搭建粘粘架时无法穿墙。" />
+		<String ID="DisableMaterialsProcessName" Text="" zh-CN="无效材料" />
+		<String ID="DisableMaterialsProcessDescription" Text="" zh-CN="使选中关卡几何元素的材料无效" />
+		<String ID="DisableMaterialsProcessNothingChanged" Text="" zh-CN="该关卡没有材料或所有材料已经被无效。" />
+		<String ID="DisableMaterialsProcessTip" Text="" zh-CN="这将让选中关卡中所有的几何元素的材料无效。（这会导致粘粘架无法粘在地面上，弹性会变化等）" />
+		<String ID="DisableMaterialsReverseName" Text="" zh-CN="恢复材料" />
+		<String ID="DisableMaterialsReverseDescription" Text="" zh-CN="恢复选中关卡几何元素的材料" />
+		<String ID="DisableMaterialsReverseNothingChanged" Text="" zh-CN="该关卡没有材料或材料尚未被无效过。" />
+		<String ID="DisableMaterialsReverseTip" Text="" zh-CN="这将恢复关卡中所有被该修改器无效的几何元素的材料。" />
+		<String ID="RequireOneGooBallProcessName" Text="" zh-CN="通关球数置为1" />
+		<String ID="RequireOneGooBallProcessDescription" Text="" zh-CN="使选中关卡目标球数变为1" />
+		<String ID="RequireOneGooBallProcessNothingChanged" Text="" zh-CN="该关卡已经被修改过或通关目标不是修改球数。" />
+		<String ID="RequireOneGooBallProcessTip" Text="" zh-CN="这将让选中关卡只需收集一个球即可过关。" />
+		<String ID="RequireOneGooBallReverseName" Text="" zh-CN="恢复通关球数" />
+		<String ID="RequireOneGooBallReverseDescription" Text="" zh-CN="恢复选中关卡目标球数" />
+		<String ID="RequireOneGooBallReverseNothingChanged" Text="" zh-CN="该关卡上未被修改过或通关目标不是修改球数。" />
+		<String ID="RequireOneGooBallReverseTip" Text="" zh-CN="这将恢复选中关卡的通关球数。" />
+		<String ID="TimeBugEachMoveProcessName" Text="" zh-CN="增加时间虫" />
+		<String ID="TimeBugEachMoveProcessDescription" Text="" zh-CN="使每一步都产生时间虫" />
+		<String ID="TimeBugEachMoveProcessNothingChanged" Text="" zh-CN="该关卡的时间虫已经被修改过了。" />
+		<String ID="TimeBugEachMoveProcessTip" Text="" zh-CN="这将使你玩选中关卡时每一步都能产生时间虫。（当时间虫数目少于5个时）" />
+		<String ID="TimeBugEachMoveReverseName" Text="" zh-CN="恢复时间虫" />
+		<String ID="TimeBugEachMoveReverseDescription" Text="" zh-CN="恢复时间虫出现可能性" />
+		<String ID="TimeBugEachMoveReverseNothingChanged" Text="" zh-CN="该关卡的时间虫尚未被修改过。" />
+		<String ID="TimeBugEachMoveReverseTip" Text="" zh-CN="这将恢复被修改的时间虫出现的可能性。" />
+		<String ID="KillExplosiveProcessName" Text="" zh-CN="杀死可炸物" />
+		<String ID="KillExplosiveProcessDescription" Text="" zh-CN="杀死选中关卡中可炸物" />
+		<String ID="KillExplosiveProcessNothingChanged" Text="" zh-CN="该关卡没有可炸物。" />
+		<String ID="KillExplosiveProcessTip" Text="" zh-CN="这将杀死选中关卡中所有的可炸物。" />
+		<String ID="KillExplosiveProcessWarning" Text="" zh-CN="该关卡的可炸物已经修改过了。" />
+		<String ID="KillExplosiveReverseName" Text="" zh-CN="恢复可炸物" />
+		<String ID="KillExplosiveReverseDescription" Text="" zh-CN="恢复选中关卡中可炸物" />
+		<String ID="KillExplosiveReverseNothingChanged" Text="" zh-CN="该关卡没有可炸物。" />
+		<String ID="KillExplosiveReverseTip" Text="" zh-CN="这将恢复选中关卡中所有的可炸物。" />
+		<String ID="KillExplosiveReverseWarning" Text="" zh-CN="该关卡的可炸物尚未被修改过。" />
+		<String ID="KillMovableProcessName" Text="" zh-CN="杀死可移动物" />
+		<String ID="KillMovableProcessDescription" Text="" zh-CN="杀死选中关卡中可移动物" />
+		<String ID="KillMovableProcessNothingChanged" Text="" zh-CN="该关卡没有可移动物。" />
+		<String ID="KillMovableProcessTip" Text="" zh-CN="这将杀死选中关卡中所有的可移动物。" />
+		<String ID="KillMovableProcessWarning" Text="" zh-CN="该关卡的可移动物已经修改过了。" />
+		<String ID="KillMovableReverseName" Text="" zh-CN="恢复可移动物" />
+		<String ID="KillMovableReverseDescription" Text="" zh-CN="恢复选中关卡中可移动物" />
+		<String ID="KillMovableReverseNothingChanged" Text="" zh-CN="该关卡没有可移动物。" />
+		<String ID="KillMovableReverseTip" Text="" zh-CN="这将恢复选中关卡中所有的可移动物。" />
+		<String ID="KillMovableReverseWarning" Text="" zh-CN="该关卡的可移动物已经修改过了。" />
+		<String ID="KillGeometriesProcessName" Text="" zh-CN="杀死几何物体" />
+		<String ID="KillGeometriesProcessDescription" Text="" zh-CN="杀死选中关卡中所有几何物体" />
+		<String ID="KillGeometriesProcessNothingChanged" Text="" zh-CN="该关卡没有几何物体。" />
+		<String ID="KillGeometriesProcessTip" Text="" zh-CN="这将杀死选中关卡中所有的几何物体，推荐配合着无重力或立即通关一起用。" />
+		<String ID="KillGeometriesReverseName" Text="" zh-CN="恢复几何物体" />
+		<String ID="KillGeometriesReverseDescription" Text="" zh-CN="恢复选中关卡中所有几何物体" />
+		<String ID="KillGeometriesReverseNothingChanged" Text="" zh-CN="该关卡没有几何物体。" />
+		<String ID="KillGeometriesReverseTip" Text="" zh-CN="这将恢复选中关卡中所有的几何物体。" />
+		<String ID="FinishAtOnceProcessName" Text="" zh-CN="瞬间通关" />
+		<String ID="FinishAtOnceProcessDescription" Text="" zh-CN="使选中关卡瞬间通关" />
+		<String ID="FinishAtOnceProcessNothingChanged" Text="" zh-CN="该关卡不是以吸球结束的。" />
+		<String ID="FinishAtOnceProcessTip" Text="" zh-CN="这将让您一开始管道就能吸收你的粘粘架。（当两者之间没有阻隔物时可以瞬间通关）" />
+		<String ID="FinishAtOnceReverseName" Text="" zh-CN="取消瞬间通关" />
+		<String ID="FinishAtOnceReverseDescription" Text="" zh-CN="取消选中关卡的瞬间通关" />
+		<String ID="FinishAtOnceReverseNothingChanged" Text="" zh-CN="该关卡不是以吸球结束的。" />
+		<String ID="FinishAtOnceReverseTip" Text="" zh-CN="这将让您取消选中关卡的瞬间通关。" />
+		<String ID="FinishInAThunderProcessName" Text="" zh-CN="闪电通关" />
+		<String ID="FinishInAThunderProcessDescription" Text="" zh-CN="使选中关卡闪电通关" />
+		<String ID="FinishInAThunderProcessNothingChanged" Text="" zh-CN="该关卡已经是闪电通关了，无需再次修改。" />
+		<String ID="FinishInAThunderProcessTip" Text="" zh-CN="这将让关卡一开始就通关。" />
+		<String ID="FinishInAThunderReverseName" Text="" zh-CN="取消闪电通关" />
+		<String ID="FinishInAThunderReverseDescription" Text="" zh-CN="取消选中关卡的闪电通关" />
+		<String ID="FinishInAThunderReverseNothingChanged" Text="" zh-CN="该关卡尚未修改过。" />
+		<String ID="FinishInAThunderReverseTip" Text="" zh-CN="这将让您取消选中关卡的闪电通关。" />
+		<String ID="LightspeedCompleteProcessName" Text="" zh-CN="光速过关" />
+		<String ID="LightspeedCompleteProcessDescription" Text="" zh-CN="启用选中关卡的超级无敌万能光速通关" />
+		<String ID="LightspeedCompleteProcessNothingChanged" Text="" zh-CN="该关卡已经是光速通关了，无需再次修改。" />
+		<String ID="LightspeedCompleteProcessTip" Text="" zh-CN="这将在选中关卡中启动超级无敌万能光速通关功能，只要在关卡开始时移动鼠标，并在弹出的对话框中点击OK即可。要想使用这个功能你必须先完成MOM关卡，否则会导致游戏崩溃。请注意不要用此功能修改ID为IslandUi的关卡，否则会导致无法正常使用。" />
+		<String ID="LightspeedCompleteProcessWarning" Text="" zh-CN="该关卡已经是超级无敌万能光速通关了，无需再次修改。" />
+		<String ID="LightspeedCompleteReverseName" Text="" zh-CN="取消光速通关" />
+		<String ID="LightspeedCompleteReverseDescription" Text="" zh-CN="禁用选中关卡的超级无敌万能光速通关" />
+		<String ID="LightspeedCompleteReverseNothingChanged" Text="" zh-CN="该关卡尚未修改过。" />
+		<String ID="LightspeedCompleteReverseTip" Text="" zh-CN="这将在选中关卡中禁用超级无敌万能光速通关。" />
+		<String ID="SkipPoiProcessName" Text="" zh-CN="跳过动画" />
+		<String ID="SkipPoiProcessDescription" Text="" zh-CN="跳过选中关卡开始时播放的动画" />
+		<String ID="SkipPoiProcessNothingChanged" Text="" zh-CN="该关卡开始时没有动画可以跳过。" />
+		<String ID="SkipPoiProcessTip" Text="" zh-CN="这将使您进入关卡时直接开始操作无需等待动画播放。" />
+		<String ID="SkipPoiReverseName" Text="" zh-CN="恢复动画" />
+		<String ID="SkipPoiReverseDescription" Text="" zh-CN="恢复选中关卡开始时播放的动画" />
+		<String ID="SkipPoiReverseNothingChanged" Text="" zh-CN="该关卡开始时没有动画可以恢复。" />
+		<String ID="SkipPoiReverseTip" Text="" zh-CN="这将使被跳过的动画恢复。" />
+		<String ID="AddSidesProcessName" Text="" zh-CN="限制移动" />
+		<String ID="AddSidesProcessDescription" Text="" zh-CN="使选中关卡的粘粘球不能移动到最大可视范围外" />
+		<String ID="AddSidesProcessNothingChanged" Text="" zh-CN="该关卡已经使用过此功能。" />
+		<String ID="AddSidesProcessTip" Text="" zh-CN="这将使选中关卡中的粘粘球、非静态物体不能移动到最大可视范围外。对于有机关的关卡慎用。" />
+		<String ID="AddSidesReverseName" Text="" zh-CN="取消限制移动" />
+		<String ID="AddSidesReverseDescription" Text="" zh-CN="取消对于选中关卡的粘粘球关于最大可视范围的限制" />
+		<String ID="AddSidesReverseNothingChanged" Text="" zh-CN="该关卡尚未使用过此功能。" />
+		<String ID="AddSidesReverseTip" Text="" zh-CN="这将恢复选中关卡中的粘粘球、非静态物体关于最大可视范围的自由移动限制。" />
+		<String ID="DraggableGooBallsProcessName" Text="" zh-CN="使粘粘球可拖动" />
+		<String ID="DraggableGooBallsProcessDescription" Text="" zh-CN="使选中粘粘球可拖动" />
+		<String ID="DraggableGooBallsProcessNothingChanged" Text="" zh-CN="该粘粘球已经可拖动了。" />
+		<String ID="DraggableGooBallsProcessTip" Text="" zh-CN="这将允许您在游戏中拖动选中粘粘球。" />
+		<String ID="DraggableGooBallsProcessWarning" Text="" zh-CN="该粘粘球是静态粘粘球，将其改为可拖动将使游戏崩溃。" />
+		<String ID="DraggableGooBallsReverseName" Text="" zh-CN="恢复粘粘球可拖动" />
+		<String ID="DraggableGooBallsReverseDescription" Text="" zh-CN="恢复选中的粘粘球为不可拖动" />
+		<String ID="DraggableGooBallsReverseNothingChanged" Text="" zh-CN="该粘粘球不是修改后而可拖动的粘粘球。" />
+		<String ID="DraggableGooBallsReverseTip" Text="" zh-CN="这将恢复被此修改器修改为可拖动的粘粘球为不可拖动。" />
+		<String ID="UnflingGooBallsProcessName" Text="" zh-CN="使可抛粘粘球可拖动" />
+		<String ID="UnflingGooBallsProcessDescription" Text="" zh-CN="使选中可抛粘粘球可拖动" />
+		<String ID="UnflingGooBallsProcessNothingChanged" Text="" zh-CN="该可抛粘粘球已经是可拖动了。" />
+		<String ID="UnflingGooBallsProcessTip" Text="" zh-CN="这将允许您在游戏中拖动选中可抛粘粘球。" />
+		<String ID="UnflingGooBallsReverseName" Text="" zh-CN="恢复可抛粘粘球可拖动" />
+		<String ID="UnflingGooBallsReverseDescription" Text="" zh-CN="恢复选中的可抛粘粘球为不可拖动" />
+		<String ID="UnflingGooBallsReverseNothingChanged" Text="" zh-CN="该可抛粘粘球已经是可拖动了。" />
+		<String ID="UnflingGooBallsReverseTip" Text="" zh-CN="这将恢复被此修改器修改为可拖动的可抛粘粘球为不可拖动。" />
+		<String ID="DetachableGooBallsProcessName" Text="" zh-CN="使粘粘球可拆卸" />
+		<String ID="DetachableGooBallsProcessDescription" Text="" zh-CN="使选中粘粘球可拆卸" />
+		<String ID="DetachableGooBallsProcessNothingChanged" Text="" zh-CN="该粘粘球已经是可拆卸了。" />
+		<String ID="DetachableGooBallsProcessTip" Text="" zh-CN="这将允许您在游戏中从粘粘架上拆卸选中粘粘球。" />
+		<String ID="DetachableGooBallsProcessWarning" Text="" zh-CN="该粘粘球是静态粘粘球，将其改为可拆卸将使游戏崩溃。" />
+		<String ID="DetachableGooBallsReverseName" Text="" zh-CN="恢复粘粘球可拆卸" />
+		<String ID="DetachableGooBallsReverseDescription" Text="" zh-CN="恢复选中粘粘球为不可拆卸" />
+		<String ID="DetachableGooBallsReverseNothingChanged" Text="" zh-CN="该粘粘球不是修改后而可拆卸的粘粘球。" />
+		<String ID="DetachableGooBallsReverseTip" Text="" zh-CN="这将恢复修改为可拆卸的粘粘球为不可拆卸。" />
+		<String ID="SuckableGooBallsProcessName" Text="" zh-CN="使粘粘球可被管道吸收" />
+		<String ID="SuckableGooBallsProcessDescription" Text="" zh-CN="使选中粘粘球可被管道吸收" />
+		<String ID="SuckableGooBallsProcessNothingChanged" Text="" zh-CN="该粘粘球已经是可被管道吸收了。" />
+		<String ID="SuckableGooBallsProcessTip" Text="" zh-CN="这将使选中粘粘球可被管道吸收从而增加球数。" />
+		<String ID="SuckableGooBallsReverseName" Text="" zh-CN="恢复粘粘球可被管道吸收" />
+		<String ID="SuckableGooBallsReverseDescription" Text="" zh-CN="恢复选中粘粘球为不可被管道吸收" />
+		<String ID="SuckableGooBallsReverseNothingChanged" Text="" zh-CN="该粘粘球不是修改后而可被管道吸收的粘粘球。" />
+		<String ID="SuckableGooBallsReverseTip" Text="" zh-CN="这将恢复修改为可被管道吸收的粘粘球为不可被管道吸收。" />
+		<String ID="UnstackingGooBallsProcessName" Text="" zh-CN="使粘粘球可被管道吸住" />
+		<String ID="UnstackingGooBallsProcessDescription" Text="" zh-CN="使选中粘粘球可被管道吸住" />
+		<String ID="UnstackingGooBallsProcessNothingChanged" Text="" zh-CN="该粘粘球已经可被管道吸住了。" />
+		<String ID="UnstackingGooBallsProcessTip" Text="" zh-CN="这将使选中粘粘球在靠近管道时向管道飞去。" />
+		<String ID="UnstackingGooBallsReverseName" Text="" zh-CN="恢复粘粘球可被管道吸住" />
+		<String ID="UnstackingGooBallsReverseDescription" Text="" zh-CN="恢复选中粘粘球为不可被管道吸住" />
+		<String ID="UnstackingGooBallsReverseNothingChanged" Text="" zh-CN="该粘粘球不是修改后而可被管道吸住的粘粘球。" />
+		<String ID="UnstackingGooBallsReverseTip" Text="" zh-CN="这将恢复修改为可被管道吸住的粘粘球为不可被管道吸住。" />
+		<String ID="StretchStrandsProcessName" Text="" zh-CN="增长粘粘架" />
+		<String ID="StretchStrandsProcessDescription" Text="" zh-CN="使选中粘粘球的最长支架长度扩大1.5倍" />
+		<String ID="StretchStrandsProcessNothingChanged" Text="" zh-CN="未找到可以修改的支架。" />
+		<String ID="StretchStrandsProcessTip" Text="" zh-CN="这将让您在游戏中可以用这种粘粘球搭建更长的粘粘架。" />
+		<String ID="StretchStrandsReverseName" Text="" zh-CN="缩短粘粘架" />
+		<String ID="StretchStrandsReverseDescription" Text="" zh-CN="使选中粘粘球的最长支架长度缩短1.5倍" />
+		<String ID="StretchStrandsReverseNothingChanged" Text="" zh-CN="未找到可以修改的支架" />
+		<String ID="StretchStrandsReverseTip" Text="" zh-CN="这将让您在游戏中可以用这种粘粘球搭建更短的粘粘架。" />
+		<String ID="StretchStrandsRestoreDescription" Text="" zh-CN="恢复选中粘粘球的最长支架长度" />
+		<String ID="StretchStrandsRestoreTip" Text="" zh-CN="这将恢复选中粘粘球的最长支架长度。" />
+		<String ID="ClimbableStrandsProcessName" Text="" zh-CN="使粘粘架可爬行" />
+		<String ID="ClimbableStrandsProcessDescription" Text="" zh-CN="使选中粘粘球的粘粘架可被爬行" />
+		<String ID="ClimbableStrandsProcessNothingChanged" Text="" zh-CN="该粘粘球没有粘粘架或其粘粘架已经可被爬行了。" />
+		<String ID="ClimbableStrandsProcessTip" Text="" zh-CN="这将让其他粘粘球可以在这个粘粘球的粘粘架上爬行。" />
+		<String ID="ClimbableStrandsReverseName" Text="" zh-CN="恢复粘粘架可爬行" />
+		<String ID="ClimbableStrandsReverseDescription" Text="" zh-CN="恢复选中粘粘球的粘粘架为不可被爬行" />
+		<String ID="ClimbableStrandsReverseNothingChanged" Text="" zh-CN="该粘粘球没有粘粘架或其粘粘架不是修改后而可被爬行。" />
+		<String ID="ClimbableStrandsReverseTip" Text="" zh-CN="这将恢复修改为可被爬行的粘粘球的粘粘架为不可被爬行。" />
+		<String ID="UngrumpyGooBallsProcessName" Text="" zh-CN="使粘粘球可被搭建" />
+		<String ID="UngrumpyGooBallsProcessDescription" Text="" zh-CN="使选中粘粘球可被搭建粘粘架" />
+		<String ID="UngrumpyGooBallsProcessNothingChanged" Text="" zh-CN="该粘粘球已经可被搭建了。" />
+		<String ID="UngrumpyGooBallsProcessTip" Text="" zh-CN="这将让其他粘粘球可以搭建在这个粘粘球上。" />
+		<String ID="UngrumpyGooBallsReverseName" Text="" zh-CN="恢复粘粘球可被搭建" />
+		<String ID="UngrumpyGooBallsReverseDescription" Text="" zh-CN="恢复选中粘粘球为不可被搭建粘粘架" />
+		<String ID="UngrumpyGooBallsReverseNothingChanged" Text="" zh-CN="该粘粘球不是修改后而可被搭建的粘粘球。" />
+		<String ID="UngrumpyGooBallsReverseTip" Text="" zh-CN="这将恢复修改为可被搭建的粘粘球为不可被搭建。" />
+		<String ID="FourStrandsProcessName" Text="" zh-CN="增加粘粘架" />
+		<String ID="FourStrandsProcessDescription" Text="" zh-CN="使选中粘粘球可伸出四个粘粘架" />
+		<String ID="FourStrandsProcessNothingChanged" Text="" zh-CN="该粘粘球不能搭建，无法修改。" />
+		<String ID="FourStrandsProcessTip" Text="" zh-CN="这将让选中粘粘球搭建时最多伸出四个粘粘架。" />
+		<String ID="FourStrandsProcessWarning" Text="" zh-CN="该粘粘球已经拥有四个粘粘架了，无须重复修改。" />
+		<String ID="FourStrandsReverseName" Text="" zh-CN="移除增加的粘粘架" />
+		<String ID="FourStrandsReverseDescription" Text="" zh-CN="恢复选中粘粘球到原来的粘粘架数目" />
+		<String ID="FourStrandsReverseNothingChanged" Text="" zh-CN="该粘粘球的支架数未被修改过，不能恢复。" />
+		<String ID="FourStrandsReverseTip" Text="" zh-CN="这将恢复选中粘粘球到原来的粘粘架数目。" />
+	</Strings>
+	<LevelEditor>
+		<Feature ID="ZeroGravity">
+			<Process>
+				<Modify File="scene">
+					<Replace Old="forcefield" New="DlEiFECroF" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<Replace Old="DlEiFECroF" New="forcefield" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="UndeadGooBalls">
+			<Process>
+				<Modify File="scene">
+					<Replace Old="deadly" New="solivy" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<Replace Old="solivy" New="deadly" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="FireDisappear">
+			<Process>
+				<Modify File="level">
+					<Replace Old="fire" New="EriF" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="EriF" New="fire" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="WakeGooBalls">
+			<Process>
+				<Modify File="level">
+					<Replace Old="discovered" New="DErEvoCsiD" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="DErEvoCsiD" New="discovered" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="PipeSuckAllGooBalls">
+			<Process>
+				<Modify File="level">
+					<Replace Old="filter" New="ringer" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="ringer" New="filter" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="KillBounds">
+			<Process>
+				<Modify File="level">
+					<Replace Old="autobounds" New="sDnuoBotuA" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="sDnuoBotuA" New="autobounds" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="AllowStrandGeoms">
+			<Process>
+				<Modify File="level">
+					<Replace Old="strandgeom" New="moEGDnArts" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="moEGDnArts" New="strandgeom" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="DisableMaterials">
+			<Process>
+				<Modify File="scene">
+					<Replace Old="material" New="medereal" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<Replace Old="medereal" New="material" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="RequireOneGooBall">
+			<Process>
+				<Modify File="level">
+					<Replace Old="ballsrequired=&quot;" New="BAllsrEquirED=&quot;1." />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="BAllsrEquirED=&quot;1." New="ballsrequired=&quot;" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="TimeBugEachMove">
+			<Process>
+				<Modify File="level">
+					<Replace Old="timebugprobability=&quot;" New="timEBuGproBABility=&quot;1." />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="timEBuGproBABility=&quot;1." New="timebugprobability=&quot;" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="KillExplosive">
+			<Process>
+				<Modify File="scene">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="scene/circle" Contains="break=" />
+							<Node XPath="scene/rectangle" Contains="break=" />
+							<Node XPath="scene/compositegeom" Contains="break=" />
+						</Nodes>
+						<Operations>
+							<IfAttribute Name="collide" Value="false" IfNull="False">
+								<Then>
+									<Warning Message="KillExplosiveProcessWarning" />
+								</Then>
+								<Else />
+							</IfAttribute>
+							<SetAttribute Name="collide" Value="false" />
+							<MatrixMultiplyAttribute Name="imagescale" Value="1,0,0;0,1,0;0,0,10000" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="scene/circle" Contains="break=" />
+							<Node XPath="scene/rectangle" Contains="break=" />
+							<Node XPath="scene/compositegeom" Contains="break=" />
+						</Nodes>
+						<Operations>
+							<IfAttribute Name="collide" Value="true" IfNull="True">
+								<Then>
+									<Warning Message="KillExplosiveReverseWarning" />
+								</Then>
+								<Else />
+							</IfAttribute>
+							<SetAttribute Name="collide" Value="true" />
+							<MatrixMultiplyAttribute Name="imagescale" Value="1,0,0;0,1,0;0,0,0.0001" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="KillMovable">
+			<Process>
+				<Modify File="scene">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="scene/circle" Contains="static=&quot;false&quot;" />
+							<Node XPath="scene/rectangle" Contains="static=&quot;false&quot;" />
+							<Node XPath="scene/compositegeom" Contains="static=&quot;false&quot;" />
+						</Nodes>
+						<Operations>
+							<IfAttribute Name="collide" Value="false" IfNull="False">
+								<Then>
+									<Warning Message="KillMovableProcessWarning" />
+								</Then>
+								<Else />
+							</IfAttribute>
+							<SetAttribute Name="collide" Value="false" />
+							<MatrixMultiplyAttribute Name="imagescale" Value="1,0,0;0,1,0;0,0,10000" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="scene/circle" Contains="static=&quot;false&quot;" />
+							<Node XPath="scene/rectangle" Contains="static=&quot;false&quot;" />
+							<Node XPath="scene/compositegeom" Contains="static=&quot;false&quot;" />
+						</Nodes>
+						<Operations>
+							<IfAttribute Name="collide" Value="true" IfNull="True">
+								<Then>
+									<Warning Message="KillMovableReverseWarning" />
+								</Then>
+								<Else />
+							</IfAttribute>
+							<SetAttribute Name="collide" Value="true" />
+							<MatrixMultiplyAttribute Name="imagescale" Value="1,0,0;0,1,0;0,0,0.0001" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="KillGeometries">
+			<Process>
+				<Modify File="scene">
+					<RegexReplace Pattern="(line|rectangle|circle|hinge|motor|slider|compositegeom)(\W)" Replacement="$1woGmhiDDEn$2" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<RegexReplace Pattern="(line|rectangle|circle|hinge|motor|slider|compositegeom)woGmhiDDEn(\W)" Replacement="$1$2" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="FinishAtOnce">
+			<Process>
+				<Modify File="level">
+					<IfContains Value="radius=&quot;1111">
+						<Then />
+						<Else>
+							<RegexReplace Pattern="levelexit.*?radius=&quot;" Replacement="$&amp;1111" />
+						</Else>
+					</IfContains>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<IfContains Value="radius=&quot;1111">
+						<Then>
+							<RegexReplace Pattern="(levelexit.*?radius=&quot;)1111" Replacement="$1" />
+						</Then>
+						<Else />
+					</IfContains>
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="FinishInAThunder">
+			<Process>
+				<Modify File="level">
+					<IfContains Value="y=&quot;-998877&quot;">
+						<Then />
+						<Else>
+							<CreateElement XPath="level" ElementName="targetheight">
+								<SetAttribute Name="y" Value="-998877" />
+							</CreateElement>
+							<CreateElement XPath="level" ElementName="endonnogeom">
+								<SetAttribute Name="y" Value="-998877" />
+							</CreateElement>
+						</Else>
+					</IfContains>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<RemoveElement XPath="level/targetheight" WhichContains="-998877" />
+					<RemoveElement XPath="level/endonnogeom" WhichContains="-998877" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="LightspeedComplete">
+			<Process>
+				<Modify File="scene">
+					<IfContains Value="onmouseover=&quot;showmom&quot;">
+						<Then />
+						<Else>
+							<CreateElement XPath="scene" ElementName="button">
+								<SetAttribute Name="alpha" Value="1" />
+								<SetAttribute Name="depth" Value="-10000" />
+								<SetAttribute Name="id" Value="btn" />
+								<SetAttribute Name="onmouseover" Value="showmom" />
+								<SetAttribute Name="rotation" Value="0" />
+								<SetAttribute Name="scalex" Value="10000" />
+								<SetAttribute Name="scaley" Value="10000" />
+								<SetAttribute Name="up" Value="IMAGE_FX_FLASH" />
+								<SetAttribute Name="x" Value="0" />
+								<SetAttribute Name="y" Value="0" />
+							</CreateElement>
+						</Else>
+					</IfContains>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<RemoveElement XPath="scene/button" WhichContains="onmouseover=&quot;showmom&quot;" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="SkipPoi">
+			<Process>
+				<Modify File="level">
+					<Replace Old="traveltime" New="timetravel" />
+					<Replace Old="pause" New="play" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="level">
+					<Replace Old="timetravel" New="traveltime" />
+					<Replace Old="play" New="pause" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="AddSides">
+			<Process>
+				<Modify File="scene">
+					<ExecuteIronPython Script="AddSides.py" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="scene">
+					<ExecuteIronPython Script="RemoveSides.py" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+	</LevelEditor>
+	<GooBallEditor>
+		<Feature ID="DraggableGooBalls">
+			<Process>
+				<Modify File="balls">
+					<IfContains Value="static=&quot;true&quot;">
+						<Then>
+							<Warning Message="DraggableGooBallsProcessWarning" />
+						</Then>
+						<Else>
+							<Replace Old="draggable" New="ElBAGGArD" />
+						</Else>
+					</IfContains>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="ElBAGGArD" New="draggable" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="UnflingGooBalls">
+			<Process>
+				<Modify File="balls">
+					<Replace Old="fling" New="frong" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="frong" New="fling" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="DetachableGooBalls">
+			<Process>
+				<Modify File="balls">
+					<IfContains Value="static=&quot;true&quot;">
+						<Then>
+							<Warning Message="DetachableGooBallsProcessWarning" />
+						</Then>
+						<Else>
+							<Replace Old="detachable" New="ElBAhCAtED" />
+						</Else>
+					</IfContains>
+					<IfEdited>
+						<Then>
+							<IfContains Value="detachstrand">
+								<Then />
+								<Else>
+									<CreateElement XPath="ball" ElementName="detachstrand">
+										<SetAttribute Name="maxlen" Value="60.14159265" />
+									</CreateElement>
+								</Else>
+							</IfContains>
+						</Then>
+						<Else />
+					</IfEdited>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="ElBAhCAtED" New="detachable" />
+					<IfEdited>
+						<Then>
+							<IfContains Value="60.14159265">
+								<Then>
+									<RemoveElement XPath="ball/detachstrand" WhichContains="60.14159265" />
+								</Then>
+								<Else />
+							</IfContains>
+						</Then>
+						<Else />
+					</IfEdited>
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="SuckableGooBalls">
+			<Process>
+				<Modify File="balls">
+					<Replace Old="suckable" New="ElBAkCus" />
+					<Replace Old="collidegeom" New="geomcollide" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="ElBAkCus" New="suckable" />
+					<Replace Old="geomcollide" New="collidegeom" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="UnstackingGooBalls">
+			<Process>
+				<Modify File="balls">
+					<Replace Old="stacking" New="GnikCAts" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="GnikCAts" New="stacking" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="StretchStrands">
+			<Process>
+				<Modify File="balls">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="ball/strand" />
+						</Nodes>
+						<Operations>
+							<MatrixMultiplyAttribute Name="maxlen1" Value="1.5,0;0,1" />
+							<MatrixMultiplyAttribute Name="maxlen2" Value="1.5,0;0,1" />
+							<MatrixMultiplyAttribute Name="burnspeed" Value="1.5,0;0,1" />
+							<MatrixMultiplyAttribute Name="shrinklen" Value="1.5,0;0,1" Default="140" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<SelectNodes>
+						<Nodes>
+							<Node XPath="ball/strand" />
+						</Nodes>
+						<Operations>
+							<MatrixMultiplyAttribute Name="maxlen1" Value="1,0;0,1.5" />
+							<MatrixMultiplyAttribute Name="maxlen2" Value="1,0;0,1.5" />
+							<MatrixMultiplyAttribute Name="burnspeed" Value="1,0;0,1.5" />
+							<MatrixMultiplyAttribute Name="shrinklen" Value="1,0;0,1.5" Default="140" />
+						</Operations>
+					</SelectNodes>
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="ClimbableStrands">
+			<Process>
+				<Modify File="balls">
+					<Replace Old="walkable" New="ElBAklAw" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="ElBAklAw" New="walkable" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="UngrumpyGooBalls">
+			<Process>
+				<Modify File="balls">
+					<Replace Old="grumpy" New="ypmurG" />
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="ypmurG" New="grumpy" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+		<Feature ID="FourStrands">
+			<Process>
+				<Modify File="balls">
+					<IfContains Value="strands=&quot;12">
+						<Then>
+							<Warning Message="FourStrandsProcessWarning" />
+						</Then>
+						<Else>
+							<Replace Old="strands=&quot;" New="strands=&quot;12" />
+						</Else>
+					</IfContains>
+				</Modify>
+			</Process>
+			<Reverse>
+				<Modify File="balls">
+					<Replace Old="strands=&quot;12" New="strands=&quot;" />
+				</Modify>
+			</Reverse>
+			<Restore />
+		</Feature>
+	</GooBallEditor>
+	<GooBallTester>
+		<Level>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<level allowskip="true" autobounds="false" ballsrequired="1" letterboxed="false" strandgeom="false" textcolor="255,255,255" timebugprobability="0" visualdebug="{0}">
+				<camera aspect="normal" endpos="0,0" endzoom="1">
+					<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
+				</camera>
+				<camera aspect="widescreen" endpos="0,0" endzoom="1">
+					<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
+				</camera>
+				<levelexit filter="" id="theExit" pos="718.83,386.57" radius="75" />
+				<pipe>
+					<Vertex x="718.83" y="386.57" />
+					<Vertex x="923.75" y="386.57" />
+					<Vertex x="923.75" y="2033.22" />
+				</pipe>
+				<BallInstance angle="0" id="goo1" type="common" x="111.4" y="105.54" />
+				<BallInstance angle="0" id="goo2" type="common" x="161.24" y="20.52" />
+				<BallInstance angle="0" id="goo3" type="common" x="55.7" y="17.59" />
+				<fire depth="0" particles="fireArmBurn" radius="50" x="-557.61" y="322.06" />
+				<BallInstance angle="0" id="goo9" type="AnchorFriendly" x="-47.11" y="1932.85" />
+				<BallInstance angle="0" id="goo10" type="common" x="-41.52" y="1752.4" />
+				<BallInstance angle="0" id="goo4" type="Fuse" x="-440.38" y="293.23" />
+				<BallInstance angle="0" id="goo5" type="Fuse" x="-350.16" y="293.23" />
+				<BallInstance angle="0" id="goo6" type="balloon" x="-364.19" y="447.3" />
+				<BallInstance angle="0" id="goo7" type="balloon" x="-439.97" y="449.74" />
+				<BallInstance angle="0" id="goo8" type="Pokey" x="-117.32" y="31.78" />
+				<Strand gb1="goo3" gb2="goo1" />
+				<Strand gb1="goo2" gb2="goo1" />
+				<Strand gb1="goo3" gb2="goo2" />
+				<Strand gb1="goo9" gb2="goo10" />
+				<Strand gb1="goo4" gb2="goo5" />
+				<BallInstance angle="0" id="gooPopper" type="WogmGooBallTestHelper" x="762.65" y="166.07" />
+			</level>
+		</Level>
+		<Scene>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<scene backgroundcolor="0,0,0" maxx="1000" maxy="2000" minx="-1000" miny="-100">
+				<linearforcefield antigrav="true" dampeningfactor="0" force="0,-10" type="gravity" />
+				<linearforcefield id="skeletonfield" type="gravity" force="0,11" dampeningfactor="0.0" antigrav="true" enabled="false" water="false" />
+				<line anchor="1000.25,319.92" id="right" normal="-1,0" tag="detaching" />
+				<line anchor="-874.47,354.06" id="left" normal="1,0" />
+				<line anchor="5.86,-3.45" id="ground" normal="0,1" />
+				<SceneLayer alpha="1" animdelay="1" depth="-100" image="IMAGE_FISTYREACHESOUT_BG" rotation="0" scalex="4.042" scaley="4.393" tilex="false" tiley="false" x="49.84" y="986.08" />
+				<SceneLayer alpha="1" animdelay="1" depth="-0.01" image="IMAGE_IMAGES_WHITESQUARE" rotation="0" scalex="23.557" scaley="21.87" tilex="false" tiley="false" x="-347.51" y="23.81" />
+				<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_IVYTOWER_TOWERLEFT" rotation="-4.44" scalex="1.509" scaley="2.123" tilex="false" tiley="false" x="-1019.0" y="1003.32" />
+				<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_WOGCD_GROUNDTILE" rotation="0.01" scalex="1.851" scaley="1.081" tilex="false" tiley="false" x="71.14" y="-56.46" />
+				<rectangle height="447.75" id="geometry1" rotation="0.0" static="true" tag="deadly" width="123.1" x="-890.92" y="1859.64" />
+				<SceneLayer alpha="1" animdelay="1" depth="0" image="IMAGE_LEVELIMAGES_SPIKEBLACK_GROUP" rotation="-90.0" scalex="1.485" scaley="1.233" tilex="false" tiley="false" x="-828.98" y="1819.57" />
+				<circle id="geometry2" radius="75" static="true" tag="ballbuster" x="842.34" y="98.66" />
+				<SceneLayer alpha="1" anim="rot_1rps" animdelay="1" animspeed="0.2" depth="1" image="IMAGE_LEVELIMAGES_GEARBALLBUSTER" rotation="0" scalex="1" scaley="1" tilex="false" tiley="false" x="843.82" y="97.22" />
+				<SceneLayer alpha="1" animdelay="1" depth="-0.01" image="IMAGE_IMAGES_BLACKSQUARE" rotation="0" scalex="21.246" scaley="19.559" tilex="false" tiley="false" x="-567.21" y="38.42" />
+				<rectangle height="394.41" id="geometry3" rotation="0.0" static="true" tag="mostlydeadly" width="108.8" x="-890.21" y="1346.58" />
+				<SceneLayer alpha="1" animdelay="1" depth="0" id="image1" image="IMAGE_LEVELIMAGES_SPIKEGRAY_GROUP" rotation="-90.0" scalex="1.485" scaley="1.233" tilex="false" tiley="false" x="-829.52" y="1342.15" />
+				<rectangle height="57.16" id="geometry4" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" tag="break=1" width="253.54" x="-426.6" y="397.7" />
+				<rectangle height="57.16" id="geometry5" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" width="253.54" x="-421.05" y="247.04" />
+				<line anchor="-31.14,2027.52" id="" normal="0,-1" />
+			</scene>
+		</Scene>
+		<Resrc>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<ResourceManifest>
+				<Resources id="scene_WogmGooBallTester">
+					<SetDefaults idprefix="" path="./" />
+					<Image id="IMAGE_IMAGES_BLACKSQUARE" path="res/images/blacksquare" />
+					<Image id="IMAGE_IMAGES_WHITESQUARE" path="res/images/whitesquare" />
+					<Image id="IMAGE_LEVELIMAGES_GEARBALLBUSTER" path="res/images/levelimages/gearballbuster" />
+					<Image id="IMAGE_LEVELIMAGES_SPIKEGRAY_GROUP" path="res/images/levelimages/spikeGray_group" />
+					<Image id="IMAGE_FISTYREACHESOUT_BG" path="res/levels/FistyReachesOut/bg" />
+					<Image id="IMAGE_IVYTOWER_TOWERLEFT" path="res/levels/IvyTower/TowerLeft" />
+					<Image id="IMAGE_WOGCD_GROUNDTILE" path="res/levels/wogcd/groundTile" />
+					<Image id="IMAGE_LEVELIMAGES_SPIKEBLACK_GROUP" path="res/images/levelimages/spikeBlack_group" />
+					<Image id="IMAGE_UPPERSHAFT_BLASTWALL" path="res/levels/UpperShaft/blastwall" />
+				</Resources>
+			</ResourceManifest>
+		</Resrc>
+	</GooBallTester>
+	<GooBallTestHelper>
+		<Balls>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<ball contains="{0}" popduration="{1}" mass="30" name="WogmGooBallTestHelper" popparticles="splash" popsound="SOUND_BALL_GENERIC_GLEE1" shape="circle,30" strands="0" walkspeed="0" />
+		</Balls>
+		<Resources>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<ResourceManifest>
+				<Resources id="ball_WogmGooBallTestHelper" />
+			</ResourceManifest>
+		</Resources>
+	</GooBallTestHelper>
+	<MaterialTester>
+		<Level>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<level allowskip="true" autobounds="false" ballsrequired="1" letterboxed="false" strandgeom="false" textcolor="255,255,255" timebugprobability="0" visualdebug="true">
+				<camera aspect="normal" endpos="0,0" endzoom="1">
+					<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
+				</camera>
+				<camera aspect="widescreen" endpos="0,0" endzoom="1">
+					<poi pause="0" pos="0,0" traveltime="0" zoom="0.1" />
+				</camera>
+				<BallInstance angle="0" id="fallingGooLeft" type="Fuse" x="-400" y="800" />
+				<BallInstance angle="0" id="fallingGooRight" type="Fuse" x="400" y="800" />
+				<BallInstance angle="0" id="goo1" type="Fuse" x="-50" y="50" />
+				<BallInstance angle="0" id="goo2" type="Fuse" x="50" y="50" />
+				<BallInstance angle="0" id="goo3" type="Fuse" x="50" y="150" />
+				<BallInstance angle="0" id="goo4" type="Fuse" x="-50" y="150" />
+				<Strand gb1="goo4" gb2="goo1" />
+				<Strand gb1="goo1" gb2="goo2" />
+				<Strand gb1="goo2" gb2="goo4" />
+				<Strand gb1="goo3" gb2="goo1" />
+				<Strand gb1="goo4" gb2="goo3" />
+				<Strand gb1="goo3" gb2="goo2" />
+				<BallInstance angle="0" id="goo5" type="Fuse" x="0.0" y="99.144448" />
+				<BallInstance angle="0" id="goo6" type="Fuse" x="-3.813248" y="139.183552" />
+				<BallInstance angle="0" id="goo7" type="Fuse" x="-49.572224" y="95.3312" />
+				<BallInstance angle="0" id="goo8" type="Fuse" x="0.0" y="61.011968" />
+				<BallInstance angle="0" id="goo9" type="Fuse" x="45.758976" y="101.051072" />
+				<BallInstance angle="0" id="goo10" type="Fuse" x="-34.319232" y="127.743808" />
+				<BallInstance angle="0" id="goo11" type="Fuse" x="-34.319232" y="74.358336" />
+				<BallInstance angle="0" id="goo12" type="Fuse" x="30.505984" y="74.358336" />
+				<BallInstance angle="0" id="goo13" type="Fuse" x="26.692736" y="123.93056" />
+				<BallInstance angle="0" id="goo14" type="Fuse" x="-20.972864" y="106.770944" />
+				<BallInstance angle="0" id="goo15" type="Fuse" x="24.786112" y="99.144448" />
+				<BallInstance angle="0" id="goo16" type="Fuse" x="-3.813248" y="123.93056" />
+				<BallInstance angle="0" id="goo17" type="Fuse" x="0.0" y="80.078208" />
+				<BallInstance angle="0" id="goo18" type="Fuse" x="-24.786112" y="83.891456" />
+				<BallInstance angle="0" id="goo19" type="Fuse" x="-3.813248" y="110.584192" />
+				<BallInstance angle="0" id="goo20" type="Fuse" x="28.59936" y="76.26496" />
+			</level>
+		</Level>
+		<Scene>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<scene backgroundcolor="0,0,0" maxx="500" maxy="1000" minx="-500" miny="0">
+				<linearforcefield antigrav="true" dampeningfactor="0" force="0,-10" type="gravity" />
+				<line anchor="500,300" id="right" normal="-1,0" tag="detaching" />
+				<line anchor="-500,300" id="left" normal="1,0" tag="detaching" />
+				<line anchor="0,20" id="ground" normal="0,1" tag="unwalkable" />
+				<line anchor="0,1000" id="ceiling" normal="0,-1" tag="unwalkable" />
+				<rectangle height="350" id="left" material="{0}" rotation="-0.872664625997" static="true" tag="unwalkable" width="600" x="-450" y="50" />
+				<rectangle height="350" id="right" rotation="0.872664625997" static="true" tag="unwalkable" width="600" x="450" y="50" />
+			</scene>
+		</Scene>
+		<Resrc>
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<ResourceManifest>
+				<Resources id="scene_WogmMaterialTester" />
+			</ResourceManifest>
+		</Resrc>
+	</MaterialTester>
+</Features>

@@ -1,0 +1,279 @@
+﻿<html>
+    <head>
+        <!-- saved from url=(0014)about:internet -->
+        <title>World of Goo Modifier Help</title>
+        <style type="text/css">
+            body { font-family: "Segoe UI", Segoe; font-size: 0.8em; }
+            h1 { text-align: center; font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            h3 { font-size: 1.3em; }
+        </style>
+        <script type="text/javascript">
+            function showOldUpdates() {
+                var element = document.getElementById("oldUpdates");
+                if (element.style.display == "") element.style.display = "none";
+                else element.style.display = "";
+            }
+        </script>
+    </head>
+<body>
+<h1>World of Goo Modifier Help</h1>
+<p>World of Goo Modifier (aka WoGModifier) is a utility that helps you goomod more 
+    easier and faster.</p>
+    <h2>Usage Help</h2>
+    <p>This program is well designed that it doesn't need help! :P Seriously if you 
+        don&#39;t know how to use this program, you can try Quick Help by clicking Help - 
+        Quick help.</p>
+    <h2>Features</h2>
+    <ul>
+        <li>Level and ball batch processing; (Regular Expressions, XML Processing and so on)</li>
+        <li>Multiple kinds of balls testing at the same time;</li>
+        <li>Materials processing and testing; </li>
+        <li>Text resources processing; </li>
+        <li>Island processing; </li>
+        <li>Profile editing and backup management;</li>
+        <li>Config editing; </li>
+        <li>Console debugging; </li>
+        <li>AES-encrypted file (.bin) editing; </li>
+        <li>Multi-language support; </li>
+        <li>...</li>
+    </ul>
+    <h2>Extend the features</h2>
+    <p>You can extend the features by clicking Tools - Edit batch process features, editing Features.xml, saving and restarting WoGModifier. Of course the content of Features.xml is hard to understand. So I'm writing an article to introduce it.<br />
+        Features.xml is a standard xml file. There is only one attribute for the root element Features. @Version determines the version of the xml. The current version is 4. There are six elements under the root element.</p>
+    <h3>Strings</h3>
+    <p>Strings element is a string table.<br />
+       There are lots of String elements in it for localization. @ID is the id, @Text is the English content, @zh-CN is the Chinese content and so on. These strings will be used later.</p>
+    <h3>LevelEditor &amp; BallEditor</h3>
+    <p>LevelEditor &amp; BallEditor element store the batch process features for levels and goo balls. There are lots of Feature elements inside. Feature elements has only one attribute @ID.<br />
+       There are three elements inside: Process, Reverse &amp; Restore. They are called subfeatures. Restore is the most special one. If its string is not found, it will use the corresponding one of Reverse. They have four attributes, we don't need to set them typically. Here are the four attributes. They are all string table IDs.<br />
+        　　Name: Displayed in the error/warning page. Make it as short as possible. Default: Feature/@ID+Subfeature name+Name. (e.g. VisualDebugProcessName)<br />
+        　　Description: Displayed in select features page. Keep it short and simple. Default: Feature/@ID+Subfeature name+Description. <br />
+        　　NothingChanged: The warning message displayed when nothing is changed. Default: Feature/@ID+Subfeature name+NothingChanged. <br />
+        　　Tip: The tooltip displayed when the mouse hovered. Default: Feature/@ID+Subfeature name+Tip. </p>
+    <p>Each subfeature except Restore has several operations inside. We can classify them under six groups. You can put A and B operations in the subfeature.</p>
+    <h4>A. Halting Operations</h4>
+    <p>Halting Operations can stop the current process immediately. </p>
+    <p>
+&lt;Warning Message="Warning Messages!" /&gt;<br />
+        This element will stop the current process immediately and print the Warning Message. <strong>No changes to the file will be saved.</strong></p>
+    <h4>
+        B. Modifying Operations</h4>
+    <p>
+        Modifying Operations are used to modify the files.</p>
+    <p>
+        &lt;Modify File=&quot;file name&quot;&gt;<br />
+&nbsp; Put all kinds of operations here!<br />
+        &lt;/Modify&gt;<br />
+        　　This element is used to open and decrypt the file and modify its content. If it's going to modify the level, valid values are scene, level and resrc. If it's going to modify the goo ball, valid values are balls and resources.</p>
+    <h4>
+        C. Text Operations</h4>
+    <p>
+        Text Operations are used to do some simple operations on texts.</p>
+    <p>
+        &lt;IfContains&nbsp;Value=&quot;text to find&quot;&gt;<br />
+        &nbsp;&nbsp;&lt;Then&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;What will be done if the text is found<br />
+        &nbsp;&nbsp;&lt;/Then&gt;<br />
+        &nbsp;&nbsp;&lt;Else&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;What will be done if the text is not found<br />
+        &nbsp;&nbsp;&lt;/Else&gt;<br />
+        &lt;/IfContains&gt;<br />
+        This element is used to test if the specified text contains in the text. Wherever it is put, it will search the whole text.</p>
+    <p>
+        &lt;RegexReplace Pattern=&quot;pattern to search&quot; Replacement=&quot;replacement&quot; /&gt;<br />
+        　　This element is used to replace texts with regular expressions. <br />
+        Here is a quick reference if you don't know what regular expression is: <a href="http://msdn.microsoft.com/en-us/library/az24scfc.aspx">http://msdn.microsoft.com/en-us/library/az24scfc.aspx</a><br />
+        And this tool can help you: <a href="http://www.regexper.com/">http://www.regexper.com/</a></p>
+    <p>
+        &lt;Replace Old=&quot;text to find&quot; New=&quot;replacement&quot; /&gt;<br />
+        　　This element is used to replace texts normally.</p>
+    <h4>
+        D. XML Node Operations</h4>
+    <p>
+        XML Node Operations are used to query or modify XML nodes.</p>
+    <p>
+        &lt;SelectNodes&gt;<br />
+        &nbsp;&nbsp;&lt;Nodes&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Node&nbsp;XPath=&quot;XPath to search&quot;&nbsp;Contains=&quot;if this attribute is set, it will only match the nodes which has the specified text inside&quot;&nbsp;/&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;Can place multiple Node elements, the result will be the union.<br />
+        &nbsp;&nbsp;&lt;/Nodes&gt;<br />
+        &nbsp;&nbsp;&lt;Operations&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;Place operations to perform on the matched nodes here<br />
+        &nbsp;&nbsp;&lt;/Operations&gt;<br />
+        &lt;/SelectNodes&gt;<br />
+        Query the nodes and perform the operations.</p>
+    <p>
+        &lt;CreateElement&nbsp;XPath=&quot;XPath of the parent node&quot;&nbsp;ElementName=&quot;Name of the element&quot;&gt;<br />
+&nbsp; Operations to perform on the new element<br />
+        &lt;/CreateElement&gt;<br />
+        Search all matched nodes and create a new element in each.</p>
+    <p>
+        &lt;RemoveElement XPath=&quot;XPath&quot; WhichContains=&quot;if this attribute is set, it will only match the nodes which has the specified text inside&quot; /&gt;<br />
+        Remove all matched nodes.</p>
+    <h4>
+        E. XML Attribute Operations</h4>
+    <p>
+        XML Attribute Operations are used to query or modify attributes. MUST BE PLACED IN D OPERATIONS DIRECTLY OR INDIRECTLY!</p>
+    <p>
+        &lt;IfAttribute&nbsp;Name=&quot;Attribute name&quot;&nbsp;Value=&quot;Attribute value&quot;&nbsp;IfNull=&quot;Will Then executed if the attribute is not found&quot;&gt;<br />
+        &nbsp;&nbsp;&lt;Then&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;Executed when the actual value equals to @Value<br />
+        &nbsp;&nbsp;&lt;/Then&gt;<br />
+        &nbsp;&nbsp;&lt;Else&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;Executed when the actual value does not equal to @Value<br />
+        &nbsp;&nbsp;&lt;/Else&gt;<br />
+        &lt;/IfAttribute&gt;<br />
+        Check the value of the attribute.</p>
+    <p>
+        &lt;SetAttribute Name=&quot;Attribute name&quot; Value=&quot;Attribute value&quot; /&gt;<br />
+        Set the value of the attribute. If the attribute does not contain, it will be created.</p>
+    <p>
+        &lt;MatrixMultiplyAttribute Name=&quot;Attribute name&quot; Value=&quot;Matrix that is going to be multiplied&quot; Default=&quot;The default value if the attribute does not exist&quot; /&gt;<br />
+        This element is used to convert the value to homogeneous coordinates and do the affine transformation. Details here: <a href="http://en.wikipedia.org/wiki/Affine_transformation">http://en.wikipedia.org/wiki/Affine_transformation</a></p>
+    <h4>
+        F. Script Engine Operations</h4>
+    <p>
+        Used to do everything!</p>
+    <p>
+        &lt;ExecuteXsl Path=&quot;Sample XSL.xsl&quot; /&gt;<br />
+        &lt;ExecuteIronPython Script=&quot;Sample Python script.py&quot; /&gt;<br />
+        &lt;ExecuteIronRuby Script=&quot;Sample Ruby script.rb&quot; /&gt;<br />
+        The script files are stored in the Scripts directory. XSL is the most easy one to use, you can generate one with this tool: <a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
+        WoGModifier will run Initialization.py and Initialization.rb when it starts. You can place run-once codes there.<br />
+        When the specified script starts to run, there will be an decrypted string variable called <code>input</code>. After your script runed, there should be a boolean variable called <code>edited</code> that determines if you want to apply your changes. If so, there should also be a string or XDocument variable called <code>output</code> which is the running result of your script. </p>
+    <h3>
+        GooBallTester &amp; MaterialTester</h3>
+    <p>
+        There are three elements in them: Level, Scene, Resrc. They are used to create the level that is used to test goo balls or materials.</p>
+    <h3>
+        GooBallTestHelper</h3>
+    <p>
+        There are two elements in them: Balls and Resources. This goo ball is used in GooBallTester.</p>
+<h2>Uninstall</h2>
+    <p>Just delete the directory of the program.</p>
+<h2>FAQs</h2>
+    <p><strong>Unable to start the program:</strong></p>
+    <p>　　You should install <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17718" target="_blank">.NET Framework 4.0</a> first 
+        to run this program just like you must install JRE before you run GooTool.</p>
+    <p><strong>Profile was destroyed by this program:</strong></p>
+    <p>　　Ask me for help then, I&#39;d like to hear, fix your profile if possible and 
+        improve my program.</p>
+    <p><strong>How to select themes:</strong></p>
+    <ul>
+        <li>Aero: An improved Windows 7 theme.</li>
+        <li>Aero Lite: A Windows 8 theme.</li>
+        <li>Classic: A classic theme.</li>
+        <li>Generic: An OS-adaptive theme. (default)</li>
+        <li>Luna Homestead: A Windows XP greeny theme.</li>
+        <li>Luna Metallic: A Windows XP silvery theme.</li>
+        <li>Luna Normal Color: A Windows XP bluey theme.</li>
+        <li>Royale: A Windows XP Media Center theme.</li>
+        <li>Simple: A customized theme that doesn&#39;t look like any OS.</li>
+    </ul>
+    <p>If you have something to ask us, (such as find a bug or don&#39;t know how to use a feature 
+        in this program) please contact us: </p>
+    <ul>
+        <li><a href="mailto:mygodstudio@gmail.com" target="_blank">mailto:mygodstudio@gmail.com</a> (e-mail)</li>
+        <li><a href="http://goofans.com/download/utility/world-of-goo-modifier" target="_blank">http://goofans.com/download/utility/world-of-goo-modifier</a></li>
+    </ul>
+    <h2>
+        What&#39;s New</h2>
+        <p><strong>Updates in V4.0.40.5:</strong></p>
+        <ul>
+            <li>Add support for iOS profiles; (thanks wogfan for his help)</li>
+            <li>Update irrKlang to 1.4.0b;</li>
+            <li>Add a new feature in the console debugger: game aborting;</li>
+            <li>Merge three libraries into one to decrease the file size;</li>
+            <li>Fix the error when trying to copy;</li>
+            <li>Update WoGCursor module to 2.0.4.1;</li>
+            <li>Improved the dialogs.</li>
+        </ul>
+    <!-- optional localization item -->
+    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="Show/hide updates in old versions" />
+    <div style="display: none;" id="oldUpdates">
+        <p><strong>Updates in V4.0.39.0:</strong></p>
+        <ul>
+            <li>Add support for IronRuby and XSL;</li>
+            <li>Fix the restoring bug;</li>
+            <li>Fix the about box wrapping bug;</li>
+            <li>Add a detailed help for editing Features.xml.</li>
+        </ul>
+        <p><strong>Updates in V4.0.38.1:</strong></p>
+        <ul>
+            <li>Add support for displaying total number of balls, moves and time;</li>
+            <li>Now with a better cursor in the about box;</li>
+            <li>Improved the help box a bit.</li>
+        </ul>
+        <p><strong>Updates in V4.0.37.5:</strong></p>
+        <ul>
+            <li>Add support for searching levels; (thanks goo23 for his/her advice)</li>
+            <li>Add a new tool: XSL transformer;</li>
+            <li>Fix the bug about displaying incorrect ball count in WoGCorp browser;</li>
+            <li>Fix the bug that the profile cannot be used as soon as you load it; (you have to restart it)</li>
+            <li>Fix the bug about crashing when you trying to access the Specific Language Strings Browser;</li>
+            <li>Improve the default size of the main window and the about dialog.</li>
+        </ul>
+        <p><strong>Updates in V4.0.36.4:</strong></p>
+        <ul>
+            <li>Improve the name of island levels;</li>
+            <li>Improve an alt shortcut in Level Browser;</li>
+            <li>Fix a bug that you can&#39;t load a game in XP; (thanks wogfan for finding this bug)</li>
+            <li>Add support for displaying ball count and setting exact scaling factor. (thanks wogfan for his suggestions)</li>
+        </ul>
+        <p><strong>Updates in V4.0.35.6:</strong></p>
+        <ul>
+            <li>Fix the cursor bug in the about box;</li>
+            <li>Fix the theme bug for some controls;</li>
+            <li>Add a new theme: Aero Lite;</li>
+            <li>Fix the bug about the links in the Help document;</li>
+            <li>Improve the icon of the profile;</li>
+            <li>Add support for loading profile background;</li>
+            <li>Remove loading window to make startup faster;</li>
+            <li>Add support for loading game window background;</li>
+            <li>Improve the speed of loading profile;</li>
+            <li>Add support for &quot;Edit batch process features&quot;; (thank @wogfan for his suggestion)</li>
+            <li>Make the program smaller;</li>
+            <li>Fix the bug that makes you unable to modify your player name; (thank @wogfan for his suggestion)</li>
+            <li>Improve the music player;</li>
+            <li>Improve the animation in Options;</li>
+            <li>Improve the numeric input control;</li>
+            <li>Add support for setting alias for games and profile. (thank @wogfan for his suggestion)</li>
+        </ul>
+        <p><strong>Updates in V4.0.34.70 1st Anniversary Special Version:</strong></p>
+        <ul>
+            <li>Add an easter egg;</li>
+            <li>Improve the code.</li>
+        </ul>
+        <p><strong>Updates in V4.0.34.68 Release Preview:</strong></p>
+        <ul>
+            <li>Add support for selecting program to edit the .bin file; (thank @wogfan &amp; 
+                @laobubu for their suggestions)</li>
+            <li>Add quick help; (thank @movildima &amp; @goo23 for their suggestions)</li>
+            <li>Improve the help document;</li>
+            <li>Fix a bug about logging;</li>
+            <li>Fix a bug about displaying name for the restoring features in batch processing;</li>
+            <li>Fix a bug about processing XML; (thank @wogfan for his suggestion)</li>
+            <li>Improve the display of level browser;</li>
+            <li>Fix a bug about UTF codes while editing with notepad;</li>
+            <li>Fix a bug about the Edited variable doesn&#39;t make sense in IronPython;</li>
+            <li>Add &quot;Delete selected levels&quot; in Level Browser and &quot;Show selected levels in the 
+                Level Browser&quot; in Island Level Browser; (thanks @wogfan for his suggestions)</li>
+            <li>Improve the easter egg; Ooops!</li>
+            <li>Fix a bug about loading in the background;</li>
+            <li>Fix a bug about changing profile name; (thanks @wogfan for his suggestion)</li>
+            <li>Fix a bug about dragging goo balls to debug in XP. (thanks @wogfan for his 
+                suggestion)</li>
+        </ul>
+        <p><strong>Updates in V4.0.34.61 Consumer Preview: </strong></p>
+        <ul>
+            <li>Add a lot of features;</li>
+            <li>Improve the user interface a lot;</li>
+            <li>Improve the speed a lot;</li>
+            <li>Reduce the size of the program;</li>
+            <li>Fixed a lot of bugs;</li>
+            <li>Add the support of localization.</li>
+        </ul>
+    </div>
+</body>
+</html>

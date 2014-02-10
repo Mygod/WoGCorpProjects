@@ -1,0 +1,79 @@
+﻿<m:GlassWindow x:Class="Mygod.WorldOfGoo.Cursor.SettingsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="clr-namespace:Mygod.Windows"
+               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:local="clr-namespace:Mygod.WorldOfGoo.Cursor"
+               Title="{x:Static m:CurrentApp.Title}" Icon="{x:Static m:CurrentApp.MainIcon}" Activated="OnActivate"
+               ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" Closing="OnClosing" Deactivated="OnDeactivate">
+    <m:GlassWindow.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Effect" Value="{DynamicResource GlowingEffect}" />
+        </Style>
+    </m:GlassWindow.Resources>
+    <Grid DataContext="{x:Static local:Settings.Current}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Label Content="_Cursor color:" Target="{Binding ElementName=ForegroundPicker}" />
+        <xctk:ColorPicker Name="ForegroundPicker" x:FieldModifier="private" Grid.Column="1" Grid.ColumnSpan="2"
+                          SelectedColor="{Binding Foreground}" />
+        
+        <Label Grid.Row="1" Content="_Border color:" Target="{Binding ElementName=Border}" />
+        <xctk:ColorPicker Name="Border" x:FieldModifier="private" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                          SelectedColor="{Binding Border}" />
+
+        <Label Grid.Row="2" Content="_Exhaled radius:" Target="{Binding ElementName=ExhaledRadius}" />
+        <xctk:DoubleUpDown Name="ExhaledRadius" x:FieldModifier="private" Grid.Row="2" Grid.Column="1" Value="{Binding ExhaledRadius}" />
+        <TextBlock Text=" px" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
+
+        <Label Grid.Row="3" Content="_Inhaled radius:" Target="{Binding ElementName=InhaledRadius}" />
+        <xctk:DoubleUpDown Name="InhaledRadius" x:FieldModifier="private" Grid.Row="3" Grid.Column="1" Value="{Binding InhaledRadius}" />
+        <TextBlock Text=" px" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" />
+
+        <Label Grid.Row="4" Content="Border _thickness:" Target="{Binding ElementName=BorderThicknessUpDown}" />
+        <xctk:DoubleUpDown Name="BorderThicknessUpDown" x:FieldModifier="private" Grid.Row="4" Grid.Column="1"
+                           Value="{Binding BorderThickness}" />
+        <TextBlock Text=" px" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" />
+
+        <Label Grid.Row="5" Content="Cursor _length:" Target="{Binding ElementName=Length}" />
+        <xctk:IntegerUpDown Name="Length" x:FieldModifier="private" Grid.Row="5" Grid.Column="1" Value="{Binding Length}" />
+        <TextBlock Text=" px" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" />
+
+        <Label Grid.Row="6" Content="Breath _duration:" Target="{Binding ElementName=BreathDuration}" />
+        <xctk:IntegerUpDown Name="BreathDuration" x:FieldModifier="private" Grid.Row="6" Grid.Column="1"
+                            Value="{Binding BreathDuration}" />
+        <TextBlock Text=" sec" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" />
+
+        <Label Grid.Row="7" Content="_Refresh rate:" Target="{Binding ElementName=RefreshRate}" />
+        <xctk:DoubleUpDown Name="RefreshRate" x:FieldModifier="private" Grid.Row="7" Grid.Column="1" Value="{Binding RefreshRate}" />
+        <TextBlock Text=" fps" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" />
+        
+        <CheckBox Grid.Row="8" Grid.ColumnSpan="3" Content="Display the _original cursor" IsChecked="{Binding ShowOriginalCursor}" />
+        <CheckBox Grid.Row="9" Grid.ColumnSpan="3" Content="_Use more time to make the curve smoother"
+                  IsChecked="{Binding SmootherCurve}" />
+        <Button Grid.Row="10" Grid.ColumnSpan="3" Content="Re_set to default" Click="ResetToDefault" HorizontalAlignment="Center" />
+        
+        <CheckBox Grid.Row="12" Grid.ColumnSpan="3" Content="Start at the _Windows startup"
+                  Name="AutoStartup" x:FieldModifier="private" Checked="AutoStartupChanged" Unchecked="AutoStartupChanged" />
+        <TextBlock Grid.Row="13" Grid.ColumnSpan="3" TextAlignment="Center">
+            Minimize or close this window to enable the cursor!<LineBreak />
+            <Hyperlink Click="CheckUpdates">Check for updates</Hyperlink>
+        </TextBlock>
+    </Grid>
+</m:GlassWindow>

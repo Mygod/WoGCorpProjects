@@ -1,0 +1,458 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib" xml:lang="zh-CN">
+    <s:String x:Key="ProgramName">World of Goo修改器</s:String>
+    
+    <!-- Words -->
+    <s:String x:Key="Ask">询问</s:String>
+    <s:String x:Key="Backup">备份</s:String>
+    <s:String x:Key="Balls">球</s:String>
+    <s:String x:Key="Byte">字节</s:String>
+    <s:String x:Key="DefaultText">默认文本（英语）</s:String>
+    <s:String x:Key="Delete">删除</s:String>
+    <s:String x:Key="Details">详细信息</s:String>
+    <s:String x:Key="Error">错误</s:String>
+    <s:String x:Key="Failed">失败</s:String>
+    <s:String x:Key="Finish">完成</s:String>
+    <s:String x:Key="GooBall">粘粘球</s:String>
+    <s:String x:Key="Here">这里</s:String>
+    <s:String x:Key="Information">信息</s:String>
+    <s:String x:Key="Level">关卡</s:String>
+    <s:String x:Key="PlayerSharp">玩家 #</s:String>
+    <s:String x:Key="Properties">属性</s:String>
+    <s:String x:Key="Restore">全部恢复</s:String>
+    <s:String x:Key="Seconds">秒</s:String>
+    <s:String x:Key="Value">值</s:String>
+    <s:String x:Key="UnknownLanguage">未知语言</s:String>
+    
+    <!-- Single line strings -->
+    <s:String x:Key="AboutDetails">{0} 由 {1} 于 {2} 制作。</s:String>
+    <s:String x:Key="BackupName">备份名</s:String>
+    <s:String x:Key="BackupSameVolume">备份与您要备份的存档在同一卷中。</s:String>
+    <s:String x:Key="BackupSameVolumeDetails">这可能导致您的系统在重装后丢失存档。</s:String>
+    <s:String x:Key="BackupSize">备份大小</s:String>
+    <s:String x:Key="BackupSuccessfully">备份成功！</s:String>
+    <s:String x:Key="BackupTime">备份时间</s:String>
+    <s:String x:Key="BatchProcessCancelConfirm">您是否确定要取消吗？</s:String>
+    <s:String x:Key="BatchProcessCancelConfirmDetails">当前还在处理中，取消可能会导致没有被完全修改。取消后请您使用恢复的功能进行恢复。</s:String>
+    <s:String x:Key="BatchProcessError">但是修改部分{0}/全部{0}时发生了错误</s:String>
+    <s:String x:Key="BatchProcessFinish">已完成。</s:String>
+    <s:String x:Key="BatchProcessFinishInstruction">处理完毕。</s:String>
+    <s:String x:Key="BatchProcessFinishText">共用时 {0} 秒，{1}。是否要查看详细资料？</s:String>
+    <s:String x:Key="BatchProcessLog">使用 {0} 个功能修改 {1} 个{2}</s:String>
+    <s:String x:Key="BatchProcessSuccessfully">全部{0}修改成功</s:String>
+    <s:String x:Key="BatchProcessWarning">但是修改部分{0}/全部{0}时发生了警告</s:String>
+    <s:String x:Key="CopyBackupsConfirm">原文件夹下还有备份，是否要复制备份到新文件夹？</s:String>
+    <s:String x:Key="CopyFailed">复制时出错，请重试。</s:String>
+    <s:String x:Key="DecryptDataError">不是正确的xml文件。</s:String>
+    <s:String x:Key="DefaultModifiedXml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;Modified /&gt;</s:String>
+    <s:String x:Key="DeleteBackupConfirm">确认删除</s:String>
+    <s:String x:Key="DeleteBackupInstruction">您确定要删除选中备份吗？</s:String>
+    <s:String x:Key="DeleteBackupSuccessfully">删除备份成功！</s:String>
+    <s:String x:Key="DeleteBackupText">这是个不可逆的操作，删除备份后备份将无法挽回。</s:String>
+    <s:String x:Key="DeleteConfirm">你确定要删除选中项吗？</s:String>
+    <s:String x:Key="DeleteConfirmDetails">这是一个不可逆的操作。如果你不慎移除了一个重要的东西，你的游戏可能会崩溃。</s:String>
+    <s:String x:Key="DragFile">使用 %1 打开</s:String>
+    <s:String x:Key="EditBackupsDirectorySuccessfully">修改备份存放位置成功！</s:String>
+    <s:String x:Key="EnterSkipEndOfLevelSequenceInstruction">是否要跳过关卡结束动画？</s:String>
+    <s:String x:Key="ErrorDetailsLabel">错误详细信息(_D)</s:String>
+    <s:String x:Key="FailedLoadingGame">加载World of Goo失败！</s:String>
+    <s:String x:Key="FailedLoadingProfile">加载存档失败！</s:String>
+    <s:String x:Key="Fatal">程序运行时出现了一个非预期的错误。</s:String>
+    <s:String x:Key="FeaturesParseError">对不起，读取Features.xml时出错！</s:String>
+    <s:String x:Key="FeaturesParseErrorDetails">请检查当前根目录下中的Resources文件夹中是否存在正确的Features.xml，否则请重新下载本软件：http://mygod.apphb.com/#Product-54</s:String>
+    <s:String x:Key="GameAlreadyRunning">游戏已经运行，你不能同时启动两个游戏！</s:String>
+    <s:String x:Key="GarbageCleanupDone">垃圾清理完成！</s:String>
+    <s:String x:Key="GarbageCleanupDetails">共清理了 {0} 垃圾。</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupportedInfo">对不起，我们目前无法为你生成一个新的玩家在线认证码。</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupported">我们当前无法处理你的国家代码。如果你仍想生成一个新的玩家在线认证码，你可以联系我们帮助我们改进这个程序，或者尝试这个解决方案：清空你的玩家在线认证码，禁用在线搭塔，保存存档后打开游戏，在粘粘公司中点击connect。</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">服务器返回空响应，请稍后再试。</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyFailed">生成玩家在线认证码失败！</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyInstruction">你想要在生成之前备份一下你的旧认证码吗？</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyInvalidResponse">服务器返回未知结果：</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyProcessFailed">服务器处理失败！返回消息：</s:String>
+    <s:String x:Key="IsLoading" xml:space="preserve"> 正在加载中……</s:String>
+    <s:String x:Key="IncorrectInput">输入不正确！</s:String>
+    <s:String x:Key="NoItemHintPart1">您还没有加载任何游戏/存档。请点击</s:String>
+    <s:String x:Key="NoItemHintPart2">打开要加载的游戏/存档或点击</s:String>
+    <s:String x:Key="NoItemHintPart3">搜索你的存档。</s:String>
+    <s:String x:Key="NoModifiedRecordFound">该{0}没有被修改过的记录。</s:String>
+    <s:String x:Key="NowPlaying">正在播放：</s:String>
+    <s:String x:Key="OpenFileTitle">请选择要打开的游戏/存档/.bin 文件</s:String>
+    <s:String x:Key="OpenFileFilter">所有支持的文件 (*.exe;*.dat;*.bin;*.plist;*.wogmpbak)|*.exe;*.dat;*.bin;*.wogmpbak|World of Goo 程序 (粘粘世界.exe;Launch.exe;*World*Goo*.exe)|粘粘世界.exe;Launch.exe;World*Goo*.exe|所有程序 (*.exe)|*.exe|存档文件 (pers2.dat;com.2dboy.worldofgoo.plist)|pers2.dat;com.2dboy.worldofgoo.plist|World of Goo AES 加密文件 (*.bin)|*.bin|加密存档 (*.dat)|*.dat|iOS 存档 (*.plist)|*.plist|World of Goo修改器存档备份文件 (*.wogmpbak)|*.wogmpbak|所有文件 (*.*)|*</s:String>
+    <s:String x:Key="OpenBinFileFilter">World of Goo AES 加密文件 (*.bin)|*.bin|加密存档 (*.dat)|*.dat|World of Goo修改器存档备份文件 (*.wogcpbak)|*.wogcpbak|所有文件 (*.*)|*</s:String>
+    <s:String x:Key="OpenBinFileTitle">请选择要编辑的 .bin 文件：（可多选）</s:String>
+    <s:String x:Key="OpenProfileTitle">请选择您的存档：</s:String>
+    <s:String x:Key="OpenProgramTitle">请选择程序：</s:String>
+    <s:String x:Key="OpenProgramFilter">所有程序 (*.exe)|*.exe|所有文件 (*.*)|*</s:String>
+    <s:String x:Key="OverwriteConfirm">确认覆盖</s:String>
+    <s:String x:Key="OverwriteBackupInstruction">指定位置的备份已存在。</s:String>
+    <s:String x:Key="OverwriteBackupText">覆盖是不可逆的操作，覆盖备份后原备份将无法恢复。</s:String>
+    <s:String x:Key="OverwritePlayerInstruction">指定位置的玩家已存在。</s:String>
+    <s:String x:Key="OverwritePlayerText">覆盖是不可逆的操作，覆盖玩家后原来的玩家将无法恢复。（除非你不保存关闭）</s:String>
+    <s:String x:Key="PastePlayerError">粘贴玩家时发生了错误。</s:String>
+    <s:String x:Key="PasteToInstruction">请选择要粘贴到的玩家位置。</s:String>
+    <s:String x:Key="PlayMusicError">播放关卡音乐时发生了错误。</s:String>
+    <s:String x:Key="ProfileLoadBoth">全部加载</s:String>
+    <s:String x:Key="ProfileNewVersion">1.1及以上版本游戏存档</s:String>
+    <s:String x:Key="ProfileNotSavedInstruction">以下存档尚未保存</s:String>
+    <s:String x:Key="ProfileNotSavedText">如果退出，对以上文件的修改将全部无效且无法挽回。</s:String>
+    <s:String x:Key="ProfileOldVersion">1.0版游戏存档</s:String>
+    <s:String x:Key="RemainingTime">剩余时间：</s:String>
+    <s:String x:Key="RenameSuccessfully">重命名成功！</s:String>
+    <s:String x:Key="RestoreBackupConfirm">确认恢复</s:String>
+    <s:String x:Key="RestoreBackupInstruction">您确定要恢复当前备份吗？</s:String>
+    <s:String x:Key="RestoreBackupSuccessfully">恢复成功！</s:String>
+    <s:String x:Key="RestoreBackupText">这可能导致您的存档当前状态丢失，建议您备份存档后再恢复。</s:String>
+    <s:String x:Key="SaveProfileFilter">存档文件 (pers2.dat)|pers2.dat|加密存档 (*.dat)|*.dat|iOS 存档 (com.2dboy.worldofgoo.plist)|com.2dboy.worldofgoo.plist|Plist 格式存档 (*.plist)|*.plist|World of Goo修改器存档备份文件 (*.wogmpbak)|*.wogmpbak|所有文件 (*.*)|*</s:String>
+    <s:String x:Key="SaveProfileTitle">请选择要保存的位置：</s:String>
+    <s:String x:Key="SearchProfileFailed">无法在默认存档路径任何存档，请手动定位！</s:String>
+    <s:String x:Key="SearchProfileFinished">找到以下存档，请选择要加载的存档：</s:String>
+    <s:String x:Key="TestSelectedGooBalls">测试选中粘粘球</s:String>
+    <s:String x:Key="UsedTime">已用时间：</s:String>
+    <s:String x:Key="WelcomeUseTitle">欢迎使用</s:String>
+    <s:String x:Key="XslTransformFailed">无法转换 XSL。</s:String>
+
+    <!-- Multi line strings -->
+    <s:String x:Key="BatchProcessDetails">处理完毕，共修改了 {1} 个{0}中的 {2} 个{0}。%N以下是错误/警告信息：%N</s:String>
+    <s:String x:Key="EditDetails">{0} {1} 的被修改情况：%N</s:String>
+    <s:String x:Key="EnterSkipEndOfLevelSequenceText">如果这个关卡以管道收集粘粘球结束而且你选择了“是”，那么它不会显示你收集了多少球、用了多少步、多长时间，而是直接跳到通关动画（如果有）或（如果有通关动画则放完后）回到章节地图或世界地图（如果这关排在最后）。%N如果选择“放弃”则不作修改。</s:String>
+    <s:String x:Key="ErrorDetails">{0} {1} {2} 时发生了错误，详细信息：{3}%N</s:String>
+    <s:String x:Key="ErrorStart">---------- 错误信息 ----------%N</s:String>
+    <s:String x:Key="FeatureEditDetails">　功能 {0} 被修改了 {1} 次%N</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyText">如果你生成一个新的玩家在线认证码却不备份旧的玩家认证码，旧的玩家认证码和与其相关的所有记录都将无法挽回。%N%N* 要使用此功能你必须联网。</s:String>
+    <s:String x:Key="PlayerLevelsTotal">标准关：{0} 球，{1} 步，{2} 秒%N新关：　{3} 球，{4} 步，{5} 秒%N所有关：{6} 球，{7} 步，{8} 秒</s:String>
+    <s:String x:Key="ProcessingDetails">{2}/{3}({4}%)。%N正在处理{0} {1} 中……</s:String>
+    <s:String x:Key="PropertiesConfigFile">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;%N&lt;!-- IMPORTANT WARNING: If you edit this file, your computer will probably explode. Your friend, the High Resolution Sign Painter --&gt;%N&lt;!-- This file has been edited by World of Goo Modifier by Mygod --&gt;%N&lt;config&gt;%N	&lt;param name="language" value="{0}"/&gt;%N	&lt;param name="screen_width" value="{1}"/&gt;%N	&lt;param name="screen_height" value="{2}"/&gt;%N	&lt;param name="ui_inset" value="{3}"/&gt;%N&lt;/config&gt;</s:String>
+    <s:String x:Key="SearchProfileText">如果你想要加载你的 Android 存档，请找到 /data/data/com.twodboy.worldofgoofull/pers2.dat 这个文件并在主界面加载。%N%N如果你想要加载你的 iOS 存档，请把 com.2dboy.worldofgoo.plist 这个文件找到并在主界面加载。通常情况下你可以在以下目录找到你的存档：%N/var/mobile/Library/Preferences%N/var/mobile/Applications/{wog.app或GUID}/Library/Preferences</s:String>
+    <s:String x:Key="WarningDetails">{0} {1} {2} 时发生了警告，详细信息：{3}%N</s:String>
+    <s:String x:Key="WarningStart">%N---------- 警告信息 ----------%N</s:String>
+    <s:String x:Key="WelcomeUse">欢迎使用 {0}！请仔细阅读下面的快速帮助来帮助你更好地使用此程序。%N要使用本程序，请首先载入你的游戏、存档，你可以手动定位游戏、存档，也可以自动搜索存档。载入完毕后，你可以右击它们通过弹出菜单来进行修改。（本程序的大多数列表都有弹出菜单来供你修改）%N当你看见一个表格时，多数情况下它们都是可以被直接修改的，你只需双击它们就能像在Excel中一样修改。如果你想把某几行都修改成一个值，请你还是使用弹出菜单就能进行修改。当你对某一个元素的使用方式不确定时，你可以将鼠标移动到列名处，它会提示你这一列该如何修改。%N快速帮助就到这里，祝您goomod愉快！%N%NP.S. 你可以稍后阅读快速帮助，只要点击 帮助 - 快速帮助。</s:String>
+    <s:String x:Key="WoGCorpBallDetails">位置：({0}, {1})%N速度：({2}, {3})</s:String>
+    
+    <!-- Jump List -->
+    <s:String x:Key="JumpListCategory">实用工具箱</s:String>
+    <s:String x:Key="JumpListSelectBinFiles">打开 .bin 文件</s:String>
+    <s:String x:Key="JumpListTechSupport">技术支持 &amp; 检查更新</s:String>
+    
+    <!-- Exceptions -->
+    <s:String x:Key="ExceptionFeaturesXmlVersionIncorrect">Features.xml版本不正确，当前修改器版本仅支持版本{0}。</s:String>
+    <s:String x:Key="ExceptionXmlElementDoesNotExist">XML文件不存在元素 {0}！</s:String>
+    <s:String x:Key="ExceptionXmlAttributeDoesNotExist">XML文件不存在指定的属性 {0}！</s:String>
+    <s:String x:Key="ExceptionXmlElementCannotRecognize">无法识别XML文件的 {0} 元素！</s:String>
+    
+    <!-- Errors & Warnings -->
+    <s:String x:Key="ErrorOnBinaryFileEdit">编辑 .bin 文件时出错。</s:String>
+    <s:String x:Key="ErrorGooBallsTesterPositiveIntegerRequired">第 {0} 项的内容不是个表示粘粘球数目的正整数。%N</s:String>
+    <s:String x:Key="ErrorGooBallsTesterNotExist">第 {0} 项所使用的粘粘球ID不存在。%N</s:String>
+    <s:String x:Key="WarningGooBallsTesterCountGreaterThan1000">总球数超过 1000！当这些球都被收集时显示将不正常。%N</s:String>
+    <s:String x:Key="WarningGooBallsTesterCountGreaterThan20000">总球数超过 20000！这可能导致游戏开始时会卡一段时间。%N</s:String>
+    <s:String x:Key="ErrorGooBallsTesterCountGreaterThan500000">总球数超过 500000！这可能导致游戏崩溃！%N</s:String>
+    
+    <!-- UI Strings -->
+
+    <s:String x:Key="ProcessingInstructions">正在处理中……（若想取消请关闭此窗口）</s:String>
+    <s:String x:Key="ProcessingDetailsInitializing">正在初始化中……</s:String>
+    <s:String x:Key="OptionsMainInterface">主界面(_M)</s:String>
+    <s:String x:Key="OptionsGame">游戏(_G)</s:String>
+    <s:String x:Key="AbortGame">杀死游戏 (_A)（如果你在粘粘公司中你当前的塔将不会被保存）</s:String>
+
+    <!-- Label Texts -->
+    <s:String x:Key="BallsCollected">已经收集球数：</s:String>
+    <s:String x:Key="BallsRequired">需要收集球数：</s:String>
+    <s:String x:Key="GameMemoryFileName">游戏文件名：</s:String>
+    <s:String x:Key="GamePropertiesDisplayLanguage">显示语言：(_L)</s:String>
+    <s:String x:Key="GamePropertiesScreenSize">屏幕大小：(_S)</s:String>
+    <s:String x:Key="GamePropertiesUIInset">_UI距离：</s:String>
+    <s:String x:Key="GameGooBallsTesterGooBallsToTest">要测试的粘粘球：(_G)</s:String>
+    <s:String x:Key="MovesUsed">使用步数：</s:String>
+    <s:String x:Key="OptionsRecentPathsCapacity">最近使用的文件容量：(_R)</s:String>
+    <s:String x:Key="OptionsThumbnailMaxHeight">缩略图最大高度：(_H)</s:String>
+    <s:String x:Key="OptionsTheme">主题：(_T)（重新启动生效）</s:String>
+    <s:String x:Key="OptionsLanguage">语言：(_L)（重新启动生效）</s:String>
+    <s:String x:Key="OptionsBinFileEditor">._bin文件编辑器：</s:String>
+    <s:String x:Key="PlayerPropertiesNewlyCollectedGooBalls">新收集的粘粘球：(_C)</s:String>
+    <s:String x:Key="PlayerPropertiesOnlinePlayerKey">玩家在线认证码：(_O)</s:String>
+    <s:String x:Key="PlayerPropertiesGenerateOnlinePlayerKey">生成玩家在线认证码(_G)</s:String>
+    <s:String x:Key="PlayerPropertiesPlayerName">玩家名称：(_N)</s:String>
+    <s:String x:Key="PlayerPropertiesTotalPlayTime">游戏时长：(_T)</s:String>
+    <s:String x:Key="PlayerPropertiesiOSFeature">iOS 功能（以下数据在存储在 PC 格式的存档中时会丢失）</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">Game Centre 玩家 _ID：</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">_Game Centre 玩家名：</s:String>
+    <s:String x:Key="ProfilePropertiesCountryCode">国家代码：(_C)</s:String>
+    <s:String x:Key="XslTransformerSource">原 X_ML：</s:String>
+    <s:String x:Key="XslTransformerResult">结果：(_R)</s:String>
+    <s:String x:Key="XslTransformerTransform">转换(_T)</s:String>
+    <s:String x:Key="XslTransformerXsl">_XSL：</s:String>
+
+    <!-- CheckBox Texts -->
+    <s:String x:Key="GooBallTesterVisualDebugEnabled">启用可视化调试(_V)</s:String>
+    <s:String x:Key="MemoryGooBallsUndraggable">使所有粘粘球不可拖动(_A)</s:String>
+    <s:String x:Key="MemoryLetterboxed">显示字符框(_L)</s:String>
+    <s:String x:Key="MemoryMenuEnabled">启用_menu按钮</s:String>
+    <s:String x:Key="MemoryPaused">暂停(_P)</s:String>
+    <s:String x:Key="MemoryShowBallsInTank">在右方蓄水池中显示粘粘球(_B)</s:String>
+    <s:String x:Key="OptionsLoadGooBallThumbnail">加载粘粘球缩略图(_L)</s:String>
+    <s:String x:Key="OptionsConsoleDebuggerEnabled">启用控制台调试器(_E)</s:String>
+    <s:String x:Key="PlayerPropertiesDeliveranceUnlocked">解禁解救数据(_K)</s:String>
+    <s:String x:Key="PlayerPropertiesOnlinePlayEnabled">启用在线搭塔(_E)</s:String>
+    <s:String x:Key="PlayerPropertiesWhistleFound">启用口哨(_W)</s:String>
+    <s:String x:Key="PlayerPropertiesWorldOfGooCorporationDestroyed">销毁粘粘公司(_D)</s:String>
+    <s:String x:Key="PlayerPropertiesWorldOfGooCorporationUnlocked">解锁粘粘公司(_U)</s:String>
+    <s:String x:Key="ProfilePropertiesFullscreen">全屏显示(_F)</s:String>
+    <s:String x:Key="TopMost">使此窗口显示在最前方(_T)</s:String>
+
+    <!-- Menu Strings -->
+    <s:String x:Key="ContextMenuFold">展开/折叠(_F)</s:String>
+    <s:String x:Key="ContextMenuSetAsDefault">设为默认玩家(_S)</s:String>
+    <s:String x:Key="ContextMenuBackupProfile">备份存档(_B)</s:String>
+    <s:String x:Key="ContextMenuSave">保存(_S)</s:String>
+    <s:String x:Key="ContextMenuSaveAs">另存为(_A)...</s:String>
+    <s:String x:Key="ContextMenuEditProfile">手动修改存档内容(_E)</s:String>
+    <s:String x:Key="ContextMenuEditMemory">修改内存(_E)</s:String>
+    <s:String x:Key="ContextMenuBrowseInExplorer">在资源管理器中浏览(_V)</s:String>
+    <s:String x:Key="ContextMenuBrowseLevels">浏览关卡(_L)</s:String>
+    <s:String x:Key="ContextMenuBrowseGooBalls">浏览粘粘球(_B)</s:String>
+    <s:String x:Key="ContextMenuBrowseIslands">浏览岛屿(_I)</s:String>
+    <s:String x:Key="ContextMenuBrowseMaterials">浏览材料(_M)</s:String>
+    <s:String x:Key="ContextMenuBrowseText">浏览文本资源(_T)</s:String>
+    <s:String x:Key="ContextMenuBrowseLevelRecords">浏览关卡记录(_L)</s:String>
+    <s:String x:Key="ContextMenuBrowseWoGCorp">浏览粘粘公司(_W)</s:String>
+    <s:String x:Key="ContextMenuCut">剪切(_X)</s:String>
+    <s:String x:Key="ContextMenuCopy">复制(_C)</s:String>
+    <s:String x:Key="ContextMenuPaste">粘贴(_P)...</s:String>
+    <s:String x:Key="ContextMenuPasteTo">粘贴到(_P)...</s:String>
+    <s:String x:Key="ContextMenuProperties">属性(_R)</s:String>
+    <s:String x:Key="ContextMenuExecuteGame">运行游戏(_E)</s:String>
+    <s:String x:Key="ContextMenuRemoveItem">移除(_D)</s:String>
+    <s:String x:Key="ContextMenuRefresh">重新打开(_H)</s:String>
+    <s:String x:Key="ContextMenuInsertProfilePlayer">新建玩家(_N)</s:String>
+    <s:String x:Key="ContextMenuSetAlias">设置别名(_S)</s:String>
+
+    <s:String x:Key="ContextMenuProcessLevels">修改选中关卡(_C)...</s:String>
+    <s:String x:Key="ContextMenuReverseLevels">恢复选中关卡(_U)...</s:String>
+    <s:String x:Key="ContextMenuRestoreLevels">恢复选中关卡到初始状态(_T)...</s:String>
+    <s:String x:Key="ContextMenuExecuteLevel">运行选中关卡中的第一个(_E)</s:String>
+    <s:String x:Key="ContextMenuPlayLevelMusic">播放选中关卡中的第一个的音乐(_M)</s:String>
+    <s:String x:Key="ContextMenuEditLevelSceneBin">手动修改_scene.bin</s:String>
+    <s:String x:Key="ContextMenuEditLevelLevelBin">手动修改_level.bin</s:String>
+    <s:String x:Key="ContextMenuEditLevelResrcBin">手动修改resrc._bin</s:String>
+    <s:String x:Key="ContextMenuCopyLevels">复制选中关卡显示名(_O)</s:String>
+    <s:String x:Key="ContextMenuSortLevels">排序/取消排序(_R)</s:String>
+    <s:String x:Key="ContextMenuSearchLevel">搜索关卡(_A)...</s:String>
+    <s:String x:Key="ContextMenuDeleteLevels">删除选中关卡(_D)...</s:String>
+
+    <s:String x:Key="ContextMenuProcessGooBalls">修改选中粘粘球(_C)...</s:String>
+    <s:String x:Key="ContextMenuReverseGooBalls">恢复选中粘粘球(_U)...</s:String>
+    <s:String x:Key="ContextMenuRestoreGooBalls">恢复选中粘粘球到初始状态(_T)...</s:String>
+    <s:String x:Key="ContextMenuAddGooBallsToTestLeft" xml:space="preserve">增加 </s:String>
+    <s:String x:Key="ContextMenuAddGooBallsToTestRight" xml:space="preserve"> 个一起同时测试(_E)</s:String>
+    <s:String x:Key="ContextMenuEditGooBallBallsXmlBin">手动修改_balls.xml.bin</s:String>
+    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">手动修改_resources.xml.bin</s:String>
+    <s:String x:Key="ContextMenuCopyGooBalls">复制选中粘粘球的_ID</s:String>
+    <s:String x:Key="ContextMenuDeleteGooBalls">删除选中粘粘球(_D)...</s:String>
+
+    <s:String x:Key="ContextMenuEditMaterialsXml">手动编辑材料_XML</s:String>
+    <s:String x:Key="ContextMenuTestMaterial">测试选中材料中的第一个(_E)</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsFriction">批量修改材料摩擦力(_F)...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsBounce">批量修改材料弹性(_B)...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsMinimumBounceVelocity">批量修改材料最小反弹速度(_M)...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsStickiness">批量修改材料粘性(S)...</s:String>
+    <s:String x:Key="ContextMenuAddMaterial">添加新材料(_A)...</s:String>
+    <s:String x:Key="ContextMenuCopyMaterial">复制选中材料(_C)...</s:String>
+    <s:String x:Key="ContextMenuRemoveMaterial">移除选中材料(_R)</s:String>
+
+    <s:String x:Key="ContextMenuEditIslandsXml">手动编辑选中岛屿_XML</s:String>
+    <s:String x:Key="ContextMenuEditIslandsName">批量修改岛屿名(_N)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandsMap">批量修改岛屿地图关卡I_D...</s:String>
+    <s:String x:Key="ContextMenuEditIslandsIcon">批量修改岛屿图标_ID...</s:String>
+    <s:String x:Key="ContextMenuCopyIsland">复制选中岛屿(_C)...</s:String>
+    <s:String x:Key="ContextMenuSwapIslands">交换选中岛屿(_W)</s:String>
+
+    <s:String x:Key="ContextMenuEditIslandXml">手动编辑该岛屿_XML</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsName">批量修改岛屿关卡名称(_N)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsText">批量修改岛屿关卡副标题(_T)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsOCD">批量修改岛屿关卡_OCD标准...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsDepends">批量修改岛屿关卡开启条件(_D)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsCutscene">批量修改岛屿关卡通关动画(_U)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsOnComplete">批量修改岛屿关卡完成后执行命令(_M)...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsSkipEndOfLevelSequence">批量修改岛屿关卡跳过关卡结束动画(_S)...</s:String>
+    <s:String x:Key="ContextMenuShowSelectedLevels">在关卡浏览器中显示选中关卡(_L)</s:String>
+    <s:String x:Key="ContextMenuDisplayIslandLevelsNameText">显示选中岛屿关卡名称指向的文本资源(_P)</s:String>
+    <s:String x:Key="ContextMenuDisplayIslandLevelsTextText">显示选中岛屿关卡副标题指向的文本资源(_B)</s:String>
+    <s:String x:Key="ContextMenuAddIslandLevel">添加新岛屿关卡(_A)...</s:String>
+    <s:String x:Key="ContextMenuCopyIslandLevel">复制选中岛屿关卡(_C)...</s:String>
+    <s:String x:Key="ContextMenuRemoveIslandLevels">移除选中岛屿关卡(_R)</s:String>
+
+    <s:String x:Key="ContextMenuEditTextXml">手动编辑文本资源_XML</s:String>
+    <s:String x:Key="ContextMenuProcessTextItem">处理选中文本资源(_P)</s:String>
+    <s:String x:Key="ContextMenuSearchTextItem">搜索文本资源(_S)...</s:String>
+    <s:String x:Key="ContextMenuAddTextItem">添加新文本资源(_A)...</s:String>
+    <s:String x:Key="ContextMenuCopyTextItem">复制选中文本资源(_C)...</s:String>
+    <s:String x:Key="ContextMenuRemoveTextItems">移除选中文本资源(_R)</s:String>
+
+    <s:String x:Key="ContextMenuAddSpecificLanguageString">添加新特定语言字符串(_A)...</s:String>
+    <s:String x:Key="ContextMenuRemoveSpecificLanguageStrings">移除选中特定语言字符串(_R)</s:String>
+
+    <s:String x:Key="ContextMenuEditLevelRecordMostGoos">批量修改最多球(_M)...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordFewestMoves">批量修改最少步(_F)...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordFewestSeconds">批量修改最少秒(_E)...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordSkipped">跳过选中关卡(_S)</s:String>
+    <s:String x:Key="ContextMenuAddLevelRecord">新增关卡记录(_A)...</s:String>
+    <s:String x:Key="ContextMenuCopyLevelRecord">复制选中关卡记录(_C)...</s:String>
+    <s:String x:Key="ContextMenuRemoveLevelRecords">删除选中关卡记录(_R)</s:String>
+
+    <s:String x:Key="ContextMenuEditPosition">设置位置(_P)</s:String>
+    <s:String x:Key="ContextMenuEditVelocity">设置速度(_V)</s:String>
+
+    <s:String x:Key="MenuFile">文件(_F)</s:String>
+    <s:String x:Key="MenuFileNewProfile">新建存档(_N)...</s:String>
+    <s:String x:Key="MenuFileOpen">打开游戏/存档/.bin 文件(_O)...</s:String>
+    <s:String x:Key="MenuFileSearch">搜索存档(_S)...</s:String>
+    <s:String x:Key="MenuFileSaveAll">全部保存(_A)</s:String>
+    <s:String x:Key="MenuFileRemoveSelectedItem">移除选中项(_R)</s:String>
+    <s:String x:Key="MenuFileClear">清空(_C)</s:String>
+    <s:String x:Key="MenuFileRecentPaths">最近使用的文件(_F)</s:String>
+    <s:String x:Key="MenuFileQuit">退出(_X)</s:String>
+    <s:String x:Key="MenuTools">工具(_T)</s:String>
+    <s:String x:Key="MenuToolsEditBatchProcessFeatures">修改批量处理功能(_E)</s:String>
+    <s:String x:Key="MenuToolsManageBackups">管理存档备份(_M)</s:String>
+    <s:String x:Key="MenuToolsXslTransformer">_XSL 转换器</s:String>
+    <s:String x:Key="MenuToolsCleanupGarbage">清理垃圾(_C)</s:String>
+    <s:String x:Key="MenuToolsOptions">选项(_O)</s:String>
+    <s:String x:Key="MenuHelp">帮助(_H)</s:String>
+    <s:String x:Key="MenuQuickHelp">快速帮助(_Q)</s:String>
+    <s:String x:Key="MenuGetHelp">获取帮助(_G)</s:String>
+    <s:String x:Key="MenuHelpAbout">关于(_A)</s:String>
+
+    <!-- Window Titles -->
+    <s:String x:Key="AboutDialogTitle" xml:space="preserve">关于 </s:String>
+    <s:String x:Key="BackupProfileWindowTitle">备份存档</s:String>
+    <s:String x:Key="GameDebuggingWindowTitle">控制台调试器 - {0}</s:String>
+    <s:String x:Key="GameGooBallsTesterWindowTitle">粘粘球测试器 - {0}</s:String>
+    <s:String x:Key="GameGooBallsWindowTitle">粘粘球浏览器 - {0}</s:String>
+    <s:String x:Key="GameIslandWindowTitle">岛屿关卡浏览器 - {0} 岛屿 #{1}</s:String>
+    <s:String x:Key="GameIslandsWindowTitle">岛屿浏览器 - {0}</s:String>
+    <s:String x:Key="GameLevelsWindowTitle">关卡浏览器 - {0}</s:String>
+    <s:String x:Key="GameMaterialsWindowTitle">材料浏览器 - {0}</s:String>
+    <s:String x:Key="GameMemoryWindowTitle">内存修改器</s:String>
+    <s:String x:Key="GameTextWindowTitle">文本资源浏览器 - {0}</s:String>
+    <s:String x:Key="GameTextItemWindowTitle">特定语言字符串浏览器 - {0}</s:String>
+    <s:String x:Key="HelpWindowTitle">帮助</s:String>
+    <s:String x:Key="OptionsWindowTitle">选项</s:String>
+    <s:String x:Key="PlayerLevelsWindowTitle">玩家关卡记录浏览器 - {0} 玩家 #{1}</s:String>
+    <s:String x:Key="PlayerPropertiesWindowTitle">属性 - {0} 玩家 #{1}</s:String>
+    <s:String x:Key="PlayerWoGCorpWindowTitle">玩家粘粘公司浏览器 - {0} 玩家 #{1}</s:String>
+    <s:String x:Key="ProcessingWindowTitle">处理中 - {0}</s:String>
+    <s:String x:Key="PropertiesWindowTitle">属性 - {0}</s:String>
+    <s:String x:Key="SelectFeaturesDialogTitle">请选择要使用的功能：</s:String>
+    <s:String x:Key="XslTransformerWindowTitle">XSL 转换器</s:String>
+
+    <s:String x:Key="EnterBackupsDirectoryTitle">请选择备份存放文件夹：</s:String>
+    <s:String x:Key="EnterBackupNameTitle">请输入备份名：</s:String>
+    <s:String x:Key="EnterIDTitle">请输入ID：</s:String>
+    <s:String x:Key="EnterIslandToCopyNumber">请输入要复制到的岛屿序号：（1-5且不能与原岛屿相同）</s:String>
+    <s:String x:Key="EnterNewValueTitle">请输入新值：</s:String>
+    
+    <!-- ToolTips -->
+    <ToolTip x:Key="CountryCodeToolTip">
+        <TextBlock TextWrapping="Wrap">符合ISO 3166-1标准的两个字符长度的国家代码，除了欧盟是EU与未知是XX，不允许使用半角逗号“,”。<LineBreak />如果不清楚使用方法请不要修改此项。</TextBlock>
+    </ToolTip>
+    <ToolTip x:Key="FullscreenToolTip">
+        <TextBlock TextWrapping="Wrap">指示游戏是以全屏模式还是窗口模式启动。</TextBlock>
+    </ToolTip>
+    <ToolTip x:Key="PlayerNameToolTip">
+        <TextBlock TextWrapping="Wrap">玩家名称仅允许以下字符：<LineBreak />ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&amp;*()-_=+[{]};:"&lt;.&gt;/?¡¢£¥§©®¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ<LineBreak /><LineBreak />如果是汉化版（以1.6为准）还支持以下字符：<LineBreak />已收集个步跳过返回退出重试菜单取消存档关于删除小峡谷向上走不倒翁下荡刺穿粘飞行机器米使用了球世界第常春藤之塔抽水站大桥颂歌的沼泽链子游戏时间还可以次遗传验证红地毯美人与电线杆笛管道口火山温泉滤学暴风天校起来吧家伙们顺流而二手烟轴你必须爆那头雾中骨路三轮锁超级保险丝垃圾焚产品运烧场挑战刻热气纵输标革新委员会文观测公司强烈建议去玩卡这一告系统葡萄病毒图形处理元障优错误和晚服务农饲解救数据脑载入提筛选溶匀化空在附近猛转碘缩像音效采样切实猜刮资金应构思动情深度争论作为艺术安抚明真相版商做点乐正想完善翻自主创事物我确定散模仿未进溢交换原型启预期沙盘发蒸馏好双能源阵造社责任扳弯调羹非性叙汉信息纯属杜撰<LineBreak /><LineBreak />如果您自定义了字体文件您可以输入TwCenMTCondensedExtraBold18字体中的字。若输入了不支持的字则在游戏中不显示。</TextBlock>
+    </ToolTip>
+
+    <!-- DataGrid Titles -->
+    <s:String x:Key="Bounce">弹性</s:String>
+    <s:String x:Key="Cutscene">通关动画</s:String>
+    <s:String x:Key="Depends">开启条件</s:String>
+    <s:String x:Key="FewestMoves">最少步数</s:String>
+    <Span x:Key="FewestMovesDescription">通关关卡使用的最少步数。</Span>
+    <s:String x:Key="Friction">摩擦力</s:String>
+    <s:String x:Key="IconID">图标ID</s:String>
+    <Span x:Key="IconIDDescription">该岛屿图标的ID。<LineBreak />它会在该岛屿下的关卡开始时显示。例如第四章是一个绿色电脑的图标。</Span>
+    <Span x:Key="IslandLevelCutsceneDescription">岛屿关卡的通关动画。<LineBreak />这里你需要连续填写三个动画的ID，各个ID之间使用半角逗号“,”分隔，表示完成当前关卡后播放指定的动画。如果在某个位置不播放动画，输入x。<LineBreak />例如：levelFadeOut,Chapter1End,gooTransition_out x,whistleUnlock,gooTransition_out<LineBreak /><LineBreak />这三个动画会按顺序播放，但是这三个播放时的背景不同，当你设计/创建你的动画时应该尤其注意。<LineBreak />第一个动画会在关卡结束后立即播放，因此它的背景是关卡。在这个动画开始的第一秒内关卡内的音乐/音效淡出。<LineBreak />第二个动画则在一个纯黑的背景下播放。<LineBreak />第三个动画的背景是你将要返回的岛屿或主界面（如果这个关卡放在当前岛屿的最后）。在这个动画开始时岛屿/主界面的音乐、音效开始响起。</Span>
+    <Span x:Key="IslandLevelDependsDescription">岛屿关卡的开启条件。<LineBreak />这里你需要填写关卡的ID，可以是当前章节的关卡，也可以是上一章节的关卡。多个ID之间使用半角逗号“,”分隔，表示必须要完成指定的关卡才能开启当前关卡。如果省略则表示只要所在岛屿开启则该关卡总是开启的。（岛屿开启的条件是该岛屿的第一个关卡被开启）</Span>
+    <Span x:Key="IslandLevelIDDescription">岛屿关卡的ID。</Span>
+    <Span x:Key="IslandLevelNameDescription">岛屿关卡的名称。<LineBreak />这里你需要填写文本资源的ID，你可以通过浏览文本资源来获得相关信息。</Span>
+    <Span x:Key="IslandLevelOCDCriteriaDescription">岛屿关卡的OCD标准。<LineBreak />balls,x表示需要收集x球OCD，moves,x表示OCD需要在x步以内完成，time,x表示OCD需要在x秒内完成，如果不填则表示该关卡没有OCD。</Span>
+    <Span x:Key="IslandLevelOnCompleteDescription">岛屿关卡完成后执行的命令。<LineBreak />这里你需要填写命令的ID，一旦关卡被完成这个命令就会被执行。他们通常修改存档中的flags属性来解锁游戏的一种功能或者是模式。<LineBreak />可用命令：unlockwogcorp（解锁粘粘世界，解锁后玩家可以进入粘粘世界，用于Hang Low）, unlockwhistle（解锁口哨，解锁后玩家可以使用口哨吸引粘粘球）, expandchapter4（扩大第四章）。</Span>
+    <Span x:Key="IslandLevelSubtitleDescription">岛屿关卡的副标题。<LineBreak />这里你需要填写文本资源的ID，你可以通过浏览文本资源来获得相关信息。</Span>
+    <Span x:Key="IslandLevelSkipEndOfLevelSequenceDescription">岛屿关卡完成后是否跳过关卡结束动画。<LineBreak />如果这个关卡是以收集指定粘粘球数结束的且跳过关卡结束动画，那么按下continue后不会显示收集粘粘球数、步数与时间而是直接播放关卡结束动画或返回岛屿/主界面。</Span>
+    <Span x:Key="IslandNameDescription">岛屿的名字。在游戏中并不会出现这个岛屿的名字，它仅作标识。</Span>
+    <s:String x:Key="IslandNumber">岛屿序号</s:String>
+    <Span x:Key="IslandNumberDescription">表示岛屿的序号。<LineBreak /><LineBreak />请不要随意修改，否则会导致主界面混乱。如果你执意要修改，请使用复制或交换的方法进行修改。</Span>
+    <s:String x:Key="LanguageID">语言ID</s:String>
+    <Span x:Key="LanguageIDDescription">语言的ID。<LineBreak />通常使用国家的ID来代表语言，在语言名中会显示ID所代表的语言（由于一个国家可能出现多种语言，因此如果发现显示有误请与我联系），然而text是指没有找到的情况下显示的文本，通常是英语。<LineBreak />国家ID示例：cn, es, fr, de, it, jp, nl, pl, hu。</Span>
+    <s:String x:Key="LanguageName">语言名</s:String>
+    <s:String x:Key="FewestSeconds">最少秒数</s:String>
+    <Span x:Key="FewestSecondsDescription">通过关卡使用的最少秒数。</Span>
+    <s:String x:Key="LevelID">关卡ID</s:String>
+    <Span x:Key="LevelIDDescription">通过关卡的ID。</Span>
+    <s:String x:Key="MapID">地图关卡ID</s:String>
+    <Span x:Key="MapIDDescription">该岛屿地图的关卡ID。<LineBreak />注意：在该关卡中需要有很多button，id为lb_{LevelID}（Level Button的缩写，即关卡按钮），onclick为pl_{LevelID}（Play Level的缩写，即玩关卡），onmouseenter为ss_{LevelID}（Show Stats的缩写，即显示统计），onmouseleave为hs_{LevelID}（Hide Stats的缩写，即隐藏统计）。</Span>
+    <Span x:Key="MaterialBounceDescription">材料的弹性。<LineBreak />弹性小于等于0时粘粘球/动态几何物体落在上面不会反弹，弹性大于0时反弹的速度将乘以这个值。（即如果小于1的话会越弹越慢，最后停下来；如果等于1且没有阻力则不停地弹；如果大于1则会越弹越高）</Span>
+    <Span x:Key="MaterialFrictionDescription">材料的摩擦力。<LineBreak />当摩擦力大于0时粘粘球/动态几何物体在上面滑动会受到阻力，值越大阻力越大。</Span>
+    <Span x:Key="MaterialMinimumBounceVelocityDescription">材料的最低反弹速度。<LineBreak />当粘粘球/动态几何物体撞击材料的速度小于等于最低反弹速度时不会反弹。</Span>
+    <Span x:Key="MaterialStickinessDescription">材料的粘性。<LineBreak />当粘性大于等于7.5时粘粘架会被粘在上面而与值的大小没有关系。</Span>
+    <Span x:Key="MaterialIDDescription">材料的ID。</Span>
+    <s:String x:Key="MinimumBounceVelocity">最低反弹速度</s:String>
+    <s:String x:Key="MostGoos">最多球数</s:String>
+    <Span x:Key="MostGoosDescription">通过关卡收集的最多球数。</Span>
+    <s:String x:Key="Name">名称</s:String>
+    <s:String x:Key="OCDCriteria">OCD标准</s:String>
+    <s:String x:Key="OnComplete">完成后执行命令</s:String>
+    <s:String x:Key="SkipEndOfLevelSequence">跳过关卡结束动画</s:String>
+    <s:String x:Key="Stickiness">粘性</s:String>
+    <s:String x:Key="Subtitle">副标题</s:String>
+    <Span x:Key="TextItemValueDescription">指定语言的字符串内容。</Span>
+
+    <!-- Command Link Texts -->
+    <s:String x:Key="FatalBreak">中断运行(_B)%N立即中断运行并记录错误，避免错误进一步发展。</s:String>
+    <s:String x:Key="FatalContinue">继续运行(_C)%N记录错误后继续运行，这可能导致错误进一步发展。如果您确定该错误没有影响请点击此选项。</s:String>
+    <s:String x:Key="FatalRestart">重新启动(_R)%N记录错误后重启本程序。</s:String>
+
+    <!-- Button Texts -->
+    <s:String x:Key="Browse">浏览(_B)...</s:String>
+    <s:String x:Key="Cancel">取消</s:String>
+    <s:String x:Key="Clear">清空(_C)</s:String>
+    <s:String x:Key="Close">关闭</s:String>
+    <s:String x:Key="Continue">继续(_C)</s:String>
+    <s:String x:Key="DeleteBackups">删除选中备份</s:String>
+    <s:String x:Key="Edit">修改(_E)</s:String>
+    <s:String x:Key="GiveUp">放弃(_G)</s:String>
+    <s:String x:Key="NewBackup">备份到新备份</s:String>
+    <s:String x:Key="No">否(_N)</s:String>
+    <s:String x:Key="OK">确认</s:String>
+    <s:String x:Key="Overwrite">覆盖(_O)</s:String>
+    <s:String x:Key="OverwriteBackups">备份并覆盖选中备份</s:String>
+    <s:String x:Key="Refresh">刷新(_R)</s:String>
+    <s:String x:Key="RenameBackup">重命名当前备份</s:String>
+    <s:String x:Key="Reselect">重新选择(_R)</s:String>
+    <s:String x:Key="RestoreBackup">恢复当前备份</s:String>
+    <s:String x:Key="RestoreButton">恢复(_R)</s:String>
+    <s:String x:Key="Save">保存(_S)</s:String>
+    <s:String x:Key="ScaleToFit">填满窗口(_F)</s:String>
+    <s:String x:Key="SetBackupsDirectory">设置备份存放位置</s:String>
+    <s:String x:Key="TechSupportCheckForUpdates">技术支持 &amp; 检查更新(_T)</s:String>
+    <s:String x:Key="Test">测试(_T)</s:String>
+    <s:String x:Key="VisualDebugEnabled">启动可视化调试(_E)</s:String>
+    <s:String x:Key="Yes">是(_Y)</s:String>
+
+    <s:String x:Key="SelectTool">选择工具 (Ctrl+1)</s:String>
+    <Run x:Key="SelectToolDescription">使用它拖动粘粘球可以改变粘粘球的位置。</Run>
+    <s:String x:Key="VelocityEditTool">速度修改工具 (Ctrl+2)</s:String>
+    <Run x:Key="VelocityEditToolDescription">使用它拖动粘粘球可以修改粘粘球的速度。</Run>
+    <s:String x:Key="AddTool">添加工具 (Ctrl+3)</s:String>
+    <Run x:Key="AddToolDescription">使用它在屏幕上点击可以添加新的粘粘球。</Run>
+    <s:String x:Key="RemoveTool">删除工具 (Ctrl+4)</s:String>
+    <Run x:Key="RemoveToolDescription">使用它按住鼠标在粘粘球上经过时可以删除该粘粘球。</Run>
+    <s:String x:Key="AttachTool">连接工具 (Ctrl+5)</s:String>
+    <Run x:Key="AttachToolDescription">使用它在粘粘球上按下后在另一个粘粘球上释放鼠标可以在这两个粘粘球之间连接支架。</Run>
+    <s:String x:Key="DetachTool">拆卸工具 (Ctrl+6)</s:String>
+    <Run x:Key="DetachToolDescription">使用它在粘粘架上点击可以拆卸此粘粘架。</Run>
+
+</ResourceDictionary>

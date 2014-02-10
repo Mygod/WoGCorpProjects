@@ -1,0 +1,10 @@
+﻿<m:CursorWindow x:Class="Mygod.WorldOfGoo.Cursor.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="clr-namespace:Mygod.Windows" ShowInTaskbar="False"
+                xmlns:ctrl="clr-namespace:Mygod.Windows.Controls" xmlns:local="clr-namespace:Mygod.WorldOfGoo.Cursor"
+                Title="{x:Static m:CurrentApp.Title}" Icon="{x:Static m:CurrentApp.MainIcon}" Closed="OnClose" Background="Transparent">
+    <ctrl:WorldOfGooCursor x:Name="WoGCursor" x:FieldModifier="private" FullscreenMode="True"
+                           DataContext="{x:Static local:Settings.Current}" Foreground="{Binding Foreground}" Border="{Binding Border}"
+                           ExhaledRadius="{Binding ExhaledRadius}" InhaledRadius="{Binding InhaledRadius}"
+                           BorderThickness="{Binding BorderThickness}" BreathDuration="{Binding BreathDuration}"
+                           UseBezierCurve="{Binding SmootherCurve}" Length="{Binding Length}" ShrinkRate="{Binding ShrinkRate}" />
+</m:CursorWindow>

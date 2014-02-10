@@ -1,0 +1,505 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:lang="en-US">
+    <s:String x:Key="ProgramName">World of Goo Modifier</s:String>
+
+    <!-- Words -->
+    <s:String x:Key="Ask">Asking</s:String>
+    <s:String x:Key="Byte">Bytes</s:String>
+    <s:String x:Key="Backup">Backup</s:String>
+    <s:String x:Key="Balls">balls</s:String>
+    <s:String x:Key="DefaultText">Default text (English)</s:String>
+    <s:String x:Key="Delete">Delete</s:String>
+    <s:String x:Key="Details">Details</s:String>
+    <s:String x:Key="Error">Error</s:String>
+    <s:String x:Key="Failed">Failed</s:String>
+    <s:String x:Key="Finish">Finish</s:String>
+    <s:String x:Key="GooBall">goo ball</s:String>
+    <s:String x:Key="Here">Here</s:String>
+    <s:String x:Key="Information">Information</s:String>
+    <s:String x:Key="Level">level</s:String>
+    <s:String x:Key="PlayerSharp">Player #</s:String>
+    <s:String x:Key="Properties">Properties</s:String>
+    <s:String x:Key="Restore">Restore</s:String>
+    <s:String x:Key="Seconds">seconds</s:String>
+    <s:String x:Key="Value">Value</s:String>
+    <s:String x:Key="UnknownLanguage">Unknown language</s:String>
+
+    <!-- Single line strings -->
+    <s:String x:Key="AboutDetails">{0} is made by {1} on {2}.</s:String>
+    <s:String x:Key="BackupName">Backup Name</s:String>
+    <s:String x:Key="BackupSameVolume">The backup and your profile is in the same volume.</s:String>
+    <s:String x:Key="BackupSameVolumeDetails">It may cause the loss of both your backup and your profile in accident or system reinstallation.</s:String>
+    <s:String x:Key="BackupSize">Backup Size</s:String>
+    <s:String x:Key="BackupSuccessfully">Backup successfully!</s:String>
+    <s:String x:Key="BackupTime">Backup Time</s:String>
+    <s:String x:Key="BatchProcessCancelConfirm">Are you sure to cancel this operation?</s:String>
+    <s:String x:Key="BatchProcessCancelConfirmDetails">The data is being processed. Cancellation may result in not being completely revised. After cancellation please use the restore function to restore.</s:String>
+    <s:String x:Key="BatchProcessError">But something bad has happened while processing some of the {0}s.</s:String>
+    <s:String x:Key="BatchProcessFinish">Finished.</s:String>
+    <s:String x:Key="BatchProcessFinishInstruction">Processing is completed.</s:String>
+    <s:String x:Key="BatchProcessFinishText">It took {0} seconds. {1} Would you like to read the details?</s:String>
+    <s:String x:Key="BatchProcessLog">Using {0} features to modify {1} {2}(s)</s:String>
+    <s:String x:Key="BatchProcessSuccessfully">All {0}s are processed successfully.</s:String>
+    <s:String x:Key="BatchProcessWarning">But some/all of the {0}s are not processed successfully.</s:String>
+    <s:String x:Key="CopyBackupsConfirm">There are some backups in the directory. Would you like to copy them to the new directory?</s:String>
+    <s:String x:Key="CopyFailed">Failed to copy files. Please retry.</s:String>
+    <s:String x:Key="DecryptDataError">The file isn't a legal XML file.</s:String>
+    <s:String x:Key="DefaultModifiedXml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;Modified /&gt;</s:String>
+    <s:String x:Key="DeleteBackupConfirm">Make sure to delete</s:String>
+    <s:String x:Key="DeleteBackupInstruction">Are you sure to delete these backups?</s:String>
+    <s:String x:Key="DeleteBackupSuccessfully">Succeeded to delete.</s:String>
+    <s:String x:Key="DeleteBackupText">This is an irreversible operation that once you have done it, you will never get the backup back.</s:String>
+    <s:String x:Key="DeleteConfirm">Are you sure to delete them?</s:String>
+    <s:String x:Key="DeleteConfirmDetails">This is an irreversible operation. Something terrible like game crashes will happen if an important stuff is removed.</s:String>
+    <s:String x:Key="DragFile">Open with %1</s:String>
+    <s:String x:Key="EditBackupsDirectorySuccessfully">Succeeded to reselect backup storage directory!</s:String>
+    <s:String x:Key="EnterSkipEndOfLevelSequenceInstruction">Would you like to skip the end of level sequence?</s:String>
+    <s:String x:Key="ErrorDetailsLabel">Error _details</s:String>
+    <s:String x:Key="FailedLoadingGame">Unable to load World of Goo!</s:String>
+    <s:String x:Key="FailedLoadingProfile">Unable to load the profile!</s:String>
+    <s:String x:Key="Fatal">An unexpected error has occurred.</s:String>
+    <s:String x:Key="FeaturesParseError">Unable to read Features.xml!</s:String>
+    <s:String x:Key="FeaturesParseErrorDetails">Please check the file Resources/Features.xml or redownload it here: http://goofans.com/download/utility/world-of-goo-modifier</s:String>
+    <s:String x:Key="GameAlreadyRunning">The game is already running! You can't start two games at the same time!</s:String>
+    <s:String x:Key="GarbageCleanupDone">Garbage clean-up completed!</s:String>
+    <s:String x:Key="GarbageCleanupDetails">{0} garbages has been cleaned.</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupportedInfo">Sorry, we can't generate an online player key for you.</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupported">We are unable to process your country code currently. If you really want to do this, contact us to help us improve this program, or maybe you would like to try this solution: clear your online player key, disable online tower building, save the profile and start the game, click connect in World of Goo Corporation.</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">The server returns nothing.</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyFailed">Generate a new online player key failed.</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyInstruction">Would you like to backup your old key before you do this?</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyInvalidResponse" xml:space="preserve">The response is invalid and we can't recognize it: </s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyProcessFailed" xml:space="preserve">The server are unable to generate a new one. Message: </s:String>
+    <s:String x:Key="IsLoading" xml:space="preserve"> is loading...</s:String>
+    <s:String x:Key="IncorrectInput">The input is not correct!</s:String>
+    <s:String x:Key="NoItemHintPart1">You haven't load any game/profile. Please click</s:String>
+    <s:String x:Key="NoItemHintPart2">to open the game/profile you want to load or click</s:String>
+    <s:String x:Key="NoItemHintPart3">to search your profile.</s:String>
+    <s:String x:Key="NoModifiedRecordFound">The {0} didn't seem to be modified.</s:String>
+    <s:String x:Key="NowPlaying" xml:space="preserve">Now playing: </s:String>
+    <s:String x:Key="OpenFileTitle">Please select the game/profile/.bin file to open</s:String>
+    <s:String x:Key="OpenFileFilter">All supported formats (*.exe;*.dat;*.bin;*.plist;*.wogmpbak)|*.exe;*.dat;*.bin;*.plist;*.wogmpbak|World of Goo program (Launch.exe;*World*Goo*.exe)|Launch.exe;World*Goo*.exe|All programs (*.exe)|*.exe|Profile (pers2.dat;com.2dboy.worldofgoo.plist)|pers2.dat;com.2dboy.worldofgoo.plist|World of Goo AES encrypted file (*.bin)|*.bin|Encrypted profile (*.dat)|*.dat|iOS profile (*.plist)|*.plist|WoGModifier profile backup (*.wogmpbak)|*.wogmpbak|All files (*.*)|*</s:String>
+    <s:String x:Key="OpenBinFileFilter">World of Goo AES encrypted file (*.bin)|*.bin|Encrypted profile (*.dat)|*.dat|WoGModifier profile backup (*.wogmpbak)|*.wogmpbak|All files (*.*)|*</s:String>
+    <s:String x:Key="OpenBinFileTitle">Please select .bin files you want to edit: (multiple choice)</s:String>
+    <s:String x:Key="OpenProfileTitle">Please select your profile:</s:String>
+    <s:String x:Key="OpenProgramTitle">Please select the program:</s:String>
+    <s:String x:Key="OpenProgramFilter">All programs (*.exe)|*.exe|All files (*.*)|*</s:String>
+    <s:String x:Key="OverwriteConfirm">Make sure to overwrite</s:String>
+    <s:String x:Key="OverwriteBackupInstruction">The backup already exists.</s:String>
+    <s:String x:Key="OverwriteBackupText">Overwriting is an irreversible operation. Once you overwrite the backup, you will never find the old one.</s:String>
+    <s:String x:Key="OverwritePlayerInstruction">The player already exists.</s:String>
+    <s:String x:Key="OverwritePlayerText">Overwriting is an irreversible operation. Once you overwrite the player, you will never find the old one.</s:String>
+    <s:String x:Key="PastePlayerError">An error occurred while pasting player.</s:String>
+    <s:String x:Key="PasteToInstruction">Please select a place to paste on.</s:String>
+    <s:String x:Key="PlayMusicError">An error occurred while trying to play the level music.</s:String>
+    <s:String x:Key="ProfileLoadBoth">Load both</s:String>
+    <s:String x:Key="ProfileNewVersion">Profile generated by 1.1 and above versions of the game</s:String>
+    <s:String x:Key="ProfileNotSavedInstruction">The following profiles are not saved yet</s:String>
+    <s:String x:Key="ProfileNotSavedText">If you close the program, changes to these profiles won't be saved.</s:String>
+    <s:String x:Key="ProfileOldVersion">Profile generated by 1.0 version of the game</s:String>
+    <s:String x:Key="RemainingTime">Remaining time:</s:String>
+    <s:String x:Key="RenameSuccessfully">Succeeded to rename.</s:String>
+    <s:String x:Key="RestoreBackupConfirm">Make sure to restore</s:String>
+    <s:String x:Key="RestoreBackupInstruction">Are you sure to restore these backups?</s:String>
+    <s:String x:Key="RestoreBackupSuccessfully">Succeeded to restore.</s:String>
+    <s:String x:Key="RestoreBackupText">It may cause your current profile lost. We recommend you to backup your current profile and then restore.</s:String>
+    <s:String x:Key="SaveProfileFilter">Profile (pers2.dat)|pers2.dat|iOS Profile (com.2dboy.worldofgoo.plist)|com.2dboy.worldofgoo.plist|Encrypted profile (*.dat)|*.dat|Plist Profile (*.plist)|*.plist|WoGModifier profile backup (*.wogmpbak)|*.wogmpbak|All files (*.*)|*</s:String>
+    <s:String x:Key="SaveProfileTitle">Please select where you want to save your profile:</s:String>
+    <s:String x:Key="SearchProfileFailed">We couldn't find any profile, please locate it.</s:String>
+    <s:String x:Key="SearchProfileFinished">Following profiles are found, please select which to be loaded:</s:String>
+    <s:String x:Key="TestSelectedGooBalls">Test selected goo balls</s:String>
+    <s:String x:Key="UsedTime">Time used:</s:String>
+    <s:String x:Key="WelcomeUseTitle">Welcome to Use</s:String>
+    <s:String x:Key="XslTransformFailed">Unable to transform XSL.</s:String>
+
+    <!-- Multi line strings -->
+    <s:String x:Key="BatchProcessDetails">Processing is finished. {2} of {1} {0}s are modified.%NFollowing are the error/warning messages.%N</s:String>
+    <s:String x:Key="EditDetails">The details of {0} {1}:%N</s:String>
+    <s:String x:Key="EnterSkipEndOfLevelSequenceText">If this level uses the normal "level exit and pipe" end condition, this makes the game skip the "tank and scores" sequence, and jumps straight to any cutscene movies, when the "Continue" handle is pulled.</s:String>
+    <s:String x:Key="ErrorDetails">An error occurred when the modifier is trying to {0} {1} {2}. Here are the details: {3}%N</s:String>
+    <s:String x:Key="ErrorStart">----------- ERROR MESSAGES -----------%N</s:String>
+    <s:String x:Key="FeatureEditDetails">Feature "{0}" has been modified for {1} time(s)%N</s:String>
+    <s:String x:Key="GenerateOnlinePlayerKeyText">If you generate a new one without backuping the old one, you can't get back the old one and records on the server.%N%N* This feature requires you to be online.</s:String>
+    <s:String x:Key="PlayerLevelsTotal">Original levels:%T{0} balls, {1} moves, {2} seconds%NNew levels:%T{3} balls, {4} moves, {5} seconds%NAll levels:%T{6} balls, {7} moves, {8} seconds</s:String>
+    <s:String x:Key="ProcessingDetails">{2}/{3}({4}%)%NProcessing {0} {1}......</s:String>
+    <s:String x:Key="PropertiesConfigFile">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;%N&lt;!-- IMPORTANT WARNING: If you edit this file, your computer will probably explode. Your friend, the High Resolution Sign Painter --&gt;%N&lt;!-- This file has been edited by World of Goo Modifier by Mygod --&gt;%N&lt;config&gt;%N	&lt;param name="language" value="{0}"/&gt;%N	&lt;param name="screen_width" value="{1}"/&gt;%N	&lt;param name="screen_height" value="{2}"/&gt;%N	&lt;param name="ui_inset" value="{3}"/&gt;%N&lt;/config&gt;</s:String>
+    <s:String x:Key="SearchProfileText">If you want to load your Android profile, copy the file /data/data/com.twodboy.worldofgoofull/pers2.dat out of your device and load it in WoGModifier.%N%NIf you want to load your iOS profile, copy the com.2dboy.worldofgoo.plist file out of your device and load it in WoGModifier. Normally, it can be found in these directories:%N/var/mobile/Library/Preferences%N/var/mobile/Applications/{wog.app or GUID}/Library/Preferences</s:String>
+    <s:String x:Key="WarningDetails">An warning is issued when the modifier is trying to {0} {1} {2}. Here are the details: {3}%N</s:String>
+    <s:String x:Key="WarningStart">%N---------- WARNING MESSAGES ----------%N</s:String>
+    <s:String x:Key="WelcomeUse">Welcome to use {0}! Please read the following quick help to help you make better use of this program. %NTo use WoGModifier, you must first load your game and your profile. You can manually locate your game and profile or automatically search your profile which is in use. After loading your game and your profile, you can right click on them to make changes by the pop-up menu. (most of the lists has a pop-up menu for you to edit)%NWhen you see a table, in most cases they can be edited directly by double-clicking them like you edit a table in Excel. If you want to change certain rows into the same value, you can also use pop-up menu. If you don't know how to use the function of the column in a table, you can hover on the top of the column, WoGModifier will tell you how to edit it. %NThese are the quick help. Happy goomodding! :D%N%NP.S. You can read this whenever you want. Just click Help - Quick Help.</s:String>
+    <s:String x:Key="WoGCorpBallDetails">Position: ({0}, {1})%NVelocity: ({2}, {3})</s:String>
+
+    <!-- Jump List -->
+    <s:String x:Key="JumpListCategory">Utilities</s:String>
+    <s:String x:Key="JumpListSelectBinFiles">Edit .bin files</s:String>
+    <s:String x:Key="JumpListTechSupport">Check for updates</s:String>
+
+    <!-- Exceptions -->
+    <s:String x:Key="ExceptionFeaturesXmlVersionIncorrect">The version of Features.xml is incorrect. The current version only support Version {0}.</s:String>
+    <s:String x:Key="ExceptionXmlElementDoesNotExist">The element "{0}" wasn't found in the XML file.</s:String>
+    <s:String x:Key="ExceptionXmlAttributeDoesNotExist">The attribute "{0}" wasn't found in the XML file.</s:String>
+    <s:String x:Key="ExceptionXmlElementCannotRecognize">The element "{0}" cannot be recognized.</s:String>
+
+    <!-- Errors & Warnings -->
+    <s:String x:Key="ErrorOnBinaryFileEdit">An error occurred while editing .bin file.</s:String>
+    <s:String x:Key="ErrorGooBallsTesterPositiveIntegerRequired">An positive integer is required in Item #{0}.%N</s:String>
+    <s:String x:Key="ErrorGooBallsTesterNotExist">The goo ball ID does not exists in Item #{0}.%N</s:String>
+    <s:String x:Key="WarningGooBallsTesterCountGreaterThan1000">There are more than 1000 goo balls! If all of these goo balls are collected, the display will not work properly.%N</s:String>
+    <s:String x:Key="WarningGooBallsTesterCountGreaterThan20000">There are more than 20000 goo balls! You will wait for a long time while loading this level.%N</s:String>
+    <s:String x:Key="ErrorGooBallsTesterCountGreaterThan500000">THERE ARE MORE THAN 500000 GOO BALLS IN THIS LEVEL!!! IT MAY CAUSE GAME CRASH!!!%N</s:String>
+
+    <!-- UI Strings -->
+
+    <s:String x:Key="ProcessingInstructions">Processing... (close this window if you want to cancel the operation)</s:String>
+    <s:String x:Key="ProcessingDetailsInitializing">Initializing...</s:String>
+    <s:String x:Key="OptionsMainInterface">The _Main Interface</s:String>
+    <s:String x:Key="OptionsGame">The _Game Module</s:String>
+    <s:String x:Key="AbortGame">_Abort the game (your current tower will not be saved if you are still in World of Goo Corporation)</s:String>
+
+    <!-- Label Texts -->
+    <s:String x:Key="BallsCollected" xml:space="preserve">Balls collected: </s:String>
+    <s:String x:Key="BallsRequired" xml:space="preserve">Balls required: </s:String>
+    <s:String x:Key="GameMemoryFileName" xml:space="preserve">Game file name: </s:String>
+    <s:String x:Key="GamePropertiesDisplayLanguage">Display _language:</s:String>
+    <s:String x:Key="GamePropertiesScreenSize">_Screen size:</s:String>
+    <s:String x:Key="GamePropertiesUIInset">_UI inset:</s:String>
+    <s:String x:Key="GameGooBallsTesterGooBallsToTest">_Goo balls to test:</s:String>
+    <s:String x:Key="MovesUsed" xml:space="preserve">Moves used: </s:String>
+    <s:String x:Key="OptionsRecentPathsCapacity">Recent paths capacity: </s:String>
+    <s:String x:Key="OptionsThumbnailMaxHeight">Maximum _height of the thumbnail:</s:String>
+    <s:String x:Key="OptionsTheme">_Theme: (reboot is needed)</s:String>
+    <s:String x:Key="OptionsLanguage">_Language: (reboot is needed)</s:String>
+    <s:String x:Key="OptionsBinFileEditor">._bin file editor:</s:String>
+    <s:String x:Key="PlayerPropertiesNewlyCollectedGooBalls">Newly _collected goo balls:</s:String>
+    <s:String x:Key="PlayerPropertiesOnlinePlayerKey">_Online player key:</s:String>
+    <s:String x:Key="PlayerPropertiesGenerateOnlinePlayerKey">_Generate Online player key</s:String>
+    <s:String x:Key="PlayerPropertiesPlayerName">Player _Name:</s:String>
+    <s:String x:Key="PlayerPropertiesTotalPlayTime">Gameplay _time:</s:String>
+    <s:String x:Key="PlayerPropertiesiOSFeature">iOS Features (the following data will be lost in PC profile format)</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">Game Centre Player _Key:</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">Game Centre _Player Name:</s:String>
+    <s:String x:Key="ProfilePropertiesCountryCode">_Country code:</s:String>
+    <s:String x:Key="XslTransformerSource">_Source:</s:String>
+    <s:String x:Key="XslTransformerResult">_Result:</s:String>
+    <s:String x:Key="XslTransformerTransform">_Transform</s:String>
+    <s:String x:Key="XslTransformerXsl">_XSL:</s:String>
+
+    <!-- CheckBox Texts -->
+    <s:String x:Key="MemoryGooBallsUndraggable">Make _all goo balls undraggable</s:String>
+    <s:String x:Key="MemoryLetterboxed">_Letterboxed</s:String>
+    <s:String x:Key="MemoryMenuEnabled">_Enable menu button</s:String>
+    <s:String x:Key="MemoryPaused">_Paused</s:String>
+    <s:String x:Key="MemoryShowBallsInTank">_Show goo balls in the right tank</s:String>
+    <s:String x:Key="GooBallTesterVisualDebugEnabled">Enable _visual debugging</s:String>
+    <s:String x:Key="OptionsLoadGooBallThumbnail">_Load goo ball thumbnails</s:String>
+    <s:String x:Key="OptionsConsoleDebuggerEnabled">_Enable console debugger</s:String>
+    <s:String x:Key="PlayerPropertiesDeliveranceUnlocked">Unloc_k Deliverance</s:String>
+    <s:String x:Key="PlayerPropertiesOnlinePlayEnabled">_Enable online tower building</s:String>
+    <s:String x:Key="PlayerPropertiesWhistleFound">Enable _whistler</s:String>
+    <s:String x:Key="PlayerPropertiesWorldOfGooCorporationDestroyed">_Destroy World of Goo Corporation</s:String>
+    <s:String x:Key="PlayerPropertiesWorldOfGooCorporationUnlocked">_Unlock World of Goo Corporation</s:String>
+    <s:String x:Key="ProfilePropertiesFullscreen">_Fullscreen</s:String>
+    <s:String x:Key="TopMost">_Top most</s:String>
+
+    <!-- Menu Strings -->
+    <s:String x:Key="ContextMenuFold">_Fold</s:String>
+    <s:String x:Key="ContextMenuSetAsDefault">_Set as default player</s:String>
+    <s:String x:Key="ContextMenuBackupProfile">_Backup profile</s:String>
+    <s:String x:Key="ContextMenuSave">_Save</s:String>
+    <s:String x:Key="ContextMenuSaveAs">Save _as...</s:String>
+    <s:String x:Key="ContextMenuEditProfile">_Edit profile...</s:String>
+    <s:String x:Key="ContextMenuEditMemory">_Edit memory</s:String>
+    <s:String x:Key="ContextMenuBrowseInExplorer">_View in Explorer</s:String>
+    <s:String x:Key="ContextMenuBrowseLevels">Browse _levels</s:String>
+    <s:String x:Key="ContextMenuBrowseGooBalls">_Browse goo balls</s:String>
+    <s:String x:Key="ContextMenuBrowseIslands">Browse _islands</s:String>
+    <s:String x:Key="ContextMenuBrowseMaterials">Browse _materials</s:String>
+    <s:String x:Key="ContextMenuBrowseText">Browse _text resources</s:String>
+    <s:String x:Key="ContextMenuBrowseLevelRecords">Browse _level records</s:String>
+    <s:String x:Key="ContextMenuBrowseWoGCorp">Browse _World of Goo Corporation</s:String>
+    <s:String x:Key="ContextMenuCut">C_ut</s:String>
+    <s:String x:Key="ContextMenuCopy">_Copy</s:String>
+    <s:String x:Key="ContextMenuPaste">_Paste...</s:String>
+    <s:String x:Key="ContextMenuPasteTo">_Paste to...</s:String>
+    <s:String x:Key="ContextMenuProperties">P_roperties</s:String>
+    <s:String x:Key="ContextMenuExecuteGame">_Execute the game</s:String>
+    <s:String x:Key="ContextMenuRemoveItem">_Delete</s:String>
+    <s:String x:Key="ContextMenuRefresh">Re_open</s:String>
+    <s:String x:Key="ContextMenuInsertProfilePlayer">_New player</s:String>
+    <s:String x:Key="ContextMenuSetAlias">_Set alias</s:String>
+
+    <s:String x:Key="ContextMenuProcessLevels">_Process selected levels...</s:String>
+    <s:String x:Key="ContextMenuReverseLevels">Re_verse selected levels...</s:String>
+    <s:String x:Key="ContextMenuRestoreLevels">Res_tore selected levels...</s:String>
+    <s:String x:Key="ContextMenuExecuteLevel">_Execute the first selected level</s:String>
+    <s:String x:Key="ContextMenuPlayLevelMusic">Play the first selected level _music</s:String>
+    <s:String x:Key="ContextMenuEditLevelSceneBin">Edit _scene.bin</s:String>
+    <s:String x:Key="ContextMenuEditLevelLevelBin">Edit _level.bin</s:String>
+    <s:String x:Key="ContextMenuEditLevelResrcBin">Edit resrc._bin</s:String>
+    <s:String x:Key="ContextMenuCopyLevels">C_opy the display names of the selected levels</s:String>
+    <s:String x:Key="ContextMenuSortLevels">So_rt</s:String>
+    <s:String x:Key="ContextMenuSearchLevel">Se_arch level...</s:String>
+    <s:String x:Key="ContextMenuDeleteLevels">_Delete selected levels...</s:String>
+
+    <s:String x:Key="ContextMenuProcessGooBalls">_Process selected goo balls...</s:String>
+    <s:String x:Key="ContextMenuReverseGooBalls">Re_verse selected goo balls...</s:String>
+    <s:String x:Key="ContextMenuRestoreGooBalls">Res_tore selected goo balls...</s:String>
+    <s:String x:Key="ContextMenuAddGooBallsToTestLeft" xml:space="preserve">Add </s:String>
+    <s:String x:Key="ContextMenuAddGooBallsToTestRight" xml:space="preserve"> of this kind of goo balls to t_est</s:String>
+    <s:String x:Key="ContextMenuEditGooBallBallsXmlBin">Edit _balls.xml.bin</s:String>
+    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">Edit _resources.xml.bin</s:String>
+    <s:String x:Key="ContextMenuCopyGooBalls">Copy the _IDs of the selected goo balls</s:String>
+    <s:String x:Key="ContextMenuDeleteGooBalls">_Delete selected goo balls...</s:String>
+
+    <s:String x:Key="ContextMenuEditMaterialsXml">Edit the material _XML</s:String>
+    <s:String x:Key="ContextMenuTestMaterial">T_est the first selected material</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsFriction">Edit the _friction of selected materials...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsBounce">Edit the _bounce of selected materials...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsMinimumBounceVelocity">Edit the _minimum bounce velocity of selected materials...</s:String>
+    <s:String x:Key="ContextMenuEditMaterialsStickiness">Edit the _stickiness of selected materials...</s:String>
+    <s:String x:Key="ContextMenuAddMaterial">_Add a new material...</s:String>
+    <s:String x:Key="ContextMenuCopyMaterial">_Copy selected material...</s:String>
+    <s:String x:Key="ContextMenuRemoveMaterial">_Remove selected materials</s:String>
+
+    <s:String x:Key="ContextMenuEditIslandsXml">Edit the selected island _XML</s:String>
+    <s:String x:Key="ContextMenuEditIslandsName">Edit the _name of the selected islands...</s:String>
+    <s:String x:Key="ContextMenuEditIslandsMap">Edit the _map ID of the selected islands...</s:String>
+    <s:String x:Key="ContextMenuEditIslandsIcon">Edit the _icon ID of the selected islands...</s:String>
+    <s:String x:Key="ContextMenuCopyIsland">_Copy selected island...</s:String>
+    <s:String x:Key="ContextMenuSwapIslands">S_wap selected islands</s:String>
+
+    <s:String x:Key="ContextMenuEditIslandXml">Edit the island _XML</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsName">Edit the _name of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsText">Edit the sub_title of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsOCD">Edit the _ocd criteria of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsDepends">Edit the _depends of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsCutscene">Edit the c_utscene of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsOnComplete">Edit the onco_mplete of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuEditIslandLevelsSkipEndOfLevelSequence">Edit the _skip end of level sequence of the selected island levels...</s:String>
+    <s:String x:Key="ContextMenuShowSelectedLevels">Show selected levels in the _Level Browser</s:String>
+    <s:String x:Key="ContextMenuDisplayIslandLevelsNameText">Dis_play the text resource of the name of selected island levels</s:String>
+    <s:String x:Key="ContextMenuDisplayIslandLevelsTextText">Display the text resource of the su_btitle of selected island levels</s:String>
+    <s:String x:Key="ContextMenuAddIslandLevel">_Add a new island level...</s:String>
+    <s:String x:Key="ContextMenuCopyIslandLevel">_Copy selected island level...</s:String>
+    <s:String x:Key="ContextMenuRemoveIslandLevels">_Remove selected island level</s:String>
+
+    <s:String x:Key="ContextMenuEditTextXml">Edit the text resources _XML</s:String>
+    <s:String x:Key="ContextMenuProcessTextItem">_View selected text resources</s:String>
+    <s:String x:Key="ContextMenuSearchTextItem">_Search for text resources...</s:String>
+    <s:String x:Key="ContextMenuAddTextItem">_Add a new text resource...</s:String>
+    <s:String x:Key="ContextMenuCopyTextItem">_Copy selected text resource...</s:String>
+    <s:String x:Key="ContextMenuRemoveTextItems">_Remove selected text resources...</s:String>
+
+    <s:String x:Key="ContextMenuAddSpecificLanguageString">_Add a new specific language string...</s:String>
+    <s:String x:Key="ContextMenuRemoveSpecificLanguageStrings">_Remove selected specific language strings</s:String>
+
+    <s:String x:Key="ContextMenuEditLevelRecordMostGoos">Edit _most goo balls...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordFewestMoves">Edit _fewest moves...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordFewestSeconds">Edit f_ewest seconds...</s:String>
+    <s:String x:Key="ContextMenuEditLevelRecordSkipped">_Skip selected levels</s:String>
+    <s:String x:Key="ContextMenuAddLevelRecord">_Add a new level record...</s:String>
+    <s:String x:Key="ContextMenuCopyLevelRecord">_Copy selected level record...</s:String>
+    <s:String x:Key="ContextMenuRemoveLevelRecords">_Remove selected level records</s:String>
+
+    <s:String x:Key="ContextMenuEditPosition">Edit _position</s:String>
+    <s:String x:Key="ContextMenuEditVelocity">Edit _velocity</s:String>
+
+    <s:String x:Key="MenuFile">_File</s:String>
+    <s:String x:Key="MenuFileNewProfile">_New profile...</s:String>
+    <s:String x:Key="MenuFileOpen">_Open game/profile/.bin file...</s:String>
+    <s:String x:Key="MenuFileSearch">_Search profile...</s:String>
+    <s:String x:Key="MenuFileSaveAll">Save _all</s:String>
+    <s:String x:Key="MenuFileRemoveSelectedItem">_Remove selected item</s:String>
+    <s:String x:Key="MenuFileClear">_Clear</s:String>
+    <s:String x:Key="MenuFileRecentPaths">Recent _files</s:String>
+    <s:String x:Key="MenuFileQuit">E_xit</s:String>
+    <s:String x:Key="MenuTools">_Tools</s:String>
+    <s:String x:Key="MenuToolsEditBatchProcessFeatures">_Edit batch process features</s:String>
+    <s:String x:Key="MenuToolsManageBackups">_Manage backups</s:String>
+    <s:String x:Key="MenuToolsXslTransformer">_XSL Transformer</s:String>
+    <s:String x:Key="MenuToolsCleanupGarbage">_Cleanup garbage</s:String>
+    <s:String x:Key="MenuToolsOptions">_Options</s:String>
+    <s:String x:Key="MenuHelp">_Help</s:String>
+    <s:String x:Key="MenuQuickHelp">_Quick help</s:String>
+    <s:String x:Key="MenuGetHelp">_Get help</s:String>
+    <s:String x:Key="MenuHelpAbout">_About us</s:String>
+
+    <!-- Window Titles -->
+    <s:String x:Key="AboutDialogTitle" xml:space="preserve">About </s:String>
+    <s:String x:Key="BackupProfileWindowTitle">Backup Profile</s:String>
+    <s:String x:Key="GameDebuggingWindowTitle">Console Debugger - {0}</s:String>
+    <s:String x:Key="GameGooBallsTesterWindowTitle">Goo Balls Tester - {0}</s:String>
+    <s:String x:Key="GameGooBallsWindowTitle">Goo Balls Browser - {0}</s:String>
+    <s:String x:Key="GameIslandWindowTitle">Island Levels Browser - {0} Island #{1}</s:String>
+    <s:String x:Key="GameIslandsWindowTitle">Islands Browser - {0}</s:String>
+    <s:String x:Key="GameLevelsWindowTitle">Levels Browser - {0}</s:String>
+    <s:String x:Key="GameMaterialsWindowTitle">Materials Browser - {0}</s:String>
+    <s:String x:Key="GameMemoryWindowTitle">Memory Editor</s:String>
+    <s:String x:Key="GameTextWindowTitle">Text Resources Browser - {0}</s:String>
+    <s:String x:Key="GameTextItemWindowTitle">Specific Language Strings Browser - {0}</s:String>
+    <s:String x:Key="HelpWindowTitle">Help</s:String>
+    <s:String x:Key="OptionsWindowTitle">Options</s:String>
+    <s:String x:Key="PlayerLevelsWindowTitle">Player Level Records Browser - {0} Player #{1}</s:String>
+    <s:String x:Key="PlayerPropertiesWindowTitle">Properties - {0} Player #{1}</s:String>
+    <s:String x:Key="PlayerWoGCorpWindowTitle">Player World of Goo Corporation Browser - {0} Player #{1}</s:String>
+    <s:String x:Key="ProcessingWindowTitle">Processing - {0}</s:String>
+    <s:String x:Key="PropertiesWindowTitle">Properties - {0}</s:String>
+    <s:String x:Key="SelectFeaturesDialogTitle">Select the features to use:</s:String>
+    <s:String x:Key="XslTransformerWindowTitle">XSL Transformer</s:String>
+
+    <s:String x:Key="EnterBackupsDirectoryTitle">Please select backup storage directory:</s:String>
+    <s:String x:Key="EnterBackupNameTitle">Please enter the name of the backup:</s:String>
+    <s:String x:Key="EnterIDTitle">Please enter the ID:</s:String>
+    <s:String x:Key="EnterIslandToCopyNumber">Please enter the number of the island you are going to copy to: (1-5 and can't be same as the source)</s:String>
+    <s:String x:Key="EnterNewValueTitle">Please enter the new value:</s:String>
+
+    <!-- ToolTips -->
+    <ToolTip x:Key="CountryCodeToolTip">
+        <TextBlock TextWrapping="Wrap">Values are two-letter ISO 3166-1 country codes, or EU for the European Union, or XX for unknown. Comma "," is not allowed.<LineBreak />If you don't know how to edit this item please do not edit.</TextBlock>
+    </ToolTip>
+    <ToolTip x:Key="FullscreenToolTip">
+        <TextBlock TextWrapping="Wrap">Indicates whether the game runs in full-screen or in windowed mode.</TextBlock>
+    </ToolTip>
+    <ToolTip x:Key="PlayerNameToolTip">
+        <TextBlock TextWrapping="Wrap">You can use following characters:<LineBreak />ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&amp;*()-_=+[{]};:"&lt;.&gt;/?¡¢£¥§©®¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ<LineBreak />If you customized the font file, you can enter any character you defined in the TwCenMTCondensedExtraBold18 font. If you enter an invalid character, it will not be displayed in the game.</TextBlock>
+    </ToolTip>
+
+    <!-- DataGrid Titles -->
+    <s:String x:Key="Bounce">Bounce</s:String>
+    <s:String x:Key="Cutscene">Cutscene</s:String>
+    <s:String x:Key="Depends">Depends</s:String>
+    <s:String x:Key="FewestMoves">Fewest Moves</s:String>
+    <Span x:Key="FewestMovesDescription">The fewest moves you have ever done.</Span>
+    <s:String x:Key="Friction">Friction</s:String>
+    <s:String x:Key="IconID">Icon ID</s:String>
+    <Span x:Key="IconIDDescription">The ID of the icon.
+        <LineBreak /> The image to display on the level start screens for this chapter.
+    </Span>
+    <Span x:Key="IslandLevelCutsceneDescription">The cutscene of the island level.
+        <LineBreak /> The names of the movies to play at the end of the level.
+        <LineBreak /> This list must always contain 3 valid items, x may be used when less than 3 "real" movies are requried.
+        <LineBreak /> examples : levelFadeOut,Chapter1End,gooTransition_out x,whistleUnlock,gooTransition_out
+        <LineBreak /> The 3 movies will play in order, however each one is overlayed onto a different background. You should take account of this when you create / design you movie.
+        <LineBreak /> The 1st Movie is overlay onto the level which has just been completed.
+        <LineBreak /> The music and sounds from that level will fade out in about 1 second at the start of the movie.
+        <LineBreak /> The 2nd movie is played over a solid black background.
+        <LineBreak /> The 3rd movie is played over the island you are returning to, or the main menu if you just completed the island.
+        <LineBreak /> he music / sounds from the island begin to play at the start of this movie, and will play at the same time as any sounds or music in the movie.
+    </Span>
+    <Span x:Key="IslandLevelDependsDescription">The depends of the island level.
+        <LineBreak /> The id (or ids) of levels which must be completed before this level can be played.
+        <LineBreak /> Can be levels in this chapter, or in a "previous" chapter.
+        <LineBreak /> If omitted the level can always be played.
+        <LineBreak />
+        <LineBreak /> Note on playable levels:
+        <LineBreak /> Levels with no "depends" are always playable, however the chapter they are in may not be open.
+        <LineBreak /> Chapters are "open" if the first level specified in the island.xml is available.
+    </Span>
+    <Span x:Key="IslandLevelIDDescription">Level ID.</Span>
+    <Span x:Key="IslandLevelNameDescription">The name of your level.
+        <LineBreak /> The text resource ID for the Level Name.
+    </Span>
+    <Span x:Key="IslandLevelOCDCriteriaDescription">The OCD criteria of the level.
+        <LineBreak /> Sets the OCD criteria for this level
+        <LineBreak /> eg. balls,11 moves,4 time,13
+        <LineBreak /> If omitted then there is no OCD, the games displays "This one is mine, The Sign Painter"
+    </Span>
+    <Span x:Key="IslandLevelOnCompleteDescription">Command to execute when you complete this level.
+        <LineBreak /> When this level is completed the command given will be executed.
+        <LineBreak /> Mostly these commands affect flags in the profile info, which unlock a game feature or mode.
+        <LineBreak /> Legal values are: unlockwogcorp (Unlock World of Goo Corporation, used in Hang Low, so that you can build towers in World of Goo Corporation), unlockwhistle (Unlock the whistler, so that player can use whistler to attract goo balls), expandchapter4 (extend chapter 4 map, used in Hello, World).
+    </Span>
+    <Span x:Key="IslandLevelSubtitleDescription">The subtitle of the level.
+        <LineBreak /> The text resource ID for the Level Subtitle.
+    </Span>
+    <Span x:Key="IslandLevelSkipEndOfLevelSequenceDescription">If this level uses the normal "level exit and pipe" end condition, this makes the game skip the "tank and scores" sequence, and jumps straight to any cutscene movies, when the "Continue" handle is pulled.</Span>
+    <Span x:Key="IslandNameDescription">Text describing or naming this level. This text is not used anywhere within the game, so is used for identification purposes only.</Span>
+    <s:String x:Key="IslandNumber">Island Number</s:String>
+    <Span x:Key="IslandNumberDescription">Island Number.
+        <LineBreak />
+        <LineBreak /> Please do not modify this item or the main interface will be orderless. If you want to modify this item, please use copy &amp; swap instead.
+    </Span>
+    <s:String x:Key="LanguageID">Language ID</s:String>
+    <Span x:Key="LanguageIDDescription">Language ID.
+        <LineBreak /> Commonly use the ID of the country to represent the language ID. (maybe people in a country speak different languages, so if you find something wrong please contact me) If the game doesn't find the specific resource, the text will be used.
+        <LineBreak /> Examples: cn, es, fr, de, it, jp, nl, pl, hu...
+    </Span>
+    <s:String x:Key="LanguageName">Language Name</s:String>
+    <s:String x:Key="FewestSeconds">Fewest Seconds</s:String>
+    <Span x:Key="FewestSecondsDescription">The fewest seconds you have ever done.</Span>
+    <s:String x:Key="LevelID">Level ID</s:String>
+    <Span x:Key="LevelIDDescription">Level ID.</Span>
+    <s:String x:Key="MapID">Map ID</s:String>
+    <Span x:Key="MapIDDescription">The level id (folder) of the map for this chapter.
+        <LineBreak /> Essentially, you need a button called lb_LevelName for each level in the island.xml file. For it to work properly, click should be pl_LevelName, mouse over should be ss_LevelName, and mouse off should be hs_LevelName.
+    </Span>
+    <Span x:Key="MaterialBounceDescription">The bounce of the material.
+        <LineBreak /> Things won't rebound when the value is less than or equal to 0. If the value is greater than 0, the rebound velocity = - impact velocity * bounce.
+    </Span>
+    <Span x:Key="MaterialFrictionDescription">The friction of the material.
+        <LineBreak /> Things will stop sliding by the resistance on the interface when the friction is greater than 0. The larger friction becomes, the faster things stop.
+    </Span>
+    <Span x:Key="MaterialMinimumBounceVelocityDescription">The minimum bounce velocity of the material.
+        <LineBreak /> If the impact velocity is less than this value, things won't rebound.
+    </Span>
+    <Span x:Key="MaterialStickinessDescription">The stickiness.
+        <LineBreak /> Goo balls which are attached to other will be stuck on this interface when the stickiness is greater than or equals to 7.5.
+    </Span>
+    <Span x:Key="MaterialIDDescription">The material ID.</Span>
+    <s:String x:Key="MinimumBounceVelocity">Minimum Bounce Velocity</s:String>
+    <s:String x:Key="MostGoos">Most Goos</s:String>
+    <Span x:Key="MostGoosDescription">The maximum goo balls you have collected.</Span>
+    <s:String x:Key="Name">Name</s:String>
+    <s:String x:Key="OCDCriteria">OCD Criteria</s:String>
+    <s:String x:Key="OnComplete">On Complete</s:String>
+    <s:String x:Key="SkipEndOfLevelSequence">Skip End of Level Sequence</s:String>
+    <s:String x:Key="Stickiness">Stickiness</s:String>
+    <s:String x:Key="Subtitle">Subtitle</s:String>
+    <Span x:Key="TextItemValueDescription">The content of the specific language string.</Span>
+    
+    <!-- Command Link Texts -->
+    <s:String x:Key="FatalBreak">_Stop running%NClose the program and log the error to prevent the error being worse.</s:String>
+    <s:String x:Key="FatalContinue">_Continue running%NLog the error and continue to run the program. The error may be worse. Please make sure the error doesn't affect anything.</s:String>
+    <s:String x:Key="FatalRestart">_Restart the program%NLog the error and restart the program.</s:String>
+
+    <!-- Button Texts -->
+    <s:String x:Key="Browse">_Browse...</s:String>
+    <s:String x:Key="Cancel">Cancel</s:String>
+    <s:String x:Key="Clear">_Clear</s:String>
+    <s:String x:Key="Close">Close</s:String>
+    <s:String x:Key="Continue">_Continue</s:String>
+    <s:String x:Key="DeleteBackups">Delete selected backups</s:String>
+    <s:String x:Key="Edit">_Edit</s:String>
+    <s:String x:Key="GiveUp">_Give up</s:String>
+    <s:String x:Key="NewBackup">Create a new backup</s:String>
+    <s:String x:Key="No">_No</s:String>
+    <s:String x:Key="OK">OK</s:String>
+    <s:String x:Key="Overwrite">_Overwrite</s:String>
+    <s:String x:Key="OverwriteBackups">Backup and overwrite the selected backup</s:String>
+    <s:String x:Key="Refresh">_Refresh</s:String>
+    <s:String x:Key="RenameBackup">Rename the selected backup</s:String>
+    <s:String x:Key="Reselect">_Reselect</s:String>
+    <s:String x:Key="RestoreBackup">Restore the selected backup</s:String>
+    <s:String x:Key="RestoreButton">_Restore</s:String>
+    <s:String x:Key="Save">_Save</s:String>
+    <s:String x:Key="ScaleToFit">Scale to _fit</s:String>
+    <s:String x:Key="SetBackupsDirectory">Set _backup store directory</s:String>
+    <s:String x:Key="TechSupportCheckForUpdates">_Tech support &amp; check for updates</s:String>
+    <s:String x:Key="Test">_Test</s:String>
+    <s:String x:Key="VisualDebugEnabled">_Enable Visual Debug</s:String>
+    <s:String x:Key="Yes">_Yes</s:String>
+
+    <s:String x:Key="SelectTool">Select Tool (Ctrl+1)</s:String>
+    <Run x:Key="SelectToolDescription">You can move goo balls by dragging it with this tool.</Run>
+    <s:String x:Key="VelocityEditTool">Velocity Edit Tool (Ctrl+2)</s:String>
+    <Run x:Key="VelocityEditToolDescription">You can change goo balls' speed by dragging it with this tool.</Run>
+    <s:String x:Key="AddTool">Add Tool (Ctrl+3)</s:String>
+    <Run x:Key="AddToolDescription">You can add a goo ball on the screen by clicking on the screen with this tool.</Run>
+    <s:String x:Key="RemoveTool">Remove Tool (Ctrl+4)</s:String>
+    <Run x:Key="RemoveToolDescription">You can remove a goo ball if you click on it.</Run>
+    <s:String x:Key="AttachTool">Attach Tool (Ctrl+5)</s:String>
+    <Run x:Key="AttachToolDescription">You can attach one goo ball to another by dragging one to other with this tool.</Run>
+    <s:String x:Key="DetachTool">Detach Tool (Ctrl+6)</s:String>
+    <Run x:Key="DetachToolDescription">You can detach the strand by clicking it with this tool.</Run>
+</ResourceDictionary>

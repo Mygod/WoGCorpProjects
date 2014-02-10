@@ -1,0 +1,721 @@
+﻿<html>
+<head>
+    <!-- saved from url=(0014)about:internet -->
+    <title>World of Goo修改器使用帮助</title>
+    <style type="text/css">
+        body { font-family: 微软雅黑, 宋体; font-size: 0.8em; }
+        h1 { text-align: center; font-size: 2em; }
+        h2 { font-size: 1.6em; }
+        h3 { font-size: 1.3em; }
+    </style>
+    <script type="text/javascript">
+        function showOldUpdates() {
+            var element = document.getElementById("oldUpdates");
+            if (element.style.display == "") element.style.display = "none"; 
+            else element.style.display = "";
+        }
+    </script>
+</head>
+<body>
+<h1>World of Goo修改器使用帮助</h1>
+<p>　　该修改器简介：使用此修改器可以为World of Goo提供作弊功能（甚至可以自己添加功能），也可以辅助做World of Goo新关。</p>
+    <h2>使用帮助</h2>
+    <p>这个程序设计的如此之完美以至于根本不需要帮助。:P<br />
+        如果你真的不知道如何使用，你可以点击帮助 - 快速帮助。</p>
+    <h2>扩展功能</h2>
+    <p>　　如何给修改器扩展功能？很简单，点击“工具 - 修改批量处理功能”并进行修改，保存，然后重启修改器即可。当然，你很可能里面什么东西也看不懂，这里就将介绍如何给修改器添加批量处理功能。<br />
+        　　Features.xml是一个标准的XML文件。根元素Features只有一个属性@Version，指示当前Features.xml的格式版本，避免版本误用而设计。这里将介绍第四版Features.xml的格式。在根元素下面有Strings, LevelEditor, GooBallEditor, GooBallTester, GooBallTestHelper, MaterialTester六个元素，每个元素有其各自的用途，下面将详细介绍。</p>
+    <h3>Strings</h3>
+    <p>　　Strings元素存放了一个字符串表，用于本地化。<br />
+        　　Strings元素下有若干个String元素，@ID表示String元素的ID，@Text表示String元素的英文内容，@zh-CN则表示String元素的中文内容，以此类推。这些字符串表将被下两个元素使用。</p>
+    <h3>LevelEditor与BallEditor</h3>
+    <p>　　LevelEditor与BallEditor元素分别存放了批量修改关卡、粘粘球的功能。每个元素下面均有若干个Feature元素，每一个Feature代表一个批量修改功能，它只有一个@ID属性，表示该批量修改功能的ID。<br />
+        　　在每个Feature元素中总有三个元素，分别为Process, Reverse和Restore，分别代表修改、恢复和恢复到原始状态（因为有些功能可以修改多次，恢复指撤销一次，而恢复到原始状态则可以撤销多次），合称子功能。要注意的是Restore比较特殊，假如它对应的属性、字符串没有找到的话会自动使用Reverse的对应内容，其内部没有任何操作。（一切都是自动完成的！）这三个元素各有四个属性，不过通常情况下不需要设置。这四个属性分别如下：<br />
+        　　Name（名称）：在错误/警告页面显示的简称ID，对应上面的Strings字符串表中的ID，默认值为Feature的@ID（如VisualDebug）+元素名（如Process）+Name。<br />
+        　　Description（描述）：在选择功能页面显示的全称ID，对应上面的Strings字符串表中的ID，默认值为Feature的@ID（如VisualDebug）+元素名（如Process）+Description。<br />
+        　　NothingChanged（未修改）：如果修改后的结果与修改前没有变化时显示的警告消息，对应上面的Strings字符串表中的ID，默认值为Feature的@ID（如VisualDebug）+元素名（如Process）+NothingChanged。<br />
+        　　Tip（描述）：在选择功能页面鼠标悬停时显示的描述ID，对应上面的Strings字符串表中的ID，默认值为Feature的@ID（如VisualDebug）+元素名（如Process）+Tip。</p>
+    <p>　　在除了Restore元素以外，各个子功能元素下面有若干个操作，我们将其分为六大类，下面会详细介绍，在子功能下能放一个或多个A类或B类操作。</p>
+    <h4>A. 结束处理类</h4>
+    <p>　　结束处理类可以使当前处理立即停止。可以将其放在任何位置，其内部不可放置任何元素。</p>
+    <p>
+&lt;Warning Message="警告内容" /&gt;<br />
+        　　这个元素将使当前处理立即停止并输出警告信息，<strong>结束处理后对文件的任何修改不会被保存</strong>。</p>
+    <h4>
+        B. 修改文件类</h4>
+    <p>
+        　　修改文件类可以修改要修改的文件并保存修改。</p>
+    <p>
+        &lt;Modify File=&quot;文件名&quot;&gt;<br />
+&nbsp; 放置各种各样的操作<br />
+        &lt;/Modify&gt;<br />
+        　　这个元素将打开对应的文件并修改其中的内容。如果是修改关卡，文件名可以填scene, level, resrc；如果是修改粘粘球，文件名可以填balls和resources。</p>
+    <h4>
+        C. 普通文本类</h4>
+    <p>
+&nbsp;　　&nbsp;普通文本类可以用于简单的文本修改操作。</p>
+    <p>
+        &lt;IfContains&nbsp;Value=&quot;要查找的值&quot;&gt;<br />
+        &nbsp;&nbsp;&lt;Then&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;如果文本中存在Value则要执行的操作<br />
+        &nbsp;&nbsp;&lt;/Then&gt;<br />
+        &nbsp;&nbsp;&lt;Else&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;如果文本中不存在Value则要执行的操作<br />
+        &nbsp;&nbsp;&lt;/Else&gt;<br />
+        &lt;/IfContains&gt;<br />
+        这个元素用来判断当前文件中是否存在Value的值，如果存在执行Then，不存在执行Else。注意无论放在哪里查找的范围都是整个文本的。</p>
+    <p>
+        &lt;RegexReplace Pattern=&quot;要匹配的正则表达式模式&quot; Replacement=&quot;要替换的文本&quot; /&gt;<br />
+        　　这个元素将使用正则表达式替换所有的匹配项。<br />
+        关于正则表达式的使用请参考：<a href="http://msdn.microsoft.com/zh-cn/library/az24scfc.aspx">http://msdn.microsoft.com/zh-cn/library/az24scfc.aspx</a><br />
+        这个工具可以帮助你理解正则表达式：<a href="http://www.regexper.com/">http://www.regexper.com/</a></p>
+    <p>
+        &lt;Replace Old=&quot;要查找的内容&quot; New=&quot;要替换的文本&quot; /&gt;<br />
+        　　这个元素将像记事本里一样替换所有找到的内容。</p>
+    <h4>
+        D. XML节点类</h4>
+    <p>
+        　　XML节点类用于查询节点以修改其属性，或添加、删除节点。</p>
+    <p>
+        &lt;SelectNodes&gt;<br />
+        &nbsp;&nbsp;&lt;Nodes&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Node&nbsp;XPath=&quot;要寻找的XML节点的XPath&quot;&nbsp;Contains=&quot;限制了只选择存在这个文本的节点&quot;&nbsp;/&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;可以重复放置多个Node元素，最后查询的结果将是其并集<br />
+        &nbsp;&nbsp;&lt;/Nodes&gt;<br />
+        &nbsp;&nbsp;&lt;Operations&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;这里可以放置对每个匹配的Node元素执行操作<br />
+        &nbsp;&nbsp;&lt;/Operations&gt;<br />
+        &lt;/SelectNodes&gt;<br />
+        查询节点并对每个查询到的节点执行相应操作。</p>
+    <p>
+        &lt;CreateElement&nbsp;XPath=&quot;要创建的XML节点的父节点XPath&quot;&nbsp;ElementName=&quot;要创建的XML节点的名称&quot;&gt;<br />
+&nbsp; 可以对新创建的节点的属性进行操作<br />
+        &lt;/CreateElement&gt;<br />
+        查找所有满足条件的节点并在满足条件的节点下各创建一个子节点并添加属性。</p>
+    <p>
+        &lt;RemoveElement XPath=&quot;要移除的XML节点的XPath&quot; WhichContains=&quot;限制只移除存在这个文本的节点&quot; /&gt;<br />
+        删除所有满足条件的节点。</p>
+    <h4>
+        E. XML属性类</h4>
+    <p>
+        　　XML属性类用于查询、添加、删除属性，必须放在D类下。（直接或间接）</p>
+    <p>
+        &lt;IfAttribute&nbsp;Name=&quot;属性名&quot;&nbsp;Value=&quot;要判定的属性值&quot;&nbsp;IfNull=&quot;如果不存在该属性则是否执行Then&quot;&gt;<br />
+        &nbsp;&nbsp;&lt;Then&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;如果属性名对应的值和Value相等则要执行的操作<br />
+        &nbsp;&nbsp;&lt;/Then&gt;<br />
+        &nbsp;&nbsp;&lt;Else&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;如果属性名对应的值和Value不相等则要执行的操作<br />
+        &nbsp;&nbsp;&lt;/Else&gt;<br />
+        &lt;/IfAttribute&gt;<br />
+        如果属性与Value相同则执行Then，否则执行Else。如果IfNull设为True且属性不存在，则执行Then，如果IfNull设为False且属性不存在，则执行Else。</p>
+    <p>
+        &lt;SetAttribute Name=&quot;属性名&quot; Value=&quot;属性值&quot; /&gt;<br />
+        设置属性，如果不存在将会被创建。</p>
+    <p>
+        &lt;MatrixMultiplyAttribute Name=&quot;属性名&quot; Value=&quot;要给属性乘上的矩阵&quot; Default=&quot;如果不存在该属性，则使用的默认值&quot; /&gt;<br />
+        这个元素将把目标属性的值转换成齐次坐标并对其执行对应的仿射变换，更多信息：<a href="http://zh.wikipedia.org/wiki/仿射变换">http://zh.wikipedia.org/wiki/%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2</a></p>
+    <p>
+        假如属性值为标量（只有一个数），设其为x，则对于输入矩阵：</p>
+    <table align="center">
+        <tr>
+            <td>m1</td>
+            <td>m2</td>
+        </tr>
+        <tr>
+            <td>m3</td>
+            <td>m4</td>
+        </tr>
+    </table>
+    <p>（输入格式为m1,m2;m3,m4）<br />
+        使用该矩阵变换后得到的标量x&#39;=(x*m1+m2)/(x*m3+m4)。</p>
+    <p>假如属性值为二维向量（例如由两个数组成的坐标，例如100,200等），设其为x1,x2，则对于输入矩阵：</p>
+    <table align="center">
+        <tr>
+            <td>m1</td>
+            <td>m2</td>
+            <td>m3</td>
+        </tr>
+        <tr>
+            <td>m4</td>
+            <td>m5</td>
+            <td>m6</td>
+        </tr>
+        <tr>
+            <td>m7</td>
+            <td>m8</td>
+            <td>m9</td>
+        </tr>
+    </table>
+    <p>（输入格式为m1,m2,m3;m4,m5,m6;m7,m8,m9）<br />
+        使用该矩阵变换后得到的二维向量x1&#39;,x2&#39;=(x*m1+y*m2+m3)/(x*m7+y*m8+m9),(x*m4+y*m5+m6)/(x*m7+y*m8+m9)。</p>
+    <h4>
+        F. 脚本引擎类</h4>
+    <p>
+        　　脚本引擎类使你可以自己编写脚本修改各个关卡文件。</p>
+    <p>
+        &lt;ExecuteXsl Path=&quot;要使用的XSL.xsl&quot; /&gt;<br />
+        &lt;ExecuteIronPython Script=&quot;要运行的脚本.py&quot; /&gt;<br />
+        &lt;ExecuteIronRuby Script=&quot;要运行的脚本.rb&quot; /&gt;<br />
+        　　这些元素将使用游戏目录下Scripts文件夹中的对应文件。XSL的使用很简单，你可以使用这个工具生成：<a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
+        　　在程序开始运行时会自动执行Initialization.py和Initialization.rb分别初始化IronPython引擎和IronRuby引擎，你可以将一切只需运行一次的代码放到这里以加快运行速度。<br />
+        　　当指定的脚本开始运行时会有一个解码后的字符串变量input。在你的脚本执行完毕后应该至少有一个布尔型变量edited表示是否应用当前修改，如果为true，则还需要有一个output变量，其类型可以为字符串或XDocument。</p>
+    <h3>
+        GooBallTester 与 MaterialTester</h3>
+    <p>
+        这两个元素下面分别有三个元素Level, Scene, Resrc，在测试粘粘球/材料时程序会使用这些XML生成对应关卡并运行对应关卡。</p>
+    <h3>
+        GooBallTestHelper</h3>
+    <p>
+        这个元素下面分别有两个元素Balls和Resources，在测试粘粘球时程序会使用这些XML生成对应粘粘球。（在对应关卡中会用到）</p>
+<h2>卸载方式</h2>
+    <p>
+        删除修改器安装目录即可。</p>
+<h2>常见问题</h2>
+    <p><strong>使用GooTool增加新关时出错或使用WooGLE修改某关卡时出错：</strong></p>
+    <ol>
+        <li>使用V1.0.8.44或以上的版本对出错的关卡或所有关卡进行一次修改或恢复。</li>
+        <li>如果这样操作仍没有解决问题，请把问题报告给Mygod，Mygod将帮您解决。（可以通过QQ、贴吧或留言板）</li>
+    </ol>
+<p style="font-weight: 700">修改后游戏/GooTool/本修改器无法读取存档：</p>
+    <p>　　请联系本修改器的制作者以解决此问题。</p>
+    <p><strong>运行程序时出现0xC0000135错误或提示中含有“.NET”字样：</strong></p>
+    <p>　　请安装<a href="http://www.microsoft.com/zh-cn/download/details.aspx?id=17718" target="_blank">.NET Framework 4.0</a>。</p>
+    <p><strong>如何选择主题：</strong></p>
+    <ul>
+        <li>Aero：Windows 7主题改良版。</li>
+        <li>Aero Lite：Windows 8 Aero Lite主题。</li>
+        <li>Classic：Windows XP以下版本的主题。</li>
+        <li>Generic：自适应操作系统主题。（如果是Windows 7则是普通主题而不是改良版）</li>
+        <li>Luna Homestead：Windows XP绿色主题。</li>
+        <li>Luna Metallic：Windows XP银色主题。</li>
+        <li>Luna Normal Color：Windows XP蓝色主题。</li>
+        <li>Royale：Windows XP Media Center主题。</li>
+        <li>Simple：一款自定义主题。</li>
+    </ul>
+    <p>
+        你也可以自己制作主题！然而这需要一些xaml &amp; baml知识，具体方法不再赘述。</p>
+    <p>如果看了以上帮助仍没有解决问题、发现此软件的BUG、寻找最新版本或您想要的功能本修改器不支持，请联系本修改器的制作者Mygod。联系方式：</p>
+    <ul>
+        <li><a href="http://mygod.apphb.com/#Product-54" target="_blank">http://mygod.apphb.com/#Product-54</a>（检查更新）</li>
+        <li><a href="http://tieba.baidu.com/Mygod" target="_blank">http://tieba.baidu.com/Mygod</a>（贴吧）</li>
+        <li><a href="mailto:mygodstudio@gmail.com" target="_blank">mailto:mygodstudio@gmail.com</a>（邮箱）</li>
+        <li><a href="http://goofans.com/download/utility/world-of-goo-modifier" target="_blank">http://goofans.com/download/utility/world-of-goo-modifier</a>（作弊功能移除版）</li>
+    </ul>
+    <p>版权所有，盗版必究。转载请注明出处。</p>
+<h2>更新历史</h2>
+    <p><strong>V4.0.40.5 更新内容：</strong></p>
+    <ul>
+        <li>新增对 iOS 存档的支持；（感谢 Wogfan4Evr 的帮助）</li>
+        <li>更新irrKlang到1.4.0b；</li>
+        <li>新增控制台调试器中杀死游戏的功能；</li>
+        <li>将三个dll合并为一个以减小占用空间；</li>
+        <li>修复了复制BUG；</li>
+        <li>更新WoGCursor模块到 V2.0.4.1；</li>
+        <li>改进了对话框。</li>
+    </ul>
+    <!-- optional localization item -->
+    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="显示/隐藏旧版本更新内容" />
+    <div style="display: none;" id="oldUpdates">
+    <p><strong>V4.0.39.0 更新内容：</strong></p>
+    <ul>
+        <li>添加对使用 IronRuby 和 XSL 批量修改的支持；</li>
+        <li>修复关卡无法恢复的BUG；</li>
+        <li>修复关于窗口自动换行的BUG；</li>
+        <li>新增对 Features.xml 修改方法的介绍。</li>
+    </ul>
+    <p><strong>V4.0.38.1 更新内容：</strong></p>
+    <ul>
+        <li>添加显示总球数、总步数、总秒数的支持；</li>
+        <li>改进关于窗口中的鼠标；</li>
+        <li>改进了一点帮助窗口。</li>
+    </ul>
+    <p><strong>V4.0.37.5 更新内容：</strong></p>
+    <ul>
+        <li>新增对搜索关卡的支持；（感谢 goo23 提供建议）</li>
+        <li>新增输入国家代码的提示功能；</li>
+        <li>改进粘粘公司的修改功能，减少内存占用、垃圾收集的次数，增强互动性，修复了总球数显示错误的BUG；</li>
+        <li>修复新存档加载后崩溃、不能立即使用的BUG；（需要重启修改器）</li>
+        <li>修复无法打开文本资源特定语言字符串的BUG；</li>
+        <li>修改默认主窗口大小与关于窗口大小；</li>
+        <li>新增“XSL转换器”工具。</li>
+    </ul>
+    <p><strong>V4.0.36.4 更新内容：</strong></p>
+    <ul>
+        <li>改进对章节地图的文本获取；</li>
+        <li>改进关卡浏览器的一个快捷键；</li>
+        <li>新增对内存修改器透明度修改的支持；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>修复内存修改器可能导致修改器崩溃的BUG；</li>
+        <li>修复XP无法加载游戏的BUG；（感谢 Wogfan4Evr 找到此BUG）</li>
+        <li>新增对粘粘公司缩放比例的精确修改的支持与显示球数的支持。（感谢 Wogfan4Evr 提供此建议）</li>
+    </ul>
+    <p><strong>V4.0.35.6 更新内容：</strong></p>
+    <ul>
+        <li>修复关于窗口鼠标指针的BUG；</li>
+        <li>修复主题对于部分控件无效的BUG；</li>
+        <li>新增Aero Lite主题；</li>
+        <li>修正帮助文件超链接的BUG；</li>
+        <li>修改存档图标；</li>
+        <li>新增对存档后台加载的支持；</li>
+        <li>移除加载窗口，加快启动速度；</li>
+        <li>新增“删除选中粘粘球”的功能；</li>
+        <li>修复新建玩家的BUG；（感谢 Wogfan4Evr 找到此BUG）</li>
+        <li>新增对后台加载游戏窗口的支持，避免卡死；</li>
+        <li>大大优化存档加载速度；</li>
+        <li>新增“修改批量修改功能”；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>缩小程序大小；</li>
+        <li>新增“生成玩家在线认证码”；</li>
+        <li>修复有时修改存档无效的BUG；（感谢 Wogfan4Evr 找到此BUG）</li>
+        <li>新增对音乐播放器的音量控制、上一个、下一个、停止和无序播放的支持；</li>
+        <li>改进选项页的动画；</li>
+        <li>改进数值输入；</li>
+        <li>新增对游戏、存档别名的支持。（感谢 Wogfan4Evr 提供建议）</li>
+    </ul>
+    <p><strong>V4.0.34.70 一周年特别版 更新内容：</strong></p>
+    <ul>
+        <li>改进代码；</li>
+        <li>新增彩蛋。</li>
+    </ul>
+    <p><strong>V4.0.34.68 发布预览版 更新内容：</strong></p>
+    <ul>
+        <li>新增内存修改器；</li>
+        <li>新增粘粘公司快捷键访问工具箱；（感谢 Wogfan4Evr 提供此建议）</li>
+        <li>新增.bin文件打开方式设置；（感谢 Wogfan4Evr 和 laobubu 提供此建议）</li>
+        <li>新增快速帮助；（感谢 movildima 和 goo23 提供此建议）</li>
+        <li>新增在粘粘公司中右击手动编辑位置、速度的功能；</li>
+        <li>改善帮助；</li>
+        <li>修复performance.log记录错误的BUG；</li>
+        <li>修复警告显示ID的BUG；</li>
+        <li>改进Features.xml两个快速通关的执行效率，新增“超级无敌万能光速通关”功能；</li>
+        <li>修复恢复时的显示BUG；</li>
+        <li>修复XML处理BUG；（感谢 Wogfan4Evr 发现此BUG）</li>
+        <li>改进关卡浏览器的显示；</li>
+        <li>修复.bin文件手动修改导致文件可能损坏的BUG；</li>
+        <li>修复IronPython的edited无效的BUG；</li>
+        <li>新增“删除选中关卡”功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>新增在关卡浏览器中显示选中关卡的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>修复在粘粘公司浏览器中把粘粘球全部拖动到地面下后导致绘画不正常的BUG；（感谢 Wogfan4Evr 找出此BUG）</li>
+        <li>新增拖动删除的功能；</li>
+        <li>改良关于窗口中的粘粘鼠标；</li>
+        <li>修复后台加载的BUG；</li>
+        <li>修复修改存档属性无效的BUG；（感谢 Wogfan4Evr 找出此BUG）</li>
+        <li>修复XP上拖动粘粘球崩溃的BUG。（感谢 Wogfan4Evr 找出此BUG）</li>
+    </ul>
+    <p><strong>V4.0.34.61 消费者预览版 更新内容：</strong></p>
+    <ul>
+        <li>改正8处World Of Goo为World of Goo；</li>
+        <li>更新帮助；</li>
+        <li>新增“清理垃圾”功能；（清理日志文件，当没有出错时可以使用）</li>
+        <li>改进5处内部代码；</li>
+        <li>新增“懒骨头”模式，加快游戏读取速度，因此不再在日志文件中记录读取速度；</li>
+        <li>Features.xml中Cheat改为Process；</li>
+        <li>新增本地化功能，提供对多种语言的支持；</li>
+        <li>修复提示框标题的一处错误；</li>
+        <li>为程序集强签名；</li>
+        <li>主程序重命名为“WoGModifier.exe”；</li>
+        <li>将外部显示改为“World of Goo Modifier”；</li>
+        <li>新增选择是否加载粘粘球预览图的功能，加快加载速度；</li>
+        <li>停止对Microsoft.WindowsAPICodePack.Shell.dll（529 KB）的引用，减小程序体积；</li>
+        <li>将对Microsoft.WindowsAPICodePack.dll（102.5 KB）的引用改为对AvalonLibrary.dll（305.5 
+            KB）的引用，让增强版对话框支持Windows XP；</li>
+        <li>改进选择用户类型对话框界面，修复标题错误的BUG；</li>
+        <li>改进全部增强版对话框；</li>
+        <li>主界面彻底颠覆传统界面，采用新的资源浏览器式UI；</li>
+        <li>修复“恢复关卡允许穿墙状态”无效的BUG；</li>
+        <li>移除了用户分级；</li>
+        <li>改用英语记录日志；</li>
+        <li>改进彩蛋；</li>
+        <li>改进加载窗口显示内容；</li>
+        <li>改进关于窗口；</li>
+        <li>改进文件读取效率；</li>
+        <li>修正了恢复关卡功能到初始状态的BUG；</li>
+        <li>改进修改关卡、粘粘球的速度；</li>
+        <li>改进进度显示；</li>
+        <li>改进控制台调试器及其外观，游戏关闭后保存结果以方便比较，同时避免其内存泄露，降低其更新频率；</li>
+        <li>改进关于窗口外观；</li>
+        <li>新增一款Simple主题；</li>
+        <li>移除跳转列表中的备份存档及命令行启动的功能；</li>
+        <li>改进错误窗口显示，减少显示信息，并尝试将更多信息与更多情况存入日志文件中以便后期调试；</li>
+        <li>新增在后台读取Features.xml的功能，不再在启动程序时等待加载完成；</li>
+        <li>新增重新打开的功能；</li>
+        <li>更改图标；</li>
+        <li>新增加载后在后台加载粘粘球预览图图标路径的功能；</li>
+        <li>新增备份与默认位置所在驱动器相同时提醒；（感谢 Wogfan4Evr 的建议）</li>
+        <li>新增选择显示语言的功能；（如果支持）</li>
+        <li>新增表格排序功能；</li>
+        <li>改变岛屿编辑器外观；</li>
+        <li>缩小主题大小；</li>
+        <li>改进UI，尤其是Aero主题；</li>
+        <li>在岛屿修改器中增加自动完成列表，提高工作效率；</li>
+        <li>新增文本资源编辑器；</li>
+        <li>改为使用默认程序打开xml、txt文件；</li>
+        <li>新增手动修改存档内容；</li>
+        <li>修复了没有选择时添加项被禁用的BUG；</li>
+        <li>改进输入窗口错误提示及其UI；</li>
+        <li>改进选择存档存放目录功能；</li>
+        <li>新增大量工具提示，便于使用；</li>
+        <li>新增“新增存档”的功能；</li>
+        <li>新增粘粘公司可视化修改的功能；（感谢 Wogfan4Evr 提供建议，虽然我很久以前就想这么做了）</li>
+        <li>新增存档是否保存的显示、提醒功能；</li>
+        <li>新增存档玩家拷贝、覆盖、交换的功能；</li>
+        <li>新增关卡音乐播放器。</li>
+    </ul>
+        <p><strong>V3.1.2.888 特别版更新内容：</strong></p>
+    <ul>
+        <li>移除一个未使用的模块，缩小程序体积；</li>
+        <li>不再使用irrKlang模块，避免程序在未安装.NET Framework 4的情况下崩溃，加快程序初始化速度；</li>
+        <li>由于模块被移除，“播放选中关卡中的第一个的音乐”的功能被迫暂时移除；（等我找到一个好的模块后会重新加上这个功能）</li>
+        <li>开源，对部分源码进行了优化；</li>
+        <li>修正了5处命令行参数开头有空格无法读取的BUG。</li>
+    </ul>
+    <p><strong>V3.1.1.878 犯二节特别版更新内容：</strong></p>
+    <ul>
+        <li>优化主题以及对主题的支持；</li>
+        <li>更换主题包中的主题，移除了4个，新增了6个；</li>
+        <li>新增“播放选中关卡中的第一个的音乐”的功能；</li>
+        <li>新增Chrome风格；（仅启动Aero时可用）</li>
+        <li>改进Aero窗口；</li>
+        <li>改进游戏读取效率；</li>
+        <li>改进了第一次点击“粘粘球批量修改器”的速度；</li>
+        <li>新增对主题包baml的支持，缩小程序体积；</li>
+        <li>修复了不能播放声音时难以启动程序/打开关于的BUG；</li>
+        <li>改进了日志记录。</li>
+    </ul>
+    <p><strong>V3.1.0.858 贺岁版更新内容：</strong></p>
+    <ul>
+        <li>改进脚本执行效率；</li>
+        <li>进一步改进启动窗口动画及处理速度；</li>
+        <li>为24处输入提供取消、检查输入是否合法与出错信息的功能，避免输入错误后直接崩溃；</li>
+        <li>改进保存设置的执行效率；</li>
+        <li>新增使用Ctrl+滚轮调整粘粘球批量修改器中粘粘球的大小；（但是略微有点卡）</li>
+        <li>修复未选择存档时可以保存、另存为的BUG；</li>
+        <li>修复默认未选择游戏时可以运行的BUG；</li>
+        <li>对UI进行2处小改进；</li>
+        <li>修复“使粘粘球可被管道吸收”功能的提示错误的BUG；（感谢 邱江坤 找出此BUG）</li>
+        <li>改进Windows Vista以下版本消息框的提示；</li>
+        <li>改进30处本地化；</li>
+        <li>新增备份存档的功能；</li>
+        <li>修复“基本选项设置器”点击修改弹出提示错误的BUG；（感谢 Wogfan4Evr 找出此BUG）</li>
+        <li>修复存档默认不全屏的BUG；</li>
+        <li>为打开 .bin 文件和打开存档对话框新增3个过滤器；</li>
+        <li>新增新建存档的功能；</li>
+        <li>修复了记录存档位置仍用注册表的BUG；</li>
+        <li>改进自动获取存档；</li>
+        <li>修复了使用默认语言或未识别的语言时不显示的BUG；</li>
+        <li>在粘粘球测试器中新增“清空”的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>新增使用过的游戏路径、存档路径下拉列表框的功能；</li>
+        <li>更新帮助；</li>
+        <li>缩小程序体积；</li>
+        <li>改进日志记录；</li>
+        <li>新增对性能的日志记录；</li>
+        <li>修复游戏读取完毕后显示的BUG；</li>
+        <li>减少文件数量；</li>
+        <li>改进跳转列表；</li>
+        <li>新增对-selectbinfiles、-backupprofile参数的支持；</li>
+        <li>改进不打开窗口关闭的速度；</li>
+        <li>新增对主题的支持与设置。（感谢 jackchen2345 提供建议）</li>
+    </ul>
+    <p><strong>V3.0.5.769更新内容：</strong></p>
+    <ul>
+        <li>改进小数的输入，新增对科学计数法（如1E+4）输入的支持；</li>
+        <li>改进音频播放；</li>
+        <li>移除不必要的可选功能；（感谢 Wogfan4Evr 发现此BUG）</li>
+        <li>改进处理窗口UI；</li>
+        <li>增加在处理过程中取消的功能，但是通常不推荐这么做；（感谢 快乐小子123165 提供建议）</li>
+        <li>改进关于窗口UI；</li>
+        <li>修复“杀死全部几何物体”的BUG。</li>
+    </ul>
+    <p><strong>V3.0.4.762更新内容：</strong></p>
+    <ul>
+        <li>更新帮助；</li>
+        <li>新增自动存储是否开启控制台调试器；</li>
+        <li>修复了当要移除的节点已经被移除时RemoveElement操作抛出警告并停止当前操作的BUG；</li>
+        <li>修复了关卡批量修改器修改时不存储原文件内容导致IfEdited提供的信息可能不正确的BUG；</li>
+        <li>改进“闪电通关”，增加更多支持的关卡；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>修正旧版本中排序完毕提示内容的BUG；</li>
+        <li>改进“杀死全部几何物体”，加快速度、稳定性；（推荐与“瞬间通关”同时用）</li>
+        <li>改进RegexReplace运行的速度，避免多次Parse操作降低效率；（代价为启动速度会减慢一点点）</li>
+        <li>在设置与实用工具箱中添加“自定义修改器功能”的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>改进了粘粘球批量测试器，使其自动移除0个粘粘球的项而不是报错；</li>
+        <li>修复了当 .bin 文件拖动到程序图标上时程序仍然加载加载窗口的BUG；</li>
+        <li>改进“使粘粘球可被搭建”“使粘粘架可爬行”“使粘粘球可被管道吸住”“使粘粘球可被管道吸收”“使粘粘球可拆卸”“使粘粘球可拖动”“使关卡允许穿墙”“使关卡全部可见”“叫醒粘粘球”“使火消失”“无重力”，提高速度；</li>
+        <li>改进“使粘粘架可爬行”的说明；</li>
+        <li>修复“瞬间通关”使火焰变大的BUG；</li>
+        <li>更新Features.xml帮助。</li>
+    </ul>
+    <p><strong>V3.0.3.737更新内容：</strong></p>
+    <ul>
+        <li>更新帮助；</li>
+        <li>改进23处性能；</li>
+        <li>改进28处本地化；</li>
+        <li>修复了存档修改器全屏修改无效的BUG；</li>
+        <li>修复了存档修改器上次修复BUG没有修复到的细小BUG；（感谢 Wogfan4Evr 发现此BUG）</li>
+        <li>改进启动动画的性能；</li>
+        <li>新增对拖动快捷方式到窗口或程序图标的支持；</li>
+        <li>取消需要安装，改为绿色版；</li>
+        <li>稍微改进关于窗口；</li>
+        <li>修正基本选项设置器中语言的默认值；</li>
+        <li>修正基本选项设置器语言为默认值时显示为ID而不是英文的BUG；</li>
+        <li>修正了部分 .bin 文件读入可能有损失的BUG；</li>
+        <li>改进了粘粘球测试器；</li>
+        <li>新增自动存储是否可视化调试。</li>
+    </ul>
+    <p><strong>V3.0.2.674更新内容：</strong></p>
+    <ul>
+        <li>新增拖动游戏、存档、.bin文件到程序图标或用此修改器打开的支持；</li>
+        <li>修复了文件没有修改时也会写入.bin文件的BUG；</li>
+        <li>改进选择了解程度窗口的大小；</li>
+        <li>在游戏修改器、存档修改器中增加“确定”按钮便于操作；</li>
+        <li>修复了对于有跳过的关卡的存档保存后游戏无法打开的BUG；（感谢 *. ﹌未知の未涞◆？ 发现此BUG）</li>
+        <li>修复了保存.bin文件使用ASCII编码的BUG；</li>
+        <li>修复了编辑.bin文件有时不保存修改的BUG；</li>
+        <li>新增对中文玩家名称的支持；</li>
+        <li>新增玩家名称上支持字符的提醒。</li>
+    </ul>
+    <p><strong>V3.0.1.660 元旦特别版更新内容：</strong></p>
+    <ul>
+        <li>增加控制台调试器稳定性，避免崩溃；</li>
+        <li>移除关于窗口的大小限制；</li>
+        <li>修复了粘粘公司没有任何粘粘球/粘粘架时无法添加粘粘球的BUG；</li>
+        <li>修复了玩家关卡记录修改器没有任何记录时无法添加的BUG；</li>
+        <li>优化21处菜单速度；</li>
+        <li>新增加载时将三项任务根据CPU核数同时进行的功能，加快启动速度；</li>
+        <li>调整默认窗口大小；</li>
+        <li>新增对UndeletePill粘粘球测试的功能；</li>
+        <li>新增记录粘粘球批量修改器缩略图显示大小的功能；</li>
+        <li>修复了修改粘粘球缩略图显示大小后选定项消失的BUG；</li>
+        <li>修复了同时打开两个以上相同文件时访问冲突而崩溃的BUG；</li>
+        <li>修复了在不支持Aero的Windows Vista及以上版本上背景变黑的BUG；</li>
+        <li>优化了岛屿修改器；</li>
+        <li>修复了修改粘粘球的显示BUG；</li>
+        <li>更新帮助；</li>
+        <li>优化少许性能；</li>
+        <li>修复粘粘球批量修改器以及帮助的边缘模糊的BUG；</li>
+        <li>更新Features.xml帮助。</li>
+    </ul>
+    <p><strong>V3.0.0.620 圣诞特别版更新内容：</strong></p>
+    <ul>
+        <li>改进57处用户界面；</li>
+        <li>使存档关卡记录改为表格显示，更加清晰；</li>
+        <li>安装程序中添加在桌面添加快捷方式的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>更新帮助；</li>
+        <li>增加了关卡中手动修改level/scene/resrc.bin的功能；</li>
+        <li>增加了粘粘球中手动修改ball/resources.xml.bin的功能；</li>
+        <li>增加了设置与实用工具箱模块；</li>
+        <li>增加了快速修改.bin, .scene.bin, .level.bin, .resrc.bin, ball.xml.bin, resources.xml.bin, 
+            materials.xml.bin文件的功能；</li>
+        <li>改进跳转列表，使命令行启动也加入跳转列表；</li>
+        <li>修复控制台调试器的多选框按Alt占用大块面积的BUG；</li>
+        <li>增加材料修改器；（感谢 zhaoshuyu331 提供建议）</li>
+        <li>新增了测试粘粘球与测试粘粘球时开启可视化调试的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>将关卡修改器重命名为关卡批量修改器，与WooGLE区别开；</li>
+        <li>将粘粘球修改器重命名为粘粘球批量修改器，与WooBLE区别开；</li>
+        <li>不再使用注册表记录，改放在根目录下的Settings.ini文件中，便于移动；</li>
+        <li>新增对不同用户显示不同功能集的功能，使修改器对于各种人群更易于使用；</li>
+        <li>优化了开始界面播放的动画，减少了内存泄露；</li>
+        <li>增加第一次打开自动获取存档位置并读取的功能，加快工作效率；</li>
+        <li>避免让一个未捕捉的异常导致修改器无提示崩溃；（而是优美地失败，Graceful Failure）</li>
+        <li>增加测试材料的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>改进15处Alt快捷键；</li>
+        <li>改进了控制台调试器；</li>
+        <li>修复了修改路径后控制台调试器立即失效的BUG；</li>
+        <li>改进了Windows XP以及以下版本中的错误显示页面；</li>
+        <li>改进了对话框，避免了显示对话框时后台窗口仍可显示的BUG；</li>
+        <li>修复了在Windows Vista及以上版本中没有图标的BUG；</li>
+        <li>减少了内存泄露，加速垃圾回收；</li>
+        <li>修复了在Windows Vista及以上版本中错误提示框没有声音的BUG；</li>
+        <li>修复了可修改多次的功能恢复次数过多时显示为恢复负数次的BUG；</li>
+        <li>更新帮助；</li>
+        <li>增加了“技术支持 &amp; 检查更新”的功能；</li>
+        <li>增加了对ExecuteIronPython元素的支持，以此支持运行脚本；</li>
+        <li>新增“跳过选中关卡开始时播放的动画”及其恢复的功能；（感谢 Wogfan4Evr 提供建议）</li>
+        <li>修正：将“使选中粘粘球的粘粘架可行走”及其恢复改为“使选中粘粘球的粘粘架可被爬行”，更加准确；</li>
+        <li>新增“使选中粘粘球可被管道吸住”及其恢复的功能；</li>
+        <li>扩大文本窗口和选择功能窗口；</li>
+        <li>改进“使选中关卡无重力”及其恢复功能的运行效率；</li>
+        <li>修复了“使选中粘粘球可拆卸”不增加detachstrand的BUG；</li>
+        <li>新增了“使选中关卡的粘粘球不能移动到最大可视范围外”及其恢复的功能；</li>
+        <li>改进19处存档修改器的性能问题以及修改后选项消失的BUG；</li>
+        <li>修复了关卡记录与粘粘公司修改器修改后选中项消失的BUG；</li>
+        <li style="text-align: left">修正了帮助文件中最后几段的显示BUG；（感谢 Wogfan4Evr 指出）</li>
+        <li style="text-align: left">新增在Vista以上版本中的Aero窗口；</li>
+        <li style="text-align: left">增加对普通异常与非预期异常的日志记录及忽略继续运行的功能；</li>
+        <li style="text-align: left">去除关于主窗口大小的限制；</li>
+        <li style="text-align: left">新增拖动即可加载游戏/存档或打开 .bin 文件的功能；</li>
+        <li style="text-align: left">修复了提供非正确 .bin 文件后崩溃的BUG；</li>
+        <li style="text-align: left">改进了初始化XML文件的性能；</li>
+        <li style="text-align: left">改进了非Vista以上版本中预期异常的错误提示框；</li>
+        <li style="text-align: left">改进启动动画；</li>
+        <li style="text-align: left">增加“关卡批量修改器”和“粘粘球批量修改器”修改过程中的进度功能；</li>
+        <li style="text-align: left">增加鼠标移动到“帮助”选项卡上时显示问号鼠标的功能；</li>
+        <li style="text-align: left">增加处理过程中鼠标在应用程序内显示忙的功能；</li>
+        <li style="text-align: left">修复Vista以上版本中询问对话框没有图标、声音的BUG；</li>
+        <li style="text-align: left">新增Win7以上版本中主窗口显示文本、执行窗口显示文本、进度的功能；</li>
+        <li style="text-align: left">改进Win7以上版本中主窗口的缩略图位置；</li>
+        <li style="text-align: left">修正了加载时关闭加载窗口时程序不结束的BUG；</li>
+        <li style="text-align: left">新增“关于”；</li>
+        <li style="text-align: left">新增*******；（It&#39;s a secret，感谢 Wogfan4Evr 提供创意）</li>
+        <li style="text-align: left">新增在修改 .bin 文件过程中动态监视文件更新的功能；</li>
+        <li style="text-align: left">简化两处用户界面；</li>
+        <li style="text-align: left">新增岛屿修改器；（感谢 Wogfan4Evr 提供创意）</li>
+        <li style="text-align: left">修复了材料修改器中没有选择项时使用菜单后崩溃的BUG；</li>
+        <li style="text-align: left">简化粘粘公司修改器的9处代码；</li>
+        <li style="text-align: left">
+            新增“闪电通关”及其恢复的功能，任何关卡一打开就通关。（比瞬间通关的适用性、步数、秒数更强，但收集球数不如瞬间通关）（感谢 Wogfan4Evr 提供创意）</li>
+    </ul>
+    <p><strong>V2.1.0.412更新内容：</strong></p>
+    <ul>
+        <li>使加载界面动画播放更流畅；</li>
+        <li>修复了运行关卡不能使用控制台调试器的BUG；</li>
+        <li>改进了加载界面的2处文本显示；</li>
+        <li>改进了游戏修改器的1处文本显示；</li>
+        <li>改进了存档修改器的2处文本显示；</li>
+        <li>改进了用户界面，将控制台调试器、基本选项设置器、关卡修改器、粘粘球修改器合并到一个选项卡中；</li>
+        <li>改进了粘粘球修改器外观；</li>
+        <li>改进了右键菜单中19处文本显示；</li>
+        <li>选择主程序时改用哈希表存放关卡名，加快启动速度与选择主程序速度；</li>
+        <li>改进关卡修改器显示方式；</li>
+        <li>更新对MapWorldView的中文说明；</li>
+        <li>缩小程序占用空间；</li>
+        <li>更新帮助；</li>
+        <li>修改帮助显示方式为HTML，使帮助格式更加多样；</li>
+        <li>取消了没用的ClickOnce；</li>
+        <li>恢复了原来的Common-Control的引用方式，保持稳定性；</li>
+        <li>将18处对话框改为新版对话框；（仅支持Windows Vista及以上版本，否则显示原来的）</li>
+        <li>增加跳转列表，显示最近使用的World of Goo主程序与存档，便于打开前快速选择；（仅支持Windows Vista及以上版本，否则不显示）</li>
+        <li>修正了存档修改器显示的BUG；</li>
+        <li>增加给基本选项设置器添加计时的功能；</li>
+        <li>改进获取图标方式；</li>
+        <li>增加对控制台参数的支持；（参数：[-g 游戏路径] [-p 存档路径]）</li>
+        <li>在帮助中增加了更新历史；</li>
+        <li>Features.xml升级到版本2；</li>
+        <li>提供对Features.xml版本2的支持；</li>
+        <li>修复了IfEdited元素的BUG；</li>
+        <li>改进了对中文的显示，避免将中文状态下所有的空格省略；</li>
+        <li>让关卡/粘粘球全部恢复功能支持仅恢复部分功能；</li>
+        <li>修正2处Alt快捷键错误；</li>
+        <li>缩小主窗口占用空间；</li>
+        <li>更新Features.xml中提供的简易帮助；</li>
+        <li>改用Dictionary代替List加快功能搜索速度；（当功能有很多时此项优化格外重要）</li>
+        <li>增加读取XML失败时弹出错误提示的功能，避免无法打开且无提示退出的BUG；</li>
+        <li>改进22处快捷键，使其更符合使用习惯；</li>
+        <li>修改32处全局快捷键为局部快捷键，避免误用；</li>
+        <li>新增了1处局部快捷键；</li>
+        <li>删除了2个重复定义的快捷键；</li>
+        <li>移除粘粘球修改器的默认操作“修改粘粘球”；</li>
+        <li>将关卡修改器的默认操作“修改关卡”改为“运行关卡”；</li>
+        <li>修复安装程序中多一个空格的问题；</li>
+        <li>增加新功能“杀死几何物体”，推荐配合着无重力或立即通关一起用。</li>
+    </ul>
+    <p><strong>V2.0.3.277更新内容：</strong></p>
+    <ul>
+        <li>缩小了程序体积； </li>
+        <li>改进了Common-Control的引用方式；（可能有BUG）</li>
+        <li>改用安装包安装，避免出现0xC0000135（未安装.NET Framework导致的）错误。</li>
+        <li>删除了击碎选中关卡中可击碎的粘粘球功能；（原因：BUGGY）</li>
+        <li>增加了使选中粘粘球可伸出四个粘粘架的功能；（感谢 48217266 的创意）</li>
+        <li>新增了对ClickOnce的支持；（实际上几乎没啥用）</li>
+        <li>更新帮助。</li>
+    </ul>
+    <p><strong>V2.0.2.268更新内容：</strong></p>
+    <ul>
+        <li>改进了关卡记录的显示；</li>
+        <li>新增了打碎所有粘粘球的功能；（感谢 Wogfan4Evr 的创意）</li>
+        <li>修正一处菜单Alt快捷键问题；</li>
+        <li>修正了跳过关卡后打开该修改器无法载入存档的BUG；（感谢 Wogfan4Evr 发现此BUG）</li>
+        <li>添加了跳过选中关卡的功能；</li>
+        <li>修正了运行选中关卡中的第一个会使程序异常退出的BUG；（感谢 Wogfan4Evr 发现此BUG）</li>
+        <li>更新了帮助。</li>
+    </ul>
+    <p><strong>V2.0.1.261更新内容：</strong></p>
+    <ul>
+        <li>修正了刚刚创建的新存档会导致修改器崩溃的BUG；</li>
+        <li>修正了刚刚创建的新存档不能使用增加关卡记录的BUG；</li>
+        <li>恢复了在上一版本中被移除的杀死可移动物的功能；</li>
+        <li>修复了上个版本中对英语的显示的改进使显示不正常的BUG；</li>
+        <li>加快了显示简体中文的速度；</li>
+        <li>改进了修改关卡显示方式的速度。</li>
+    </ul>
+    <p><strong>V2.0.0.255更新内容：</strong></p>
+    <ul>
+        <li>缩小程序体积；</li><li>加快运行速度；</li><li>避免了通关球数置为1、每一步都出现时间虫恢复时可能无效的BUG；</li><li>修复了修改/恢复使粘粘球可被管道吸收时XML文件被大幅度改动的BUG；</li><li>增加了XML文件，可以自己给修改器增加喜欢的功能；</li><li>重写了引擎以支持XML文件；</li><li>修复了使粘粘球可被搭建功能无效的BUG；</li><li>修复了部分功能导致XML文件的换行符和格式缩进全部消失的BUG；（取而代之的是自动换行、缩进）</li><li>新增了Windows图标式的粘粘球视图；</li><li>改进了错误/警告文本输出机制，加快运行速度；</li><li>新增了批量修改/恢复的功能；</li><li>改进了关卡对英语的显示；</li><li>新增了提示语功能；</li><li>删除了以往的更新内容，进一步缩小程序体积并加快启动速度；</li><li>新增了左键双击修改，左键双击确认的功能；</li><li>新增了控制台调试器的功能；</li><li>新增了运行某关卡的功能；</li><li>新增了26个快捷键，更加快速地使用修改/恢复关卡/粘粘球等功能；</li><li>为已有元素和新增元素增加了26个Alt快捷键；</li><li>新增了存档修改器、全部4个子功能，共有33个功能；</li><li>新增了立即通关的功能；</li><li>删除了杀死可移动物的功能；</li><li>新增了全部恢复的功能；</li><li>新增了查看属性的功能；</li><li>更新帮助；</li><li>增加了另存为存档的功能；</li><li>移除了多余的基本选项设置器中刷新频率功能。</li>
+    </ul>
+    <p><strong>V1.4.3.138更新内容：</strong></p>
+    <ul>
+        <li>修复了无法恢复可移动物的BUG。</li><li>改进了杀死/恢复可炸物/可移动物的方法，避免粘粘球意外死亡之类的事发生。</li>
+    </ul>
+    <p><strong>V1.4.2.133更新内容：</strong></p>
+    <ul>
+        <li>增加使可抛粘粘球可拖动及恢复的功能。</li><li>增加了使粘粘球可被搭建粘粘架及恢复的功能。（感谢 Wogfan4Evr 的创意）</li><li>增加了杀死关卡中可移动物的功能。</li><li>修正了恢复材料可能无效的BUG。（在多次修改的情况下）※ 修正了修复管道可能无效的BUG。（在多次修改的情况下）</li><li>修正了恢复粘粘球不死可能无效的BUG。（在多次修改的情况下）</li><li>修正了使用消失爆炸物后部分爆炸物的图片仍然存在的BUG。（感谢 Wogfan4Evr 执意要修改这个BUG）</li><li>修正了消失爆炸物后粘粘球可能会碰点的BUG。（感谢 Wogfan4Evr 找出修改方法）</li><li>修正了支架变长后燃烧时会出现烧到一半断掉的BUG。（感谢 Wogfan4Evr 找到此BUG）</li><li>提高了修改/恢复粘粘球不死的运行效率。</li><li>更新帮助。</li>
+    </ul>
+    <p><strong>V1.4.1.122 中秋特别版更新内容：</strong></p>
+    <ul>
+        <li>修正了简体中文下会有空格的BUG。（空格在游戏里将换行）（感谢 Wogfan4Evr 发现此BUG）</li><li>修正了移除爆炸物的BUG。（已经使用过这个功能的请先使用旧版修改器恢复后更新）</li><li>增加对可能导致xml文件中的格式用空格、换行符消失的功能的绿色提醒。</li><li>更新帮助。</li>
+    </ul>
+    <p><strong>V1.4.0.118更新内容：</strong></p>
+    <ul>
+        <li>改进引擎，减少占用空间，大大增快开发新功能速度。</li><li>修复一个错别字。</li><li>改进修改的快捷键。</li><li>修正3处说明。</li><li>更新帮助。</li><li>修正了BlockHead等球吸进管道内游戏会崩溃的BUG。（感谢 Wogfan4Evr 发现此BUG）</li><li>增加了“使选中关卡几何元素的材料无效”及恢复的功能。（感谢 Wogfan4Evr 提供创意）</li><li>增加了“使选中关卡目标球数变为1”及恢复的功能。（感谢 Wogfan4Evr 提供创意）</li><li>增加了“使每一步都产生时间虫”及恢复的功能。（感谢 Wogfan4Evr 提供创意）</li><li>增加了“杀死关卡中可炸物”及恢复的功能。（感谢 Wogfan4Evr 提供创意）（该功能目前拥有修改YouHaveToExplodeTheHead等关后游戏运行会崩溃的BUG，需要手动在WooGLE等软件中将与去掉的可炸物相关的hinge、motor、slider也去掉）</li><li>增加了调整粘粘架最大长度的功能。（感谢 Wogfan4Evr 提供创意）</li><li>增加了“使选中粘粘球的粘粘架可行走”及恢复的功能。（感谢 Wogfan4Evr 提供创意）</li>
+    </ul>
+    <p><strong>V1.3.3.98更新内容：</strong></p>
+    <ul>
+        <li>增加了使关卡允许穿墙及恢复的功能。</li><li>又一次调整了窗口大小，彻底避免出现两行选项卡的情况。（应该吧）（快要崩溃了，XP就是麻烦）（感谢 Wogfan4Evr 又一次发现这个BUG并帮助在XP上测试）</li><li>修正两处极其巨大的失误（两个错别字）。（感谢 Wogfan4Evr 发现此BUG）</li><li>修正两处快捷键错误。</li><li>更新帮助。</li>
+    </ul>
+    <p><strong>V1.3.2.90更新内容：</strong></p>
+    <ul>
+        <li>增加了使粘粘球可吸收、使关卡内全部可见及其恢复的功能。</li><li>再次调整了窗口最小宽度，彻底避免出现两行选项卡的情况。（应该吧）</li><li>更新帮助。</li><li>再次改进显示。</li><li>增加运行游戏的功能。</li>
+    </ul>
+    <p><strong>V1.3.1.81更新内容：</strong></p>
+    <ul>
+        <li>修复了（或者说避免了）修改粘粘球可移动/可拆卸后点击螺丝钉（Anchor）等静态粘粘球游戏会崩溃的BUG。（感谢 Wogfan4Evr 发现这个BUG）</li><li>增加了调整缩略图的功能。</li><li>调整了窗口最小宽度，避免出现两行选项卡的情况。</li><li>更新帮助。</li><li>修复了在汉化版中显示粘粘球UndeletePill为英文的BUG。</li>
+    </ul>
+    <p><strong>V1.3.0.75更新内容：</strong></p>
+    <ul>
+        <li>修复一处快捷键错误。</li><li>改进错误/警告显示方式。</li><li>增加取消/恢复管道过滤器的功能。</li><li>增加粘粘球修改器功能。</li><li>增加粘粘球修改器大部分可以看到粘粘球的功能。（小部分是不显示或不存在一个叫body的part）</li><li>增加使粘粘球可移动/恢复的功能。</li><li>增加使粘粘球可拆卸/恢复的功能。</li><li>修复了不支持汉化版的BUG。</li>
+    </ul>
+    <p><strong>V1.2.0.64更新内容：</strong></p>
+    <ul>
+        <li>更新帮助。</li><li>改进显示方式为选项卡显示方式。</li><li>将帮助功能显示在主界面上。</li><li>修正了关闭主窗口时详细信息窗口不关闭的BUG。</li><li>增加了基本选项设置器。</li><li>增加了叫醒/催眠某关卡的粘粘球的功能。</li>
+    </ul>
+    <p><strong>V1.1.0.57更新内容：</strong></p>
+    <ul>
+        <li>改进错误显示方式，将所有信息分为错误、警告两类。</li><li>添加询问是否显示详细资料的功能。</li><li>修改窗口外观。</li><li>将右击菜单部分功能合并。</li><li>更换图标。</li><li>更新帮助。</li><li>增加不死/恢复粘粘球和消失/恢复火的功能。</li><li>软件重命名为World of Goo修改器。</li><li>加快运行速度。</li><li>缩小程序体积。</li>
+    </ul>
+    <p><strong>V1.0.8.44更新内容：</strong></p>
+    <ul>
+        <li>增加章节的其他语言显示。</li><li>改进对以前版本造成BUG的修复。（使用方法：选择某关后点击修改或恢复）</li><li>增加自动根据World of Goo语言来选择显示的语言的功能。</li><li>增加修改/恢复/初始化/排序的计时功能。</li><li>新增记忆最后一次选项功能，无需每次打开定位World of Goo游戏主程序。</li><li>更新帮助。</li><li>新增对关卡搜索结果进行排序的功能，加快查找某一关卡的速度。</li><li>修复了界面上的一个小问题。</li>
+    </ul>
+    <p><strong>V1.0.7.32更新内容：</strong></p>
+    <ul>
+        <li>修正了修改语言后修改/恢复关卡出错的BUG。（感谢 Wogfan4Evr 找出这个BUG）</li><li>修正了选择错误World of Goo主程序后退出的BUG。（感谢 Wogfan4Evr 找出这个BUG）</li>
+    </ul>
+    <p><strong>V1.0.6.30更新内容：</strong></p>
+    <ul>
+        <li>去掉了对没有制作完成的新关的支持，避免出错。（空文件夹）</li><li>增加错误详细信息框，显示更加完整。</li><li>修正了出错时结束修改而不是跳过当前关卡的BUG。</li>
+    </ul>
+    <p><strong>V1.0.5.27更新内容：</strong></p>
+    <ul>
+        <li>支持显示英语、简体中文、德语、西班牙语、法语、意大利语、荷兰语的显示（如果有的话）。</li><li>更新帮助。</li><li>添加右键菜单。</li><li>添加“复制选中关卡名”的功能。</li><li>添加“全选”功能。</li>
+    </ul>
+    <p><strong>V1.0.4.16更新内容：</strong></p>
+    <ul>
+        <li>增加手动输入World of Goo主程序/刷新关卡的功能。（焦点移动到文本框按回车键）</li><li>修复了传说中的惊天大BUG：修改后的文件会多几个字符，虽然不影响World of Goo的正常运行，但是会影响GooTool和WooGLE的正常运行。已经出现了如上问题的请再次启动本修改器，全选关卡后单击“修改(C)”或“恢复(R)”。</li><li>缩小程序体积。</li><li>更换图标。</li>
+    </ul>
+    <p><strong>V1.0.3.12更新内容：</strong></p>
+    <ul>
+        <li>修复了无法恢复重力的BUG。</li>
+        <li>优化了执行速度。</li>
+        <li>增加了执行完消失重力后弹出消息框提示的功能。</li>
+        <li>增加了报错功能。</li>
+        <li>修复了出错时停止响应的BUG。</li>
+    </ul>
+    <p><strong>V1.0.2.7更新内容：</strong></p>
+    <ul>
+        <li>简化标题。</li><li>修复了汉化版关卡变黑的BUG。</li><li>恢复了对所有关卡的支持。</li>
+    </ul>
+    <p><strong>V1.0.1.4更新内容：</strong></p>
+    <ul>
+        <li>将island1-5隐藏以免在修改汉化版时出现全黑的BUG。（已经出现了这个BUG？尝试使用旧版本恢复）</li><li>修改过滤器，更加易用，使其更加易用。</li><li>添加帮助功能。</li><li>修改“撤销(U)”为“恢复(R)”，描述更加准确。</li>
+    </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿# This file imports all useful classes to use and defines some functions that it may be shared. It will let it be faster!

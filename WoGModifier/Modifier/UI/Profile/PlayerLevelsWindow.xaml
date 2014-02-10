@@ -1,0 +1,111 @@
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.PlayerLevelsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
+        xmlns:m="http://schemas.mygodstudio.tk/wpf" xmlns:io="clr-namespace:Mygod.WorldOfGoo.IO" Icon="{x:Static m:CurrentApp.MainIcon}"
+        Height="400" Width="500" x:ClassModifier="internal" Closing="BlockClosing">
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
+            <Binding Source="{StaticResource PlayerLevelsWindowTitle}" />
+            <Binding Path="Parent.Alias" />
+            <Binding Path="Parent.FileName" />
+            <Binding Path="PlayerNumber" Converter="{StaticResource AddOne}" />
+        </MultiBinding>
+    </Window.Title>
+    <Window.Resources>
+        <ui:NoDisplayNegativeConverter x:Key="NoDisplayNegative" />
+        <ui:LevelsTotalConverter x:Key="LevelsTotal" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Name="LevelRecordGrid" x:FieldModifier="private" ItemsSource="{Binding PlayedLevels}" AutoGenerateColumns="False"
+              IsReadOnly="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled}, Converter={StaticResource NotConverter}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{StaticResource LevelID}" Binding="{Binding LevelID}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ToolTip>
+                                        <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource LevelID}" /><LineBreak /><StaticResourceExtension ResourceKey="LevelIDDescription" />
+                                        </TextBlock>
+                                    </ToolTip>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{StaticResource MostGoos}" Binding="{Binding MostGoos, Converter={StaticResource NoDisplayNegative}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ToolTip>
+                                        <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource MostGoos}" /><LineBreak /><StaticResourceExtension ResourceKey="MostGoosDescription" />
+                                        </TextBlock>
+                                    </ToolTip>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{StaticResource FewestMoves}" Binding="{Binding FewestMoves, Converter={StaticResource NoDisplayNegative}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ToolTip>
+                                        <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource FewestMoves}" /><LineBreak /><StaticResourceExtension ResourceKey="FewestMovesDescription" />
+                                        </TextBlock>
+                                    </ToolTip>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{StaticResource FewestSeconds}" Binding="{Binding FewestSeconds, Converter={StaticResource NoDisplayNegative}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ToolTip>
+                                        <TextBlock TextWrapping="Wrap">
+                                        <Run Style="{StaticResource ToolTipTitle}" Text="{StaticResource FewestSeconds}" /><LineBreak /><StaticResourceExtension ResourceKey="FewestSecondsDescription" />
+                                        </TextBlock>
+                                    </ToolTip>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.CommandBindings>
+                <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMostGoos" CanExecute="PlayedLevelSelected" />
+                <CommandBinding Command="ui:Commands.EditItem2" Executed="EditFewestMoves" CanExecute="PlayedLevelSelected" />
+                <CommandBinding Command="ui:Commands.EditItem3" Executed="EditFewestSeconds" CanExecute="PlayedLevelSelected" />
+                <CommandBinding Command="ui:Commands.EditItem4" Executed="SkipLevels" CanExecute="PlayedLevelSelected" />
+                <CommandBinding Command="ui:Commands.Insert" Executed="AddPlayedLevel" />
+                <CommandBinding Command="Copy" Executed="CopyPlayedLevel" CanExecute="SinglePlayedLevelSelected" />
+                <CommandBinding Command="ApplicationCommands.Delete" Executed="RemovePlayedLevel" CanExecute="PlayedLevelSelected" />
+            </DataGrid.CommandBindings>
+            <DataGrid.ContextMenu>
+                <ContextMenu Visibility="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled}, Converter={StaticResource VisibleWhileTrue}}">
+                    <MenuItem Header="{StaticResource ContextMenuEditLevelRecordMostGoos}" Command="ui:Commands.EditItem1" />
+                    <MenuItem Header="{StaticResource ContextMenuEditLevelRecordFewestMoves}" Command="ui:Commands.EditItem2" />
+                    <MenuItem Header="{StaticResource ContextMenuEditLevelRecordFewestSeconds}" Command="ui:Commands.EditItem3" />
+                    <MenuItem Header="{StaticResource ContextMenuEditLevelRecordSkipped}" Command="ui:Commands.EditItem4" />
+                    <Separator />
+                    <MenuItem Header="{StaticResource ContextMenuAddLevelRecord}" Command="ui:Commands.Insert" />
+                    <MenuItem Header="{StaticResource ContextMenuCopyLevelRecord}" Command="Copy" />
+                    <MenuItem Header="{StaticResource ContextMenuRemoveLevelRecords}" Command="ApplicationCommands.Delete" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <TextBlock Name="TotalText" x:FieldModifier="private" Grid.Row="2" Text="{Binding Converter={StaticResource LevelsTotal}}" />
+    </Grid>
+</Window>
