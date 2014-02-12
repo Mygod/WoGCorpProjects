@@ -1,31 +1,26 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Win32;
+using Mygod.Windows;
+using VBStartupEventArgs = Microsoft.VisualBasic.ApplicationServices.StartupEventArgs;
 
 namespace Mygod.WorldOfGoo.Cursor
 {
-    public partial class App
+    public sealed partial class App
     {
-        private void OnStartup(object sender, StartupEventArgs e)
-        {
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-        }
-
         private void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
             OnError(e.Exception);
         }
 
-        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            OnError(e.ExceptionObject as Exception);
-        }
-
-        private static void OnError(Exception e)
+        public static void OnError(Exception e)
         {
             if (e == null || e is ThreadAbortException) return;
             var msg = e.GetMessage();
@@ -35,24 +30,59 @@ namespace Mygod.WorldOfGoo.Cursor
         }
     }
 
-    public static class ExceptionHelper
+    public sealed class Program : WindowsFormsApplicationBase
     {
-        public static string GetMessage(this Exception e)
+        private static readonly string RegistryKey = "EnableSecureUIAPaths", RegistryKeyBackup = RegistryKey + "_WoGCursor";
+
+        [STAThread]
+        public static void Main(string[] args)
         {
-            var result = new StringBuilder();
-            GetMessage(e, result);
-            return result.ToString();
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            if (args.Length == 1 && "-u".Equals(args[0], StringComparison.InvariantCultureIgnoreCase))
+            {
+                Uninstall();
+                return;
+            }
+            new Program().Run(args);
+        }
+        private Program()
+        {
+            IsSingleInstance = true;
         }
 
-        private static void GetMessage(Exception e, StringBuilder result)
+        protected override bool OnStartup(VBStartupEventArgs e)
         {
-            while (e != null && !(e is AggregateException))
+            var app = new App();
+            app.InitializeComponent();
+            app.Run();
+            return false;
+        }
+
+        public static void Uninstall()
+        {
+            using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", true))
             {
-                result.AppendFormat("({0}) {1}{2}{3}{2}", e.GetType(), e.Message, Environment.NewLine, e.StackTrace);
-                e = e.InnerException;
+                var val = (int)key.GetValue(RegistryKeyBackup, -1);
+                key.DeleteValue(RegistryKeyBackup, false);
+                if (val < 0) key.DeleteValue(RegistryKey);
+                else key.SetValue(RegistryKey, val);
             }
-            var ae = e as AggregateException;
-            if (ae != null) foreach (var ex in ae.InnerExceptions) GetMessage(ex, result);
+            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine);
+            store.Open(OpenFlags.ReadWrite);
+            store.Remove(new X509Certificate2(CurrentApp.ReadResourceBytes("/Mygod.cer")));
+            store.Close();
+            MessageBox.Show(@"Uninstallation finished.
+Some files are not deleted. You can delete them manually:"
+                                + ("crash.log,Settings.ini,World of Goo Cursor.exe,World of Goo Cursor.pdb,WPFToolkit.Extended.dll,"
+                                    + "WPFToolkit.Extended.pdb").Split(',')
+                                    .Where(file => File.Exists(Path.Combine(CurrentApp.Directory, file)))
+                                    .Aggregate(string.Empty, (s, n) => s + Environment.NewLine + n),
+                            "Uninstall", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private static void OnUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            App.OnError(e.ExceptionObject as Exception);
         }
     }
 }

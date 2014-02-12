@@ -1,7 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Mygod.IO;
+using Mygod.Windows;
 
 namespace Mygod.WorldOfGoo.Cursor
 {
@@ -32,6 +36,8 @@ namespace Mygod.WorldOfGoo.Cursor
             ShrinkRateData.DataChanged += OnPropertyChanged;
             ShowOriginalCursorData.DataChanged += OnPropertyChanged;
             SmootherCurveData.DataChanged += OnPropertyChanged;
+            UACIcon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.SystemIcons.Shield.Handle, Int32Rect.Empty,
+                                                          BitmapSizeOptions.FromEmptyOptions());
         }
 
         private static readonly ColorData ForegroundData, BorderData;
@@ -51,8 +57,17 @@ namespace Mygod.WorldOfGoo.Cursor
         public static double ShrinkRate { get { return ShrinkRateData.Get(); } set { ShrinkRateData.Set(value); } }
         public static double RefreshRate { get { return RefreshRateData.Get(); } set { RefreshRateData.Set(value); } }
         public static int Length { get { return LengthData.Get(); } set { LengthData.Set(value); } }
-        public static bool ShowOriginalCursor { get { return ShowOriginalCursorData.Get(); } set { ShowOriginalCursorData.Set(value); } }
+        public static bool ShowOriginalCursor
+            { get { return ShowOriginalCursorData.Get(); } set { ShowOriginalCursorData.Set(value); } }
         public static bool SmootherCurve { get { return SmootherCurveData.Get(); } set { SmootherCurveData.Set(value); } }
+
+        public static bool AutoStartup
+        {
+            get { return StartupManager.IsStartAtWindowsStartup("WoGCursor"); }
+            set { StartupManager.SetStartAtWindowsStartup("WoGCursor", value); OnPropertyChanged("AutoStartup"); }
+        }
+
+        public static BitmapSource UACIcon { get; private set; }
 
         public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
         private static void OnPropertyChanged(string propertyName)

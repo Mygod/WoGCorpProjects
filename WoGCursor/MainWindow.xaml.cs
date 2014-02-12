@@ -13,24 +13,21 @@ namespace Mygod.WorldOfGoo.Cursor
         public MainWindow()
         {
             InitializeComponent();
-            refreshTimer = new DispatcherTimer(TimeSpan.FromSeconds(1 / Settings.RefreshRate),
-                                               DispatcherPriority.Render, Refresh, Dispatcher);
+            var refreshTimer = new DispatcherTimer(TimeSpan.FromSeconds(1 / Settings.RefreshRate),
+                                                   DispatcherPriority.Render, Refresh, Dispatcher);
             Settings.ShowOriginalCursorData.DataChanged += Update;
             Settings.RefreshRateData.DataChanged +=
                 (sender, e) => refreshTimer.Interval = TimeSpan.FromSeconds(1 / Settings.RefreshRate);
-            var notifyIcon = new NotifyIcon { Icon = CurrentApp.DrawingIcon, Text = CurrentApp.Title, Visible = true };
-            notifyIcon.MouseClick += NotifyIconClicked;
-            notifyIcon.ShowBalloonTip(10000, CurrentApp.Title,
+            GC.KeepAlive(refreshTimer);
+            NotifyIcon = new NotifyIcon { Icon = CurrentApp.DrawingIcon, Text = CurrentApp.Title, Visible = true };
+            NotifyIcon.MouseClick += NotifyIconClicked;
+            NotifyIcon.ShowBalloonTip(10000, CurrentApp.Title,
                                       "Welcome! Left click here to configure your cursor, right click to quit.", ToolTipIcon.Info);
-            GC.KeepAlive(notifyIcon);
         }
 
-        // ReSharper disable NotAccessedField.Local
-        private readonly DispatcherTimer refreshTimer;
-        // ReSharper restore NotAccessedField.Local
-
+        public readonly NotifyIcon NotifyIcon;
         private SettingsWindow settingsWindow;
-        private SettingsWindow SettingsWindow { get { return settingsWindow ?? (settingsWindow = new SettingsWindow(this)); } }
+        private SettingsWindow SettingsWindow { get { return settingsWindow ?? (settingsWindow = new SettingsWindow()); } }
 
         private void NotifyIconClicked(object sender, MouseEventArgs e)
         {

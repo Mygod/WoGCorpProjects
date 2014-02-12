@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Principal;
 using System.Windows;
 using Mygod.Windows;
 
@@ -8,23 +9,23 @@ namespace Mygod.WorldOfGoo.Cursor
 {
     public sealed partial class SettingsWindow
     {
-        public SettingsWindow(MainWindow parent)
+        public SettingsWindow()
         {
-            this.parent = parent;
+            parent = (MainWindow) Application.Current.MainWindow;
             InitializeComponent();
-            AutoStartup.IsChecked = StartupManager.IsStartAtWindowsStartup("WoGCursor");
         }
 
         private readonly MainWindow parent;
+        private bool showing;
 
         private void OnActivate(object sender, EventArgs e)
         {
-            parent.SetPaused(true);
+            if (!showing) parent.SetPaused(true);
         }
 
         private void OnDeactivate(object sender, EventArgs e)
         {
-            parent.SetPaused(false);
+            if (!showing) parent.SetPaused(false);
         }
 
         private void ResetToDefault(object sender, RoutedEventArgs e)
@@ -43,9 +44,33 @@ namespace Mygod.WorldOfGoo.Cursor
             Hide();
         }
 
-        private void AutoStartupChanged(object sender, RoutedEventArgs e)
+        private void Uninstall(object sender, RoutedEventArgs e)
         {
-            StartupManager.SetStartAtWindowsStartup("WoGCursor", AutoStartup.IsChecked == true);
+            showing = true;
+            if (new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                var result = MessageBox.Show(this, "Are you sure to uninstall this application?", "Uninstall", 
+                                             MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (result == MessageBoxResult.Yes)
+                {
+                    parent.NotifyIcon.Visible = false;
+                    Program.Uninstall();
+                    Application.Current.Shutdown();
+                }
+                else showing = false;
+            }
+            else
+                try
+                {
+                    parent.NotifyIcon.Visible = false;
+                    Process.Start(new ProcessStartInfo(CurrentApp.Path, "-u") { Verb = "runas" });
+                    Application.Current.Shutdown();
+                }
+                catch (Win32Exception)  // UAC canceled
+                {
+                    parent.NotifyIcon.Visible = true;
+                    showing = false;
+                }
         }
     }
 }
