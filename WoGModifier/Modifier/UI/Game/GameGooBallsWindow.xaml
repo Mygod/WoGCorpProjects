@@ -12,28 +12,9 @@
     <Window.Resources>
         <ui:GooBallThumbnailConverter x:Key="Thumbnail" />
         <ui:GooBallThumbnailHeightConverter x:Key="ThumbnailHeight" />
-        <ControlTemplate x:Key="WrapTemplate">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <WrapPanel IsItemsHost="True" />
-            </ScrollViewer>
-        </ControlTemplate>
-        <DataTemplate DataType="{x:Type wog:GooBall}" x:Key="WrapItemTemplate">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Image Source="{Binding ThumbnailUri, Converter={StaticResource Thumbnail}}"
-                       HorizontalAlignment="Center" Name="GooBallImage"
-                       MaxHeight="{Binding Source, RelativeSource={RelativeSource Mode=Self},
-                                           Converter={StaticResource ThumbnailHeight}}" />
-                <TextBlock Text="{Binding ID}" Grid.Row="1" HorizontalAlignment="Center" />
-            </Grid>
-        </DataTemplate>
     </Window.Resources>
     <ListBox Name="GooBallList" SelectionMode="Extended" x:FieldModifier="private"
-             PreviewMouseWheel="GooBallListMouseWheel" Template="{StaticResource WrapTemplate}"
-             ListBoxItem.PreviewMouseLeftButtonDown="DragGooBall" ItemTemplate="{StaticResource WrapItemTemplate}">
+             PreviewMouseWheel="GooBallListMouseWheel">
         <ListBox.CommandBindings>
             <CommandBinding Command="ui:Commands.Process" Executed="ProcessGooBalls" />
             <CommandBinding Command="Undo" Executed="ReverseGooBalls" />
@@ -42,6 +23,33 @@
             <CommandBinding Command="Copy" Executed="CopyGooBalls" />
             <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteBalls" />
         </ListBox.CommandBindings>
+        <ListBox.Template>
+            <ControlTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <WrapPanel IsItemsHost="True" />
+                </ScrollViewer>
+            </ControlTemplate>
+        </ListBox.Template>
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type wog:GooBall}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding ThumbnailUri, Converter={StaticResource Thumbnail}}"
+                       HorizontalAlignment="Center" Name="GooBallImage"
+                       MaxHeight="{Binding Source, RelativeSource={RelativeSource Mode=Self},
+                                           Converter={StaticResource ThumbnailHeight}}" />
+                    <TextBlock Text="{Binding ID}" Grid.Row="1" HorizontalAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DragGooBall" />
+            </Style>
+        </ListBox.ItemContainerStyle>
         <ListBox.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuProcessGooBalls}" Command="ui:Commands.Process" />
