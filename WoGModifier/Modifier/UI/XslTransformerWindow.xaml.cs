@@ -20,7 +20,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             try
             {
-                transform.Load(XmlReader.Create(new StringReader(Xsl.Text)), new XsltSettings(true, true), new XmlUrlResolver());
+                transform.Load(XmlReader.Create(new StringReader(Xsl.Text)), new XsltSettings(true, true),
+                                                new XmlUrlResolver());
                 var writer = new StringWriter();
                 transform.Transform(XmlReader.Create(new StringReader(Source.Text)), null, 
                     XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }), new XmlUrlResolver());

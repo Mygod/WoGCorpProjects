@@ -1,7 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameGooBallsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
-        xmlns:WoG="clr-namespace:Mygod.WorldOfGoo" xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}"
-        Closing="BlockClosing" Height="300" Width="400">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameGooBallsWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" xmlns:wog="clr-namespace:Mygod.WorldOfGoo"
+        Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing" Height="300" Width="400">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource GameGooBallsWindowTitle}" />
@@ -10,53 +10,58 @@
         </MultiBinding>
     </Window.Title>
     <Window.Resources>
-        <UI:GooBallThumbnailConverter x:Key="Thumbnail" />
-        <UI:GooBallThumbnailHeightConverter x:Key="ThumbnailHeight" />
+        <ui:GooBallThumbnailConverter x:Key="Thumbnail" />
+        <ui:GooBallThumbnailHeightConverter x:Key="ThumbnailHeight" />
         <ControlTemplate x:Key="WrapTemplate">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <WrapPanel IsItemsHost="True" />
             </ScrollViewer>
         </ControlTemplate>
-        <DataTemplate DataType="{x:Type WoG:GooBall}" x:Key="WrapItemTemplate">
+        <DataTemplate DataType="{x:Type wog:GooBall}" x:Key="WrapItemTemplate">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Image Source="{Binding ThumbnailUri, Converter={StaticResource Thumbnail}}" HorizontalAlignment="Center" Name="GooBallImage"
-                           MaxHeight="{Binding Source, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ThumbnailHeight}}" />
+                <Image Source="{Binding ThumbnailUri, Converter={StaticResource Thumbnail}}"
+                       HorizontalAlignment="Center" Name="GooBallImage"
+                       MaxHeight="{Binding Source, RelativeSource={RelativeSource Mode=Self},
+                                           Converter={StaticResource ThumbnailHeight}}" />
                 <TextBlock Text="{Binding ID}" Grid.Row="1" HorizontalAlignment="Center" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
-    <ListBox Name="GooBallList" SelectionMode="Extended" x:FieldModifier="private" Grid.Row="1" PreviewMouseWheel="GooBallListMouseWheel"
-             ListBoxItem.PreviewMouseLeftButtonDown="DragGooBall"
-             Template="{StaticResource WrapTemplate}" ItemTemplate="{StaticResource WrapItemTemplate}">
+    <ListBox Name="GooBallList" SelectionMode="Extended" x:FieldModifier="private"
+             PreviewMouseWheel="GooBallListMouseWheel" Template="{StaticResource WrapTemplate}"
+             ListBoxItem.PreviewMouseLeftButtonDown="DragGooBall" ItemTemplate="{StaticResource WrapItemTemplate}">
         <ListBox.CommandBindings>
-            <CommandBinding Command="UI:Commands.Process" Executed="ProcessGooBalls" />
+            <CommandBinding Command="ui:Commands.Process" Executed="ProcessGooBalls" />
             <CommandBinding Command="Undo" Executed="ReverseGooBalls" />
-            <CommandBinding Command="UI:Commands.Restore" Executed="RestoreGooBalls" />
+            <CommandBinding Command="ui:Commands.Restore" Executed="RestoreGooBalls" />
             <CommandBinding Command="Properties" Executed="GooBallsProperties" />
             <CommandBinding Command="Copy" Executed="CopyGooBalls" />
             <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteBalls" />
         </ListBox.CommandBindings>
         <ListBox.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="{StaticResource ContextMenuProcessGooBalls}" Command="UI:Commands.Process" />
+                <MenuItem Header="{StaticResource ContextMenuProcessGooBalls}" Command="ui:Commands.Process" />
                 <MenuItem Header="{StaticResource ContextMenuReverseGooBalls}" Command="Undo" />
-                <MenuItem Header="{StaticResource ContextMenuRestoreGooBalls}" Command="UI:Commands.Restore" />
+                <MenuItem Header="{StaticResource ContextMenuRestoreGooBalls}" Command="ui:Commands.Restore" />
                 <MenuItem Click="AddTestGooBall">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <AccessText Text="{StaticResource ContextMenuAddGooBallsToTestLeft}" />
-                            <TextBox Name="AddTestGooBallNumbersBox" x:FieldModifier="private" Text="1" LostFocus="CheckAddTestGooBallNumbersBox" />
+                            <TextBox Name="AddTestGooBallNumbersBox" x:FieldModifier="private" Text="1"
+                                     LostFocus="CheckAddTestGooBallNumbersBox" />
                             <AccessText Text="{StaticResource ContextMenuAddGooBallsToTestRight}" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="{StaticResource ContextMenuEditGooBallBallsXmlBin}" Tag="balls" Click="EditGooBallFile" />
-                <MenuItem Header="{StaticResource ContextMenuEditGooBallResourcesXmlBin}" Tag="resources" Click="EditGooBallFile" />
+                <MenuItem Header="{StaticResource ContextMenuEditGooBallBallsXmlBin}" Tag="balls"
+                          Click="EditGooBallFile" />
+                <MenuItem Header="{StaticResource ContextMenuEditGooBallResourcesXmlBin}" Tag="resources"
+                          Click="EditGooBallFile" />
                 <Separator />
                 <MenuItem Header="{StaticResource ContextMenuCopyGooBalls}" Command="Copy" />
                 <MenuItem Header="{StaticResource ContextMenuDeleteGooBalls}" Command="ApplicationCommands.Delete" />

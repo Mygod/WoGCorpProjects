@@ -16,7 +16,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         private List<GooBall> balls;
         internal OperationType CurrentType;
 
-        internal void RefreshAndShow(Dictionary<string, Feature> fts, IEnumerable<Level> levelsToEdit, OperationType type)
+        internal void RefreshAndShow(Dictionary<string, Feature> fts, IEnumerable<Level> levelsToEdit,
+                                     OperationType type)
         {
             levels = levelsToEdit.ToList();
             if (levels.Count <= 0) return;
@@ -25,7 +26,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             CurrentType = type;
             ShowDialog();
         }
-        internal void RefreshAndShow(Dictionary<string, Feature> fts, IEnumerable<GooBall> ballsToEdit, OperationType type)
+        internal void RefreshAndShow(Dictionary<string, Feature> fts, IEnumerable<GooBall> ballsToEdit,
+                                     OperationType type)
         {
             balls = ballsToEdit.ToList();
             if (balls.Count <= 0) return;
@@ -44,13 +46,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         private void LevelCheat()
         {
             Close();
-            new ProcessingWindow(levels[0].GameParent).LevelBatchProcess(FeatureList.SelectedItems.Cast<Feature>().ToList(), levels, CurrentType);
+            new ProcessingWindow(levels[0].GameParent)
+                .LevelBatchProcess(FeatureList.SelectedItems.Cast<Feature>().ToList(), levels, CurrentType);
         }
 
         private void GooBallCheat()
         {
             Close();
-            new ProcessingWindow(balls[0].GameParent).GooBallBatchProcess(FeatureList.SelectedItems.Cast<Feature>().ToList(), balls, CurrentType);
+            new ProcessingWindow(balls[0].GameParent)
+                .GooBallBatchProcess(FeatureList.SelectedItems.Cast<Feature>().ToList(), balls, CurrentType);
         }
     }
 
@@ -59,7 +63,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var dialog = (SelectFeaturesDialog) Window.GetWindow(container);
-            if (dialog != null) return (DataTemplate) dialog.TryFindResource(dialog.CurrentType.ToString() + "Template");
+            if (dialog != null) return (DataTemplate) dialog.TryFindResource(dialog.CurrentType + "Template");
             return base.SelectTemplate(item, container);
         }
     }

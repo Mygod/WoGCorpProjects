@@ -73,9 +73,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 process = processes[0];
                 EditEnabled = true;
             }
-            BallsCollected.Text = editor.Balls.ToString();
-            BallsRequired.Text = editor.BallsRequired.ToString();
-            MovesUsed.Text = editor.Moves.ToString();
+            BallsCollected.Text = editor.Balls.ToString(CultureInfo.InvariantCulture);
+            BallsRequired.Text = editor.BallsRequired.ToString(CultureInfo.InvariantCulture);
+            MovesUsed.Text = editor.Moves.ToString(CultureInfo.InvariantCulture);
             GooBallsUndraggable.IsChecked = editor.Undraggable;
             Letterboxed.IsChecked = editor.Letterboxed;
             //MenuEnabled.IsChecked = editor.MenuEnabled;
@@ -89,35 +89,23 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             switch (int.Parse(box.Tag.ToString(), CultureInfo.InvariantCulture))
             {
                 case 0:
-                {
                     Topmost = box.IsChecked == true;
                     break;
-                }
                 case 1:
-                {
                     editor.Undraggable = box.IsChecked == true;
                     break;
-                }
                 case 2:
-                {
                     editor.Letterboxed = box.IsChecked == true;
                     break;
-                }
                 case 3:
-                {
                     //editor.MenuEnabled = box.IsChecked == true;
                     break;
-                }
                 case 4:
-                {
                     editor.Paused = box.IsChecked == true;
                     break;
-                }
                 case 5:
-                {
                     //editor.ShowBallsInTank = box.IsChecked == true;
                     break;
-                }
             }
         }
 
@@ -138,7 +126,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void EditBallsRequired(object sender, RoutedEventArgs e)
         {
             var result = Dialog.Input(Resrc.EnterNewValueTitle, BallsRequired.Text, EnterType.Int32);
-            if (!string.IsNullOrWhiteSpace(result) && result != BallsRequired.Text) editor.BallsRequired = int.Parse(result);
+            if (!string.IsNullOrWhiteSpace(result) && result != BallsRequired.Text)
+                editor.BallsRequired = int.Parse(result);
         }
 
         private void EditMovesUsed(object sender, RoutedEventArgs e)

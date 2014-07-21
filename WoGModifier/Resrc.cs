@@ -18,7 +18,8 @@ namespace Mygod.WorldOfGoo
 
         private static AssemblyName NowAssemblyName { get { return Assembly.GetCallingAssembly().GetName(); } }
         public static string ProgramName { get { return GetString("ProgramName"); } }
-        public static string Title { get { return ProgramName + " V" + NowAssemblyName.Version + GetString("Version"); } }
+        public static string Title
+            { get { return ProgramName + " V" + NowAssemblyName.Version + GetString("Version"); } }
 
         public static string Ask { get { return GetString("Ask"); } }
         public static string Backup { get { return GetString("Backup"); } }
@@ -39,11 +40,12 @@ namespace Mygod.WorldOfGoo
         public static string Restore { get { return GetString("Restore"); } }
         public static string UnknownLanguage { get { return GetString("UnknownLanguage"); } }
 
-        public static string Cancel { get { return GetString("Cancel"); } }
-        public static string Close { get { return GetString("Close"); } }
         public static string FatalBreak { get { return GetString("FatalBreak"); } }
+        public static string FatalBreakInstructions { get { return GetString("FatalBreakInstructions"); } }
         public static string FatalContinue { get { return GetString("FatalContinue"); } }
+        public static string FatalContinueInstructions { get { return GetString("FatalContinueInstructions"); } }
         public static string FatalRestart { get { return GetString("FatalRestart"); } }
+        public static string FatalRestartInstructions { get { return GetString("FatalRestartInstructions"); } }
         public static string No { get { return GetString("No"); } }
         public static string OK { get { return GetString("OK"); } }
         public static string Overwrite { get { return GetString("Overwrite"); } }
@@ -55,10 +57,12 @@ namespace Mygod.WorldOfGoo
         public static string BackupSameVolumeDetails { get { return GetString("BackupSameVolumeDetails"); } }
         public static string BackupSuccessfully { get { return GetString("BackupSuccessfully"); } }
         public static string BatchProcessCancelConfirm { get { return GetString("BatchProcessCancelConfirm"); } }
-        public static string BatchProcessCancelConfirmDetails { get { return GetString("BatchProcessCancelConfirmDetails"); } }
+        public static string BatchProcessCancelConfirmDetails
+            { get { return GetString("BatchProcessCancelConfirmDetails"); } }
         public static string BatchProcessError { get { return GetString("BatchProcessError"); } }
         public static string BatchProcessFinish { get { return GetString("BatchProcessFinish"); } }
-        public static string BatchProcessFinishInstruction { get { return GetString("BatchProcessFinishInstruction"); } }
+        public static string BatchProcessFinishInstruction
+            { get { return GetString("BatchProcessFinishInstruction"); } }
         public static string BatchProcessFinishText { get { return GetString("BatchProcessFinishText"); } }
         public static string BatchProcessLog { get { return GetString("BatchProcessLog"); } }
         public static string BatchProcessSuccessfully { get { return GetString("BatchProcessSuccessfully"); } }
@@ -74,8 +78,10 @@ namespace Mygod.WorldOfGoo
         public static string DeleteConfirm { get { return GetString("DeleteConfirm"); } }
         public static string DeleteConfirmDetails { get { return GetString("DeleteConfirmDetails"); } }
         public static string DragFile { get { return GetString("DragFile"); } }
-        public static string EditBackupsDirectorySuccessfully { get { return GetString("EditBackupsDirectorySuccessfully"); } }
-        public static string EnterSkipEndOfLevelSequenceInstruction { get { return GetString("EnterSkipEndOfLevelSequenceInstruction"); } }
+        public static string EditBackupsDirectorySuccessfully
+            { get { return GetString("EditBackupsDirectorySuccessfully"); } }
+        public static string EnterSkipEndOfLevelSequenceInstruction
+            { get { return GetString("EnterSkipEndOfLevelSequenceInstruction"); } }
         public static string ErrorDetailsLabel { get { return GetString("ErrorDetailsLabel"); } }
         public static string FailedLoadingGame { get { return GetString("FailedLoadingGame"); } }
         public static string FailedLoadingProfile { get { return GetString("FailedLoadingProfile"); } }
@@ -85,14 +91,16 @@ namespace Mygod.WorldOfGoo
         public static string GameAlreadyRunning { get { return GetString("GameAlreadyRunning"); } }
         public static string GarbageCleanupDone { get { return GetString("GarbageCleanupDone"); } }
         public static string GarbageCleanupDetails { get { return GetString("GarbageCleanupDetails"); } }
-        public static string GenerateOnlinePlayerKeyCountryNotSupportedInfo
-            { get { return GetString("GenerateOnlinePlayerKeyCountryNotSupportedInfo"); } }
-        public static string GenerateOnlinePlayerKeyCountryNotSupported { get { return GetString("GenerateOnlinePlayerKeyCountryNotSupported"); } }
-        public static string GenerateOnlinePlayerKeyEmptyResponse { get { return GetString("GenerateOnlinePlayerKeyEmptyResponse"); } }
-        public static string GenerateOnlinePlayerKeyFailed { get { return GetString("GenerateOnlinePlayerKeyFailed"); } }
-        public static string GenerateOnlinePlayerKeyInstruction { get { return GetString("GenerateOnlinePlayerKeyInstruction"); } }
-        public static string GenerateOnlinePlayerKeyInvalidResponse { get { return GetString("GenerateOnlinePlayerKeyInvalidResponse"); } }
-        public static string GenerateOnlinePlayerKeyProcessFailed { get { return GetString("GenerateOnlinePlayerKeyProcessFailed"); } }
+        public static string GenerateOnlinePlayerKeyEmptyResponse
+            { get { return GetString("GenerateOnlinePlayerKeyEmptyResponse"); } }
+        public static string GenerateOnlinePlayerKeyFailed
+            { get { return GetString("GenerateOnlinePlayerKeyFailed"); } }
+        public static string GenerateOnlinePlayerKeyInstruction
+            { get { return GetString("GenerateOnlinePlayerKeyInstruction"); } }
+        public static string GenerateOnlinePlayerKeyInvalidResponse
+            { get { return GetString("GenerateOnlinePlayerKeyInvalidResponse"); } }
+        public static string GenerateOnlinePlayerKeyProcessFailed
+            { get { return GetString("GenerateOnlinePlayerKeyProcessFailed"); } }
         public static string GenerateOnlinePlayerKeyText { get { return GetString("GenerateOnlinePlayerKeyText"); } }
         public static string IncorrectInput { get { return GetString("IncorrectInput"); } }
         public static string NoModifiedRecordFound { get { return GetString("NoModifiedRecordFound"); } }
@@ -136,7 +144,8 @@ namespace Mygod.WorldOfGoo
 
         public static string BatchProcessDetails { get { return GetString("BatchProcessDetails"); } }
         public static string EditDetails { get { return GetString("EditDetails"); } }
-        public static string EnterSkipEndOfLevelSequenceText { get { return GetString("EnterSkipEndOfLevelSequenceText"); } }
+        public static string EnterSkipEndOfLevelSequenceText
+            { get { return GetString("EnterSkipEndOfLevelSequenceText"); } }
         public static string ErrorDetails { get { return GetString("ErrorDetails"); } }
         public static string ErrorStart { get { return GetString("ErrorStart"); } }
         public static string FeatureEditDetails { get { return GetString("FeatureEditDetails"); } }
@@ -149,17 +158,25 @@ namespace Mygod.WorldOfGoo
         public static string JumpListSelectBinFiles { get { return GetString("JumpListSelectBinFiles"); } }
         public static string JumpListTechSupport { get { return GetString("JumpListTechSupport"); } }
 
-        public static string ExceptionFeaturesXmlVersionIncorrect { get { return GetString("ExceptionFeaturesXmlVersionIncorrect"); } }
-        public static string ExceptionXmlElementDoesNotExist { get { return GetString("ExceptionXmlElementDoesNotExist"); } }
-        public static string ExceptionXmlAttributeDoesNotExist { get { return GetString("ExceptionXmlAttributeDoesNotExist"); } }
-        public static string ExceptionXmlElementCannotRecognize { get { return GetString("ExceptionXmlElementCannotRecognize"); } }
+        public static string ExceptionFeaturesXmlVersionIncorrect
+            { get { return GetString("ExceptionFeaturesXmlVersionIncorrect"); } }
+        public static string ExceptionXmlElementDoesNotExist
+            { get { return GetString("ExceptionXmlElementDoesNotExist"); } }
+        public static string ExceptionXmlAttributeDoesNotExist
+            { get { return GetString("ExceptionXmlAttributeDoesNotExist"); } }
+        public static string ExceptionXmlElementCannotRecognize
+            { get { return GetString("ExceptionXmlElementCannotRecognize"); } }
 
         public static string ErrorOnBinaryFileEdit { get { return GetString("ErrorOnBinaryFileEdit"); } }
-        public static string ErrorGooBallsTesterPositiveIntegerRequired { get { return GetString("ErrorGooBallsTesterPositiveIntegerRequired"); } }
+        public static string ErrorGooBallsTesterPositiveIntegerRequired
+            { get { return GetString("ErrorGooBallsTesterPositiveIntegerRequired"); } }
         public static string ErrorGooBallsTesterNotExist { get { return GetString("ErrorGooBallsTesterNotExist"); } }
-        public static string WarningGooBallsTesterCountGreaterThan1000 { get { return GetString("WarningGooBallsTesterCountGreaterThan1000"); } }
-        public static string WarningGooBallsTesterCountGreaterThan20000 { get { return GetString("WarningGooBallsTesterCountGreaterThan20000"); } }
-        public static string ErrorGooBallsTesterCountGreaterThan500000 { get { return GetString("ErrorGooBallsTesterCountGreaterThan500000"); } }
+        public static string WarningGooBallsTesterCountGreaterThan1000
+            { get { return GetString("WarningGooBallsTesterCountGreaterThan1000"); } }
+        public static string WarningGooBallsTesterCountGreaterThan20000
+            { get { return GetString("WarningGooBallsTesterCountGreaterThan20000"); } }
+        public static string ErrorGooBallsTesterCountGreaterThan500000
+            { get { return GetString("ErrorGooBallsTesterCountGreaterThan500000"); } }
 
         public static string EnterBackupsDirectoryTitle { get { return GetString("EnterBackupsDirectoryTitle"); } }
         public static string EnterBackupNameTitle { get { return GetString("EnterBackupNameTitle"); } }

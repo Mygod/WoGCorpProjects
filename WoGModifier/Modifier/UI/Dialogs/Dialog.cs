@@ -1,52 +1,69 @@
 ﻿using System;
 using System.Collections;
 using System.Windows;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.Windows.Controls;
-using Mygod.Windows.Dialogs;
 using Mygod.WorldOfGoo.Modifier.IO;
 
 namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
 {
     public static class Dialog
     {
-        public static void Information(Window parent, string instruction, string text = null, string title = null, string okText = null)
+        public static void Information(Window parent, string instruction, string text = null, string title = null)
         {
-            TaskDialog.Show(new TaskDialogOptions { Owner = parent, MainInstruction = instruction, Content = text, 
-                Title = title ?? Resrc.Information, MainIcon = TaskDialogIcon.Information, CustomButtons = new[] { okText ?? Resrc.OK } });
+            new TaskDialog
+            {
+                OwnerWindowHandle = parent.GetHwnd(), InstructionText = instruction, Text = text,
+                Caption = title ?? Resrc.Information, Icon = TaskDialogStandardIcon.Information,
+                StandardButtons = TaskDialogStandardButtons.Ok
+            }.Show();
         }
 
-        public static void Finish(Window parent, string instruction, string text = null, string okText = null)
+        public static void Finish(Window parent, string instruction, string text = null)
         {
-            Information(parent, instruction, text, Resrc.Finish, okText);
+            Information(parent, instruction, text, Resrc.Finish);
         }
 
         public static void Error(Window parent, string pos, string details = null, Exception e = null)
         {
             Log.Error.Write(e);
-            var options = new TaskDialogOptions
+            var dialog = new TaskDialog
             {
-                Title = Resrc.Error, MainInstruction = pos, Content = details, MainIcon = TaskDialogIcon.Error, Owner = parent,
-                CustomButtons = new[] { Resrc.Close }
+                Caption = Resrc.Error, InstructionText = pos, Text = details, Icon = TaskDialogStandardIcon.Error,
+                OwnerWindowHandle = parent.GetHwnd(), StandardButtons = TaskDialogStandardButtons.Close
             };
             if (e != null)
             {
-                options.CollapsedControlText = options.ExpandedControlText = Resrc.ErrorDetailsLabel;
-                options.ExpandedInfo = e.Message;
+                dialog.DetailsCollapsedLabel = dialog.DetailsExpandedLabel = Resrc.ErrorDetailsLabel;
+                dialog.DetailsExpandedText = e.Message;
             }
-            TaskDialog.Show(options);
+            dialog.Show();
         }
 
-        public static int Fatal(Exception e)
+        public static TaskDialogResult Fatal(Exception exc)
         {
-            Log.Crash.Write(e);
-            return TaskDialog.Show(new TaskDialogOptions { Title = Resrc.Error, MainInstruction = Resrc.Fatal, 
-                AllowDialogCancellation = true, MainIcon = TaskDialogIcon.Error, CollapsedControlText = Resrc.ErrorDetailsLabel, 
-                ExpandedControlText = Resrc.ErrorDetailsLabel, ExpandedInfo = e.Message, DefaultButtonIndex = 0, 
-                CommandButtons = new[] { Resrc.FatalBreak, Resrc.FatalRestart, Resrc.FatalContinue }}).CommandButtonResult ?? 0;
+            Log.Crash.Write(exc);
+            TaskDialogCommandLink
+                breakLink = new TaskDialogCommandLink("Break", Resrc.FatalBreak, Resrc.FatalBreakInstructions),
+                restartLink = new TaskDialogCommandLink("Restart", Resrc.FatalRestart, Resrc.FatalRestartInstructions),
+                continueLink = new TaskDialogCommandLink("Continue", Resrc.FatalContinue,
+                                                         Resrc.FatalContinueInstructions);
+            var dialog = new TaskDialog
+            {
+                Caption = Resrc.Error, InstructionText = Resrc.Fatal, Cancelable = true,
+                Icon = TaskDialogStandardIcon.Error, DetailsExpandedText = exc.Message,
+                DetailsCollapsedLabel = Resrc.ErrorDetailsLabel, DetailsExpandedLabel = Resrc.ErrorDetailsLabel,
+                DefaultButtonId = breakLink.Id, Controls = { breakLink, restartLink, continueLink }
+            };
+            breakLink.Click += (sender, e) => dialog.Close(TaskDialogResult.Cancel);
+            restartLink.Click += (sender, e) => dialog.Close(TaskDialogResult.Yes);
+            continueLink.Click += (sender, e) => dialog.Close(TaskDialogResult.No);
+            return dialog.Show();
         }
 
         internal static string Input(string title, string defaultValue = null, EnterType enterType = EnterType.String, 
-                                     Func<string, bool> validCheck = null, IEnumerable list = null, string displayMemberPath = null, 
+                                     Func<string, bool> validCheck = null, IEnumerable list = null,
+                                     string displayMemberPath = null, 
                                      AutoCompleteFilterMode filterMode = AutoCompleteFilterMode.Contains)
         {
             var dialog = new EnterDialog
@@ -57,30 +74,50 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
                     Text = defaultValue, ItemsSource = list, FilterMode = filterMode, 
                     ItemTemplate = DataGridAutoCompleteColumn.GetItemTemplate(displayMemberPath)
                 }, 
-                BrowseButton = {Visibility = enterType == EnterType.Directory ? Visibility.Visible : Visibility.Collapsed}
+                BrowseButton =
+                {
+                    Visibility = enterType == EnterType.Directory ? Visibility.Visible : Visibility.Collapsed
+                }
             };
             dialog.ShowDialog();
             return dialog.Accepted ? dialog.EnterBox.Text : null;
         }
 
-        public static bool YesNoQuestion(Window parent, string instruction, string text = null, string title = null, string yesText = null,
-                                         string noText = null, bool yesDefault = true)
+        public static bool YesNoQuestion(Window parent, string instruction, string text = null, string title = null,
+                                         string yesText = null, string noText = null, bool yesDefault = true)
         {
-            return TaskDialog.Show(new TaskDialogOptions { Title = title ?? Resrc.Ask, MainInstruction = instruction, Content = text, 
-                Owner = parent, MainIcon = TaskDialogIcon.Information, DefaultButtonIndex = yesDefault ? 0 : 1, 
-                CustomButtons = new[] { yesText ?? Resrc.Yes, noText ?? Resrc.No } }).CustomButtonResult == 0;
+            TaskDialogButton yesButton = new TaskDialogButton("Yes", yesText ?? Resrc.Yes),
+                             noButton = new TaskDialogButton("No", noText ?? Resrc.No);
+            var dialog = new TaskDialog
+            {
+                Caption = title ?? Resrc.Ask, InstructionText = instruction, Text = text,
+                OwnerWindowHandle = parent.GetHwnd(), Icon = TaskDialogStandardIcon.Information,
+                DefaultButtonId = yesDefault ? yesButton.Id : noButton.Id, Controls = { yesButton, noButton }
+            };
+            yesButton.Click += (sender, e) => dialog.Close(TaskDialogResult.Yes);
+            noButton.Click += (sender, e) => dialog.Close(TaskDialogResult.No);
+            return dialog.Show() == TaskDialogResult.Yes;
         }
 
-        public static bool? YesNoCancelQuestion(Window parent, string instruction, string text = null, string title = null,
-                                                string yesText = null, string noText = null, bool yesDefault = true)
+        public static bool? YesNoCancelQuestion(Window parent, string instruction, string text = null,
+                                                string title = null, string yesText = null, string noText = null,
+                                                bool yesDefault = true)
         {
-            switch (TaskDialog.Show(new TaskDialogOptions { Title = title ?? Resrc.Ask, MainInstruction = instruction, 
-                AllowDialogCancellation = true, MainIcon = TaskDialogIcon.Information, DefaultButtonIndex = yesDefault ? 0 : 1, 
-                CustomButtons = new[] { yesText ?? Resrc.Yes, noText ?? Resrc.No, Resrc.Cancel }, 
-                Content = text, Owner = parent }).CustomButtonResult)
+            TaskDialogButton yesButton = new TaskDialogButton("Yes", yesText ?? Resrc.Yes),
+                             noButton = new TaskDialogButton("No", noText ?? Resrc.No);
+            var dialog = new TaskDialog
             {
-                case 0: return true;
-                case 1: return false;
+                Caption = title ?? Resrc.Ask, InstructionText = instruction, Text = text, Cancelable = true,
+                OwnerWindowHandle = parent.GetHwnd(), Icon = TaskDialogStandardIcon.Information,
+                DefaultButtonId = yesDefault ? yesButton.Id : noButton.Id, Controls = { yesButton, noButton },
+                StandardButtons = TaskDialogStandardButtons.Cancel
+            };
+            yesButton.Click += (sender, e) => dialog.Close(TaskDialogResult.Yes);
+            noButton.Click += (sender, e) => dialog.Close(TaskDialogResult.No);
+            switch (dialog.Show())
+            {
+                case TaskDialogResult.Yes: return true;
+                case TaskDialogResult.No: return false;
                 default: return null;
             }
         }
@@ -88,9 +125,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         public static bool OKCancelQuestion(Window parent, string instruction, string text = null, string title = null, 
                                             string okText = null)
         {
-            return TaskDialog.Show(new TaskDialogOptions { Title = title ?? Resrc.Ask, MainInstruction = instruction, Content = text, 
-                Owner = parent, MainIcon = TaskDialogIcon.Information, DefaultButtonIndex = 0, 
-                CustomButtons = new[] { okText ?? Resrc.OK, Resrc.Cancel } }).CustomButtonResult == 0;
+            var button = new TaskDialogButton("OK", okText ?? Resrc.OK);
+            var dialog = new TaskDialog
+            {
+                Caption = title ?? Resrc.Ask, InstructionText = instruction, Text = text, Cancelable = true,
+                OwnerWindowHandle = parent.GetHwnd(), Icon = TaskDialogStandardIcon.Information,
+                DefaultButtonId = button.Id, Controls = { button }, StandardButtons = TaskDialogStandardButtons.Cancel
+            };
+            button.Click += (sender, e) => dialog.Close(TaskDialogResult.Ok);
+            return dialog.Show() == TaskDialogResult.Ok;
         }
     }
 }

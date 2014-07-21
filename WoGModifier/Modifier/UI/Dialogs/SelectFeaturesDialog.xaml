@@ -1,7 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.Dialogs.SelectFeaturesDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{StaticResource SelectFeaturesDialogTitle}" Height="400" Width="300"
-        xmlns:Dialogs="clr-namespace:Mygod.WorldOfGoo.Modifier.UI.Dialogs" xmlns:m="http://schemas.mygodstudio.tk/wpf" 
-        Icon="{x:Static m:CurrentApp.MainIcon}">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.Dialogs.SelectFeaturesDialog" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Icon="{x:Static m:CurrentApp.MainIcon}"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{StaticResource SelectFeaturesDialogTitle}"
+        Height="400" Width="300" xmlns:dialogs="clr-namespace:Mygod.WorldOfGoo.Modifier.UI.Dialogs">
     <Window.Resources>
         <DataTemplate x:Key="ProcessTemplate">
             <TextBlock Text="{Binding Process.Description}">
@@ -30,7 +30,7 @@
                 </TextBlock.ToolTip>
             </TextBlock>
         </DataTemplate>
-        <Dialogs:FeatureDisplayInfoSelector x:Key="Selector" />
+        <dialogs:FeatureDisplayInfoSelector x:Key="Selector" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,6 +39,7 @@
         </Grid.RowDefinitions>
         <ListBox Name="FeatureList" x:FieldModifier="private" SelectionMode="Extended" MouseDoubleClick="Accept"
                  ItemTemplateSelector="{StaticResource Selector}" />
-        <Button Content="{StaticResource OK}" HorizontalAlignment="Center" Margin="0,4" IsDefault="True" Click="Accept" Grid.Row="1" />
+        <Button Content="{StaticResource OK}" HorizontalAlignment="Center" Margin="0,4" IsDefault="True"
+                Click="Accept" Grid.Row="1" />
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using Mygod.WorldOfGoo.IO;
 using Mygod.WorldOfGoo.Modifier.UI.Dialogs;
+using Mygod.Xml.Linq;
 
 namespace Mygod.WorldOfGoo.Modifier.UI
 {
@@ -41,7 +42,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void ExecuteLevel(object sender, RoutedEventArgs e)
         {
-            if (!Kernel.Execute(game, SelectedLevels.FirstOrDefault())) Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
+            if (!Kernel.Execute(game, SelectedLevels.FirstOrDefault()))
+                Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
         }
 
         private void LevelsOperation(OperationType type)
@@ -76,14 +78,14 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 var root = XDocument.Load(path).Element(R.Modified);
                 if (root == null) throw Exceptions.XmlElementDoesNotExist(path, R.Modified);
                 var elements = from element in root.Elements(R.Feature)
-                               let ct = int.Parse(element.GetAttribute(R.ModifiedTimes), CultureInfo.InvariantCulture)
-                               where ct != 0 select new { ID = element.GetAttribute(R.ID), ModifiedTimes = ct };
+                               let ct = element.GetAttributeValue<int>(R.ModifiedTimes)
+                               where ct != 0 select new { ID = element.GetAttributeValue(R.ID), ModifiedTimes = ct };
                 s.AppendFormat(Resrc.EditDetails, Resrc.Level, level.ID);
                 foreach (var em in elements)
                 {
-                    var feature = Features.LevelFeatures[em.ID];
-                    s.AppendFormat(Resrc.FeatureEditDetails, 
-                                   (em.ModifiedTimes > 0 ? feature.Process : feature.Reverse).Name, Math.Abs(em.ModifiedTimes));
+                    var feature = Features.LevelFeatures.ContainsKey(em.ID) ? Features.LevelFeatures[em.ID] : null;
+                    s.AppendFormat(Resrc.FeatureEditDetails, feature == null ? "???" :
+                        (em.ModifiedTimes > 0 ? feature.Process : feature.Reverse).Name, Math.Abs(em.ModifiedTimes));
                 }
                 s.AppendLine();
             }
@@ -98,8 +100,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void SortLevels(object sender, ExecutedRoutedEventArgs e)
         {
-            if (LevelList.ItemsSource is IOrderedEnumerable<KeyValuePair<string, Level>>) LevelList.ItemsSource = game.Res.Levels;
-            else LevelList.ItemsSource = game.Res.Levels.OrderBy(p => p.LocalizedName);
+            LevelList.ItemsSource = LevelList.ItemsSource is IOrderedEnumerable<KeyValuePair<string, Level>>
+                ? (IEnumerable) game.Res.Levels : game.Res.Levels.OrderBy(p => p.LocalizedName);
         }
 
         private void PlayMusic(object sender, ExecutedRoutedEventArgs e)
@@ -124,9 +126,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void SearchLevel(object sender, ExecutedRoutedEventArgs e)
         {
             var result = Dialog.Input(Resrc.EnterIDTitle, validCheck: game.Res.Levels.Contains, list: game.Res.Levels);
-            // ReSharper disable AssignNullToNotNullAttribute
-            if (result != null) LevelList.ScrollIntoView(LevelList.SelectedItem = game.Res.Levels.FirstOrDefault(level => level.ID == result));
-            // ReSharper restore AssignNullToNotNullAttribute
+            if (result != null) LevelList.ScrollIntoView(LevelList.SelectedItem =
+                game.Res.Levels.FirstOrDefault(level => level.ID == result));
         }
     }
 }

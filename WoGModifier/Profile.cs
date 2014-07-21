@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,10 @@ namespace Mygod.WorldOfGoo
 
         private void OnPlayersChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems != null) foreach (INotifyPropertyChanged item in e.NewItems) item.PropertyChanged += OnPlayerPropertyChanged;
-            if (e.OldItems != null) foreach (INotifyPropertyChanged item in e.OldItems) item.PropertyChanged -= OnPlayerPropertyChanged;
+            if (e.NewItems != null) foreach (INotifyPropertyChanged item in e.NewItems)
+                item.PropertyChanged += OnPlayerPropertyChanged;
+            if (e.OldItems != null) foreach (INotifyPropertyChanged item in e.OldItems)
+                item.PropertyChanged -= OnPlayerPropertyChanged;
             IsSaved = false;
         }
 
@@ -35,7 +38,8 @@ namespace Mygod.WorldOfGoo
         {
             get
             {
-                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), R.ProfilePath);
+                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                        R.ProfilePath);
                 return File.Exists(path) ? path : null;
             }
         }
@@ -43,7 +47,8 @@ namespace Mygod.WorldOfGoo
         {
             get
             {
-                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), R.ProfilePath);
+                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                                        R.ProfilePath);
                 return File.Exists(path) ? path : null;
             }
         }
@@ -93,8 +98,9 @@ namespace Mygod.WorldOfGoo
             {
                 if (value < 0 || value > 2) throw new ArgumentOutOfRangeException("value");
                 var item = profileContent.SingleOrDefault(s => s.Key == "mrpp");
-                if (item == null) profileContent.Add(new ProfileItem("mrpp", value.ToString()));
-                else item.Value = value.ToString();
+                if (item == null)
+                    profileContent.Add(new ProfileItem("mrpp", value.ToString(CultureInfo.InvariantCulture)));
+                else item.Value = value.ToString(CultureInfo.InvariantCulture);
                 OnPropertyChanged("MostRecentPlayerProfile");
                 OnPropertyChanged("MostRecentPlayer");
             }
@@ -107,7 +113,15 @@ namespace Mygod.WorldOfGoo
             }
         }
 
-        public string Alias { get { return Settings.GetAlias(this); } set { Settings.SetAlias(this, value); OnPropertyChanged("Alias"); } }
+        public string Alias
+        {
+            get { return Settings.GetAlias(this); }
+            set
+            {
+                Settings.SetAlias(this, value);
+                OnPropertyChanged("Alias");
+            }
+        }
 
         public override string ToString()
         {
@@ -154,7 +168,8 @@ namespace Mygod.WorldOfGoo
                     }
                     catch
                     {
-                        input = Encoding.UTF8.GetString((byte[])new BinaryPlistReader().ReadObject(FilePath)["pers2.dat"]);
+                        input = Encoding.UTF8.GetString
+                            ((byte[]) new BinaryPlistReader().ReadObject(FilePath)["pers2.dat"]);
                         isPlistFormat = true;
                     }
                     var position = 0;
@@ -170,7 +185,8 @@ namespace Mygod.WorldOfGoo
                         position++; // read ,
                         var value = input.Substring(position, length);
                         position += length;
-                        if (key.StartsWith("profile_")) Add(new ProfilePlayer(this, key, value, dispatcher as Dispatcher));
+                        if (key.StartsWith("profile_"))
+                            Add(new ProfilePlayer(this, key, value, dispatcher as Dispatcher));
                         else profileContent.Add(new ProfileItem(key, value));
                     }
                 }
@@ -275,7 +291,10 @@ namespace Mygod.WorldOfGoo
             if (d != null) dispatcher = d;
             Key = key;
             Value = value;  // Set a new player if ignores
-            parent.PropertyChanged += (sender, e) => { if (e.PropertyName == "MostRecentPlayerProfile") OnPropertyChanged("IsMostRecentPlayer"); };
+            parent.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == "MostRecentPlayerProfile") OnPropertyChanged("IsMostRecentPlayer");
+            };
         }
         public ProfilePlayer(Profile parent, int num, string value = "New Player,0,0,0,0,_,_,0")
             : this(parent, "profile_" + (num - 1), value)
@@ -299,10 +318,12 @@ namespace Mygod.WorldOfGoo
                         playeds.Append(l);
                     }
                 return string.Format("{0},{1},{2},{3},{4}{5},{6}_{7},_{8},{9},_{10},_{11}",
-                                     PlayerName, playerFlag, TotalPlaySeconds, played.Count, playeds, skipped.Count, skippeds,
-                                     WoGCorpBalls.Aggregate(string.Empty, (current, data) => current + data) 
-                                        + WoGCorpStrands.Aggregate(string.Empty, (current, data) => current + data).TrimEnd(':'),
-                                     OnlinePlayerKey, NewlyCollectedGooBalls, GameCentrePlayerKey, GameCentrePlayerName);
+                                     PlayerName, playerFlag, TotalPlaySeconds, played.Count, playeds, skipped.Count,
+                                     skippeds, WoGCorpBalls.Aggregate(string.Empty, (current, data) => current + data) +
+                                        WoGCorpStrands.Aggregate(string.Empty, (current, data) => current + data)
+                                        .TrimEnd(':'),
+                                     OnlinePlayerKey, NewlyCollectedGooBalls, GameCentrePlayerKey,
+                                     GameCentrePlayerName);
             } 
             set
             {
@@ -320,21 +341,21 @@ namespace Mygod.WorldOfGoo
                 playerFlag = Convert.ToInt32(content[1]);
                 TotalPlaySeconds = Convert.ToInt32(content[2]);
                 int t = Convert.ToInt32(content[3]), i, j = 0;
-                for (i = 4; i <= t * 4; i += 4) PlayedLevels.Add(
-                    new PlayedLevel(this, content[i], int.Parse(content[i + 1]), int.Parse(content[i + 2]), int.Parse(content[i + 3])));
+                for (i = 4; i <= t * 4; i += 4) PlayedLevels.Add(new PlayedLevel(this, content[i],
+                    int.Parse(content[i + 1]), int.Parse(content[i + 2]), int.Parse(content[i + 3])));
                 var u = Convert.ToInt32(content[i]) + ++i;
                 for (; i < u; i++) PlayedLevels.Add(new PlayedLevel(this, content[i]));
                 var towerData = content[i].TrimStart('_').Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
                 while (j < towerData.Length) switch (towerData[j])
                     {
                         case "b":
-                            WoGCorpBalls.Add(new WoGCorpBall(towerData[j + 1], towerData[j + 2], towerData[j + 3], towerData[j + 4], 
-                                towerData[j + 5]));
+                            WoGCorpBalls.Add(new WoGCorpBall(towerData[j + 1], towerData[j + 2], towerData[j + 3],
+                                                             towerData[j + 4], towerData[j + 5]));
                             j += 6;
                             break;
                         case "s":
-                            WoGCorpStrands.Add(new WoGCorpStrand(towerData[j + 1], towerData[j + 2], towerData[j + 3], towerData[j + 4], 
-                                                                 towerData[j + 5], towerData[j + 6]));
+                            WoGCorpStrands.Add(new WoGCorpStrand(towerData[j + 1], towerData[j + 2], towerData[j + 3],
+                                                                 towerData[j + 4], towerData[j + 5], towerData[j + 6]));
                             j += 7;
                             break;
                         default:
@@ -363,11 +384,11 @@ namespace Mygod.WorldOfGoo
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Add || e.Action == NotifyCollectionChangedAction.Replace
-                || e.Action == NotifyCollectionChangedAction.Reset)
+            if (e.Action == NotifyCollectionChangedAction.Add || e.Action == NotifyCollectionChangedAction.Replace ||
+                e.Action == NotifyCollectionChangedAction.Reset)
                 foreach (INotifyPropertyChanged item in e.NewItems) item.PropertyChanged += OnInsidePropertyChanged;
-            if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Replace
-                || e.Action == NotifyCollectionChangedAction.Reset)
+            if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Replace ||
+                e.Action == NotifyCollectionChangedAction.Reset)
                 foreach (INotifyPropertyChanged item in e.OldItems) item.PropertyChanged -= OnInsidePropertyChanged;
             Parent.IsSaved = false;
         }
@@ -396,59 +417,116 @@ namespace Mygod.WorldOfGoo
 
         public int PlayerNumber { get { return Convert.ToInt32(Key.Substring(8)); } }
         private string playerName;
-        public string PlayerName { get { return playerName; } set { playerName = value; OnPropertyChanged("PlayerName"); } }
+        public string PlayerName
+        {
+            get { return playerName; }
+            set
+            {
+                playerName = value;
+                OnPropertyChanged("PlayerName");
+            }
+        }
         private string onlinePlayerKey;
         public string OnlinePlayerKey
         {
-            get { return onlinePlayerKey; } set { onlinePlayerKey = value; OnPropertyChanged("OnlinePlayerKey"); }
+            get { return onlinePlayerKey; }
+            set
+            {
+                onlinePlayerKey = value;
+                OnPropertyChanged("OnlinePlayerKey");
+            }
         }
 
         private int playerFlag;
         private int totalPlaySeconds;
         public int TotalPlaySeconds
         {
-            get { return totalPlaySeconds; } set { totalPlaySeconds = value; OnPropertyChanged("TotalPlaySeconds"); }
+            get { return totalPlaySeconds; }
+            set
+            {
+                totalPlaySeconds = value;
+                OnPropertyChanged("TotalPlaySeconds");
+            }
         }
         private int newlyCollectedGooBalls;
         public int NewlyCollectedGooBalls
         {
-            get { return newlyCollectedGooBalls; } 
-            set { OnPropertyChanged("NewlyCollectedGooBalls"); newlyCollectedGooBalls = value; }
+            get { return newlyCollectedGooBalls; }
+            set
+            {
+                OnPropertyChanged("NewlyCollectedGooBalls");
+                newlyCollectedGooBalls = value;
+            }
         }
         public bool OnlinePlayEnabled
         {
             get { return (playerFlag & 1) > 0; }
-            set { if (value) playerFlag |= 1; else playerFlag &= 30; OnPropertyChanged("OnlinePlayEnabled"); }
+            set
+            {
+                if (value) playerFlag |= 1;
+                else playerFlag &= 0x1E;
+                OnPropertyChanged("OnlinePlayEnabled");
+            }
         }
         public bool WorldOfGooCorporationUnlocked
         {
             get { return (playerFlag & 2) > 0; }
-            set { if (value) playerFlag |= 2; else playerFlag &= 29; OnPropertyChanged("WorldOfGooCorporationUnlocked"); }
+            set
+            {
+                if (value) playerFlag |= 2;
+                else playerFlag &= 0x1D;
+                OnPropertyChanged("WorldOfGooCorporationUnlocked");
+            }
         }
         public bool WorldOfGooCorporationDestroyed
         {
             get { return (playerFlag & 4) > 0; }
-            set { if (value) playerFlag |= 4; else playerFlag &= 27; OnPropertyChanged("WorldOfGooCorporationDestroyed"); }
+            set
+            {
+                if (value) playerFlag |= 4;
+                else playerFlag &= 0x1B;
+                OnPropertyChanged("WorldOfGooCorporationDestroyed");
+            }
         }
         public bool WhistleFound
         {
             get { return (playerFlag & 8) > 0; }
-            set { if (value) playerFlag |= 8; else playerFlag &= 23; OnPropertyChanged("WhistleFound"); }
+            set
+            {
+                if (value) playerFlag |= 8;
+                else playerFlag &= 0x17;
+                OnPropertyChanged("WhistleFound");
+            }
         }
         public bool DeliveranceUnlocked
         {
             get { return (playerFlag & 16) > 0; }
-            set { if (value) playerFlag |= 16; else playerFlag &= 15; OnPropertyChanged("DeliveranceUnlocked"); }
+            set
+            {
+                if (value) playerFlag |= 0x10;
+                else playerFlag &= 0xF;
+                OnPropertyChanged("DeliveranceUnlocked");
+            }
         }
 
         private string gameCentrePlayerKey, gameCentrePlayerName;
         public string GameCentrePlayerKey
         {
-            get { return gameCentrePlayerKey; } set { gameCentrePlayerKey = value; OnPropertyChanged("GameCentrePlayerKey"); }
+            get { return gameCentrePlayerKey; }
+            set
+            {
+                gameCentrePlayerKey = value;
+                OnPropertyChanged("GameCentrePlayerKey");
+            }
         }
         public string GameCentrePlayerName
         {
-            get { return gameCentrePlayerName; } set { gameCentrePlayerName = value; OnPropertyChanged("GameCentrePlayerName"); }
+            get { return gameCentrePlayerName; }
+            set
+            {
+                gameCentrePlayerName = value;
+                OnPropertyChanged("GameCentrePlayerName");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -488,24 +566,38 @@ namespace Mygod.WorldOfGoo
         public string LevelID { get { return levelID; } }
         public int MostGoos
         {
-            get { return Skipped ? -1 : mostGoos; } set { mostGoos = value; Skipped = value < 0; OnPropertyChanged("MostGoos"); }
+            get { return Skipped ? -1 : mostGoos; }
+            set
+            {
+                Skipped = (mostGoos = value) < 0;
+                OnPropertyChanged("MostGoos");
+            }
         }
         public int FewestMoves
         {
-            get { return Skipped ? -1 : fewestMoves; } set { fewestMoves = value; Skipped = value < 0; OnPropertyChanged("FewestMoves"); }
+            get { return Skipped ? -1 : fewestMoves; }
+            set
+            {
+                Skipped = (fewestMoves = value) < 0;
+                OnPropertyChanged("FewestMoves");
+            }
         }
         public int FewestSeconds
         {
-            get { return Skipped ? -1 : fewestSeconds; } set { fewestSeconds = value; Skipped = value < 0; OnPropertyChanged("FewestSeconds"); }
+            get { return Skipped ? -1 : fewestSeconds; }
+            set
+            {
+                Skipped = (fewestSeconds = value) < 0;
+                OnPropertyChanged("FewestSeconds");
+            }
         }
         public bool Skipped
         {
             get { return skipped; } 
             set
             {
-                var b = skipped == value;
+                if (skipped == value) return;
                 skipped = value;
-                if (b) return;
                 OnPropertyChanged("Skipped");
                 OnPropertyChanged("MostGoos");
                 OnPropertyChanged("FewestMoves");
@@ -534,7 +626,6 @@ namespace Mygod.WorldOfGoo
 
         public override string ToString()
         {
-            // ReSharper disable PossibleNullReferenceException
             switch (DataType)
             {
                 case "b": return (this as WoGCorpBall).ToString();
@@ -545,39 +636,64 @@ namespace Mygod.WorldOfGoo
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // ReSharper disable UnusedMember.Global
-        public string ShowText { get
+/*
+        public string ShowText
         {
-            switch (DataType)
+            get
             {
-                case "b":
-                    var ball = this as WoGCorpBall;
-                    return string.Format("粘粘球　位置：{0},{1}　速度：{2},{3}", 
-                                            ball.CoordinateX, ball.CoordinateY, ball.VelocityX, ball.VelocityY);
-                case "s":
-                    var strand = this as WoGCorpStrand;
-                    return string.Format("粘粘架　连接{0}号和{1}号粘粘球　弹力常数：{2}　自然长度：{3}　{4}产生", 
-                        strand.StartPoint, strand.EndPoint, strand.SpringConstant, strand.NaturalLength, strand.IsBall ? "连接" : "搭建");
-                default: return ToString();
+                switch (DataType)
+                {
+                    case "b":
+                        var ball = this as WoGCorpBall;
+                        return string.Format("P({0},{1})　V({2},{3})", ball.CoordinateX, ball.CoordinateY,
+                                             ball.VelocityX, ball.VelocityY);
+                    case "s":
+                        var strand = this as WoGCorpStrand;
+                        return string.Format("{0}-{1}　SC: {2}　NL: {3}　{4}", strand.StartPoint, strand.EndPoint,
+                                             strand.SpringConstant, strand.NaturalLength,
+                                             strand.IsBall ? "Connected" : "Built");
+                    default:
+                        return ToString();
+                }
             }
-        } }
-        // ReSharper restore UnusedMember.Global
-        // ReSharper restore PossibleNullReferenceException
+        }
+*/
     }
     public sealed class WoGCorpBall : WoGCorpData
     {
         public WoGCorpBall(string type = "Drained", double cx = 0, double cy = 0, double vx = 0, double vy = 0)
         {
-            DataType = "b"; BallType = type; CoordinateX = cx; CoordinateY = cy; VelocityX = vx; VelocityY = vy;
+            DataType = "b";
+            BallType = type;
+            CoordinateX = cx;
+            CoordinateY = cy;
+            VelocityX = vx;
+            VelocityY = vy;
         }
-        public WoGCorpBall(string type, string cx, string cy, string vx, string vy) 
-            : this(type, Convert.ToDouble(cx), Convert.ToDouble(cy), Convert.ToDouble(vx), Convert.ToDouble(vy))
+        public WoGCorpBall(string type, string cx, string cy, string vx, string vy)
+            : this(type, double.Parse(cx), double.Parse(cy), double.Parse(vx), double.Parse(vy))
         {
         }
 
         private double coordinateX, coordinateY, velocityX, velocityY;
-        public double CoordinateX { get { return coordinateX; } set { coordinateX = value; OnPropertyChanged("CoordinateX"); } }
-        public double CoordinateY { get { return coordinateY; } set { coordinateY = value; OnPropertyChanged("CoordinateY"); } }
+        public double CoordinateX
+        {
+            get { return coordinateX; }
+            set
+            {
+                coordinateX = value;
+                OnPropertyChanged("CoordinateX");
+            }
+        }
+        public double CoordinateY
+        {
+            get { return coordinateY; }
+            set
+            {
+                coordinateY = value;
+                OnPropertyChanged("CoordinateY");
+            }
+        }
         public double VelocityX { get { return velocityX; } set { velocityX = value; OnPropertyChanged("VelocityX"); } }
         public double VelocityY { get { return velocityY; } set { velocityY = value; OnPropertyChanged("VelocityY"); } }
 
@@ -588,28 +704,53 @@ namespace Mygod.WorldOfGoo
     }
     public sealed class WoGCorpStrand : WoGCorpData
     {
-        public WoGCorpStrand(string type = "Drained", int sp = 0, int ep = 1, double sc = 9, double nl = 110, bool ib = false)
+        public WoGCorpStrand(string type = "Drained", int sp = 0, int ep = 1, double sc = 9, double nl = 110,
+                             bool ib = false)
         {
-            DataType = "s"; BallType = type; StartPoint = sp; EndPoint = ep; SpringConstant = sc; NaturalLength = nl; IsBall = ib;
+            DataType = "s";
+            BallType = type;
+            StartPoint = sp;
+            EndPoint = ep;
+            SpringConstant = sc;
+            NaturalLength = nl;
+            IsBall = ib;
         }
         public WoGCorpStrand(string type, string sp, string ep, string sc, string nl, string ib)
-            : this(type, Convert.ToInt32(sp), Convert.ToInt32(ep), Convert.ToDouble(sc), Convert.ToDouble(nl), Convert.ToInt32(ib) == 1)
+            : this(type, int.Parse(sp), int.Parse(ep), double.Parse(sc), double.Parse(nl), int.Parse(ib) == 1)
         {
         }
         private int startPoint, endPoint;
-        public int StartPoint { get { return startPoint; } set { startPoint = value; OnPropertyChanged("StartPoint"); } }
-        public int EndPoint { get { return endPoint; } set { endPoint = value; OnPropertyChanged("EndPoint"); } }
+        public int StartPoint
+        {
+            get { return startPoint; }
+            set
+            {
+                startPoint = value;
+                OnPropertyChanged("StartPoint");
+            }
+        }
+        public int EndPoint
+        {
+            get { return endPoint; }
+            set
+            {
+                endPoint = value; OnPropertyChanged("EndPoint");
+            }
+        }
 
         private double springConstant, naturalLength;
-        public double SpringConstant { get { return springConstant; } set { springConstant = value; OnPropertyChanged("SpringConstant"); } }
-        public double NaturalLength { get { return naturalLength; } set { naturalLength = value; OnPropertyChanged("NaturalLength"); } }
+        public double SpringConstant
+            { get { return springConstant; } set { springConstant = value; OnPropertyChanged("SpringConstant"); } }
+        public double NaturalLength
+            { get { return naturalLength; } set { naturalLength = value; OnPropertyChanged("NaturalLength"); } }
 
         private bool isBall;
         public bool IsBall { get { return isBall; } set { isBall = value; OnPropertyChanged("IsBall"); } }
 
         public override string ToString()
         {
-            return string.Format("s:{0}:{1}:{2}:{3}:{4}:{5}:", BallType, StartPoint, EndPoint, SpringConstant, NaturalLength, IsBall ? 1 : 0);
+            return string.Format("s:{0}:{1}:{2}:{3}:{4}:{5}:", BallType, StartPoint, EndPoint, SpringConstant,
+                                 NaturalLength, IsBall ? 1 : 0);
         }
     }
 }

@@ -157,7 +157,7 @@
         &lt;ExecuteXsl Path=&quot;要使用的XSL.xsl&quot; /&gt;<br />
         &lt;ExecuteIronPython Script=&quot;要运行的脚本.py&quot; /&gt;<br />
         &lt;ExecuteIronRuby Script=&quot;要运行的脚本.rb&quot; /&gt;<br />
-        　　这些元素将使用游戏目录下Scripts文件夹中的对应文件。XSL的使用很简单，你可以使用这个工具生成：<a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
+        　　这些元素将使用游戏目录下 Resources\Scripts 文件夹中的对应文件。XSL 的使用很简单，你可以使用这个工具生成：<a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
         　　在程序开始运行时会自动执行Initialization.py和Initialization.rb分别初始化IronPython引擎和IronRuby引擎，你可以将一切只需运行一次的代码放到这里以加快运行速度。<br />
         　　当指定的脚本开始运行时会有一个解码后的字符串变量input。在你的脚本执行完毕后应该至少有一个布尔型变量edited表示是否应用当前修改，如果为true，则还需要有一个output变量，其类型可以为字符串或XDocument。</p>
     <h3>
@@ -197,16 +197,26 @@
         你也可以自己制作主题！然而这需要一些xaml &amp; baml知识，具体方法不再赘述。</p>
     <p>如果看了以上帮助仍没有解决问题、发现此软件的BUG、寻找最新版本或您想要的功能本修改器不支持，请联系本修改器的制作者Mygod。联系方式：</p>
     <ul>
-        <li><a href="http://mygod.apphb.com/#Product-54" target="_blank">http://mygod.apphb.com/#Product-54</a>（检查更新）</li>
+        <li><a href="http://mygod.tk/product/wogmodifier/" target="_blank">http://mygod.tk/product/wogmodifier/</a>（检查更新）</li>
         <li><a href="http://tieba.baidu.com/Mygod" target="_blank">http://tieba.baidu.com/Mygod</a>（贴吧）</li>
-        <li><a href="mailto:mygodstudio@gmail.com" target="_blank">mailto:mygodstudio@gmail.com</a>（邮箱）</li>
         <li><a href="http://goofans.com/download/utility/world-of-goo-modifier" target="_blank">http://goofans.com/download/utility/world-of-goo-modifier</a>（作弊功能移除版）</li>
     </ul>
     <p>版权所有，盗版必究。转载请注明出处。</p>
 <h2>更新历史</h2>
-    <p><strong>V4.0.40.5 更新内容：</strong></p>
+    <p><strong>V4.0.41.265 更新内容：</strong></p>
     <ul>
-        <li>新增对 iOS 存档的支持；（感谢 Wogfan4Evr 的帮助）</li>
+        <li>更新关于窗口等处的外观；</li>
+        <li>修复由于服务器 SSL 证书过期而无法生成新的玩家认证码的 BUG；（感谢 @WEGFan 发现此 BUG）</li>
+        <li>修复显示被已移除功能的关卡/粘粘球的属性时崩溃的 BUG；</li>
+        <li>一些清理；</li>
+        <li>更新 .NET 框架与一些库。</li>
+    </ul>
+    <!-- optional localization item -->
+    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="显示/隐藏旧版本更新内容" />
+    <div style="display: none;" id="oldUpdates">
+    <p><strong>V4.0.39.0 更新内容：</strong></p>
+    <ul>
+        <li>新增对 iOS 存档的支持；</li>
         <li>更新irrKlang到1.4.0b；</li>
         <li>新增控制台调试器中杀死游戏的功能；</li>
         <li>将三个dll合并为一个以减小占用空间；</li>
@@ -214,9 +224,6 @@
         <li>更新WoGCursor模块到 V2.0.4.1；</li>
         <li>改进了对话框。</li>
     </ul>
-    <!-- optional localization item -->
-    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="显示/隐藏旧版本更新内容" />
-    <div style="display: none;" id="oldUpdates">
     <p><strong>V4.0.39.0 更新内容：</strong></p>
     <ul>
         <li>添加对使用 IronRuby 和 XSL 批量修改的支持；</li>
@@ -646,7 +653,7 @@
     </ul>
     <p><strong>V1.4.2.133更新内容：</strong></p>
     <ul>
-        <li>增加使可抛粘粘球可拖动及恢复的功能。</li><li>增加了使粘粘球可被搭建粘粘架及恢复的功能。（感谢 Wogfan4Evr 的创意）</li><li>增加了杀死关卡中可移动物的功能。</li><li>修正了恢复材料可能无效的BUG。（在多次修改的情况下）※ 修正了修复管道可能无效的BUG。（在多次修改的情况下）</li><li>修正了恢复粘粘球不死可能无效的BUG。（在多次修改的情况下）</li><li>修正了使用消失爆炸物后部分爆炸物的图片仍然存在的BUG。（感谢 Wogfan4Evr 执意要修改这个BUG）</li><li>修正了消失爆炸物后粘粘球可能会碰点的BUG。（感谢 Wogfan4Evr 找出修改方法）</li><li>修正了支架变长后燃烧时会出现烧到一半断掉的BUG。（感谢 Wogfan4Evr 找到此BUG）</li><li>提高了修改/恢复粘粘球不死的运行效率。</li><li>更新帮助。</li>
+        <li>增加使可抛粘粘球可拖动及恢复的功能。</li><li>增加了使粘粘球可被搭建粘粘架及恢复的功能。（感谢 Wogfan4Evr 的创意）</li><li>增加了杀死关卡中可移动物的功能。</li><li>修正了恢复材料可能无效的BUG。（在多次修改的情况下）</li><li>修正了修复管道可能无效的BUG。（在多次修改的情况下）</li><li>修正了恢复粘粘球不死可能无效的BUG。（在多次修改的情况下）</li><li>修正了使用消失爆炸物后部分爆炸物的图片仍然存在的BUG。（感谢 Wogfan4Evr 执意要修改这个BUG）</li><li>修正了消失爆炸物后粘粘球可能会碰点的BUG。（感谢 Wogfan4Evr 找出修改方法）</li><li>修正了支架变长后燃烧时会出现烧到一半断掉的BUG。（感谢 Wogfan4Evr 找到此BUG）</li><li>提高了修改/恢复粘粘球不死的运行效率。</li><li>更新帮助。</li>
     </ul>
     <p><strong>V1.4.1.122 中秋特别版更新内容：</strong></p>
     <ul>

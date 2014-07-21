@@ -16,33 +16,34 @@ namespace Mygod.WorldOfGoo.IO
     {
         static Settings()
         {
-            SettingsFile = new IniFile("Settings.ini");
-            SettingsSection = new IniSection(SettingsFile, "Settings");
-            RecentPathsData = new StringListData(SettingsFile, "RecentPaths");
+            var settingsFile = new IniFile("Settings.ini");
+            var settingsSection = settingsFile["Settings"];
+            RecentPathsData = new StringListData(settingsFile, "RecentPaths");
             RecentPathsCapacityData = new Int32Data(RecentPathsData, "Capacity", 10);
             RecentPathsCapacityData.DataChanged += (sender, e) => 
                 { RecentPaths = RecentPaths.Distinct().Take(RecentPathsCapacity).ToList(); };
-            GamePathsData = new StringListData(SettingsFile, "GamePaths");
-            ProfilePathsData = new StringListData(SettingsFile, "ProfilePaths");
-            ThumbnailMaxHeightData = new DoubleData(SettingsSection, "ThumbnailMaxHeight", 48);
-            GooBallTesterVisualDebugEnabledData = new BooleanData(SettingsSection, "GooBallTesterVisualDebugEnabled", false);
-            ConsoleDebuggerEnabledData = new BooleanData(SettingsSection, "ConsoleDebuggerEnabled", false);
-            LoadGooBallThumbnailData = new BooleanData(SettingsSection, "LoadGooBallThumbnail", true);
-            QuickHelpViewedData = new BooleanData(SettingsSection, "QuickHelpViewed", false);
-            ProfileBackupsDirectoryData = new StringData(SettingsSection, "ProfileBackupsDirectory", 
+            GamePathsData = new StringListData(settingsFile, "GamePaths");
+            ProfilePathsData = new StringListData(settingsFile, "ProfilePaths");
+            ThumbnailMaxHeightData = new DoubleData(settingsSection, "ThumbnailMaxHeight", 48);
+            GooBallTesterVisualDebugEnabledData = new BooleanData(settingsSection, "GooBallTesterVisualDebugEnabled",
+                                                                  false);
+            ConsoleDebuggerEnabledData = new BooleanData(settingsSection, "ConsoleDebuggerEnabled", false);
+            LoadGooBallThumbnailData = new BooleanData(settingsSection, "LoadGooBallThumbnail", true);
+            QuickHelpViewedData = new BooleanData(settingsSection, "QuickHelpViewed", false);
+            ProfileBackupsDirectoryData = new StringData(settingsSection, "ProfileBackupsDirectory", 
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Backups"));
-            ThemeData = new StringData(SettingsSection, "Theme", "Generic");
-            LanguageData = new StringData(SettingsSection, "Language", Thread.CurrentThread.CurrentUICulture.Name);
-            BinFileEditorData = new StringData(SettingsSection, "BinFileEditor", "notepad");
-            Alias = new StringDictionaryData(SettingsFile, "Alias");
+            ThemeData = new StringData(settingsSection, "Theme", "Generic");
+            LanguageData = new StringData(settingsSection, "Language", Thread.CurrentThread.CurrentUICulture.Name);
+            BinFileEditorData = new StringData(settingsSection, "BinFileEditor", "notepad");
+            Alias = new StringDictionaryData(settingsFile, "Alias");
         }
-        private static readonly IniFile SettingsFile;
-        private static readonly IniSection SettingsSection;
+
         internal static readonly StringListData RecentPathsData;
         private static readonly StringListData GamePathsData, ProfilePathsData;
         internal static readonly Int32Data RecentPathsCapacityData;
         internal static readonly DoubleData ThumbnailMaxHeightData;
-        private static readonly BooleanData GooBallTesterVisualDebugEnabledData, ConsoleDebuggerEnabledData, QuickHelpViewedData;
+        private static readonly BooleanData GooBallTesterVisualDebugEnabledData, ConsoleDebuggerEnabledData,
+                                            QuickHelpViewedData;
         internal static readonly BooleanData LoadGooBallThumbnailData;
         internal static readonly StringData ProfileBackupsDirectoryData;
         private static readonly StringData ThemeData, LanguageData, BinFileEditorData;
@@ -50,26 +51,30 @@ namespace Mygod.WorldOfGoo.IO
 
         internal static int RecentPathsCapacity 
             { get { return RecentPathsCapacityData.Get(); } set { RecentPathsCapacityData.Set(value); } }
-        internal static List<string> RecentPaths { get { return RecentPathsData.Get(); } set { RecentPathsData.Set(value); } }
+        internal static List<string> RecentPaths
+            { get { return RecentPathsData.Get(); } set { RecentPathsData.Set(value); } }
         internal static List<string> GamePaths { get { return GamePathsData.Get(); } set { GamePathsData.Set(value); } }
-        internal static List<string> ProfilePaths { get { return ProfilePathsData.Get(); } set { ProfilePathsData.Set(value); } }
+        internal static List<string> ProfilePaths
+            { get { return ProfilePathsData.Get(); } set { ProfilePathsData.Set(value); } }
         internal static double ThumbnailMaxHeight
-        {
-            get { return ThumbnailMaxHeightData.Get(); } 
-            set { ThumbnailMaxHeightData.Set(value); }
-        }
+            { get { return ThumbnailMaxHeightData.Get(); } set { ThumbnailMaxHeightData.Set(value); } }
         internal static bool GooBallTesterVisualDebugEnabled
-            { get { return GooBallTesterVisualDebugEnabledData.Get(); } set { GooBallTesterVisualDebugEnabledData.Set(value); } }
+        {
+            get { return GooBallTesterVisualDebugEnabledData.Get(); }
+            set { GooBallTesterVisualDebugEnabledData.Set(value); }
+        }
         internal static bool LoadGooBallThumbnail
             { get { return LoadGooBallThumbnailData.Get(); } set { LoadGooBallThumbnailData.Set(value); } }
         internal static bool ConsoleDebuggerEnabled
             { get { return ConsoleDebuggerEnabledData.Get(); } set { ConsoleDebuggerEnabledData.Set(value); } }
-        internal static bool QuickHelpViewed { get { return QuickHelpViewedData.Get(); } set { QuickHelpViewedData.Set(value); } }
+        internal static bool QuickHelpViewed
+            { get { return QuickHelpViewedData.Get(); } set { QuickHelpViewedData.Set(value); } }
         internal static string ProfileBackupsDirectory 
             { get { return ProfileBackupsDirectoryData.Get(); } set { ProfileBackupsDirectoryData.Set(value); } }
         internal static string Theme { get { return ThemeData.Get(); } set { ThemeData.Set(value); } }
         internal static string Language { get { return LanguageData.Get(); } set { LanguageData.Set(value); } }
-        internal static string BinFileEditor { get { return BinFileEditorData.Get(); } set { BinFileEditorData.Set(value); } }
+        internal static string BinFileEditor
+            { get { return BinFileEditorData.Get(); } set { BinFileEditorData.Set(value); } }
 
         public static bool CheatingFeaturesEnabled
         {
@@ -77,7 +82,8 @@ namespace Mygod.WorldOfGoo.IO
             {
                 try
                 {
-                    return File.Exists(Path.Combine(Path.GetDirectoryName(CurrentApp.Path) ?? String.Empty, "cheating.on"));
+                    return File.Exists(Path.Combine
+                        (Path.GetDirectoryName(CurrentApp.Path) ?? string.Empty, "cheating.on"));
                 }
                 catch (NullReferenceException)
                 {
@@ -102,7 +108,7 @@ namespace Mygod.WorldOfGoo.IO
         /// 处理数据并本地化。
         /// </summary>
         /// <typeparam name="T">要本地化的数据类型。</typeparam>
-        /// <param name="exchange">将文化名称（如zh-CN）转为数据类型的方法。</param>
+        /// <param name="exchange">将文化名称（如 zh-CN）转为数据类型的方法。</param>
         /// <param name="validCheck">检查数据是否合法。</param>
         /// <returns>如果某项数据通过数据检查就返回该项数据。</returns>
         public static T GetLocalizedValue<T>(Func<string, T> exchange, Func<T, bool> validCheck) where T : class
@@ -121,7 +127,8 @@ namespace Mygod.WorldOfGoo.IO
         /// <returns>返回本地化后的路径。</returns>
         public static string GetLocalizedPath(string dirFile, string extension)
         {
-            return GetLocalizedValue(s => dirFile + '.' + (s == null ? string.Empty : (s + '.')) + extension, File.Exists);
+            return GetLocalizedValue(s => dirFile + '.' + (s == null ? string.Empty : (s + '.')) + extension,
+                                     File.Exists);
         }
     }
 }

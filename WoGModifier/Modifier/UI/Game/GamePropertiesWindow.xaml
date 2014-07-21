@@ -1,7 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GamePropertiesWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing" SizeToContent="WidthAndHeight">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GamePropertiesWindow" xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Icon="{x:Static m:CurrentApp.MainIcon}"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Closing="BlockClosing" SizeToContent="WidthAndHeight">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource PropertiesWindowTitle}" />
@@ -22,19 +22,22 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         
-        <Label Content="{StaticResource GamePropertiesDisplayLanguage}" Target="{Binding ElementName=DisplayLanguage}" />
-        <ComboBox Grid.Column="1" ItemsSource="{Binding Parent.GameParent.SupportedLanguages}" SelectedItem="{Binding Language}"
-                  HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Label Content="{StaticResource GamePropertiesDisplayLanguage}"
+               Target="{Binding ElementName=DisplayLanguage}" />
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Parent.GameParent.SupportedLanguages}"
+                  SelectedItem="{Binding Language}" HorizontalAlignment="Left" VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type s:String}">
                     <TextBlock>
-                        <TextBlock Text="{Binding Converter={StaticResource LanguageNameConverter}}" /> (<TextBlock Text="{Binding}" />)
+                        <TextBlock Text="{Binding Converter={StaticResource LanguageNameConverter}}" />
+                        (<TextBlock Text="{Binding}" />)
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         
-        <Label Content="{StaticResource GamePropertiesScreenSize}" Grid.Row="1" Target="{Binding ElementName=ScreenWidth}" />
+        <Label Content="{StaticResource GamePropertiesScreenSize}" Grid.Row="1"
+               Target="{Binding ElementName=ScreenWidth}" />
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
             <xctk:IntegerUpDown MinWidth="50" Value="{Binding ScreenWidth}" VerticalAlignment="Center" />
             <Label Content="x" />
@@ -45,6 +48,7 @@
         <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" MinWidth="50" Value="{Binding UIInset}"
                             VerticalAlignment="Center" HorizontalAlignment="Left" />
         
-        <Button Content="{StaticResource Save}" Click="Save" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+        <Button Content="{StaticResource Save}" Click="Save" Grid.Row="4" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" />
     </Grid>
 </Window>

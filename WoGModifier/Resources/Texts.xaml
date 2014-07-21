@@ -9,7 +9,6 @@
     <s:String x:Key="Backup">Backup</s:String>
     <s:String x:Key="Balls">balls</s:String>
     <s:String x:Key="DefaultText">Default text (English)</s:String>
-    <s:String x:Key="Delete">Delete</s:String>
     <s:String x:Key="Details">Details</s:String>
     <s:String x:Key="Error">Error</s:String>
     <s:String x:Key="Failed">Failed</s:String>
@@ -55,7 +54,7 @@
     <s:String x:Key="DragFile">Open with %1</s:String>
     <s:String x:Key="EditBackupsDirectorySuccessfully">Succeeded to reselect backup storage directory!</s:String>
     <s:String x:Key="EnterSkipEndOfLevelSequenceInstruction">Would you like to skip the end of level sequence?</s:String>
-    <s:String x:Key="ErrorDetailsLabel">Error _details</s:String>
+    <s:String x:Key="ErrorDetailsLabel">Error &amp;details</s:String>
     <s:String x:Key="FailedLoadingGame">Unable to load World of Goo!</s:String>
     <s:String x:Key="FailedLoadingProfile">Unable to load the profile!</s:String>
     <s:String x:Key="Fatal">An unexpected error has occurred.</s:String>
@@ -64,8 +63,6 @@
     <s:String x:Key="GameAlreadyRunning">The game is already running! You can't start two games at the same time!</s:String>
     <s:String x:Key="GarbageCleanupDone">Garbage clean-up completed!</s:String>
     <s:String x:Key="GarbageCleanupDetails">{0} garbages has been cleaned.</s:String>
-    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupportedInfo">Sorry, we can't generate an online player key for you.</s:String>
-    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupported">We are unable to process your country code currently. If you really want to do this, contact us to help us improve this program, or maybe you would like to try this solution: clear your online player key, disable online tower building, save the profile and start the game, click connect in World of Goo Corporation.</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">The server returns nothing.</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyFailed">Generate a new online player key failed.</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyInstruction">Would you like to backup your old key before you do this?</s:String>
@@ -459,36 +456,38 @@
     <Span x:Key="TextItemValueDescription">The content of the specific language string.</Span>
     
     <!-- Command Link Texts -->
-    <s:String x:Key="FatalBreak">_Stop running%NClose the program and log the error to prevent the error being worse.</s:String>
-    <s:String x:Key="FatalContinue">_Continue running%NLog the error and continue to run the program. The error may be worse. Please make sure the error doesn't affect anything.</s:String>
-    <s:String x:Key="FatalRestart">_Restart the program%NLog the error and restart the program.</s:String>
+    <s:String x:Key="FatalBreak">&amp;Stop running</s:String>
+    <s:String x:Key="FatalBreakInstructions">Close the program and log the error to prevent the error being worse.</s:String>
+    <s:String x:Key="FatalContinue">&amp;Continue running</s:String>
+    <s:String x:Key="FatalContinueInstructions">Log the error and continue to run the program. The error may be worse. Please make sure the error doesn't affect anything.</s:String>
+    <s:String x:Key="FatalRestart">&amp;Restart the program</s:String>
+    <s:String x:Key="FatalRestartInstructions">Log the error and restart the program.</s:String>
 
     <!-- Button Texts -->
     <s:String x:Key="Browse">_Browse...</s:String>
-    <s:String x:Key="Cancel">Cancel</s:String>
     <s:String x:Key="Clear">_Clear</s:String>
-    <s:String x:Key="Close">Close</s:String>
-    <s:String x:Key="Continue">_Continue</s:String>
+    <s:String x:Key="Continue">&amp;Continue</s:String>
+    <s:String x:Key="Delete">Delete</s:String>
     <s:String x:Key="DeleteBackups">Delete selected backups</s:String>
     <s:String x:Key="Edit">_Edit</s:String>
-    <s:String x:Key="GiveUp">_Give up</s:String>
+    <s:String x:Key="GiveUp">&amp;Don't save</s:String>
     <s:String x:Key="NewBackup">Create a new backup</s:String>
-    <s:String x:Key="No">_No</s:String>
+    <s:String x:Key="No">&amp;No</s:String>
     <s:String x:Key="OK">OK</s:String>
-    <s:String x:Key="Overwrite">_Overwrite</s:String>
+    <s:String x:Key="Overwrite">Overwrite</s:String>
     <s:String x:Key="OverwriteBackups">Backup and overwrite the selected backup</s:String>
     <s:String x:Key="Refresh">_Refresh</s:String>
     <s:String x:Key="RenameBackup">Rename the selected backup</s:String>
-    <s:String x:Key="Reselect">_Reselect</s:String>
+    <s:String x:Key="Reselect">&amp;Reselect</s:String>
     <s:String x:Key="RestoreBackup">Restore the selected backup</s:String>
-    <s:String x:Key="RestoreButton">_Restore</s:String>
-    <s:String x:Key="Save">_Save</s:String>
+    <s:String x:Key="RestoreButton">Restore</s:String>
+    <s:String x:Key="Save">&amp;Save</s:String>
     <s:String x:Key="ScaleToFit">Scale to _fit</s:String>
     <s:String x:Key="SetBackupsDirectory">Set _backup store directory</s:String>
     <s:String x:Key="TechSupportCheckForUpdates">_Tech support &amp; check for updates</s:String>
     <s:String x:Key="Test">_Test</s:String>
     <s:String x:Key="VisualDebugEnabled">_Enable Visual Debug</s:String>
-    <s:String x:Key="Yes">_Yes</s:String>
+    <s:String x:Key="Yes">&amp;Yes</s:String>
 
     <s:String x:Key="SelectTool">Select Tool (Ctrl+1)</s:String>
     <Run x:Key="SelectToolDescription">You can move goo balls by dragging it with this tool.</Run>

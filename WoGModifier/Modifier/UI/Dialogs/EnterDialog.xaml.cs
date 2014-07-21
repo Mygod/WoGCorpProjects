@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using Mygod.Windows.Dialogs;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
 {
@@ -94,8 +94,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         private void Browse(object sender, RoutedEventArgs e)
         {
             if (Type != EnterType.Directory) return;
-            var browser = new FolderBrowserDialog { Description = Title, UseDescriptionForTitle = true };
-            if (browser.ShowDialog() == true) EnterBox.Text = browser.SelectedPath;
+            var browser = new CommonOpenFileDialog { Title = Title, IsFolderPicker = true };
+            if (browser.ShowDialog() == CommonFileDialogResult.Ok) EnterBox.Text = browser.FileName;
         }
     }
 

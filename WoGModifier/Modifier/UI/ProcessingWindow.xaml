@@ -1,6 +1,6 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.ProcessingWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" Height="200" Width="480"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Loaded="StartTask" Closing="TryClose">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.ProcessingWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        Icon="{x:Static m:CurrentApp.MainIcon}" Height="200" Width="480" Loaded="StartTask" Closing="TryClose">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource ProcessingWindowTitle}" />
@@ -23,9 +23,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Text="{StaticResource ProcessingInstructions}" Margin="8" FontSize="20" Foreground="#282671" />
-        <TextBlock Name="DetailsBlock" Grid.Row="1" Margin="8,0,8,8" x:FieldModifier="private" Text="{StaticResource ProcessingDetailsInitializing}" />
+        <TextBlock Name="DetailsBlock" Grid.Row="1" Margin="8,0,8,8" x:FieldModifier="private"
+                   Text="{StaticResource ProcessingDetailsInitializing}" />
         <m:Reflection Grid.Row="2">
-            <m:AnimatedProgressBar Height="23" Name="ProgressBar" Maximum="1" x:FieldModifier="private" Margin="0,0,0,23" />
+            <m:AnimatedProgressBar Height="23" Name="ProgressBar" Maximum="1" x:FieldModifier="private"
+                                   Margin="0,0,0,23" />
         </m:Reflection>
     </Grid>
 </Window>

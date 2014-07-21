@@ -28,6 +28,7 @@ using Mygod.WorldOfGoo.IO;
 using Mygod.WorldOfGoo.Modifier.IO;
 using Mygod.WorldOfGoo.Modifier.UI;
 using Mygod.WorldOfGoo.Modifier.UI.Dialogs;
+using Mygod.Xml.Linq;
 using File = System.IO.File;
 
 namespace Mygod.WorldOfGoo.Modifier
@@ -54,8 +55,9 @@ namespace Mygod.WorldOfGoo.Modifier
             return true;
         }
 
-        internal static bool BatchProcessLevel(Level level, IEnumerable<Subfeature> subfeatures, XDocument doc, XElement root,
-                                               string docPath, StringBuilder warning, StringBuilder error)
+        internal static bool BatchProcessLevel(Level level, IEnumerable<Subfeature> subfeatures, XDocument doc,
+                                               XElement root, string docPath, StringBuilder warning,
+                                               StringBuilder error)
         {
             var modified = false;
             foreach (var subfeature in subfeatures)
@@ -66,32 +68,35 @@ namespace Mygod.WorldOfGoo.Modifier
                     subfeature.Execute(param);
                     if (!param.Edited) throw new Warning(subfeature.NothingChanged);
                     modified = true;
-                    #region 修改次数记录模块
-                    var f = root.Elements(R.Feature).SingleOrDefault(n => n.GetAttribute(R.ID) == subfeature.ID);
+                    #region set @ModifiedTimes
+                    var f = root.Elements(R.Feature).SingleOrDefault(n => n.GetAttributeValue(R.ID) == subfeature.ID);
                     if (f == null) root.Add(f = new XElement(R.Feature, new XAttribute(R.ID, subfeature.ID), 
                                                              new XAttribute(R.ModifiedTimes, 0)));
-                    var i = int.Parse(f.GetAttribute(R.ModifiedTimes), CultureInfo.InvariantCulture)
-                        + (subfeature.Type == OperationType.Process ? 1 : -1);
-                    if (i != 0) f.SetAttribute(R.ModifiedTimes, i.ToString(CultureInfo.InvariantCulture));
+                    var i = f.GetAttributeValue<int>(R.ModifiedTimes) +
+                                (subfeature.Type == OperationType.Process ? 1 : -1);
+                    if (i != 0) f.SetAttributeValue(R.ModifiedTimes, i.ToString(CultureInfo.InvariantCulture));
                     else f.Remove(); //remove extra nodes
                     #endregion
                 }
                 catch (Warning w)
                 {
-                    warning.AppendFormat(Resrc.WarningDetails, subfeature.Name, Resrc.Level, level.LocalizedName, w.Message);
+                    warning.AppendFormat(Resrc.WarningDetails, subfeature.Name, Resrc.Level, level.LocalizedName,
+                                         w.Message);
                 }
                 catch (Exception e)
                 {
-                    error.AppendFormat(Resrc.ErrorDetails, subfeature.Name, Resrc.Level, level.LocalizedName, e.Message);
+                    error.AppendFormat(Resrc.ErrorDetails, subfeature.Name, Resrc.Level, level.LocalizedName,
+                                       e.Message);
                 }
             }
             if (!modified) return false;
-            if (!root.Elements(R.Feature).Any()) File.Delete(docPath); else File.WriteAllText(docPath, doc.GetString());
+            if (!root.Elements(R.Feature).Any()) File.Delete(docPath); else File.WriteAllText(docPath, doc.ToString());
             return true;
         }
 
-        internal static bool BatchProcessGooBall(GooBall gooBall, IEnumerable<Subfeature> subfeatures, XDocument doc, XElement root,
-                                                 string docPath, StringBuilder warning, StringBuilder error)
+        internal static bool BatchProcessGooBall(GooBall gooBall, IEnumerable<Subfeature> subfeatures, XDocument doc,
+                                                 XElement root, string docPath, StringBuilder warning,
+                                                 StringBuilder error)
         {
             var modified = false;
             foreach (var subfeature in subfeatures)
@@ -102,13 +107,13 @@ namespace Mygod.WorldOfGoo.Modifier
                     subfeature.Execute(param);
                     if (!param.Edited) throw new Warning(subfeature.NothingChanged);
                     modified = true;
-                    #region 修改次数记录模块
-                    var f = root.Elements(R.Feature).SingleOrDefault(n => n.GetAttribute(R.ID) == subfeature.ID);
-                    if (f == null)
-                        root.Add(f = new XElement(R.Feature, new XAttribute(R.ID, subfeature.ID), new XAttribute(R.ModifiedTimes, 0)));
-                    var i = int.Parse(f.GetAttribute(R.ModifiedTimes), CultureInfo.InvariantCulture)
-                        + (subfeature.Type == OperationType.Process ? 1 : -1);
-                    if (i != 0) f.SetAttribute(R.ModifiedTimes, i.ToString(CultureInfo.InvariantCulture));
+                    #region set @ModifiedTimes
+                    var f = root.Elements(R.Feature).SingleOrDefault(n => n.GetAttributeValue(R.ID) == subfeature.ID);
+                    if (f == null) root.Add(f = new XElement(R.Feature, new XAttribute(R.ID, subfeature.ID),
+                                                             new XAttribute(R.ModifiedTimes, 0)));
+                    var i = f.GetAttributeValue<int>(R.ModifiedTimes) +
+                                (subfeature.Type == OperationType.Process ? 1 : -1);
+                    if (i != 0) f.SetAttributeValue(R.ModifiedTimes, i.ToString(CultureInfo.InvariantCulture));
                     else f.Remove(); //remove extra nodes
                     #endregion
                 }
@@ -122,7 +127,7 @@ namespace Mygod.WorldOfGoo.Modifier
                 }
             }
             if (!modified) return false;
-            if (!root.Elements(R.Feature).Any()) File.Delete(docPath); else File.WriteAllText(docPath, doc.GetString());
+            if (!root.Elements(R.Feature).Any()) File.Delete(docPath); else File.WriteAllText(docPath, doc.ToString());
             return true;
         }
 
@@ -134,16 +139,12 @@ namespace Mygod.WorldOfGoo.Modifier
             if (Sources.ContainsKey(fileName)) source = Sources[fileName];
             else
             {
-                using (var fs = new FileStream(fileName, FileMode.Open)) source = engine.AddSoundSourceFromIOStream(fs, Path.GetRandomFileName());
+                using (var fs = new FileStream(fileName, FileMode.Open))
+                    source = engine.AddSoundSourceFromIOStream(fs, Path.GetRandomFileName());
                 Sources.Add(fileName, source);
             }
             engine.Play2D(source, true, false, false);
         }
-
-        /*internal static IntPtr GetHwnd(this Window window)
-        {
-            return new WindowInteropHelper(window).Handle;
-        }*/
 
         internal static string GetTitle(string path)
         {
@@ -162,26 +163,6 @@ namespace Mygod.WorldOfGoo.Modifier
                 Log.Error.Write(e); // sometimes get the error but still succeed... THAT'S INTERSTING!
                 // Dialog.Error(null, Resrc.CopyFailed, e: e);
             }
-        }
-
-        private static readonly string[] Units = new[] { null, "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "BB", "NB", "DB", "CB" };
-
-        private static string GetUnit(int index)
-        {
-            return index == 0 ? Resrc.Byte : Units[index];
-        }
-
-        public static string GetSize(long size)
-        {
-            double byt = size;
-            byte i = 0;
-            while (byt > 1000)
-            {
-                byt /= 1024;
-                i++;
-            }
-            var bytesstring = size.ToString("N");
-            return byt.ToString("N") + " " + GetUnit(i) + " (" + bytesstring.Remove(bytesstring.Length - 3) + ' ' + GetUnit(0) + ')';
         }
         
         /// <summary>
@@ -206,18 +187,22 @@ namespace Mygod.WorldOfGoo.Modifier
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/Features.xml");
                 var doc = XDocument.Load(path);
                 var root = doc.GetElement("Features", path);
-                if (root.GetAttribute("Version") != acceptableVersion.ToString(CultureInfo.InvariantCulture))
-                    throw Exceptions.FileFormatError(path, string.Format(Resrc.ExceptionFeaturesXmlVersionIncorrect, acceptableVersion));
+                if (root.GetAttributeValue("Version") != acceptableVersion.ToString(CultureInfo.InvariantCulture))
+                    throw Exceptions.FileFormatError(path, string.Format(Resrc.ExceptionFeaturesXmlVersionIncorrect,
+                                                                         acceptableVersion));
                 Strings = new FeaturesText(root.GetElement("Strings", path));
                 var e = root.Element("LevelEditor");
                 if (e == null) throw Exceptions.XmlElementDoesNotExist(path, "LevelEditor");
-                levelFeatures = (from node in e.Elements("Feature") select new Feature(node)).ToDictionary(feature => feature.ID);
+                levelFeatures = (from node in e.Elements("Feature") select new Feature(node))
+                                    .ToDictionary(feature => feature.ID);
                 e = root.Element("GooBallEditor");
                 if (e == null) throw Exceptions.XmlElementDoesNotExist(path, "GooBallEditor");
-                gooBallFeatures = (from node in e.Elements("Feature") select new Feature(node)).ToDictionary(feature => feature.ID);
+                gooBallFeatures = (from node in e.Elements("Feature") select new Feature(node))
+                                        .ToDictionary(feature => feature.ID);
                 gooBallTester = new CreatableLevel(R.GooBallTesterLevelName, root.Element("GooBallTester"));
                 materialTester = new CreatableLevel(R.MaterialTesterLevelName, root.Element("MaterialTester"));
-                gooBallTestHelper = new CreatableGooBall(R.GooBallTestHelperGooBallName, root.Element("GooBallTestHelper"));
+                gooBallTestHelper = new CreatableGooBall(R.GooBallTestHelperGooBallName,
+                                                         root.Element("GooBallTestHelper"));
             }
             catch (ThreadAbortException)
             {
@@ -225,11 +210,12 @@ namespace Mygod.WorldOfGoo.Modifier
             }
             catch (Exception e)
             {
-                App.Dispatcher.Invoke((Action)(() =>
+                App.Dispatcher.Invoke(() =>
                 {
-                    Dialog.Error(Application.Current.MainWindow, Resrc.FeaturesParseError,Resrc.FeaturesParseErrorDetails, e);
+                    Dialog.Error(Application.Current.MainWindow, Resrc.FeaturesParseError,
+                                 Resrc.FeaturesParseErrorDetails, e);
                     Application.Current.Shutdown(-2);
-                }));
+                });
             }
             finally
             {
@@ -254,7 +240,8 @@ namespace Mygod.WorldOfGoo.Modifier
 
         public static FeaturesText Strings { get; private set; }
         public static Dictionary<string, Feature> LevelFeatures { get { WaitTillComplete(); return levelFeatures; } }
-        public static Dictionary<string, Feature> GooBallFeatures { get { WaitTillComplete(); return gooBallFeatures; } }
+        public static Dictionary<string, Feature> GooBallFeatures
+            { get { WaitTillComplete(); return gooBallFeatures; } }
         public static CreatableLevel GooBallTester { get { WaitTillComplete(); return gooBallTester; } }
         public static CreatableLevel MaterialTester { get { WaitTillComplete(); return materialTester; } }
         public static CreatableGooBall GooBallTestHelper { get { WaitTillComplete(); return gooBallTestHelper; } }
@@ -265,11 +252,11 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             ID = id;
             var element = e.Element("Level");
-            if (element != null) level = new XDocument(element.Elements()).GetString();
+            if (element != null) level = new XDocument(element.Elements()).ToString();
             element = e.Element("Scene");
-            if (element != null) scene = new XDocument(element.Elements()).GetString();
+            if (element != null) scene = new XDocument(element.Elements()).ToString();
             element = e.Element("Resrc");
-            if (element != null) resrc = new XDocument(element.Elements()).GetString();
+            if (element != null) resrc = new XDocument(element.Elements()).ToString();
         }
 
         public string ID { get; private set; }
@@ -297,9 +284,9 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             ID = id;
             var element = e.Element("Balls");
-            if (element != null) balls = new XDocument(element.Elements()).GetString();
+            if (element != null) balls = new XDocument(element.Elements()).ToString();
             element = e.Element("Resources");
-            if (element != null) resources = new XDocument(element.Elements()).GetString();
+            if (element != null) resources = new XDocument(element.Elements()).ToString();
         }
 
         public string ID { get; private set; }
@@ -330,9 +317,11 @@ namespace Mygod.WorldOfGoo.Modifier
             {
                 var name = a.Name.LocalName.ToLower();
                 if (name == "id") ID = a.Value;
-                else if (!Contains(name)) Add(new SpecificLanguageString(null, name, a.Value.Replace("|", Environment.NewLine)));
+                else if (!Contains(name))
+                    Add(new SpecificLanguageString(null, name, a.Value.Replace("|", Environment.NewLine)));
             }
-            if (ID == null) throw new FileFormatException(null, string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
+            if (ID == null)
+                throw new FileFormatException(null, string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
         }
 
         public string ID { get; private set; }
@@ -340,7 +329,13 @@ namespace Mygod.WorldOfGoo.Modifier
         private string DefaultValue
         {
             get { return Contains("text") ? this["text"].Value : null; }
-            //set { if (Contains("text")) this["text"].Value = value; else Add(new SpecificLanguageString(null, "text", value)); }
+/*
+            set
+            {
+                if (Contains("text")) this["text"].Value = value;
+                else Add(new SpecificLanguageString(null, "text", value));
+            }
+*/
         }
         public string LocalizedText
         {
@@ -355,9 +350,8 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         public FeaturesText(XContainer xe)
         {
-            foreach (var i in xe.Nodes().OfType<XElement>().Where(e => e.Name.LocalName.ToLower() == "string")
-                .Select(e => new FeaturesTextItem(e)))
-            {
+            foreach (var i in from e in xe.Nodes().OfType<XElement>() where e.Name.LocalName.ToLower() == "string"
+                              select new FeaturesTextItem(e))
                 if (!Contains(i.ID)) Add(i);
                 else
                 {
@@ -365,7 +359,6 @@ namespace Mygod.WorldOfGoo.Modifier
                     foreach (var j in i.Where(j => !item.Contains(j.Language)))
                         item.Add(new SpecificLanguageString(null, j.Language, j.Value));
                 }
-            }
         }
     }
 
@@ -373,7 +366,7 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         public Feature(XElement node)
         {
-            ID = node.GetAttribute("ID") ?? "Unknown";
+            ID = node.GetAttributeValue("ID") ?? "Unknown";
             Process = new Subfeature(this, OperationType.Process, node.Element("Process"));
             Reverse = new Subfeature(this, OperationType.Reverse, node.Element("Reverse"));
             Restore = new Subfeature(this, OperationType.Restore, node.Element("Restore"));
@@ -390,10 +383,12 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             this.parent = parent;
             Type = type;
-            name = node.GetAttribute("Name") ?? (type == OperationType.Restore ? parent.Reverse.name : null);
-            description = node.GetAttribute("Description") ?? (type == OperationType.Restore ? parent.Reverse.description : null);
-            nothingChanged = node.GetAttribute("NothingChanged") ?? (type == OperationType.Restore ? parent.Reverse.nothingChanged : null);
-            tip = node.GetAttribute("Tip") ?? (type == OperationType.Restore ? parent.Reverse.tip : null);
+            name = node.GetAttributeValue("Name") ?? (type == OperationType.Restore ? parent.Reverse.name : null);
+            description = node.GetAttributeValue("Description") ??
+                (type == OperationType.Restore ? parent.Reverse.description : null);
+            nothingChanged = node.GetAttributeValue("NothingChanged") ??
+                (type == OperationType.Restore ? parent.Reverse.nothingChanged : null);
+            tip = node.GetAttributeValue("Tip") ?? (type == OperationType.Restore ? parent.Reverse.tip : null);
             operations = new OperationGroup(node.Elements());
         }
 
@@ -402,14 +397,18 @@ namespace Mygod.WorldOfGoo.Modifier
         private readonly string name, nothingChanged, description, tip;
         public string Name
         {
-            get { return Features.Strings[name != null && Features.Strings.Contains(name) ? name : ID + Type + "Name"].LocalizedText; }
+            get
+            {
+                return Features.Strings[name != null && Features.Strings.Contains(name)
+                            ? name : ID + Type + "Name"].LocalizedText;
+            }
         }
         public string NothingChanged
         {
             get
             {
-                var key = nothingChanged != null && Features.Strings.Contains(nothingChanged) ? nothingChanged
-                    : ID + Type + "NothingChanged";
+                var key = nothingChanged != null && Features.Strings.Contains(nothingChanged)
+                            ? nothingChanged : ID + Type + "NothingChanged";
                 return Features.Strings.Contains(key) ? Features.Strings[key].LocalizedText : null;
             }
         }
@@ -418,7 +417,8 @@ namespace Mygod.WorldOfGoo.Modifier
             get
             {
                 var n = name != null && Features.Strings.Contains(name) ? name : (ID + Type + "Description");
-                if (!Features.Strings.Contains(n) && Type == OperationType.Restore) n = (ID + OperationType.Reverse + "Description");
+                if (!Features.Strings.Contains(n) && Type == OperationType.Restore)
+                    n = (ID + OperationType.Reverse + "Description");
                 return Features.Strings[n].LocalizedText;
             }
         }
@@ -427,7 +427,8 @@ namespace Mygod.WorldOfGoo.Modifier
             get
             {
                 var n = name != null && Features.Strings.Contains(name) ? name : (ID + Type + "Tip");
-                if (!Features.Strings.Contains(n) && Type == OperationType.Restore) n = (ID + OperationType.Reverse + "Tip");
+                if (!Features.Strings.Contains(n) && Type == OperationType.Restore)
+                    n = (ID + OperationType.Reverse + "Tip");
                 return Features.Strings[n].LocalizedText;
             }
         }
@@ -494,62 +495,67 @@ namespace Mygod.WorldOfGoo.Modifier
             foreach (XElement node in nodes) switch (node.Name.LocalName)
             {
                 case "RegexReplace":
-                    operations.Add(new RegexReplaceOperation(node.GetAttribute("Pattern"), node.GetAttribute("Replacement")));
+                    operations.Add(new RegexReplaceOperation(node.GetAttributeValue("Pattern"),
+                                                             node.GetAttributeValue("Replacement")));
                     break;
                 case "Replace":
-                    operations.Add(new ReplaceOperation(node.GetAttribute("Old"), node.GetAttribute("New")));
+                    operations.Add(new ReplaceOperation(node.GetAttributeValue("Old"), node.GetAttributeValue("New")));
                     break;
                 case "Warning":
-                    operations.Add(new WarningOperation(node.GetAttribute("Message")));
+                    operations.Add(new WarningOperation(node.GetAttributeValue("Message")));
                     break;
                 case "SetAttribute":
-                    operations.Add(new SetAttributeOperation(node.GetAttribute("Name"), node.GetAttribute("Value")));
+                    operations.Add(new SetAttributeOperation(node.GetAttributeValue("Name"),
+                                                             node.GetAttributeValue("Value")));
                     break;
                 case "MatrixMultiplyAttribute":
-                    operations.Add(new MatrixMultiplyAttributeOperation(node.GetAttribute("Name"), node.GetAttribute("Value"),
-                                                                        node.GetAttribute("Default")));
+                    operations.Add(new MatrixMultiplyAttributeOperation(node.GetAttributeValue("Name"),
+                                        node.GetAttributeValue("Value"), node.GetAttributeValue("Default")));
                     break;
                 case "SelectNodes":
-                    operations.Add(new SelectNodesOperation(from n in node.Element("Nodes").Elements("Node")
-                                                            select new Node(n.GetAttribute("XPath"), n.GetAttribute("Contains")),
-                                                            new OperationGroup(node.Element("Operations").Elements())));
+                    operations.Add(new SelectNodesOperation
+                        (from n in node.Element("Nodes").Elements("Node")
+                         select new Node(n.GetAttributeValue("XPath"), n.GetAttributeValue("Contains")),
+                                         new OperationGroup(node.Element("Operations").Elements())));
                     break;
                 case "CreateElement":
-                    operations.Add(new CreateElementOperation(node.GetAttribute("XPath"), node.GetAttribute("ElementName"),
+                    operations.Add(new CreateElementOperation(node.GetAttributeValue("XPath"),
+                                                              node.GetAttributeValue("ElementName"),
                                                               new OperationGroup(node.Elements())));
                     break;
                 case "RemoveElement":
-                    operations.Add(new RemoveElementOperation(node.GetAttribute("XPath"), node.GetAttribute("WhichContains")));
+                    operations.Add(new RemoveElementOperation(node.GetAttributeValue("XPath"),
+                                                              node.GetAttributeValue("WhichContains")));
                     break;
                 case "IfAttribute":
                     operations.Add(new IfAttributeOperation(new OperationGroup(node.Element("Then").Elements()),
-                                                            new OperationGroup(node.Element("Else").Elements()),
-                                                            node.GetAttribute("Name"), node.GetAttribute("Value"),
-                                                            Convert.ToBoolean(node.GetAttribute("IfNull"))));
+                        new OperationGroup(node.Element("Else").Elements()), node.GetAttributeValue("Name"),
+                        node.GetAttributeValue("Value"), node.GetAttributeValue<bool>("IfNull")));
                     break;
                 case "IfContains":
                     operations.Add(new IfContainsOperation(new OperationGroup(node.Element("Then").Elements()),
                                                            new OperationGroup(node.Element("Else").Elements()),
-                                                           node.GetAttribute("Value")));
+                                                           node.GetAttributeValue("Value")));
                     break;
                 case "IfEdited":
                     operations.Add(new IfEditedOperation(new OperationGroup(node.Element("Then").Elements()),
                                                          new OperationGroup(node.Element("Else").Elements())));
                     break;
                 case "ExecuteXsl":
-                    operations.Add(new ExecuteXslOperation(node.GetAttribute("Path")));
+                    operations.Add(new ExecuteXslOperation(node.GetAttributeValue("Path")));
                     break;
                 case "ExecuteIronPython":
-                    operations.Add(new ExecuteIronPythonOperation(node.GetAttribute("Script")));
+                    operations.Add(new ExecuteIronPythonOperation(node.GetAttributeValue("Script")));
                     break;
                 case "ExecuteIronRuby":
-                    operations.Add(new ExecuteIronRubyOperation(node.GetAttribute("Script")));
+                    operations.Add(new ExecuteIronRubyOperation(node.GetAttributeValue("Script")));
                     break;
                 case "Modify":
-                    operations.Add(new ModifyOperation(node.GetAttribute("File"), new OperationGroup(node.Elements())));
+                    operations.Add(new ModifyOperation(node.GetAttributeValue("File"),
+                                                       new OperationGroup(node.Elements())));
                     break;
                 default:
-                    Trace.WriteLine(string.Format("未知的元素名 {0}！", node.Name));
+                    Trace.WriteLine(string.Format("Unknown element name: {0}", node.Name));
                     break;
             }
             // ReSharper restore PossibleNullReferenceException
@@ -625,7 +631,8 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         public SelectNodesOperation(IEnumerable<Node> nodes, OperationGroup operations)
         {
-            this.nodes = nodes; this.operations = operations;
+            this.nodes = nodes;
+            this.operations = operations;
         }
 
         private readonly IEnumerable<Node> nodes;
@@ -635,14 +642,17 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             var pa = (FileOperationParams) param;
             var p = new XmlOperationParams(pa);
-            foreach (var node in nodes.Select(node => (from n in p.Document.XPathSelectElements(node.XPath)
-                                                       where node.Contains == null || new XDocument(n).GetString().Contains(node.Contains)
-                                                       select n)).SelectMany(node => node).Distinct())
+            foreach (var node in nodes.SelectMany(node =>
+            {
+                var result = p.Document.XPathSelectElements(node.XPath);
+                if (node.Contains != null) result = result.Where(n => n.ToString().Contains(node.Contains));
+                return result;
+            }).Distinct())
             {
                 p.XmlCurrentNode = node;
                 operations.Execute(p);
             }
-            if (p.Modified) pa.Content = p.Document.GetString();
+            if (p.Modified) pa.Content = p.Document.ToString();
         }
     }
     sealed class CreateElementOperation : Operation
@@ -665,7 +675,7 @@ namespace Mygod.WorldOfGoo.Modifier
                 p.Modified = true;
                 operations.Execute(p);
             }
-            if (p.Modified) pa.Content = p.Document.GetString();
+            if (p.Modified) pa.Content = p.Document.ToString();
         }
     }
     sealed class RemoveElementOperation : Operation
@@ -682,12 +692,13 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             var pa = (FileOperationParams)param;
             var p = new XmlOperationParams(pa);
-            foreach (var node in p.Document.XPathSelectElements(xPath).Where(n => n.GetString().Contains(whichContains)))
+            foreach (var node in p.Document.XPathSelectElements(xPath)
+                                  .Where(n => n.ToString().Contains(whichContains)))
             {
                 node.Remove();
                 p.Modified = true;
             }
-            if (p.Modified) pa.Content = p.Document.GetString();
+            if (p.Modified) pa.Content = p.Document.ToString();
         }
     }
 
@@ -705,7 +716,7 @@ namespace Mygod.WorldOfGoo.Modifier
             var p = (XmlOperationParams) param;
             if (p.XmlCurrentNode == null) throw new NotSupportedException();
             var e = p.XmlCurrentNode;
-            e.SetAttribute(name, value);
+            e.SetAttributeValue(name, value);
             p.Modified = true;
         }
     }
@@ -726,14 +737,15 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             var p = (XmlOperationParams)param;
             if (p.XmlCurrentNode == null) throw new NotSupportedException();
-            var att = p.XmlCurrentNode.GetAttribute(name) ?? Default;
+            var att = p.XmlCurrentNode.GetAttributeValue(name) ?? Default;
             if (att == null) return;
             att += ",1";
             double[] vector = att.Split(',').Select(double.Parse).ToArray(), transformed = new double[vector.Length];
             if (vector.Length != matrix.Length) throw new NotSupportedException();
-            for (var y = 0; y < vector.Length; y++) for (var x = 0; x < vector.Length; x++) transformed[y] += matrix[y][x] * vector[x];
+            for (var y = 0; y < vector.Length; y++) for (var x = 0; x < vector.Length; x++)
+                transformed[y] += matrix[y][x] * vector[x];
             for (var x = 0; x < vector.Length - 1; x++) transformed[x] /= transformed[vector.Length - 1];
-            p.XmlCurrentNode.SetAttribute(name, vector.Take(vector.Length - 1).Skip(1)
+            p.XmlCurrentNode.SetAttributeValue(name, vector.Take(vector.Length - 1).Skip(1)
                 .Aggregate(vector[0].ToString(CultureInfo.InvariantCulture), (c, s) => c + ',' + s));
             p.Modified = true;
         }
@@ -753,7 +765,7 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             var p = (XmlOperationParams)param;
             if (p.XmlCurrentNode == null) throw new NotSupportedException();
-            var a = p.XmlCurrentNode.GetAttribute(name);
+            var a = p.XmlCurrentNode.GetAttributeValue(name);
             if (a == value || a == null && ifNull) Then.Execute(p); else Else.Execute(p);
         }
     }
@@ -791,7 +803,7 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         public static string GetScriptPath(string name)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts", name);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources\\Scripts", name);
         }
     }
     sealed class ExecuteXslOperation : Operation
@@ -817,8 +829,8 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         static ExecuteIronPythonOperation()
         {
-            Engine = Python.CreateEngine();
-            Engine.CreateScriptSourceFromFile(ScriptHelper.GetScriptPath("Initialization.py")).Execute(Engine.Runtime.Globals);
+            (Engine = Python.CreateEngine()).CreateScriptSourceFromFile(ScriptHelper.GetScriptPath("Initialization.py"))
+                                            .Execute(Engine.Runtime.Globals);
         }
 
         public ExecuteIronPythonOperation(string script)
@@ -847,7 +859,7 @@ namespace Mygod.WorldOfGoo.Modifier
             else
             {
                 var document = output as XDocument;
-                if (document != null) p.Content = document.GetString();     // dynamic does not support the normal way
+                if (document != null) p.Content = document.ToString();  // dynamic does not support the normal way
             }
         }
     }
@@ -855,8 +867,9 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         static ExecuteIronRubyOperation()
         {
-            Engine = Ruby.CreateEngine();
-            Engine.CreateScriptSourceFromFile(ScriptHelper.GetScriptPath("Initialization.rb")).Execute(Engine.Runtime.Globals);
+            (Engine = Ruby.CreateEngine())
+                .CreateScriptSourceFromFile(ScriptHelper.GetScriptPath("Initialization.rb"))
+                .Execute(Engine.Runtime.Globals);
         }
 
         public ExecuteIronRubyOperation(string script)
@@ -885,7 +898,7 @@ namespace Mygod.WorldOfGoo.Modifier
             else
             {
                 var document = output as XDocument;
-                if (document != null) p.Content = document.GetString();     // dynamic does not support the normal way
+                if (document != null) p.Content = document.ToString();  // dynamic does not support the normal way
             }
         }
     }
@@ -926,7 +939,8 @@ namespace Mygod.WorldOfGoo.Modifier
     {
         public static object Load(Stream stream)
         {
-            using (var reader = new Baml2006Reader(stream)) using (var writer = new XamlObjectWriter(reader.SchemaContext))
+            using (var reader = new Baml2006Reader(stream))
+            using (var writer = new XamlObjectWriter(reader.SchemaContext))
             {
                 while (reader.Read()) writer.WriteNode(reader);
                 return writer.Result;
@@ -942,10 +956,10 @@ namespace Mygod.WorldOfGoo.Modifier
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern void CloseHandle(IntPtr hObject);
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize,
-                                                     out int lpNumberOfBytesRead);
+        private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer,
+                                                     int dwSize, out int lpNumberOfBytesRead);
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, 
+        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize,
                                                       IntPtr lpNumberOfBytesWritten);
 
         public MemoryEditor(int processID)
@@ -963,7 +977,8 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             var buffer = new byte[bytesToRead];
             int bytesRead;
-            if (!ReadProcessMemory(process, memoryAddress, buffer, bytesToRead, out bytesRead)) Trace.WriteLine("Failed to read memory.");
+            if (!ReadProcessMemory(process, memoryAddress, buffer, bytesToRead, out bytesRead))
+                Trace.WriteLine("Failed to read memory.");
             return buffer;
         }
         public byte[] ReadProcessMemory(MemoryAddress memoryAddress, int bytesToRead)
@@ -1009,14 +1024,15 @@ namespace Mygod.WorldOfGoo.Modifier
 
         private readonly MemoryEditor editor;
 
-        private static readonly MemoryAddress BallsAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0xb8),
-                                              BallsRequiredAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0xb4),
-                                              MovesAddress = new MemoryAddress(0x00217860, 0x8, 0x1a4),
-                                              PausedAddress = new MemoryAddress(0x00217860, 0xc, 0x34),
-                                              UndraggableAddress = new MemoryAddress(0x00217860, 0xc, 0x44),
-                                              //MenuEnabledAddress = new MemoryAddress(0x00217860, 0x12c, 0x2e0, 0x74),
-                                              //ShowBallsInTankAddress = new MemoryAddress(0x00217860, 0x128, 0xd0, 0x390),
-                                              LetterboxedAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0x28);
+        private static readonly MemoryAddress
+            BallsAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0xb8),
+            BallsRequiredAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0xb4),
+            MovesAddress = new MemoryAddress(0x00217860, 0x8, 0x1a4),
+            PausedAddress = new MemoryAddress(0x00217860, 0xc, 0x34),
+            UndraggableAddress = new MemoryAddress(0x00217860, 0xc, 0x44),
+            //MenuEnabledAddress = new MemoryAddress(0x00217860, 0x12c, 0x2e0, 0x74),
+            //ShowBallsInTankAddress = new MemoryAddress(0x00217860, 0x128, 0xd0, 0x390),
+            LetterboxedAddress = new MemoryAddress(0x00217860, 0x8, 0x74, 0x28);
         public int Balls
         {
             get { return BitConverter.ToInt32(editor.ReadProcessMemory(BallsAddress, 4), 0); }

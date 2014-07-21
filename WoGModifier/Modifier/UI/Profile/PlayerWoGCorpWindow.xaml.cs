@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,9 +42,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void RefreshView()
         {
             var strandBalls = player.WoGCorpStrands.Count(strand => strand.IsBall);
-            BallCount.Text = (player.WoGCorpStrands.Select(strand => strand.StartPoint).Union(
-                player.WoGCorpStrands.Select(strand => strand.EndPoint)).Count() + strandBalls).ToString()
-                + " / " + (player.WoGCorpBalls.Count + strandBalls).ToString();
+            BallCount.Text = (player.WoGCorpStrands.Select(strand => strand.StartPoint)
+                .Union(player.WoGCorpStrands.Select(strand => strand.EndPoint)).Count() + strandBalls) +
+                " / " + (player.WoGCorpBalls.Count + strandBalls);
             if (player.WoGCorpBalls.Count > 0)
             {
                 minY = minX = double.MaxValue;
@@ -70,7 +71,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Shower.Height = Math.Abs(maxY - minY);
             Ground.Width = Shower.Width;
             Canvas.SetBottom(Ground, -100.023 - minY);
-            ((ImageBrush) Ground.Background).Viewport = new Rect(-((minX + 500.03) % 1479.68), 0, 1479.68, 107.206);
+            ((ImageBrush) Ground.Background).Viewport = new Rect(-(minX + 500.03) % 1479.68, 0, 1479.68, 107.206);
             foreach (var ball in player.WoGCorpBalls)
             {
                 if (selectedTool == 1)
@@ -79,8 +80,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     {
                         var newDs = new Image
                         {
-                            Width = 32, Source = new BitmapImage(new Uri("/Resources/Detachstrand.png", UriKind.Relative)), 
-                            Tag = ball, Stretch = Stretch.Fill, RenderTransform = new RotateTransform {CenterX = 16}
+                            Source = new BitmapImage(new Uri("/Resources/Detachstrand.png", UriKind.Relative)),
+                            Width = 32, Tag = ball, Stretch = Stretch.Fill,
+                            RenderTransform = new RotateTransform { CenterX = 16 }
                         };
                         newDs.PreviewMouseLeftButtonDown += OnBallPress;
                         newDs.PreviewMouseLeftButtonUp += OnBallRelease;
@@ -92,15 +94,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     Canvas.SetBottom(ds, ball.CoordinateY - minY);
                     var transform = (RotateTransform)ds.RenderTransform;
                     transform.Angle = 90 - Math.Atan2(ball.VelocityY, ball.VelocityX) * 180 / Math.PI;
-                    transform.CenterY = ds.Height = 10 * Math.Sqrt(ball.VelocityX * ball.VelocityX + ball.VelocityY * ball.VelocityY);
+                    transform.CenterY = ds.Height =
+                        10 * Math.Sqrt(ball.VelocityX * ball.VelocityX + ball.VelocityY * ball.VelocityY);
                     Shower.Children.Add(ds);
                 }
                 if (!balls.ContainsKey(ball))
                 {
                     var newImage = new Image
                     {
-                        Width = 32, Height = 32, Source = new BitmapImage(new Uri("/Resources/GooBall.png", UriKind.Relative)), Tag = ball, 
-                        ContextMenu = Resources["BallMenu"] as ContextMenu
+                        Width = 32, Height = 32, ContextMenu = Resources["BallMenu"] as ContextMenu, Tag = ball,
+                        Source = new BitmapImage(new Uri("/Resources/GooBall.png", UriKind.Relative))
                     };
                     newImage.PreviewMouseLeftButtonDown += OnBallPress;
                     newImage.PreviewMouseMove += OnBallMouseMove;
@@ -109,19 +112,21 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     Shower.Children.Add(newImage);
                 }
                 var image = balls[ball];
-                image.ToolTip = string.Format(Resrc.WoGCorpBallDetails, ball.CoordinateX, ball.CoordinateY, ball.VelocityX, ball.VelocityY);
+                image.ToolTip = string.Format(Resrc.WoGCorpBallDetails, ball.CoordinateX, ball.CoordinateY,
+                                              ball.VelocityX, ball.VelocityY);
                 Canvas.SetLeft(image, ball.CoordinateX - 16 - minX);
                 Canvas.SetBottom(image, ball.CoordinateY - 16 - minY);
             }
             foreach (var strand in player.WoGCorpStrands)
             {
-                WoGCorpBall ball1 = player.WoGCorpBalls[strand.StartPoint], ball2 = player.WoGCorpBalls[strand.EndPoint];
+                WoGCorpBall ball1 = player.WoGCorpBalls[strand.StartPoint],
+                            ball2 = player.WoGCorpBalls[strand.EndPoint];
                 if (!strands.ContainsKey(strand))
                 {
                     var newImage = new Image
                     {
                         Width = 32, Source = new BitmapImage(new Uri("/Resources/Strand.png", UriKind.Relative)),
-                        Tag = strand, Stretch = Stretch.Fill, RenderTransform = new RotateTransform {CenterX = 16}
+                        Tag = strand, Stretch = Stretch.Fill, RenderTransform = new RotateTransform { CenterX = 16 }
                     };
                     Panel.SetZIndex(newImage, -1);
                     DragCanvas.SetCanBeDragged(newImage, false);
@@ -238,16 +243,19 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     ball.CoordinateX = point.X + minX;
                     ball.CoordinateY = Shower.Height - point.Y + minY;
                     RefreshView();
-                    if (Math.Abs(minX - ix) > 1e-4 || Math.Abs(minY - iy) > 1e-4 || Math.Abs(maxX - ax) > 1e-4 || Math.Abs(maxY - ay) > 1e-4)
-                        break;
+                    if (Math.Abs(minX - ix) > 1e-4 || Math.Abs(minY - iy) > 1e-4 ||
+                        Math.Abs(maxX - ax) > 1e-4 || Math.Abs(maxY - ay) > 1e-4) break;
                     point = image.TranslatePoint(new Point(16, 16), Scroller);
                     const double dampening = 10;
-                    if (point.X < Bounds) Scroller.ScrollToHorizontalOffset(Scroller.HorizontalOffset + (point.X - Bounds) / dampening);
+                    if (point.X < Bounds)
+                        Scroller.ScrollToHorizontalOffset(Scroller.HorizontalOffset + (point.X - Bounds) / dampening);
                     if (point.X > Scroller.ActualWidth - Bounds)
-                        Scroller.ScrollToHorizontalOffset(Scroller.HorizontalOffset + (Bounds + point.X - Scroller.ActualWidth) / dampening);
-                    if (point.Y < Bounds) Scroller.ScrollToVerticalOffset(Scroller.VerticalOffset + (point.Y - Bounds) / dampening);
-                    if (point.Y > Scroller.ActualHeight - Bounds)
-                        Scroller.ScrollToVerticalOffset(Scroller.VerticalOffset + (Bounds + point.Y - Scroller.ActualHeight) / dampening);
+                        Scroller.ScrollToHorizontalOffset(Scroller.HorizontalOffset +
+                                                            (Bounds + point.X - Scroller.ActualWidth) / dampening);
+                    if (point.Y < Bounds) Scroller.ScrollToVerticalOffset(Scroller.VerticalOffset +
+                                                                            (point.Y - Bounds) / dampening);
+                    if (point.Y > Scroller.ActualHeight - Bounds) Scroller.ScrollToVerticalOffset
+                        (Scroller.VerticalOffset + (Bounds + point.Y - Scroller.ActualHeight) / dampening);
                     break;
                 case 3:
                     Remove(ball);
@@ -374,8 +382,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void OnShowerMouseMove(object sender, MouseEventArgs e)
         {
             var p = e.GetPosition(Shower);
-            CursorX.Text = (p.X + minX).ToString();
-            CursorY.Text = (Shower.Height - p.Y + minY).ToString();
+            CursorX.Text = (p.X + minX).ToString(CultureInfo.InvariantCulture);
+            CursorY.Text = (Shower.Height - p.Y + minY).ToString(CultureInfo.InvariantCulture);
             ShowNewStrand();
         }
 
@@ -387,7 +395,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (image == null) return;
             var ball = image.Tag as WoGCorpBall;
             if (ball == null) return;
-            var result = Dialog.Input(Resrc.EnterNewValueTitle, ball.CoordinateX + "," + ball.CoordinateY, validCheck: s =>
+            var result = Dialog.Input(Resrc.EnterNewValueTitle, ball.CoordinateX + "," + ball.CoordinateY,
+                                      validCheck: s =>
             {
                 var t = s.Split(',');
                 if (t.Length != 2) return false;

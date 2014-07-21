@@ -84,8 +84,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
     [ValueConversion(typeof(string), typeof(BitmapImage))]
     public class GooBallThumbnailConverter : IValueConverter
     {
-        private static BitmapImage token;
-        private static BitmapImage Token { get { return token ?? (token = new BitmapImage(new Uri("/Resources/GooBall.png", UriKind.Relative))); } }
+        private static readonly Lazy<BitmapImage> Token = new Lazy<BitmapImage>(() =>
+            new BitmapImage(new Uri("/Resources/GooBall.png", UriKind.Relative)));
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -130,7 +130,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             }
             catch (CultureNotFoundException)
             {
-                var cul = CultureInfo.GetCultures(CultureTypes.AllCultures).FirstOrDefault(c => c.Name.ToLower().Contains(str));
+                var cul = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                                     .FirstOrDefault(c => c.Name.ToLower().Contains(str));
                 return cul != null ? cul.DisplayName : Resrc.UnknownLanguage;
             }
         }
@@ -176,7 +177,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var s = value as string;
             if (s == null) throw Exceptions.NotSupported;
-            return s.ToLower().EndsWith(".exe", StringComparison.Ordinal) ? IconExtractor.GetBitmapSource(s) : new BitmapImage(new Uri(s));
+            return s.ToLower().EndsWith(".exe", StringComparison.Ordinal) ? IconExtractor.GetBitmapSource(s)
+                                                                          : new BitmapImage(new Uri(s));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

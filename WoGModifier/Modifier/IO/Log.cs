@@ -27,7 +27,8 @@ namespace Mygod.WorldOfGoo.Modifier.IO
 
         public void Dispose()
         {
-            if (isCurrentMain) writer.WriteLine("[{1}]\t{0} has been run for {2}.", CurrentApp.Title, DateTime.Now, Program.StartupTime.Elapsed);
+            if (isCurrentMain) writer.WriteLine("[{1}]\t{0} has been run for {2}.", CurrentApp.Title, DateTime.Now,
+                                                Program.StartupTime.Elapsed);
             writer.WriteLine();
             writer.Dispose();
         }
@@ -46,7 +47,8 @@ namespace Mygod.WorldOfGoo.Modifier.IO
         }
         public void Write(string operation, TimeSpan time)
         {
-            writer.WriteLine("[{0}]\tOperation <{1}> finished. It took {2} seconds.", DateTime.Now, operation, time.TotalSeconds);
+            writer.WriteLine("[{0}]\tOperation <{1}> finished. It took {2} seconds.", DateTime.Now, operation,
+                             time.TotalSeconds);
         }
         public long Clear()
         {

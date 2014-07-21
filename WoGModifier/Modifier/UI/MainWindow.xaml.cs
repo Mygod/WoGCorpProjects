@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +12,12 @@ using System.Windows.Input;
 using System.Windows.Shell;
 using System.Xml.Linq;
 using IrrKlang;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.Windows;
-using Mygod.Windows.Dialogs;
 using Mygod.WorldOfGoo.IO;
 using Mygod.WorldOfGoo.Modifier.IO;
 using Mygod.WorldOfGoo.Modifier.UI.Dialogs;
+using Mygod.Xml.Linq;
 
 namespace Mygod.WorldOfGoo.Modifier.UI
 {
@@ -25,6 +27,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         public MainWindow()
         {
+            openFileDialog.Filters.Add(Resrc.OpenFileFilter);
+            saveProfileDialog.Filters.Add(Resrc.SaveProfileFilter);
             InitializeComponent();
             Tree.Focus();
             RecentPathsChanged();
@@ -66,8 +70,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 paths.Add(filePath);
                 Settings.GamePaths = paths.Distinct().ToList();
                 if (loading) Tree.Items.Add(game); else Tree.Items.Insert(paths.Count - 1, game);
-                JumpList.AddToRecentCategory(new JumpTask { Arguments = "-g \"" + filePath + '"',
-                    Description = filePath, IconResourcePath = filePath, IconResourceIndex = 0, Title = Kernel.GetTitle(filePath) });
+                JumpList.AddToRecentCategory(new JumpTask
+                {
+                    Arguments = "-g \"" + filePath + '"', Description = filePath, IconResourcePath = filePath,
+                    IconResourceIndex = 0, Title = Kernel.GetTitle(filePath)
+                });
             }
             catch (Exception e)
             {
@@ -92,8 +99,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 Settings.RecentPaths = paths.Distinct().Take(Settings.RecentPathsCapacity).ToList();
                 var profile = new Profile(filePath, RefreshProfileError, !loading);
                 Tree.Items.Add(profile);
-                JumpList.AddToRecentCategory(new JumpTask { Arguments = "-p \"" + filePath + '"',
-                    Description = filePath, IconResourcePath = CurrentApp.Path, IconResourceIndex = 0, Title = Kernel.GetTitle(filePath) });
+                JumpList.AddToRecentCategory(new JumpTask
+                {
+                    Arguments = "-p \"" + filePath + '"', Description = filePath, IconResourcePath = CurrentApp.Path,
+                    IconResourceIndex = 0, Title = Kernel.GetTitle(filePath)
+                });
             }
             catch (Exception e)
             {
@@ -288,15 +298,18 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 if (root == null) throw Exceptions.XmlElementDoesNotExist(level.GetPath(R.Level), R.Level);
                 XElement music = root.Element("music"), sound = root.Element("loopsound");
                 var resource = level.Resources.First();
-                string musicID = music == null ? null : music.GetAttribute("id"), soundID = sound == null ? null : sound.GetAttribute("id"),
-                       musicPath = musicID != null && resource.Contains(musicID) ? resource[musicID].LocalizedPath : null,
-                       soundPath = soundID != null && resource.Contains(soundID) ? resource[soundID].LocalizedPath : null;
+                string musicID = music == null ? null : music.GetAttributeValue("id"),
+                       soundID = sound == null ? null : sound.GetAttributeValue("id"),
+                       musicPath = musicID != null && resource.Contains(musicID)
+                                        ? resource[musicID].LocalizedPath : null,
+                       soundPath = soundID != null && resource.Contains(soundID)
+                                        ? resource[soundID].LocalizedPath : null;
                 if (engine == null) engine = new ISoundEngine();
                 engine.StopAllSounds();
-                if (musicPath != null)
-                    engine.Play2DLooped(Path.Combine(level.GameParent.DirectoryPath, musicPath.Replace('/', '\\').TrimStart('\\')));
-                if (soundPath != null)
-                    engine.Play2DLooped(Path.Combine(level.GameParent.DirectoryPath, soundPath.Replace('/', '\\').TrimStart('\\')));
+                if (musicPath != null) engine.Play2DLooped(Path.Combine
+                    (level.GameParent.DirectoryPath, musicPath.Replace('/', '\\').TrimStart('\\')));
+                if (soundPath != null) engine.Play2DLooped(Path.Combine
+                    (level.GameParent.DirectoryPath, soundPath.Replace('/', '\\').TrimStart('\\')));
                 IsPlaying = true;
                 NowPlaying.Text = (nowPlaying = level).LocalizedName + " - " + level.GameParent.FilePath;
             }
@@ -354,7 +367,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
             {
                 e.Effects = e.AllowedEffects & DragDropEffects.Copy;
-                DropTargetHelper.DragEnter(this, e.Data, e.GetPosition(this), e.Effects, Resrc.DragFile, Resrc.ProgramName);
+                DropTargetHelper.DragEnter(this, e.Data, e.GetPosition(this), e.Effects,
+                                           Resrc.DragFile, Resrc.ProgramName);
             }
             else
             {
@@ -364,7 +378,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
         private void OnDragOver(object sender, DragEventArgs e)
         {
-            e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop, true) ? e.AllowedEffects & DragDropEffects.Copy : DragDropEffects.None;
+            e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop, true) ? e.AllowedEffects & DragDropEffects.Copy
+                                                                          : DragDropEffects.None;
             DropTargetHelper.DragOver(e.GetPosition(this), e.Effects);
         }
         private void OnDragLeave(object sender, DragEventArgs e)
@@ -373,7 +388,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
         private void OnDrop(object sender, DragEventArgs e)
         {
-            e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop, true) ? e.AllowedEffects & DragDropEffects.Copy : DragDropEffects.None;
+            e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop, true) ? e.AllowedEffects & DragDropEffects.Copy
+                                                                          : DragDropEffects.None;
             DropTargetHelper.Drop(e.Data, e.GetPosition(this), e.Effects);
             if (e.Effects != DragDropEffects.Copy) return;
             var files = e.Data.GetData(DataFormats.FileDrop, true) as string[];
@@ -442,47 +458,54 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         #region File
 
-        private readonly OpenFileDialog openFileDialog = new OpenFileDialog { Title = Resrc.OpenFileTitle, Filter = Resrc.OpenFileFilter, 
-                                                                              Multiselect = true, CheckFileExists = true };
-        private readonly SaveFileDialog saveProfileDialog = new SaveFileDialog
-            { Title = Resrc.SaveProfileTitle, Filter = Resrc.SaveProfileFilter};
+        private readonly CommonOpenFileDialog openFileDialog = new CommonOpenFileDialog
+            { Title = Resrc.OpenFileTitle, Multiselect = true, EnsureFileExists = true };
+        private readonly CommonSaveFileDialog saveProfileDialog = new CommonSaveFileDialog
+            { Title = Resrc.SaveProfileTitle };
 
         private void NewProfile(object sender, ExecutedRoutedEventArgs e)
         {
-            if (saveProfileDialog.ShowDialog() != true) return;
+            if (saveProfileDialog.ShowDialog() != CommonFileDialogResult.Ok) return;
             BinaryFile.WriteAllText(saveProfileDialog.FileName, R.ProfileDefaultContent);
             LoadProfile(saveProfileDialog.FileName);
         }
 
         private void FileOpen(object sender, ExecutedRoutedEventArgs e)
         {
-            if (openFileDialog.ShowDialog() == true) ProcessFiles(openFileDialog.FileNames);
+            if (openFileDialog.ShowDialog() == CommonFileDialogResult.Ok) ProcessFiles(openFileDialog.FileNames);
         }
 
         private void SearchProfile(object sender, ExecutedRoutedEventArgs e)
         {
-            string np = Profile.NewVersionProfilePath, op = Profile.OldVersionProfilePath, 
-                   n = np == null ? null : Resrc.ProfileNewVersion + '\n' + np,
-                   o = op == null ? null : Resrc.ProfileOldVersion + '\n' + op;
+            string np = Profile.NewVersionProfilePath, op = Profile.OldVersionProfilePath;
+            TaskDialogCommandLink
+                n = np == null ? null : new TaskDialogCommandLink("n", Resrc.ProfileNewVersion + '\n' + np),
+                o = op == null ? null : new TaskDialogCommandLink("o", Resrc.ProfileOldVersion + '\n' + op);
             if (n == null && o == null) Dialog.Information(this, Resrc.SearchProfileFailed, Resrc.SearchProfileText);
             else
             {
-                var options = new TaskDialogOptions { MainInstruction = Resrc.SearchProfileFinished, Owner = this, 
-                    AllowDialogCancellation = true, Buttons = TaskDialogButtons.Cancel, Title = Resrc.Information,
-                    Content = Resrc.SearchProfileText };
-                if (n != null) options.CommandButtons = o == null ? new[] { n } : new[] { n, o, Resrc.ProfileLoadBoth };
-                else options.CommandButtons = new[] { o };
-                var result = TaskDialog.Show(options);
-                switch (result.CommandButtonResult)
+                var dialog = new TaskDialog
                 {
-                    case 0:
-                        ProcessFile(n == null ? op : np);
-                        break;
-                    case 1:
-                        ProcessFile(op);
-                        break;
-                    case 2:
+                    InstructionText = Resrc.SearchProfileFinished, OwnerWindowHandle = this.GetHwnd(), 
+                    Cancelable = true, StandardButtons = TaskDialogStandardButtons.Cancel,
+                    Caption = Resrc.Information, Text = Resrc.SearchProfileText
+                };
+                if (n != null)
+                {
+                    dialog.Controls.Add(n);
+                    n.Click += (a, b) => dialog.Close(TaskDialogResult.Yes);
+                }
+                if (o != null)
+                {
+                    dialog.Controls.Add(o);
+                    o.Click += (a, b) => dialog.Close(TaskDialogResult.No);
+                }
+                switch (dialog.Show())
+                {
+                    case TaskDialogResult.Yes:
                         ProcessFile(np);
+                        break;
+                    case TaskDialogResult.No:
                         ProcessFile(op);
                         break;
                 }
@@ -543,7 +566,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             {
                 RecentPaths.Items.Clear();
                 var i = 0;
-                foreach (var item in Settings.RecentPaths.Select(s => new MenuItem {Header = string.Format("_{0} {1}", ++i, s), Tag = s}))
+                foreach (var item in from s in Settings.RecentPaths
+                                     select new MenuItem { Header = string.Format("_{0} {1}", ++i, s), Tag = s })
                 {
                     item.Click += RecentPathClicked;
                     RecentPaths.Items.Add(item);
@@ -573,7 +597,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void CleanupGarbage(object sender, RoutedEventArgs e)
         {
             Dialog.Finish(this, Resrc.GarbageCleanupDone, string.Format(Resrc.GarbageCleanupDetails,
-                Kernel.GetSize(Log.Error.Clear() + Log.Crash.Clear() + Log.Performance.Clear())));
+                Helper.GetSize(Log.Error.Clear() + Log.Crash.Clear() + Log.Performance.Clear(), Resrc.Byte)));
         }
 
         private void XslTransformer(object sender, RoutedEventArgs e)
@@ -603,8 +627,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         
         private void QuickHelp(object sender, ExecutedRoutedEventArgs e)
         {
-            Dialog.Information(this, Resrc.WelcomeUseTitle + ' ' + Resrc.Title, string.Format(Resrc.WelcomeUse, Resrc.Title), 
-                               Resrc.WelcomeUseTitle);
+            Dialog.Information(this, Resrc.WelcomeUseTitle + ' ' + Resrc.Title,
+                               string.Format(Resrc.WelcomeUse, Resrc.Title), Resrc.WelcomeUseTitle);
         }
 
         private void TechSupportCheckForUpdates(object sender, RoutedEventArgs e)
@@ -655,7 +679,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var game = Tree.SelectedItem as Game;
             if (game != null)
             {
-                if (!Kernel.Execute((Game)Tree.SelectedItem)) Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
+                if (!Kernel.Execute((Game)Tree.SelectedItem))
+                    Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
                 return;
             }
             var player = Tree.SelectedItem as ProfilePlayer;
@@ -683,10 +708,12 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             profile.Refresh();
         }
 
-        private readonly Dictionary<Game, GamePropertiesWindow> gamePropertiesWindows = new Dictionary<Game, GamePropertiesWindow>();
-        private readonly Dictionary<Profile, ProfilePropertiesWindow> profilePropertiesWindows = new Dictionary<Profile, ProfilePropertiesWindow>();
-        private readonly Dictionary<ProfilePlayer, PlayerPropertiesWindow> playerPropertiesWindows
-            = new Dictionary<ProfilePlayer, PlayerPropertiesWindow>();
+        private readonly Dictionary<Game, GamePropertiesWindow>
+            gamePropertiesWindows = new Dictionary<Game, GamePropertiesWindow>();
+        private readonly Dictionary<Profile, ProfilePropertiesWindow>
+            profilePropertiesWindows = new Dictionary<Profile, ProfilePropertiesWindow>();
+        private readonly Dictionary<ProfilePlayer, PlayerPropertiesWindow>
+            playerPropertiesWindows = new Dictionary<ProfilePlayer, PlayerPropertiesWindow>();
         private void Properties(object sender, ExecutedRoutedEventArgs e)
         {
             var game = Tree.SelectedItem as Game;
@@ -736,8 +763,10 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             }
         }
 
-        private readonly Dictionary<Game, GameLevelsWindow> gameLevelsWindows = new Dictionary<Game, GameLevelsWindow>();
-        private readonly Dictionary<ProfilePlayer, PlayerLevelsWindow> playerLevelsWindows = new Dictionary<ProfilePlayer, PlayerLevelsWindow>();
+        private readonly Dictionary<Game, GameLevelsWindow>
+            gameLevelsWindows = new Dictionary<Game, GameLevelsWindow>();
+        private readonly Dictionary<ProfilePlayer, PlayerLevelsWindow>
+            playerLevelsWindows = new Dictionary<ProfilePlayer, PlayerLevelsWindow>();
         private void BrowseLevels(object sender, ExecutedRoutedEventArgs e)
         {
             var game = Tree.SelectedItem as Game;
@@ -818,8 +847,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 if (profile == null) return;
                 int result;
                 do result = SelectPlayerNumber();
-                while (result != 0 && profile.Contains(result - 1) && !Dialog.OKCancelQuestion(this, Resrc.OverwritePlayerInstruction,
-                    Resrc.OverwritePlayerText, Resrc.OverwriteConfirm, Resrc.Overwrite));
+                while (result != 0 && profile.Contains(result - 1) &&
+                    !Dialog.OKCancelQuestion(this, Resrc.OverwritePlayerInstruction,
+                                             Resrc.OverwritePlayerText, Resrc.OverwriteConfirm, Resrc.Overwrite));
                 if (result == 0) return;
                 profile.Remove(result - 1);
                 Paste(profile, result);
@@ -839,7 +869,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         #region Game
 
-        private readonly Dictionary<Game, GameGooBallsWindow> gameGooBallsWindows = new Dictionary<Game, GameGooBallsWindow>();
+        private readonly Dictionary<Game, GameGooBallsWindow>
+            gameGooBallsWindows = new Dictionary<Game, GameGooBallsWindow>();
         private void BrowseGooBalls(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
@@ -865,7 +896,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             }
         }
 
-        private readonly Dictionary<Game, GameIslandsWindow> gameIslandsWindows = new Dictionary<Game, GameIslandsWindow>();
+        private readonly Dictionary<Game, GameIslandsWindow>
+            gameIslandsWindows = new Dictionary<Game, GameIslandsWindow>();
         private void BrowseIslands(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
@@ -891,7 +923,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             }
         }
 
-        private readonly Dictionary<Game, GameMaterialsWindow> gameMaterialsWindows = new Dictionary<Game, GameMaterialsWindow>();
+        private readonly Dictionary<Game, GameMaterialsWindow>
+            gameMaterialsWindows = new Dictionary<Game, GameMaterialsWindow>();
         private void BrowseMaterials(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
@@ -963,7 +996,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
 
         private GameMemoryWindow gameMemoryWindow;
-        private GameMemoryWindow GameMemoryWindow { get { return gameMemoryWindow ?? (gameMemoryWindow = new GameMemoryWindow()); } }
+        private GameMemoryWindow GameMemoryWindow
+            { get { return gameMemoryWindow ?? (gameMemoryWindow = new GameMemoryWindow()); } }
         private void EditMemory(object sender, ExecutedRoutedEventArgs e)
         {
             GameMemoryWindow.Show(((Game) Tree.SelectedItem));
@@ -1009,7 +1043,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void SaveAsProfile(object sender, ExecutedRoutedEventArgs e)
         {
             var profile = Tree.SelectedItem as Profile;
-            if (profile == null || saveProfileDialog.ShowDialog() != true) return;
+            if (profile == null || saveProfileDialog.ShowDialog() != CommonFileDialogResult.Ok) return;
             profile.Save(saveProfileDialog.FileName);
             Remove(profile);
             LoadProfile(saveProfileDialog.FileName);
@@ -1028,12 +1062,26 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private int SelectPlayerNumber()
         {
-            var options = new TaskDialogOptions { Title = Resrc.Ask, MainInstruction = Resrc.PasteToInstruction, Owner = this,
-                AllowDialogCancellation = true, MainIcon = TaskDialogIcon.Information, Buttons = TaskDialogButtons.Cancel, 
-                CommandButtons = new string[3] };
-            for (var i = 1; i <= 3; i++) options.CommandButtons[i - 1] = Resrc.PlayerSharp + i;
-            var result = TaskDialog.Show(options);
-            return result.CommandButtonResult == null ? 0 : (result.CommandButtonResult.Value + 1);
+            var dialog = new TaskDialog
+            {
+                Caption = Resrc.Ask, InstructionText = Resrc.PasteToInstruction, OwnerWindowHandle = this.GetHwnd(),
+                Cancelable = true, Icon = TaskDialogStandardIcon.Information,
+                StandardButtons = TaskDialogStandardButtons.Cancel
+            };
+            var result = 0;
+            for (var i = 1; i <= 3; i++)
+            {
+                var link = new TaskDialogCommandLink(i.ToString(CultureInfo.InvariantCulture), Resrc.PlayerSharp + i);
+                var copy = i;
+                link.Click += (sender, e) =>
+                {
+                    result = copy;
+                    dialog.Close();
+                };
+                dialog.Controls.Add(link);
+            }
+            dialog.Show();
+            return result;
         }
 
         private void InsertProfilePlayer(object sender, ExecutedRoutedEventArgs e)
@@ -1042,8 +1090,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (profile == null) return;
             int result;
             do result = SelectPlayerNumber();
-            while (result != 0 && profile.Contains(result - 1) && !Dialog.OKCancelQuestion(this, Resrc.OverwritePlayerInstruction, 
-                Resrc.OverwritePlayerText, Resrc.OverwriteConfirm, Resrc.Overwrite));
+            while (result != 0 && profile.Contains(result - 1) &&
+                !Dialog.OKCancelQuestion(this, Resrc.OverwritePlayerInstruction, 
+                                         Resrc.OverwritePlayerText, Resrc.OverwriteConfirm, Resrc.Overwrite));
             if (result == 0) return;
             profile.Remove(result - 1);
             profile.Add(new ProfilePlayer(profile, result));

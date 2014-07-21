@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,11 +43,14 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             e.CanExecute = LevelRecordGrid.SelectedItems.Count == 1;
         }
 
-        private IEnumerable<PlayedLevel> SelectedLevels { get { return LevelRecordGrid.SelectedItems.OfType<PlayedLevel>(); } }
+        private IEnumerable<PlayedLevel> SelectedLevels
+            { get { return LevelRecordGrid.SelectedItems.OfType<PlayedLevel>(); } }
 
         private void EditMostGoos(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().MostGoos.ToString(), EnterType.Int32);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedLevels.First().MostGoos.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Int32);
             if (str == null) return;
             var i = int.Parse(str);
             foreach (var level in SelectedLevels) level.MostGoos = i;
@@ -54,7 +58,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditFewestMoves(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().FewestMoves.ToString(), EnterType.Int32);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedLevels.First().FewestMoves.ToString(CultureInfo.InvariantCulture), 
+                                   EnterType.Int32);
             if (str == null) return;
             var i = int.Parse(str);
             foreach (var level in SelectedLevels) level.FewestMoves = i;
@@ -62,7 +68,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditFewestSeconds(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().FewestSeconds.ToString(), EnterType.Int32);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedLevels.First().FewestSeconds.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Int32);
             if (str == null) return;
             var i = int.Parse(str);
             foreach (var level in SelectedLevels) level.FewestSeconds = i;
@@ -84,7 +92,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var level = SelectedLevels.First();
             if (level == null) return;
             var id = Dialog.Input(Resrc.EnterIDTitle, level.LevelID, validCheck: i => !player.PlayedLevels.Contains(i));
-            if (id != null) player.PlayedLevels.Add(new PlayedLevel(player, id, level.MostGoos, level.FewestMoves, level.FewestSeconds));
+            if (id != null) player.PlayedLevels.Add(new PlayedLevel(player, id, level.MostGoos, level.FewestMoves,
+                                                                    level.FewestSeconds));
         }
 
         private void RemovePlayedLevel(object sender, ExecutedRoutedEventArgs e)

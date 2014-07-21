@@ -1,6 +1,7 @@
-﻿<m:GlassWindow x:Class="Mygod.WorldOfGoo.Modifier.UI.GameDebuggingWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf" Closed="StopDebugging"
-               Height="450" Width="600" Icon="{x:Static m:CurrentApp.MainIcon}">
+﻿<m:GlassWindow x:Class="Mygod.WorldOfGoo.Modifier.UI.GameDebuggingWindow" xmlns:m="http://schemas.mygod.tk/wpf"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="450" Width="600"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Closed="StopDebugging"
+               Icon="{x:Static m:CurrentApp.MainIcon}">
     <m:GlassWindow.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource GameDebuggingWindowTitle}" />
@@ -15,7 +16,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBox Name="OutputBox" AcceptsTab="True" AcceptsReturn="True" IsReadOnly="True" x:FieldModifier="private"
-                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnlyCaretVisible="True" />
+                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     IsReadOnlyCaretVisible="True" />
             <Button Grid.Row="1" Content="{StaticResource AbortGame}" Click="AbortGame" />
         </Grid>
     </Border>

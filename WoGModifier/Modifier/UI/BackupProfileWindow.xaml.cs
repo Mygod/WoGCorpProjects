@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -22,8 +23,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             {
                 get
                 {
-                    return Info.Name.Substring(0, Info.Name.Length - R.BackupExtension.Length).Replace("%1", "\\").Replace("%2", "/")
-                        .Replace("%3", ":").Replace("%4", "*").Replace("%5", "?").Replace("%6", "\"").Replace("%7", "<").Replace("%8", ">")
+                    return Info.Name.Substring(0, Info.Name.Length - R.BackupExtension.Length)
+                        .Replace("%1", "\\").Replace("%2", "/").Replace("%3", ":").Replace("%4", "*")
+                        .Replace("%5", "?").Replace("%6", "\"").Replace("%7", "<").Replace("%8", ">")
                         .Replace("%9", "|").Replace("%0", "%");
                 }
                 set
@@ -33,12 +35,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     // ReSharper restore PossibleNullReferenceException
                 }
             }
-            public string Time { get { return Info.LastWriteTime.ToString(); } }
-            public string Size { get { return Kernel.GetSize(Info.Length); } }
+            public string Time { get { return Info.LastWriteTime.ToString(CultureInfo.InvariantCulture); } }
+            public string Size { get { return Helper.GetSize(Info.Length, Resrc.Byte); } }
             public static string GetFileName(string backupName)
             {
-                return backupName.Replace("%", "%0").Replace("\\", "%1").Replace("/", "%2").Replace(":", "%3").Replace("*", "%4")
-                    .Replace("?", "%5").Replace("\"", "%6").Replace("<", "%7").Replace(">", "%8").Replace("|", "%9");
+                return backupName.Replace("%", "%0").Replace("\\", "%1").Replace("/", "%2").Replace(":", "%3")
+                    .Replace("*", "%4").Replace("?", "%5").Replace("\"", "%6").Replace("<", "%7").Replace(">", "%8")
+                    .Replace("|", "%9");
             }
         }
 
@@ -84,8 +87,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 if (e == null || e.ChangeType == WatcherChangeTypes.Renamed)
                 {
                     backups.Clear();
-                    foreach (var backup in new DirectoryInfo(Settings.ProfileBackupsDirectory)
-                        .EnumerateFiles('*' + R.BackupExtension, SearchOption.AllDirectories).Select(info => new Backup(info))) backups.Add(backup);
+                    foreach (var backup in from info in new DirectoryInfo(Settings.ProfileBackupsDirectory)
+                        .EnumerateFiles('*' + R.BackupExtension, SearchOption.AllDirectories) select new Backup(info))
+                        backups.Add(backup);
                 }
                 else switch (e.ChangeType)
                 {
@@ -126,8 +130,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (fileName == null) return;
             fileName = Backup.GetFileName(fileName);
             var path = Path.Combine(Settings.ProfileBackupsDirectory, fileName + R.BackupExtension);
-            if (File.Exists(path)) if (!Dialog.YesNoQuestion(this, Resrc.OverwriteBackupInstruction, Resrc.OverwriteBackupText, 
-                yesText: Resrc.Overwrite, noText: Resrc.Cancel)) return;
+            if (File.Exists(path) && !Dialog.OKCancelQuestion(this, Resrc.OverwriteBackupInstruction,
+                Resrc.OverwriteBackupText, okText: Resrc.Overwrite)) return;
             File.Copy(SelectedProfile, path);
             new FileInfo(path).LastWriteTime = DateTime.Now;
             Dialog.Finish(this, Resrc.BackupSuccessfully);
@@ -135,8 +139,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void OverwriteBackups(object sender, RoutedEventArgs e)
         {
-            if (!Dialog.OKCancelQuestion(this, Resrc.OverwriteBackupInstruction, Resrc.OverwriteBackupText, Resrc.OverwriteConfirm, 
-                Resrc.Overwrite)) return;
+            if (!Dialog.OKCancelQuestion(this, Resrc.OverwriteBackupInstruction, Resrc.OverwriteBackupText,
+                                         Resrc.OverwriteConfirm, Resrc.Overwrite)) return;
             foreach (Backup backup in BackupList.SelectedItems)
             {
                 File.Copy(SelectedProfile, backup.Info.FullName, true);
@@ -147,8 +151,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void RestoreBackup(object sender, RoutedEventArgs e)
         {
-            if (!Dialog.OKCancelQuestion(this, Resrc.RestoreBackupInstruction, Resrc.RestoreBackupText, Resrc.RestoreBackupConfirm, 
-                Resrc.RestoreButton)) return;
+            if (!Dialog.OKCancelQuestion(this, Resrc.RestoreBackupInstruction, Resrc.RestoreBackupText,
+                                         Resrc.RestoreBackupConfirm, Resrc.RestoreButton)) return;
             File.Copy(((Backup)BackupList.SelectedItem).Info.FullName, SelectedProfile, true);
             Dialog.Finish(this, Resrc.RestoreBackupSuccessfully);
         }
@@ -160,7 +164,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (fileName == null) return;
             fileName = Backup.GetFileName(fileName);
             var path = Path.Combine(Settings.ProfileBackupsDirectory, fileName + R.BackupExtension);
-            if (File.Exists(path)) if (!Dialog.YesNoQuestion(this, Resrc.OverwriteBackupInstruction, Resrc.OverwriteBackupText)) return;
+            if (File.Exists(path) && !Dialog.YesNoQuestion(this, Resrc.OverwriteBackupInstruction,
+                                                           Resrc.OverwriteBackupText)) return;
             File.Delete(path);
             backup.Info.MoveTo(path);
             Dialog.Finish(this, Resrc.RenameSuccessfully);
@@ -168,8 +173,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void DeleteBackups(object sender, RoutedEventArgs e)
         {
-            if (!Dialog.OKCancelQuestion(this, Resrc.DeleteBackupInstruction, Resrc.DeleteBackupText, Resrc.DeleteBackupConfirm, 
-                Resrc.Delete)) return;
+            if (!Dialog.OKCancelQuestion(this, Resrc.DeleteBackupInstruction, Resrc.DeleteBackupText,
+                                         Resrc.DeleteBackupConfirm, Resrc.Delete)) return;
             foreach (Backup backup in BackupList.SelectedItems) backup.Info.Delete();
             Dialog.Finish(this, Resrc.DeleteBackupSuccessfully);
         }
@@ -177,15 +182,21 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void SetBackupsDirectory(object sender, RoutedEventArgs e)
         {
             var window = sender == null ? Application.Current.MainWindow : this;
-        reselect: 
-            var directoryName = Dialog.Input(Resrc.EnterBackupsDirectoryTitle, Settings.ProfileBackupsDirectory, EnterType.Directory);
-            if (directoryName == null) return;
-            if (new DirectoryInfo(directoryName).Root.FullName == new DirectoryInfo(SelectedProfileDirectory).Root.FullName && 
-                !Dialog.YesNoQuestion(this, Resrc.BackupSameVolume, Resrc.BackupSameVolumeDetails, yesText: Resrc.Continue, noText: Resrc.Reselect))
-                    goto reselect;
+            string directoryName;
+            do
+            {
+                directoryName = Dialog.Input(Resrc.EnterBackupsDirectoryTitle, Settings.ProfileBackupsDirectory,
+                                             EnterType.Directory);
+                if (directoryName == null) return;
+            }
+            while (new DirectoryInfo(directoryName).Root.FullName ==
+                   new DirectoryInfo(SelectedProfileDirectory).Root.FullName &&
+                   !Dialog.YesNoQuestion(this, Resrc.BackupSameVolume, Resrc.BackupSameVolumeDetails,
+                                         yesText: Resrc.Continue, noText: Resrc.Reselect));
             Directory.CreateDirectory(directoryName);
-            if (BackupList.Items.Count > 0) if (Dialog.YesNoQuestion(window, Resrc.CopyBackupsConfirm))
-                foreach (Backup backup in BackupList.Items) backup.Info.MoveTo(Path.Combine(directoryName, backup.Info.Name));
+            if (BackupList.Items.Count > 0 && Dialog.YesNoQuestion(window, Resrc.CopyBackupsConfirm))
+                foreach (Backup backup in BackupList.Items)
+                    backup.Info.MoveTo(Path.Combine(directoryName, backup.Info.Name));
             Settings.ProfileBackupsDirectory = directoryName;
             Dialog.Finish(window, Resrc.EditBackupsDirectorySuccessfully);
         }

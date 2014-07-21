@@ -1,6 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.XslTransformerWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
-        Title="{StaticResource XslTransformerWindowTitle}" Icon="{x:Static m:CurrentApp.MainIcon}" Height="400" Width="600">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.XslTransformerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="400" Width="600"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygod.tk/wpf"
+        Title="{StaticResource XslTransformerWindowTitle}" Icon="{x:Static m:CurrentApp.MainIcon}">
     <Window.Resources>
         <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="AcceptsReturn" Value="True" />

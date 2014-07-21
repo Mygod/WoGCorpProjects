@@ -1,6 +1,6 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.ProfilePropertiesWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
-        SizeToContent="Height" Width="200" Closing="BlockClosing"
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.ProfilePropertiesWindow" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" SizeToContent="Height" Width="200"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Closing="BlockClosing"
         xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" Icon="{x:Static m:CurrentApp.MainIcon}">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
@@ -21,7 +21,7 @@
         <Label Content="{StaticResource ProfilePropertiesCountryCode}" Target="{Binding ElementName=CountryCodeBox}"
                ToolTip="{StaticResource CountryCodeToolTip}" />
         <m:AutoCompleteBox Name="CountryCodeBox" x:FieldModifier="private" VerticalAlignment="Center" Grid.Column="1"
-                               Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
+                           Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
             <m:AutoCompleteBox.Text>
                 <Binding Path="CountryCode" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>

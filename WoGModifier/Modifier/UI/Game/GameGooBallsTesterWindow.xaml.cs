@@ -37,8 +37,10 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             if (!CheckTestGooBall()) return;
             if (string.IsNullOrWhiteSpace(TestGooBallBox.Text)) return;
-            Features.GooBallTestHelper.CreateAt(game.Res.Balls, TestGooBallBox.Text, (double)TestGooBallBox.Text.Split(',').LongLength/20);
-            Kernel.Execute(game, Features.GooBallTester.CreateAt(game.Res.Levels, new object[] { Settings.GooBallTesterVisualDebugEnabled }));
+            Features.GooBallTestHelper.CreateAt(game.Res.Balls, TestGooBallBox.Text,
+                                                (double) TestGooBallBox.Text.Split(',').LongLength / 20);
+            Kernel.Execute(game, Features.GooBallTester.CreateAt
+                (game.Res.Levels, new object[] { Settings.GooBallTesterVisualDebugEnabled }));
         }
 
         private void CheckTestGooBall(object sender, RoutedEventArgs e)
@@ -59,7 +61,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 if ((i & 1) == 0)
                 {
                     uint j;
-                    if (!uint.TryParse(balls[i], out j)) error.AppendFormat(Resrc.ErrorGooBallsTesterPositiveIntegerRequired, no);
+                    if (!uint.TryParse(balls[i], out j))
+                        error.AppendFormat(Resrc.ErrorGooBallsTesterPositiveIntegerRequired, no);
                     if (j == 0)
                     {
                         balls.RemoveAt(i);
@@ -72,7 +75,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 else
                 {
                     var ball = game.Res.Balls.FirstOrDefault(p => p.ID == balls[i]);
-                    if (ball == null || ball.ID == R.GooBallTestHelperGooBallName) error.AppendFormat(Resrc.ErrorGooBallsTesterNotExist, no);
+                    if (ball == null || ball.ID == R.GooBallTestHelperGooBallName)
+                        error.AppendFormat(Resrc.ErrorGooBallsTesterNotExist, no);
                 }
                 result.Append(balls[i]);
                 if (i != balls.Count - 1) result.Append(',');
@@ -88,7 +92,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (error.Length != 0) TestGooBallErrorDetails.Text += Resrc.ErrorStart + error;
             if (warning.Length != 0) TestGooBallErrorDetails.Text += Resrc.WarningStart + warning;
             TestGooBallErrorDetails.Text = TestGooBallErrorDetails.Text.Trim('\r', '\n');
-            TestGooBallErrorDetails.Visibility = string.IsNullOrWhiteSpace(TestGooBallErrorDetails.Text) ? Visibility.Collapsed : Visibility.Visible;
+            TestGooBallErrorDetails.Visibility = string.IsNullOrWhiteSpace(TestGooBallErrorDetails.Text)
+                                                    ? Visibility.Collapsed : Visibility.Visible;
             return error.Length == 0;
         }
 
@@ -118,7 +123,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void OnDrop(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(R.GooBalls)) return;
-            e.Effects = e.Data.GetDataPresent(R.GooBalls, true) ? e.AllowedEffects & DragDropEffects.Link : DragDropEffects.None;
+            e.Effects = e.Data.GetDataPresent(R.GooBalls, true) ? e.AllowedEffects & DragDropEffects.Link
+                                                                : DragDropEffects.None;
             if (e.Effects != DragDropEffects.Link) return;
             DropTargetHelper.Drop(e.Data, e.GetPosition(this), e.Effects);
             var gooBalls = (DraggableGooBalls)e.Data.GetData(R.GooBalls, true);

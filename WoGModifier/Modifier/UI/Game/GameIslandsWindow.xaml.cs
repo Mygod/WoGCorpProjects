@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -79,13 +80,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditIslandsMap(object sender, ExecutedRoutedEventArgs e)
         {
-            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedIslands.First().Map, list: MapColumn.ItemsSource);
+            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedIslands.First().Map,
+                                     list: MapColumn.ItemsSource);
             if (value != null) foreach (var material in SelectedIslands) material.Map = value;
         }
 
         private void EditIslandsIcon(object sender, ExecutedRoutedEventArgs e)
         {
-            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedIslands.First().Icon, list: IconColumn.ItemsSource);
+            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedIslands.First().Icon,
+                                     list: IconColumn.ItemsSource);
             if (value != null) foreach (var material in SelectedIslands) material.Icon = value;
         }
 
@@ -93,7 +96,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var island = SelectedIslands.FirstOrDefault();
             if (island == null) return;
-            var str = Dialog.Input(Resrc.EnterIslandToCopyNumber, island.Number.ToString(), EnterType.Int32, s =>
+            var str = Dialog.Input(Resrc.EnterIslandToCopyNumber, island.Number.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Int32, s =>
             {
                 var i = int.Parse(s);
                 return i >= 1 && i <= 5 && i != island.Number;
@@ -114,7 +118,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void SwapIslands(object sender, ExecutedRoutedEventArgs e)
         {
             var islands = SelectedIslands.ToList();
-            for (var i = 1; i < islands.Count; i++) game.Res.Islands.SwapIslands(islands[i].Number, islands[i - 1].Number);
+            for (var i = 1; i < islands.Count; i++)
+                game.Res.Islands.SwapIslands(islands[i].Number, islands[i - 1].Number);
         }
     }
 }

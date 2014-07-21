@@ -1,7 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.OptionsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Closing="Hide"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{StaticResource OptionsWindowTitle}" Height="300" Width="400"
-        xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:m="http://schemas.mygodstudio.tk/wpf"
-        Icon="{x:Static m:CurrentApp.MainIcon}">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.OptionsWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        Title="{StaticResource OptionsWindowTitle}" xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
+        Closing="Hide" Height="300" Width="400" Icon="{x:Static m:CurrentApp.MainIcon}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Grid.IsSharedSizeScope="True">
             <m:AnimatedExpander Header="{StaticResource OptionsMainInterface}">
@@ -17,17 +17,19 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="{StaticResource OptionsRecentPathsCapacity}" Target="{Binding ElementName=RecentPathsCapacity}" />
-                    <TextBox Name="RecentPathsCapacity" x:FieldModifier="private" LostFocus="RecentPathsCapacityChanged" Grid.Column="1"
-                             VerticalAlignment="Center" Grid.ColumnSpan="2" />
+                    <Label Content="{StaticResource OptionsRecentPathsCapacity}"
+                           Target="{Binding ElementName=RecentPathsCapacity}" />
+                    <TextBox Name="RecentPathsCapacity" x:FieldModifier="private" LostFocus="RecentPathsCapacityChanged"
+                             Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2" />
 
                     <Label Content="{StaticResource OptionsTheme}" Target="{Binding ElementName=Theme}" Grid.Row="1" />
-                    <ComboBox Name="Theme" x:FieldModifier="private" SelectionChanged="ThemeChanged" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                              VerticalAlignment="Center" />
+                    <ComboBox Name="Theme" x:FieldModifier="private" SelectionChanged="ThemeChanged" Grid.Row="1"
+                              Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" />
 
-                    <Label Content="{StaticResource OptionsLanguage}" Target="{Binding ElementName=LanguageBox}" Grid.Row="2" />
-                    <ComboBox Name="LanguageBox" x:FieldModifier="private" SelectionChanged="LanguageChanged" Grid.Row="2" Grid.Column="1"
-                              VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    <Label Content="{StaticResource OptionsLanguage}" Target="{Binding ElementName=LanguageBox}"
+                           Grid.Row="2" />
+                    <ComboBox Name="LanguageBox" x:FieldModifier="private" SelectionChanged="LanguageChanged"
+                              Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2">
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type g:CultureInfo}">
                                 <TextBlock>
@@ -37,10 +39,12 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <Label Content="{StaticResource OptionsBinFileEditor}" Target="{Binding ElementName=BinFileEditor}" Grid.Row="3" />
-                    <TextBox Name="BinFileEditor" x:FieldModifier="private" TextChanged="BinFileEditorChanged" Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Center" />
-                    <Button Content="{StaticResource Browse}" Grid.Row="3" Grid.Column="2" Click="BrowseBinFileEditor" VerticalAlignment="Center" />
+                    <Label Content="{StaticResource OptionsBinFileEditor}" Target="{Binding ElementName=BinFileEditor}"
+                           Grid.Row="3" />
+                    <TextBox Name="BinFileEditor" x:FieldModifier="private" TextChanged="BinFileEditorChanged"
+                             Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
+                    <Button Content="{StaticResource Browse}" Grid.Row="3" Grid.Column="2" Click="BrowseBinFileEditor"
+                            VerticalAlignment="Center" />
                 </Grid>
             </m:AnimatedExpander>
             <m:AnimatedExpander Header="{StaticResource OptionsGame}">
@@ -54,9 +58,10 @@
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Description" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Label Content="{StaticResource OptionsThumbnailMaxHeight}" Target="{Binding ElementName=ThumbnailMaxHeight}" />
-                    <TextBox Name="ThumbnailMaxHeight" x:FieldModifier="private" LostFocus="ThumbnailMaxHeightChanged" Grid.Column="1"
-                             VerticalAlignment="Center" />
+                    <Label Content="{StaticResource OptionsThumbnailMaxHeight}"
+                           Target="{Binding ElementName=ThumbnailMaxHeight}" />
+                    <TextBox Name="ThumbnailMaxHeight" x:FieldModifier="private" LostFocus="ThumbnailMaxHeightChanged"
+                             Grid.Column="1" VerticalAlignment="Center" />
 
                     <CheckBox Grid.Row="1" Grid.ColumnSpan="2" Name="LoadGooBallThumbnail" x:FieldModifier="private"
                               Checked="LoadGooBallThumbnailChanged" Unchecked="LoadGooBallThumbnailChanged"

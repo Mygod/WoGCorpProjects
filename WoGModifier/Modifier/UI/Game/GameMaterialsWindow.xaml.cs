@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -25,7 +26,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
 
         private readonly Game game;
-        private IEnumerable<Material> SelectedMaterials { get { return MaterialGrid.SelectedItems.OfType<Material>(); } }
+        private IEnumerable<Material> SelectedMaterials
+            { get { return MaterialGrid.SelectedItems.OfType<Material>(); } }
 
         private void MaterialSelected(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -52,7 +54,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var material = SelectedMaterials.FirstOrDefault();
             if (material == null) return;
-            var id = Dialog.Input(Resrc.EnterIDTitle, material.ID, validCheck: i => !game.Properties.Materials.Contains(i));
+            var id = Dialog.Input(Resrc.EnterIDTitle, material.ID,
+                                  validCheck: i => !game.Properties.Materials.Contains(i));
             if (id != null) game.Properties.Materials.Add(new Material(material, id));
         }
 
@@ -71,12 +74,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var material = SelectedMaterials.FirstOrDefault();
             if (material == null) return;
             SaveMaterials();
-            Kernel.Execute(game, Features.MaterialTester.CreateAt(game.Res.Levels, sceneArgs: new object[] { material.ID }));
+            Kernel.Execute(game, Features.MaterialTester.CreateAt(game.Res.Levels,
+                                                                  sceneArgs: new object[] { material.ID }));
         }
 
         private void EditMaterialsFriction(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedMaterials.First().Friction.ToString(), EnterType.Double);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedMaterials.First().Friction.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Double);
             if (str == null) return;
             var value = double.Parse(str);
             foreach (var material in SelectedMaterials) material.Friction = value;
@@ -84,7 +90,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditMaterialsBounce(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedMaterials.First().Bounce.ToString(), EnterType.Double);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedMaterials.First().Bounce.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Double);
             if (str == null) return;
             var value = double.Parse(str);
             foreach (var material in SelectedMaterials) material.Bounce = value;
@@ -92,7 +100,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditMaterialsMinimumBounceVelocity(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedMaterials.First().MinimumBounceVelocity.ToString(), EnterType.Double);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedMaterials.First().MinimumBounceVelocity
+                                                            .ToString(CultureInfo.InvariantCulture), EnterType.Double);
             if (str == null) return;
             var value = double.Parse(str);
             foreach (var material in SelectedMaterials) material.MinimumBounceVelocity = value;
@@ -100,7 +109,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditMaterialsStickiness(object sender, ExecutedRoutedEventArgs e)
         {
-            var str = Dialog.Input(Resrc.EnterNewValueTitle, SelectedMaterials.First().Stickiness.ToString(), EnterType.Double);
+            var str = Dialog.Input(Resrc.EnterNewValueTitle,
+                                   SelectedMaterials.First().Stickiness.ToString(CultureInfo.InvariantCulture),
+                                   EnterType.Double);
             if (str == null) return;
             var value = double.Parse(str);
             foreach (var material in SelectedMaterials) material.Stickiness = value;

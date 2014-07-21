@@ -1,17 +1,15 @@
-﻿namespace Mygod.WorldOfGoo.Modifier.UI
+﻿using System.Windows;
+
+namespace Mygod.WorldOfGoo.Modifier.UI
 {
     sealed partial class TextWindow
     {
-        public TextWindow(string title, string properties)
+        public TextWindow(string title, string properties, Window owner = null)
         {
             InitializeComponent();
             Title = title;
             TextBox.Text = properties;
-        }
-
-        public static void Show(string title, string properties)
-        {
-            new TextWindow(title, properties).Show();
+            Owner = owner;
         }
     }
 }

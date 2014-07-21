@@ -1,6 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameMaterialsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" x:ClassModifier="internal"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing" Height="500" Width="400">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameMaterialsWindow" xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Icon="{x:Static m:CurrentApp.MainIcon}"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal"
+        xmlns:m="http://schemas.mygod.tk/wpf" Closing="BlockClosing" Height="500" Width="400">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource GameMaterialsWindowTitle}" />
@@ -88,14 +89,18 @@
         </DataGrid.Columns>
         <DataGrid.CommandBindings>
             <CommandBinding Command="Save" Executed="SaveMaterials" />
-            <CommandBinding Command="UI:Commands.EditItem1" Executed="EditMaterialsFriction" CanExecute="MaterialSelected" />
-            <CommandBinding Command="UI:Commands.EditItem2" Executed="EditMaterialsBounce" CanExecute="MaterialSelected" />
-            <CommandBinding Command="UI:Commands.EditItem3" Executed="EditMaterialsMinimumBounceVelocity"
+            <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMaterialsFriction"
                             CanExecute="MaterialSelected" />
-            <CommandBinding Command="UI:Commands.EditItem4" Executed="EditMaterialsStickiness" CanExecute="MaterialSelected" />
-            <CommandBinding Command="UI:Commands.Insert" Executed="AddMaterial" />
+            <CommandBinding Command="ui:Commands.EditItem2" Executed="EditMaterialsBounce"
+                            CanExecute="MaterialSelected" />
+            <CommandBinding Command="ui:Commands.EditItem3" Executed="EditMaterialsMinimumBounceVelocity"
+                            CanExecute="MaterialSelected" />
+            <CommandBinding Command="ui:Commands.EditItem4" Executed="EditMaterialsStickiness"
+                            CanExecute="MaterialSelected" />
+            <CommandBinding Command="ui:Commands.Insert" Executed="AddMaterial" />
             <CommandBinding Command="Copy" Executed="CopyMaterial" CanExecute="SingleMaterialSelected" />
-            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="MaterialSelected" Executed="RemoveMaterials" />
+            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="MaterialSelected"
+                            Executed="RemoveMaterials" />
         </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
@@ -103,12 +108,14 @@
                 <MenuItem Header="{StaticResource ContextMenuEditMaterialsXml}" Click="EditMaterialsXml" />
                 <MenuItem Header="{StaticResource ContextMenuTestMaterial}" Click="TestMaterial" />
                 <Separator />
-                <MenuItem Header="{StaticResource ContextMenuEditMaterialsFriction}" Command="UI:Commands.EditItem1" />
-                <MenuItem Header="{StaticResource ContextMenuEditMaterialsBounce}" Command="UI:Commands.EditItem2" />
-                <MenuItem Header="{StaticResource ContextMenuEditMaterialsMinimumBounceVelocity}" Command="UI:Commands.EditItem3" />
-                <MenuItem Header="{StaticResource ContextMenuEditMaterialsStickiness}" Command="UI:Commands.EditItem4" />
+                <MenuItem Header="{StaticResource ContextMenuEditMaterialsFriction}" Command="ui:Commands.EditItem1" />
+                <MenuItem Header="{StaticResource ContextMenuEditMaterialsBounce}" Command="ui:Commands.EditItem2" />
+                <MenuItem Header="{StaticResource ContextMenuEditMaterialsMinimumBounceVelocity}"
+                          Command="ui:Commands.EditItem3" />
+                <MenuItem Header="{StaticResource ContextMenuEditMaterialsStickiness}"
+                          Command="ui:Commands.EditItem4" />
                 <Separator />
-                <MenuItem Header="{StaticResource ContextMenuAddMaterial}" Command="UI:Commands.Insert" />
+                <MenuItem Header="{StaticResource ContextMenuAddMaterial}" Command="ui:Commands.Insert" />
                 <MenuItem Header="{StaticResource ContextMenuCopyMaterial}" Command="Copy" />
                 <MenuItem Header="{StaticResource ContextMenuRemoveMaterial}" Command="ApplicationCommands.Delete" />
             </ContextMenu>

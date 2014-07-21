@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Mygod.WorldOfGoo.Modifier.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
-             xmlns:wog="clr-namespace:Mygod.WorldOfGoo" xmlns:mod="clr-namespace:Mygod.WorldOfGoo.Modifier" Startup="ApplicationStartup"
-             DispatcherUnhandledException="ErrorOccurred" Exit="ApplicationExit">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:wog="clr-namespace:Mygod.WorldOfGoo"
+             xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" DispatcherUnhandledException="ErrorOccurred"
+             xmlns:mod="clr-namespace:Mygod.WorldOfGoo.Modifier" Startup="ApplicationStartup" Exit="ApplicationExit">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,8 +12,8 @@
             </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary x:Key="Styles">
                 <Style TargetType="MenuItem" x:Key="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-                    <Setter Property="CommandTarget"
-                            Value="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" />
+                    <Setter Property="CommandTarget" Value="{Binding PlacementTarget,
+                                                RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" />
                 </Style>
                 <Style TargetType="TextBox" x:Key="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Setter Property="MinWidth" Value="23" />
@@ -55,7 +55,8 @@
                             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimation BeginTime="0:0:0" Duration="0:0:1" Storyboard.TargetName="LoadingRotateTransform"
+                                        <DoubleAnimation BeginTime="0:0:0" Duration="0:0:1"
+                                                         Storyboard.TargetName="LoadingRotateTransform"
                                                          From="0" To="360" Storyboard.TargetProperty="Angle" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -72,7 +73,8 @@
                     </TextBlock>
                 </Grid>
             </HierarchicalDataTemplate>
-            <HierarchicalDataTemplate x:Key="ProfilePlayerTemplate" x:Shared="False" DataType="{x:Type wog:ProfilePlayer}">
+            <HierarchicalDataTemplate x:Key="ProfilePlayerTemplate" x:Shared="False"
+                                      DataType="{x:Type wog:ProfilePlayer}">
                 <TextBlock FontWeight="{Binding IsMostRecentPlayer, Converter={StaticResource BoldWhileTrue}}">
                     <Run Text="{StaticResource PlayerSharp}" /><Run Text="{Binding PlayerNumber, 
                         Converter={StaticResource AddOne}, Mode=OneWay}" /> (<Run Text="{Binding PlayerName}" />)
@@ -99,7 +101,8 @@
                             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimation BeginTime="0:0:0" Duration="0:0:1" Storyboard.TargetName="LoadingRotateTransform"
+                                        <DoubleAnimation BeginTime="0:0:0" Duration="0:0:1"
+                                                         Storyboard.TargetName="LoadingRotateTransform"
                                                          From="0" To="360" Storyboard.TargetProperty="Angle" />
                                     </Storyboard>
                                 </BeginStoryboard>

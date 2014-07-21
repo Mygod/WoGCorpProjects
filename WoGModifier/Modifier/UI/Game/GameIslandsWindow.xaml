@@ -1,7 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameIslandsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing"
-        Height="200" Width="600" x:ClassModifier="internal">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameIslandsWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" Icon="{x:Static m:CurrentApp.MainIcon}"
+        Closing="BlockClosing" Height="200" Width="600" x:ClassModifier="internal">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource GameIslandsWindowTitle}" />
@@ -56,7 +56,8 @@
                     </Style>
                 </m:DataGridAutoCompleteColumn.HeaderStyle>
             </m:DataGridAutoCompleteColumn>
-            <m:DataGridAutoCompleteColumn Header="{StaticResource IconID}" Binding="{Binding Icon}" x:Name="IconColumn" x:FieldModifier="private">
+            <m:DataGridAutoCompleteColumn Header="{StaticResource IconID}" Binding="{Binding Icon}"
+                                          x:Name="IconColumn" x:FieldModifier="private">
                 <m:DataGridAutoCompleteColumn.HeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="ToolTip">
@@ -73,7 +74,8 @@
             </m:DataGridAutoCompleteColumn>
         </DataGrid.Columns>
         <DataGrid.CommandBindings>
-            <CommandBinding Command="ui:Commands.ControlDefault" Executed="BrowseIslandLevels" CanExecute="IslandSelected" />
+            <CommandBinding Command="ui:Commands.ControlDefault" Executed="BrowseIslandLevels"
+                            CanExecute="IslandSelected" />
             <CommandBinding Command="Save" Executed="SaveIslands" CanExecute="IslandSelected" />
             <CommandBinding Command="ui:Commands.EditItem1" Executed="EditIslandsName" CanExecute="IslandSelected" />
             <CommandBinding Command="ui:Commands.EditItem2" Executed="EditIslandsMap" CanExecute="IslandSelected" />

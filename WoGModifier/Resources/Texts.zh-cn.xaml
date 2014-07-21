@@ -9,7 +9,6 @@
     <s:String x:Key="Balls">球</s:String>
     <s:String x:Key="Byte">字节</s:String>
     <s:String x:Key="DefaultText">默认文本（英语）</s:String>
-    <s:String x:Key="Delete">删除</s:String>
     <s:String x:Key="Details">详细信息</s:String>
     <s:String x:Key="Error">错误</s:String>
     <s:String x:Key="Failed">失败</s:String>
@@ -55,17 +54,15 @@
     <s:String x:Key="DragFile">使用 %1 打开</s:String>
     <s:String x:Key="EditBackupsDirectorySuccessfully">修改备份存放位置成功！</s:String>
     <s:String x:Key="EnterSkipEndOfLevelSequenceInstruction">是否要跳过关卡结束动画？</s:String>
-    <s:String x:Key="ErrorDetailsLabel">错误详细信息(_D)</s:String>
-    <s:String x:Key="FailedLoadingGame">加载World of Goo失败！</s:String>
+    <s:String x:Key="ErrorDetailsLabel">错误详细信息(&amp;D)</s:String>
+    <s:String x:Key="FailedLoadingGame">加载 World of Goo 失败！</s:String>
     <s:String x:Key="FailedLoadingProfile">加载存档失败！</s:String>
     <s:String x:Key="Fatal">程序运行时出现了一个非预期的错误。</s:String>
-    <s:String x:Key="FeaturesParseError">对不起，读取Features.xml时出错！</s:String>
-    <s:String x:Key="FeaturesParseErrorDetails">请检查当前根目录下中的Resources文件夹中是否存在正确的Features.xml，否则请重新下载本软件：http://mygod.apphb.com/#Product-54</s:String>
+    <s:String x:Key="FeaturesParseError">对不起，读取 Features.xml 时出错！</s:String>
+    <s:String x:Key="FeaturesParseErrorDetails">请检查当前根目录下中的 Resources 文件夹中是否存在正确的 Features.xml，否则请重新下载本软件：http://mygod.tk/product/wogmodifier/</s:String>
     <s:String x:Key="GameAlreadyRunning">游戏已经运行，你不能同时启动两个游戏！</s:String>
     <s:String x:Key="GarbageCleanupDone">垃圾清理完成！</s:String>
     <s:String x:Key="GarbageCleanupDetails">共清理了 {0} 垃圾。</s:String>
-    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupportedInfo">对不起，我们目前无法为你生成一个新的玩家在线认证码。</s:String>
-    <s:String x:Key="GenerateOnlinePlayerKeyCountryNotSupported">我们当前无法处理你的国家代码。如果你仍想生成一个新的玩家在线认证码，你可以联系我们帮助我们改进这个程序，或者尝试这个解决方案：清空你的玩家在线认证码，禁用在线搭塔，保存存档后打开游戏，在粘粘公司中点击connect。</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">服务器返回空响应，请稍后再试。</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyFailed">生成玩家在线认证码失败！</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyInstruction">你想要在生成之前备份一下你的旧认证码吗？</s:String>
@@ -411,36 +408,38 @@
     <Span x:Key="TextItemValueDescription">指定语言的字符串内容。</Span>
 
     <!-- Command Link Texts -->
-    <s:String x:Key="FatalBreak">中断运行(_B)%N立即中断运行并记录错误，避免错误进一步发展。</s:String>
-    <s:String x:Key="FatalContinue">继续运行(_C)%N记录错误后继续运行，这可能导致错误进一步发展。如果您确定该错误没有影响请点击此选项。</s:String>
-    <s:String x:Key="FatalRestart">重新启动(_R)%N记录错误后重启本程序。</s:String>
+    <s:String x:Key="FatalBreak">中断运行(&amp;B)</s:String>
+    <s:String x:Key="FatalBreakInstructions">立即中断运行并记录错误，避免错误进一步发展。</s:String>
+    <s:String x:Key="FatalContinue">继续运行(&amp;C)</s:String>
+    <s:String x:Key="FatalContinueInstructions">记录错误后继续运行，这可能导致错误进一步发展。如果您确定该错误没有影响请点击此选项。</s:String>
+    <s:String x:Key="FatalRestart">重新启动(&amp;R)</s:String>
+    <s:String x:Key="FatalRestartInstructions">记录错误后重启本程序。</s:String>
 
     <!-- Button Texts -->
     <s:String x:Key="Browse">浏览(_B)...</s:String>
-    <s:String x:Key="Cancel">取消</s:String>
     <s:String x:Key="Clear">清空(_C)</s:String>
-    <s:String x:Key="Close">关闭</s:String>
-    <s:String x:Key="Continue">继续(_C)</s:String>
+    <s:String x:Key="Continue">继续(&amp;C)</s:String>
+    <s:String x:Key="Delete">删除</s:String>
     <s:String x:Key="DeleteBackups">删除选中备份</s:String>
     <s:String x:Key="Edit">修改(_E)</s:String>
-    <s:String x:Key="GiveUp">放弃(_G)</s:String>
+    <s:String x:Key="GiveUp">放弃(&amp;D)</s:String>
     <s:String x:Key="NewBackup">备份到新备份</s:String>
-    <s:String x:Key="No">否(_N)</s:String>
+    <s:String x:Key="No">否(&amp;N)</s:String>
     <s:String x:Key="OK">确认</s:String>
-    <s:String x:Key="Overwrite">覆盖(_O)</s:String>
+    <s:String x:Key="Overwrite">覆盖</s:String>
     <s:String x:Key="OverwriteBackups">备份并覆盖选中备份</s:String>
     <s:String x:Key="Refresh">刷新(_R)</s:String>
     <s:String x:Key="RenameBackup">重命名当前备份</s:String>
-    <s:String x:Key="Reselect">重新选择(_R)</s:String>
+    <s:String x:Key="Reselect">重新选择(&amp;R)</s:String>
     <s:String x:Key="RestoreBackup">恢复当前备份</s:String>
-    <s:String x:Key="RestoreButton">恢复(_R)</s:String>
-    <s:String x:Key="Save">保存(_S)</s:String>
+    <s:String x:Key="RestoreButton">恢复</s:String>
+    <s:String x:Key="Save">保存(&amp;S)</s:String>
     <s:String x:Key="ScaleToFit">填满窗口(_F)</s:String>
     <s:String x:Key="SetBackupsDirectory">设置备份存放位置</s:String>
     <s:String x:Key="TechSupportCheckForUpdates">技术支持 &amp; 检查更新(_T)</s:String>
     <s:String x:Key="Test">测试(_T)</s:String>
     <s:String x:Key="VisualDebugEnabled">启动可视化调试(_E)</s:String>
-    <s:String x:Key="Yes">是(_Y)</s:String>
+    <s:String x:Key="Yes">是(&amp;Y)</s:String>
 
     <s:String x:Key="SelectTool">选择工具 (Ctrl+1)</s:String>
     <Run x:Key="SelectToolDescription">使用它拖动粘粘球可以改变粘粘球的位置。</Run>

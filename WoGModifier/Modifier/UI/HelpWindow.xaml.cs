@@ -10,8 +10,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         public HelpWindow()
         {
             InitializeComponent();
-            Browser.Source = new Uri(Globalization.GetLocalizedPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/Help"), 
-                                     R.HelpExtension));
+            Browser.Source = new Uri(Globalization.GetLocalizedPath(Path.Combine
+                                        (AppDomain.CurrentDomain.BaseDirectory, "Resources/Help"), R.HelpExtension));
         }
 
         private void Hide(object sender, CancelEventArgs e)

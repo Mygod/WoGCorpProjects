@@ -1,6 +1,6 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.TextWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.TextWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
         Height="480" Width="640" Icon="{x:Static m:CurrentApp.MainIcon}">
-    <TextBox Name="TextBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" AcceptsReturn="True"
-             x:FieldModifier="private" />
+    <TextBox Name="TextBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+             AcceptsReturn="True" x:FieldModifier="private" />
 </Window>

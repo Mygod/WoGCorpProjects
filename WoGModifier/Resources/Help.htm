@@ -139,7 +139,7 @@
         &lt;ExecuteXsl Path=&quot;Sample XSL.xsl&quot; /&gt;<br />
         &lt;ExecuteIronPython Script=&quot;Sample Python script.py&quot; /&gt;<br />
         &lt;ExecuteIronRuby Script=&quot;Sample Ruby script.rb&quot; /&gt;<br />
-        The script files are stored in the Scripts directory. XSL is the most easy one to use, you can generate one with this tool: <a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
+        The script files are stored in the Resources\Scripts directory. XSL is the most easy one to use, you can generate one with this tool: <a href="http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet">http://www.davidc.net/miscellany/diff-xml-documents-xsl-stylesheet</a><br />
         WoGModifier will run Initialization.py and Initialization.rb when it starts. You can place run-once codes there.<br />
         When the specified script starts to run, there will be an decrypted string variable called <code>input</code>. After your script runed, there should be a boolean variable called <code>edited</code> that determines if you want to apply your changes. If so, there should also be a string or XDocument variable called <code>output</code> which is the running result of your script. </p>
     <h3>
@@ -179,6 +179,20 @@
     </ul>
     <h2>
         What&#39;s New</h2>
+        <p><strong>Updates in V4.0.41.265:</strong></p>
+        <ul>
+            <li>Code cleanup;</li>
+            <li>About dialog updates;</li>
+            <li>Fix the bug where you failed generating a new player key due to server SSL certificate expiration; (thanks to wogfan)</li>
+            <li>Fix the bug where showing properties of a level/goo ball which is modified by a removed feature will cause crashing;</li>
+            <li>Binary folder cleanup;</li>
+            <li>Update libraries;</li>
+            <li>Update the framework to 4.5.1 to drop XP support;</li>
+            <li>Enhance the experience on Vista+.</li>
+        </ul>
+    <!-- optional localization item -->
+    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="Show/hide updates in old versions" />
+    <div style="display: none;" id="oldUpdates">
         <p><strong>Updates in V4.0.40.5:</strong></p>
         <ul>
             <li>Add support for iOS profiles; (thanks wogfan for his help)</li>
@@ -189,9 +203,6 @@
             <li>Update WoGCursor module to 2.0.4.1;</li>
             <li>Improved the dialogs.</li>
         </ul>
-    <!-- optional localization item -->
-    <input id="oldUpdatesButton" onclick="showOldUpdates()" type="submit" value="Show/hide updates in old versions" />
-    <div style="display: none;" id="oldUpdates">
         <p><strong>Updates in V4.0.39.0:</strong></p>
         <ul>
             <li>Add support for IronRuby and XSL;</li>

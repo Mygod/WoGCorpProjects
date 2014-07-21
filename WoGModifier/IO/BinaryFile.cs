@@ -12,8 +12,11 @@ namespace Mygod.WorldOfGoo.IO
 {
     public static class BinaryFile
     {
-        private static readonly byte[] ProfileKey = new byte[] { 0x0D, 0x06, 0x07, 0x07, 0x0C, 0x01, 0x08, 0x05, 0x06, 0x09, 0x09, 0x04,
-                                                                 0x06, 0x0D, 0x03, 0x0F, 0x03, 0x06, 0x0E, 0x01, 0x0E, 0x02, 0x07, 0x0B };
+        private static readonly byte[] ProfileKey =
+        {
+            0x0D, 0x06, 0x07, 0x07, 0x0C, 0x01, 0x08, 0x05, 0x06, 0x09, 0x09, 0x04,
+            0x06, 0x0D, 0x03, 0x0F, 0x03, 0x06, 0x0E, 0x01, 0x0E, 0x02, 0x07, 0x0B
+        };
         private static readonly AesManaged Aes = 
             new AesManaged { Key = ProfileKey, Mode = CipherMode.CBC, IV = new byte[16], Padding = PaddingMode.None };
 
@@ -64,7 +67,8 @@ namespace Mygod.WorldOfGoo.IO
             var target = path;
             try
             {
-                if (path.ToLowerInvariant().EndsWith(".bin", StringComparison.Ordinal)) target = path.Substring(0, path.Length - 4);
+                if (path.ToLowerInvariant().EndsWith(".bin", StringComparison.Ordinal))
+                    target = path.Substring(0, path.Length - 4);
                 if (isXml && !target.ToLowerInvariant().EndsWith(".xml", StringComparison.Ordinal)) target += ".xml";
                 if (target == path) if (isXml) target += ".xml"; else target += ".txt";
                 if (OpenedPaths.Contains(target)) return;
@@ -89,7 +93,8 @@ namespace Mygod.WorldOfGoo.IO
                             }
                             catch (IOException)
                             {
-                                // Trace.WriteLine(string.Format("Retry at Thread {0}", Thread.CurrentThread.ManagedThreadId));
+                                Trace.WriteLine(string.Format("Retry at Thread {0}",
+                                                              Thread.CurrentThread.ManagedThreadId));
                                 goto retry;
                             }
                         };

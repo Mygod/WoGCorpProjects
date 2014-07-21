@@ -755,7 +755,7 @@
 	</GooBallEditor>
 	<GooBallTester>
 		<Level>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<level allowskip="true" autobounds="false" ballsrequired="1" letterboxed="false" strandgeom="false" textcolor="255,255,255" timebugprobability="0" visualdebug="{0}">
 				<camera aspect="normal" endpos="0,0" endzoom="1">
 					<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
@@ -789,7 +789,7 @@
 			</level>
 		</Level>
 		<Scene>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<scene backgroundcolor="0,0,0" maxx="1000" maxy="2000" minx="-1000" miny="-100">
 				<linearforcefield antigrav="true" dampeningfactor="0" force="0,-10" type="gravity" />
 				<linearforcefield id="skeletonfield" type="gravity" force="0,11" dampeningfactor="0.0" antigrav="true" enabled="false" water="false" />
@@ -813,7 +813,7 @@
 			</scene>
 		</Scene>
 		<Resrc>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<ResourceManifest>
 				<Resources id="scene_WogmGooBallTester">
 					<SetDefaults idprefix="" path="./" />
@@ -832,11 +832,11 @@
 	</GooBallTester>
 	<GooBallTestHelper>
 		<Balls>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<ball contains="{0}" popduration="{1}" mass="30" name="WogmGooBallTestHelper" popparticles="splash" popsound="SOUND_BALL_GENERIC_GLEE1" shape="circle,30" strands="0" walkspeed="0" />
 		</Balls>
 		<Resources>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<ResourceManifest>
 				<Resources id="ball_WogmGooBallTestHelper" />
 			</ResourceManifest>
@@ -844,7 +844,7 @@
 	</GooBallTestHelper>
 	<MaterialTester>
 		<Level>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<level allowskip="true" autobounds="false" ballsrequired="1" letterboxed="false" strandgeom="false" textcolor="255,255,255" timebugprobability="0" visualdebug="true">
 				<camera aspect="normal" endpos="0,0" endzoom="1">
 					<poi pause="0" pos="0,0" traveltime="0" zoom="1" />
@@ -883,7 +883,7 @@
 			</level>
 		</Level>
 		<Scene>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<scene backgroundcolor="0,0,0" maxx="500" maxy="1000" minx="-500" miny="0">
 				<linearforcefield antigrav="true" dampeningfactor="0" force="0,-10" type="gravity" />
 				<line anchor="500,300" id="right" normal="-1,0" tag="detaching" />
@@ -895,7 +895,7 @@
 			</scene>
 		</Scene>
 		<Resrc>
-			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.apphb.com/#Product-54 -->
+			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
 			<ResourceManifest>
 				<Resources id="scene_WogmMaterialTester" />
 			</ResourceManifest>

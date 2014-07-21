@@ -11,13 +11,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 {
     public partial class GameDebuggingWindow
     {
-        public GameDebuggingWindow(Game g, Process gameProcess)
+        public GameDebuggingWindow(Game game, Process gameProcess)
         {
-            DataContext = game = g;
+            DataContext = game;
             InitializeComponent();
             DebugStart = false;
-            debugTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, OutputConsole, App.Dispatcher) 
-                { IsEnabled = true };
+            debugTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, OutputConsole,
+                                             App.Dispatcher) { IsEnabled = true };
             outputFile = Path.Combine(game.DirectoryPath, R.ConsoleOutput);
             fileName = Path.GetFileNameWithoutExtension(game.FilePath) ?? string.Empty;
             Task.Factory.StartNew(() =>
@@ -37,14 +37,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             });
         }
 
-        private readonly Game game;
-
         private readonly DispatcherTimer debugTimer;
         private bool debugStart;
         private bool DebugStart
         {
             get { return debugStart; }
-            set { debugStart = value; Dispatcher.Invoke(() => Status.BorderBrush = value ? Brushes.Lime : Brushes.Red); }
+            set
+            {
+                debugStart = value;
+                Dispatcher.Invoke(() => Status.BorderBrush = value ? Brushes.Lime : Brushes.Red);
+            }
         }
 
         private readonly string outputFile, fileName;
@@ -54,7 +56,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             if (DebugStart)
             {
                 if (File.Exists(outputFile))
-                    using (var reader = new StreamReader(new FileStream(outputFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+                    using (var reader = new StreamReader(new FileStream(outputFile, FileMode.Open,
+                                                                        FileAccess.Read, FileShare.ReadWrite)))
                         OutputBox.Text = reader.ReadToEnd();
             }
             else if (Process.GetProcessesByName(fileName).LongLength > 0) DebugStart = true;

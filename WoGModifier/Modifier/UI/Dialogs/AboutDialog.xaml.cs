@@ -43,10 +43,5 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             s.Children.Add(animation);
             s.Begin();
         }
-
-        private void VisitHomePage(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("http://mygod.apphb.com/");
-        }
     }
 }

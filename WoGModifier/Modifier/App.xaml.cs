@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -11,8 +12,8 @@ using System.Windows.Markup;
 using System.Windows.Shell;
 using System.Windows.Threading;
 using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.Windows;
-using Mygod.Windows.Dialogs;
 using Mygod.WorldOfGoo.IO;
 using Mygod.WorldOfGoo.Modifier.IO;
 using Mygod.WorldOfGoo.Modifier.UI;
@@ -29,6 +30,7 @@ namespace Mygod.WorldOfGoo.Modifier
         {
             Dispatcher = base.Dispatcher;
             Log.Initialize();
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
         }
 
         // ReSharper disable MemberCanBePrivate.Global
@@ -110,9 +112,9 @@ namespace Mygod.WorldOfGoo.Modifier
                     else if (lower.StartsWith("-p", StringComparison.Ordinal)) type = ArgumentType.Profile;
                     else if (lower.StartsWith("-selectbinfiles", StringComparison.Ordinal))
                     {
-                        var dialog = new OpenFileDialog
-                            { Title = Resrc.OpenBinFileTitle, Filter = Resrc.OpenBinFileFilter, Multiselect = true };
-                        if (dialog.ShowDialog() != true) return;
+                        var dialog = new CommonOpenFileDialog { Title = Resrc.OpenBinFileTitle, Multiselect = true };
+                        dialog.Filters.Add(Resrc.OpenBinFileFilter);
+                        if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
                         foreach (var path in dialog.FileNames) BinaryFile.Edit(path, Settings.BinFileEditor, false);
                     }
                     else if (File.Exists(arg))
@@ -145,10 +147,10 @@ namespace Mygod.WorldOfGoo.Modifier
             if (e.Exception is ThreadAbortException) return;
             switch (Dialog.Fatal(e.Exception))
             {
-                case 1:
+                case TaskDialogResult.Yes:
                     Process.Start(Assembly.GetEntryAssembly().Location);
                     goto default;
-                case 2:
+                case TaskDialogResult.No:
                     break;
                 default:
                     Shutdown(-1);
@@ -166,6 +168,17 @@ namespace Mygod.WorldOfGoo.Modifier
 
     sealed class Program : WindowsFormsApplicationBase
     {
+        static Program()
+        {
+            AppDomain.CurrentDomain.SetData("PRIVATE_BINPATH", "Resources\\Libraries");
+            var m = typeof(AppDomainSetup).GetMethod("UpdateContextProperty",
+                                                     BindingFlags.NonPublic | BindingFlags.Static);
+            var fusion = typeof(AppDomain).GetMethod("GetFusionContext",
+                                                     BindingFlags.NonPublic | BindingFlags.Instance);
+            m.Invoke(null, new[] { fusion.Invoke(AppDomain.CurrentDomain, null), "PRIVATE_BINPATH",
+                                   "Resources\\Libraries" });
+        }
+
         [STAThread]
         public static void Main(string[] args)
         {

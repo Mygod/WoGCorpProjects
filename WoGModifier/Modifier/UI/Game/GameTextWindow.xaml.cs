@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using Mygod.WorldOfGoo.IO;
-using Mygod.WorldOfGoo.Modifier.IO;
 using Mygod.WorldOfGoo.Modifier.UI.Dialogs;
 
 namespace Mygod.WorldOfGoo.Modifier.UI
@@ -36,9 +32,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
 
         private readonly Game game;
-        private IEnumerable<TextItem> SelectedTextItems { get { return TextItemList.SelectedItems.OfType<TextItem>(); } }
+        private IEnumerable<TextItem> SelectedTextItems
+            { get { return TextItemList.SelectedItems.OfType<TextItem>(); } }
 
-        private readonly Dictionary<TextItem, GameTextItemWindow> windows = new Dictionary<TextItem, GameTextItemWindow>();
+        private readonly Dictionary<TextItem, GameTextItemWindow>
+            windows = new Dictionary<TextItem, GameTextItemWindow>();
 
         private void ProcessTextItem(object sender, RoutedEventArgs e)
         {
@@ -82,7 +80,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void SearchTextItem(object sender, ExecutedRoutedEventArgs e)
         {
-            var id = Dialog.Input(Resrc.EnterIDTitle, validCheck: i => game.Properties.Text.Contains(i), list: game.Properties.Text.Select(i => i.ID));
+            var id = Dialog.Input(Resrc.EnterIDTitle, validCheck: i => game.Properties.Text.Contains(i),
+                                  list: game.Properties.Text.Select(i => i.ID));
             if (id == null) return;
             TextItemList.SelectedItem = game.Properties.Text[id];
             TextItemList.ScrollIntoView(game.Properties.Text[id]);

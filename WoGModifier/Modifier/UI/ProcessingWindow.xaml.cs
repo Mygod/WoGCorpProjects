@@ -10,6 +10,7 @@ using System.Windows.Shell;
 using System.Xml.Linq;
 using Mygod.WorldOfGoo.Modifier.IO;
 using Mygod.WorldOfGoo.Modifier.UI.Dialogs;
+using Mygod.Xml.Linq;
 
 namespace Mygod.WorldOfGoo.Modifier.UI
 {
@@ -45,7 +46,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             {
                 var used = DateTime.Now - start.Value;
                 var remaining = new TimeSpan((long)(used.Ticks * (total - current) / (double)current));
-                d += Environment.NewLine + Resrc.UsedTime + used + Environment.NewLine + Resrc.RemainingTime + remaining;
+                d += Environment.NewLine + Resrc.UsedTime + used + Environment.NewLine + Resrc.RemainingTime +
+                     remaining;
             }
             Progress = p;
             Details = d;
@@ -88,14 +90,17 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     var root = doc.Element(R.Modified);
                     if (root == null) continue;
                     var selected = features.ToDictionary(f => f.ID);
-                    var nodes = from node in root.Elements() let id = node.GetAttribute(R.ID) where selected.ContainsKey(id)
-                                select new { ID = id, ModifiedTimes = Convert.ToInt32(node.GetAttribute(R.ModifiedTimes)) };
+                    var nodes = from node in root.Elements() let id = node.GetAttributeValue(R.ID)
+                                where selected.ContainsKey(id)
+                                select new { ID = id, ModifiedTimes = node.GetAttributeValue<int>(R.ModifiedTimes) };
                     var subfeatures = new List<Subfeature>();
                     foreach (var node in nodes)
                     {
                         var feature = selected[node.ID];
-                        if (node.ModifiedTimes > 0) for (var i = 0; i < node.ModifiedTimes; i++) subfeatures.Add(feature.Reverse);
-                        else if (node.ModifiedTimes < 0) for (var i = 0; i > node.ModifiedTimes; i--) subfeatures.Add(feature.Process);
+                        if (node.ModifiedTimes > 0)
+                            for (var i = 0; i < node.ModifiedTimes; i++) subfeatures.Add(feature.Reverse);
+                        else if (node.ModifiedTimes < 0)
+                            for (var i = 0; i > node.ModifiedTimes; i--) subfeatures.Add(feature.Process);
                     }
                     if (Kernel.BatchProcessLevel(level, subfeatures, doc, root, p, warning, error)) changed++;
                 }
@@ -110,8 +115,9 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                         doc = XDocument.Parse(Resrc.DefaultModifiedXml);
                     }
                     var root = doc.Element(R.Modified);
-                    if (Kernel.BatchProcessLevel(level, from Feature f in features select type == OperationType.Process ? f.Process : f.Reverse,
-                                                    doc, root, p, warning, error)) changed++;
+                    if (Kernel.BatchProcessLevel(level, from Feature f in features
+                                                        select type == OperationType.Process ? f.Process : f.Reverse,
+                                                 doc, root, p, warning, error)) changed++;
                     Update(Resrc.Level, level.LocalizedName, ++total, levels.LongCount(), start);
                 }
             }
@@ -120,13 +126,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Details = Resrc.BatchProcessFinish;
             Dispatcher.Invoke(() =>
             {
-                Log.Performance.Write(string.Format(Resrc.BatchProcessLog, features.Count, levels.Count, Resrc.Level), span);
-                if (Dialog.YesNoQuestion(this, Resrc.BatchProcessFinishInstruction, string.Format(Resrc.BatchProcessFinishText, span.TotalSeconds,
-                    error.Length > 0 ? string.Format(Resrc.BatchProcessError, Resrc.Level) : 
-                    warning.Length > 0 ? string.Format(Resrc.BatchProcessWarning, Resrc.Level)
-                        : string.Format(Resrc.BatchProcessSuccessfully, Resrc.Level)), Resrc.Finish))
-                    new TextWindow(Resrc.Details, string.Format(Resrc.BatchProcessDetails, Resrc.Level, levels.LongCount(), changed)
-                                   + Resrc.ErrorStart + error + Resrc.WarningStart + warning) { Owner = Owner }.Show();
+                Log.Performance.Write(string.Format(Resrc.BatchProcessLog, features.Count, levels.Count, Resrc.Level),
+                                      span);
+                if (Dialog.YesNoQuestion(this, Resrc.BatchProcessFinishInstruction,
+                        string.Format(Resrc.BatchProcessFinishText, span.TotalSeconds,
+                            error.Length > 0 ? string.Format(Resrc.BatchProcessError, Resrc.Level) : 
+                            warning.Length > 0 ? string.Format(Resrc.BatchProcessWarning, Resrc.Level) :
+                            string.Format(Resrc.BatchProcessSuccessfully, Resrc.Level)), Resrc.Finish))
+                    new TextWindow(Resrc.Details, string.Format(Resrc.BatchProcessDetails, Resrc.Level,
+                        levels.LongCount(), changed) + Resrc.ErrorStart + error + Resrc.WarningStart + warning, Owner)
+                        .Show();
                 Close();
             });
         }
@@ -156,14 +165,17 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     var root = doc.Element(R.Modified);
                     if (root == null) continue;
                     var selected = features.ToDictionary(f => f.ID);
-                    var nodes = from node in root.Elements() let id = node.GetAttribute(R.ID) where selected.ContainsKey(id)
-                                select new { ID = id, ModifiedTimes = Convert.ToInt32(node.GetAttribute(R.ModifiedTimes)) };
+                    var nodes = from node in root.Elements() let id = node.GetAttributeValue(R.ID)
+                                where selected.ContainsKey(id)
+                                select new { ID = id, ModifiedTimes = node.GetAttributeValue<int>(R.ModifiedTimes) };
                     var subfeatures = new List<Subfeature>();
                     foreach (var node in nodes)
                     {
                         var feature = selected[node.ID];
-                        if (node.ModifiedTimes > 0) for (var i = 0; i < node.ModifiedTimes; i++) subfeatures.Add(feature.Reverse);
-                        else if (node.ModifiedTimes < 0) for (var i = 0; i > node.ModifiedTimes; i--) subfeatures.Add(feature.Process);
+                        if (node.ModifiedTimes > 0)
+                            for (var i = 0; i < node.ModifiedTimes; i++) subfeatures.Add(feature.Reverse);
+                        else if (node.ModifiedTimes < 0)
+                            for (var i = 0; i > node.ModifiedTimes; i--) subfeatures.Add(feature.Process);
                     }
                     if (Kernel.BatchProcessGooBall(ball, subfeatures, doc, root, p, warning, error)) changed++;
                 }
@@ -178,7 +190,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                         doc = XDocument.Parse(Resrc.DefaultModifiedXml);
                     }
                     var root = doc.Element(R.Modified);
-                    if (Kernel.BatchProcessGooBall(ball, from Feature f in features select type == OperationType.Process ? f.Process : f.Reverse,
+                    if (Kernel.BatchProcessGooBall(ball, from Feature f in features
+                                                         select type == OperationType.Process ? f.Process : f.Reverse,
                                                    doc, root, p, warning, error)) changed++;
                 }
                 Update(Resrc.GooBall, ball.ID, ++total, balls.LongCount(), start);
@@ -188,12 +201,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Details = Resrc.BatchProcessFinish;
             Dispatcher.Invoke(() =>
             {
-                Log.Performance.Write(string.Format(Resrc.BatchProcessLog, features.Count, balls.Count, Resrc.GooBall), span);
-                if (Dialog.YesNoQuestion(this, Resrc.BatchProcessFinishInstruction, string.Format(Resrc.BatchProcessFinishText, span.TotalSeconds,
-                    error.Length > 0 ? string.Format(Resrc.BatchProcessError, Resrc.GooBall) : warning.Length > 0 ?
-                        string.Format(Resrc.BatchProcessWarning, Resrc.GooBall) : string.Format(Resrc.BatchProcessSuccessfully, Resrc.GooBall)), Resrc.Finish))
-                    new TextWindow(Resrc.Details, string.Format(Resrc.BatchProcessDetails, Resrc.GooBall, balls.LongCount(), changed)
-                                   + Resrc.ErrorStart + error + Resrc.WarningStart + warning).Show();
+                Log.Performance.Write(string.Format(Resrc.BatchProcessLog, features.Count, balls.Count, Resrc.GooBall),
+                                      span);
+                if (Dialog.YesNoQuestion(this, Resrc.BatchProcessFinishInstruction,
+                                         string.Format(Resrc.BatchProcessFinishText, span.TotalSeconds,
+                    error.Length > 0 ? string.Format(Resrc.BatchProcessError, Resrc.GooBall) :
+                    warning.Length > 0 ? string.Format(Resrc.BatchProcessWarning, Resrc.GooBall) :
+                    string.Format(Resrc.BatchProcessSuccessfully, Resrc.GooBall)), Resrc.Finish))
+                    new TextWindow(Resrc.Details, string.Format(Resrc.BatchProcessDetails, Resrc.GooBall,
+                        balls.LongCount(), changed) + Resrc.ErrorStart + error + Resrc.WarningStart + warning, Owner)
+                        .Show();
                 Close();
             });
         }
@@ -206,7 +223,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             if (finished || canceled) return;
             e.Cancel = true;
-            if (Dialog.YesNoQuestion(this, Resrc.BatchProcessCancelConfirm, Resrc.BatchProcessCancelConfirmDetails)) canceled = true;
+            if (Dialog.YesNoQuestion(this, Resrc.BatchProcessCancelConfirm, Resrc.BatchProcessCancelConfirmDetails))
+                canceled = true;
         }
     }
 }

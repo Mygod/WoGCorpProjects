@@ -1,6 +1,7 @@
-﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameTextItemWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:Mygod.WorldOfGoo.Modifier.UI"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" Icon="{x:Static m:CurrentApp.MainIcon}" Closing="BlockClosing" Height="250" Width="550">
+﻿<Window x:Class="Mygod.WorldOfGoo.Modifier.UI.GameTextItemWindow" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:m="http://schemas.mygod.tk/wpf"
+        xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" Icon="{x:Static m:CurrentApp.MainIcon}"
+        Closing="BlockClosing" Height="250" Width="550">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource GameTextItemWindowTitle}" />
@@ -25,8 +26,8 @@
                     </Style>
                 </DataGridTextColumn.HeaderStyle>
             </DataGridTextColumn>
-            <DataGridTextColumn Header="{StaticResource LanguageName}" Binding="{Binding Language, Converter={StaticResource LanguageNameConverter}}"
-                                IsReadOnly="True" />
+            <DataGridTextColumn Header="{StaticResource LanguageName}" IsReadOnly="True"
+                                Binding="{Binding Language, Converter={StaticResource LanguageNameConverter}}" />
             <DataGridTextColumn Header="{StaticResource Value}" Binding="{Binding Value}">
                 <DataGridTextColumn.HeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -44,13 +45,15 @@
             </DataGridTextColumn>
         </DataGrid.Columns>
         <DataGrid.CommandBindings>
-            <CommandBinding Command="UI:Commands.Insert" Executed="AddSpecificLanguageString" />
-            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="SpecificLanguageStringSelected" Executed="RemoveSpecificLanguageStrings" />
+            <CommandBinding Command="ui:Commands.Insert" Executed="AddSpecificLanguageString" />
+            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="SpecificLanguageStringSelected"
+                            Executed="RemoveSpecificLanguageStrings" />
         </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="{StaticResource ContextMenuAddSpecificLanguageString}" Command="UI:Commands.Insert" />
-                <MenuItem Header="{StaticResource ContextMenuRemoveSpecificLanguageStrings}" Command="ApplicationCommands.Delete" />
+                <MenuItem Header="{StaticResource ContextMenuAddSpecificLanguageString}" Command="ui:Commands.Insert" />
+                <MenuItem Header="{StaticResource ContextMenuRemoveSpecificLanguageStrings}"
+                          Command="ApplicationCommands.Delete" />
             </ContextMenu>
         </DataGrid.ContextMenu>
     </DataGrid>

@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using Mygod.Collections.ObjectModel;
 using Mygod.WorldOfGoo.IO;
+using Mygod.Xml.Linq;
 
 namespace Mygod.WorldOfGoo
 {
@@ -88,20 +89,30 @@ namespace Mygod.WorldOfGoo
         public HashSet<string> SupportedLanguages { get; private set; }
 
         private PropertiesDirectory properties;
-        public PropertiesDirectory Properties { get { return properties ?? (properties = new PropertiesDirectory(this)); } }
+        public PropertiesDirectory Properties
+            { get { return properties ?? (properties = new PropertiesDirectory(this)); } }
         private ResourcesDirectory res;
         public ResourcesDirectory Res { get { return res ?? (res = new ResourcesDirectory(this)); } }
 
         public ResourceManifests Resources { get; private set; }
 
-        public string Alias { get { return Settings.GetAlias(this); } set { Settings.SetAlias(this, value); OnPropertyChanged("Alias"); } }
+        public string Alias
+        {
+            get { return Settings.GetAlias(this); }
+            set
+            {
+                Settings.SetAlias(this, value);
+                OnPropertyChanged("Alias");
+            }
+        }
 
         public Process Execute(bool outputConsole = false, Level levelToExecute = null)
         {
             var fileName = Path.GetFileNameWithoutExtension(FilePath) ?? string.Empty;
             if (Process.GetProcessesByName(fileName).LongLength > 0) return null;
-            return Process.Start(new ProcessStartInfo("cmd", "/c \"" + FilePath + "\" " + (levelToExecute == null ? string.Empty : levelToExecute.ID)
-                + (outputConsole ? '>' + R.ConsoleOutput : string.Empty)) 
+            return Process.Start(new ProcessStartInfo("cmd", "/c \"" + FilePath + "\" " +
+                (levelToExecute == null ? string.Empty : levelToExecute.ID) +
+                (outputConsole ? '>' + R.ConsoleOutput : string.Empty))
                     { WorkingDirectory = DirectoryPath, CreateNoWindow = true, UseShellExecute = false });
         }
         public void Refresh()
@@ -170,7 +181,7 @@ namespace Mygod.WorldOfGoo
             var e = new XElement("materials");
             doc.Add(e);
             e.Add(this.Select(i => (object)i.GetElement()).ToArray());
-            return doc.GetString();
+            return doc.ToString();
         }
         public void Save()
         {
@@ -184,8 +195,9 @@ namespace Mygod.WorldOfGoo
         {
             Parent = parent;
             CurrentDispatcher = parent.Parent.GameParent.Dispatcher;
-            ID = e.GetAttribute("id");
-            if (ID == null) throw new FileFormatException(new Uri(Parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
+            ID = e.GetAttributeValue("id");
+            if (ID == null) throw new FileFormatException(new Uri(Parent.FilePath),
+                                                          string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
             string idPrefix = string.Empty, pathPrefix = string.Empty;
             foreach (var i in e.Elements())
             {
@@ -193,8 +205,8 @@ namespace Mygod.WorldOfGoo
                 switch (i.Name.LocalName.ToLower())
                 {
                     case "setdefaults":
-                        idPrefix = i.GetAttribute("idprefix") ?? string.Empty;
-                        pathPrefix = i.GetAttribute("path") ?? string.Empty;
+                        idPrefix = i.GetAttributeValue("idprefix") ?? string.Empty;
+                        pathPrefix = i.GetAttributeValue("path") ?? string.Empty;
                         continue;
                     case "font":
                         r = new FontResource(this, i, idPrefix, pathPrefix);
@@ -210,7 +222,8 @@ namespace Mygod.WorldOfGoo
                         continue;
                     default:
                         throw new FileFormatException(new Uri(Parent.FilePath),
-                                                      string.Format(Resrc.ExceptionXmlElementCannotRecognize, i.Name.LocalName));
+                                                      string.Format(Resrc.ExceptionXmlElementCannotRecognize,
+                                                      i.Name.LocalName));
                 }
             }
         }
@@ -255,8 +268,8 @@ namespace Mygod.WorldOfGoo
                         break;
                 }
             }
-            if (ID == null) 
-                throw new FileFormatException(new Uri(Parent.Parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
+            if (ID == null) throw new FileFormatException(new Uri(Parent.Parent.FilePath),
+                                                          string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
             var m = Parent.Parent.Parent.GameParent.Resources;
             if (!m.Contains(ID)) m.Add(this);
         }
@@ -302,7 +315,8 @@ namespace Mygod.WorldOfGoo
     }
     public sealed class FontResource : ResourceBase
     {
-        public FontResource(Resources parent, XElement e, string idPrefix, string pathPrefix) : base(parent, e, idPrefix, pathPrefix)
+        public FontResource(Resources parent, XElement e, string idPrefix, string pathPrefix)
+            : base(parent, e, idPrefix, pathPrefix)
         {
         }
 
@@ -311,7 +325,8 @@ namespace Mygod.WorldOfGoo
     }
     public sealed class ImageResource : ResourceBase
     {
-        public ImageResource(Resources parent, XElement e, string idPrefix, string pathPrefix) : base(parent, e, idPrefix, pathPrefix)
+        public ImageResource(Resources parent, XElement e, string idPrefix, string pathPrefix)
+            : base(parent, e, idPrefix, pathPrefix)
         {
         }
 
@@ -320,7 +335,8 @@ namespace Mygod.WorldOfGoo
     }
     public sealed class SoundResource : ResourceBase
     {
-        public SoundResource(Resources parent, XElement e, string idPrefix, string pathPrefix) : base(parent, e, idPrefix, pathPrefix)
+        public SoundResource(Resources parent, XElement e, string idPrefix, string pathPrefix)
+            : base(parent, e, idPrefix, pathPrefix)
         {
         }
 
@@ -357,10 +373,10 @@ namespace Mygod.WorldOfGoo
     {
         public ConfigParam(IGameFile parent, XElement e)
         {
-            Name = e.GetAttribute("name");
-            Value = e.GetAttribute("value");
-            if (string.IsNullOrEmpty(Name)) 
-                throw new FileFormatException(new Uri(parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "name"));
+            Name = e.GetAttributeValue("name");
+            Value = e.GetAttributeValue("value");
+            if (string.IsNullOrEmpty(Name)) throw new FileFormatException(new Uri(parent.FilePath),
+                                                string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "name"));
         }
 
         public string Name { get; private set; }
@@ -376,9 +392,10 @@ namespace Mygod.WorldOfGoo
             CurrentDispatcher = parent.GameParent.Dispatcher;
             FilePath = Path.Combine(parent.DirectoryPath, "config.txt");
             var xml = XDocument.Parse(File.ReadAllText(FilePath)).Element("config");
-            if (xml == null) throw new FileFormatException(new Uri(FilePath), string.Format(Resrc.ExceptionXmlElementDoesNotExist, "config"));
-            foreach (var i in xml.Nodes().OfType<XElement>().Where(e => e.Name == "param").Select(e => new ConfigParam(this, e))
-                .Where(i => !Contains(i.Name))) Add(i);
+            if (xml == null) throw new FileFormatException(new Uri(FilePath),
+                                string.Format(Resrc.ExceptionXmlElementDoesNotExist, "config"));
+            foreach (var i in from e in xml.Nodes().OfType<XElement>() where e.Name == "param"
+                              let i = new ConfigParam(this, e) where !Contains(i.Name) select i) Add(i);
         }
 
         public IGameDirectory Parent { get; private set; }
@@ -411,7 +428,8 @@ namespace Mygod.WorldOfGoo
         {
             var writer = new StreamWriter(FilePath, false, Encoding.UTF8);
             writer.Write(Resrc.PropertiesConfigFile, Language, ScreenWidth.ToString(CultureInfo.InvariantCulture), 
-                         ScreenHeight.ToString(CultureInfo.InvariantCulture), UIInset.ToString(CultureInfo.InvariantCulture));
+                         ScreenHeight.ToString(CultureInfo.InvariantCulture),
+                         UIInset.ToString(CultureInfo.InvariantCulture));
             writer.Close();
         }
     }
@@ -422,18 +440,17 @@ namespace Mygod.WorldOfGoo
                         double stickiness = 0)
         {
             ID = id;
-            if (string.IsNullOrEmpty(ID))
-                throw new FileFormatException(new Uri(parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
+            if (string.IsNullOrEmpty(ID)) throw new FileFormatException(new Uri(parent.FilePath),
+                                            string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
             this.friction = friction;
             this.bounce = bounce;
             minimumBounceVelocity = minbouncevel;
             this.stickiness = stickiness;
         }
-        public Material(IGameFile parent, XElement e) : this(parent, e.GetAttribute("id"),
-                        double.Parse(e.GetAttribute("friction") ?? R.Zero, CultureInfo.InvariantCulture), 
-                        double.Parse(e.GetAttribute("bounce") ?? R.Zero, CultureInfo.InvariantCulture),
-                        double.Parse(e.GetAttribute("minbouncevel") ?? R.Zero, CultureInfo.InvariantCulture), 
-                        double.Parse(e.GetAttribute("stickiness") ?? R.Zero, CultureInfo.InvariantCulture))
+        public Material(IGameFile parent, XElement e)
+            : this(parent, e.GetAttributeValue("id"), e.GetAttributeValueWithDefault("friction", 0.0),
+                   e.GetAttributeValueWithDefault("bounce", 0.0), e.GetAttributeValueWithDefault("minbouncevel", 0.0),
+                   e.GetAttributeValueWithDefault("stickiness", 0.0))
         {
         }
         public Material(Material copy, string id)
@@ -455,7 +472,8 @@ namespace Mygod.WorldOfGoo
             get { return minimumBounceVelocity; } 
             set { minimumBounceVelocity = value; OnPropertyChanged("MinimumBounceVelocity"); }
         }
-        public double Stickiness { get { return stickiness; } set { stickiness = value; OnPropertyChanged("Stickiness"); } }
+        public double Stickiness
+            { get { return stickiness; } set { stickiness = value; OnPropertyChanged("Stickiness"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -480,8 +498,8 @@ namespace Mygod.WorldOfGoo
             var xml = XDocument.Parse(BinaryFile.ReadAllText(FilePath)).Element("materials");
             if (xml == null) throw new FileFormatException(new Uri(FilePath), 
                 string.Format(Resrc.ExceptionXmlElementDoesNotExist, "materials"));
-            foreach (var i in xml.Nodes().OfType<XElement>().Where(e => e.Name == "material").Select(e => new Material(this, e))
-                .Where(i => !Contains(i.ID))) Add(i);
+            foreach (var i in from e in xml.Nodes().OfType<XElement>() where e.Name == "material"
+                              let i = new Material(this, e) where !Contains(i.ID) select i) Add(i);
         }
 
         public IGameDirectory Parent { get; private set; }
@@ -494,7 +512,7 @@ namespace Mygod.WorldOfGoo
             var e = new XElement("materials");
             doc.Add(e);
             e.Add(this.Select(i => (object)i.GetElement()).ToArray());
-            return doc.GetString();
+            return doc.ToString();
         }
         public void Save()
         {
@@ -527,7 +545,8 @@ namespace Mygod.WorldOfGoo
             Parent = parent;
             CurrentDispatcher = parent.Parent.GameParent.Dispatcher;
             ID = id;
-            if (texts != null) foreach (var text in texts) Add(new SpecificLanguageString(parent.Parent.GameParent, text.Language, text.Value));
+            if (texts != null) foreach (var text in texts)
+                Add(new SpecificLanguageString(parent.Parent.GameParent, text.Language, text.Value));
         }
         public TextItem(Text parent, XElement e)
         {
@@ -539,7 +558,8 @@ namespace Mygod.WorldOfGoo
                 if (name == "id") ID = a.Value;
                 else if (!Contains(name)) Add(new SpecificLanguageString(Parent.Parent.GameParent, name, a.Value));
             }
-            if (ID == null) throw new FileFormatException(new Uri(parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
+            if (ID == null) throw new FileFormatException(new Uri(parent.FilePath),
+                                string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
         }
 
         public string ID { get; private set; }
@@ -567,7 +587,8 @@ namespace Mygod.WorldOfGoo
         public XElement GetElement()
         {
             var result = new XElement("string", new XAttribute("id", ID));
-            foreach (var text in this) result.Add(new XAttribute(text.Language, text.Value.Replace(Environment.NewLine, "|")));
+            foreach (var text in this)
+                result.Add(new XAttribute(text.Language, text.Value.Replace(Environment.NewLine, "|")));
             return result;
         }
 
@@ -584,7 +605,8 @@ namespace Mygod.WorldOfGoo
             CurrentDispatcher = parent.GameParent.Dispatcher;
             FilePath = Path.Combine(parent.DirectoryPath, "text.xml.bin");
             var xe = XDocument.Parse(BinaryFile.ReadAllText(FilePath)).GetElement("strings", FilePath);
-            foreach (var i in xe.Nodes().OfType<XElement>().Where(e => e.Name == "string").Select(e => new TextItem(this, e)))
+            foreach (var i in from e in xe.Nodes().OfType<XElement>() where e.Name == "string"
+                              select new TextItem(this, e))
             {
                 if (!Contains(i.ID)) Add(i);
                 else
@@ -607,7 +629,7 @@ namespace Mygod.WorldOfGoo
             var e = new XElement("strings");
             doc.Add(e);
             e.Add(this.Select(i => (object)i.GetElement()).ToArray());
-            return doc.GetString();
+            return doc.ToString();
         }
         public void Save()
         {
@@ -672,11 +694,15 @@ namespace Mygod.WorldOfGoo
         public string ResrcXml { get { return Read(R.Resrc); } set { Write(R.Resrc, value); } }
         public bool IsValid
         {
-            get { return File.Exists(GetPath(R.Level)) && File.Exists(GetPath(R.Scene)) && File.Exists(GetPath(R.Resrc)); }
+            get
+            {
+                return File.Exists(GetPath(R.Level)) && File.Exists(GetPath(R.Scene)) && File.Exists(GetPath(R.Resrc));
+            }
         }
 
         private ResourceManifest resources;
-        public ResourceManifest Resources { get { return resources ?? (resources = new ResourceManifest(this, GetFileName(R.Resrc))); } }
+        public ResourceManifest Resources
+            { get { return resources ?? (resources = new ResourceManifest(this, GetFileName(R.Resrc))); } }
 
         private TextItem localizedNameItem;
         private TextItem LocalizedNameItem
@@ -688,14 +714,18 @@ namespace Mygod.WorldOfGoo
                 switch (ID)
                 {
                     case "IslandUi":
-                        return localizedNameItem = new TextItem(GameParent.Properties.Text, new XElement("string", new XAttribute("id", "IslandUi"),
-                                            new XAttribute("text", "Islands UI"), new XAttribute("cn", "章节按钮")));
+                        return localizedNameItem = new TextItem(GameParent.Properties.Text,
+                            new XElement("string", new XAttribute("id", "IslandUi"),
+                            new XAttribute("text", "Islands UI"), new XAttribute("cn", "章节按钮")));
                     case "MapWorldView":
-                        return localizedNameItem = new TextItem(GameParent.Properties.Text, new XElement("string", new XAttribute("id", "MapWorldView"),
-                                            new XAttribute("text", "Map World View"), new XAttribute("cn", "World of Goo主地图")));
+                        return localizedNameItem = new TextItem(GameParent.Properties.Text,
+                            new XElement("string", new XAttribute("id", "MapWorldView"),
+                            new XAttribute("text", "Map World View"), new XAttribute("cn", "World of Goo 主地图")));
                     case "MoonUnlocker":
-                        return localizedNameItem = new TextItem(GameParent.Properties.Text, new XElement("string", new XAttribute("id", "MoonUnlocker"),
-                            new XAttribute("text", "Moon Unlocker"), new XAttribute("cn", "月球解锁器（汉化版第一章隐藏关卡）")));
+                        return localizedNameItem = new TextItem(GameParent.Properties.Text,
+                            new XElement("string", new XAttribute("id", "MoonUnlocker"),
+                            new XAttribute("text", "Moon Unlocker"),
+                            new XAttribute("cn", "月球解锁器（汉化版第一章隐藏关卡）")));
                     case "wogc":
                         findID = "WOG_CORP_NAME";
                         break;
@@ -711,21 +741,24 @@ namespace Mygod.WorldOfGoo
                         else
                         {
                             var island = GameParent.Res.Islands.FirstOrDefault(i => i.Map == ID);
-                            findID = island == null ? "LEVEL_NAME_" + ID.ToUpper() : "CHAPTER" + island.Number + "_NAME";
+                            findID = island == null ? "LEVEL_NAME_" + ID.ToUpper()
+                                                    : "CHAPTER" + island.Number + "_NAME";
                         }
                         break;
                 }
-                if (GameParent.Properties.Text.Contains(findID)) return localizedNameItem = GameParent.Properties.Text[findID];
+                if (GameParent.Properties.Text.Contains(findID))
+                    return localizedNameItem = GameParent.Properties.Text[findID];
                 findID = "LEVEL_NAME_" + ID.ToUpper();
-                return localizedNameItem = GameParent.Properties.Text.Contains(findID) ? GameParent.Properties.Text[findID] : null;
+                return localizedNameItem = GameParent.Properties.Text.Contains(findID)
+                            ? GameParent.Properties.Text[findID] : null;
             }
         }
         public string LocalizedName
         {
             get
             {
-                return LocalizedNameItem == null ? ID 
-                    : LocalizedNameItem.LocalizedText.Replace(Environment.NewLine, GameParent.Properties.Config.Language == "cn" ? string.Empty : " ");
+                return LocalizedNameItem == null ? ID : LocalizedNameItem.LocalizedText
+                    .Replace(Environment.NewLine, GameParent.Properties.Config.Language == "cn" ? string.Empty : " ");
             }
         }
 
@@ -751,14 +784,25 @@ namespace Mygod.WorldOfGoo
             GameParent = parent.GameParent;
             CurrentDispatcher = parent.GameParent.Dispatcher;
             DirectoryPath = Path.Combine(parent.DirectoryPath, "levels");
-            foreach (var level in new DirectoryInfo(DirectoryPath).EnumerateDirectories().Select(dir => new Level(this, dir.Name))
-                .Where(level => level.IsValid)) Add(level);
+            foreach (var level in new DirectoryInfo(DirectoryPath).EnumerateDirectories()
+                .Select(dir => new Level(this, dir.Name)).Where(level => level.IsValid)) Add(level);
         }
 
         public Game GameParent { get; private set; }
         public string DirectoryPath { get; private set; }
 
-        public static readonly SortedSet<string> OriginalLevelsID = new SortedSet<string>("AB3,BeautyAndTheTentacle,BeautySchool,BlusteryDay,BulletinBoardSystem,BurningMan,Chain,Deliverance,Drool,EconomicDivide,FistyReachesOut,FlyAwayLittleOnes,FlyingMachine,GeneticSortingMachine,GoingUp,GracefulFailure,GrapeVineVirus,GraphicProcessingUnit,HangLow,HelloWorld,HTInnovationCommittee,ImmigrationNaturalizationUnit,ImpaleSticky,IncinerationDestination,InfestyTheWorm,IvyTower,LeapHole,MistysLongBonyRoad,MOM,ObservatoryObservationStation,OdeToBridgeBuilder,ProductLauncher,RedCarpet,RegurgitationPumpingStation,RoadBlocks,SecondHandSmoke,SuperFuseChallengeTime,TheServer,ThirdWheel,ThrusterTest,TowerOfGoo,Tumbler,UpperShaft,VolcanicPercolatorDaySpa,WaterLock,WeatherVane,Whistler,wogc,wogc3d,wogcd,YouHaveToExplodeTheHead".Split(','));
+        public static readonly SortedSet<string> OriginalLevelsID = new SortedSet<string>
+        {
+            "AB3", "BeautyAndTheTentacle", "BeautySchool", "BlusteryDay", "BulletinBoardSystem", "BurningMan", "Chain",
+            "Deliverance", "Drool", "EconomicDivide", "FistyReachesOut", "FlyAwayLittleOnes", "FlyingMachine",
+            "GeneticSortingMachine", "GoingUp", "GracefulFailure", "GrapeVineVirus", "GraphicProcessingUnit", "HangLow",
+            "HelloWorld", "HTInnovationCommittee", "ImmigrationNaturalizationUnit", "ImpaleSticky",
+            "IncinerationDestination", "InfestyTheWorm", "IvyTower", "LeapHole", "MistysLongBonyRoad", "MOM",
+            "ObservatoryObservationStation", "OdeToBridgeBuilder", "ProductLauncher", "RedCarpet",
+            "RegurgitationPumpingStation", "RoadBlocks", "SecondHandSmoke", "SuperFuseChallengeTime", "TheServer",
+            "ThirdWheel", "ThrusterTest", "TowerOfGoo", "Tumbler", "UpperShaft", "VolcanicPercolatorDaySpa",
+            "WaterLock", "WeatherVane", "Whistler", "wogc", "wogc3d", "wogcd", "YouHaveToExplodeTheHead"
+        };
     }
 
     public sealed class GooBall : IGameDirectory, IGameItem
@@ -768,49 +812,30 @@ namespace Mygod.WorldOfGoo
             GameParent = parent.GameParent;
             ID = id;
             DirectoryPath = Path.Combine(parent.DirectoryPath, id);
+            thumbnailUri = new Lazy<string>(() =>
+            {
+                var root = XDocument.Parse(BallsXml).Element("ball");
+                if (root == null) return null;
+                var body = root.Elements("part").FirstOrDefault(i => i.GetAttributeValue("name") == "body");
+                if (body == null) return null;
+                var resName = "ball_" + ID;
+                if (!Resources.Contains(resName)) return null;
+                var res = Resources[resName];
+                var image = body.GetAttributeValue("image").Split(',').FirstOrDefault(res.Contains);
+                if (image == null) return null;
+                var r = res[image] as ImageResource;
+                if (r == null) return null;
+                var path = Path.Combine(GameParent.DirectoryPath, r.LocalizedPath.TrimStart('/'));
+                if (File.Exists(path)) return path;
+                return null;
+            });
         }
 
         public string DirectoryPath { get; private set; }
         public Game GameParent { get; private set; }
         public string ID { get; private set; }
-
-        private readonly object thumbnailUriLock = new object();
-        private bool uriGenerated;
-        private string thumbnailUri;
-        public string ThumbnailUri
-        {
-            get
-            {
-                lock (thumbnailUriLock) if (!uriGenerated)
-                {
-                    uriGenerated = true;
-                    var root = XDocument.Parse(BallsXml).Element("ball");
-                    if (root != null)   //throw Exceptions.XmlElementDoesNotExist(GetPath(R.Balls), "ball");
-                    {
-                        var body = root.Elements("part").FirstOrDefault(i => i.GetAttribute("name") == "body");
-                        if (body != null)
-                        {
-                            var resName = "ball_" + ID;
-                            if (Resources.Contains(resName))
-                            {
-                                var res = Resources[resName];
-                                var image = body.GetAttribute("image").Split(',').FirstOrDefault(res.Contains);
-                                if (image != null)
-                                {
-                                    var r = res[image] as ImageResource;
-                                    if (r != null)
-                                    {
-                                        var path = Path.Combine(GameParent.DirectoryPath, r.LocalizedPath.TrimStart('/'));
-                                        if (File.Exists(path)) thumbnailUri = path;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                return thumbnailUri;
-            }
-        }
+        private readonly Lazy<string> thumbnailUri;
+        public string ThumbnailUri { get { return thumbnailUri.Value; } }
         
         private string GetPath(string file)
         {
@@ -853,8 +878,8 @@ namespace Mygod.WorldOfGoo
             GameParent = parent.GameParent;
             CurrentDispatcher = parent.GameParent.Dispatcher;
             DirectoryPath = Path.Combine(parent.DirectoryPath, R.Balls);
-            foreach (var ball in new DirectoryInfo(DirectoryPath).EnumerateDirectories().Select(dir => new GooBall(this, dir.Name))
-                .Where(ball => ball.IsValid)) Add(ball);
+            foreach (var ball in new DirectoryInfo(DirectoryPath).EnumerateDirectories()
+                .Select(dir => new GooBall(this, dir.Name)).Where(ball => ball.IsValid)) Add(ball);
         }
 
         public Game GameParent { get; private set; }
@@ -919,9 +944,9 @@ namespace Mygod.WorldOfGoo
             var root = XDocument.Parse(xml ?? BinaryFile.ReadAllText(FilePath)).Element("island");
             if (root == null) throw new FileFormatException(new Uri(FilePath), 
                 string.Format(Resrc.ExceptionXmlElementDoesNotExist, "island"));
-            name = root.GetAttribute("name");
-            map = root.GetAttribute("map");
-            icon = root.GetAttribute("icon");
+            name = root.GetAttributeValue("name");
+            map = root.GetAttributeValue("map");
+            icon = root.GetAttributeValue("icon");
             foreach (var level in root.Elements("level").Select(e => new IslandLevel(this, e))) Add(level);
         }
 
@@ -943,7 +968,7 @@ namespace Mygod.WorldOfGoo
             doc.Add(root);
             if (!string.IsNullOrEmpty(Name)) root.Add(new XAttribute("name", Name));
             foreach (var i in this) root.Add(i.GetElement());
-            return doc.GetString();
+            return doc.ToString();
         }
         public void Save()
         {
@@ -964,7 +989,8 @@ namespace Mygod.WorldOfGoo
             skipEndOfLevelSequence = level.skipEndOfLevelSequence;
         }
         public IslandLevel(IGameFile parent, string id, string name = null, string text = null, string ocd = null,
-                           string depends = null, string cutscene = null, string oncomplete = null, bool skipeolsequence = false)
+                           string depends = null, string cutscene = null, string oncomplete = null,
+                           bool skipeolsequence = false)
         {
             if (id == null) throw new FileFormatException(new Uri(parent.FilePath), string.Format(Resrc.ExceptionXmlAttributeDoesNotExist, "id"));
             ID = id;
@@ -976,9 +1002,10 @@ namespace Mygod.WorldOfGoo
             onComplete = oncomplete;
             skipEndOfLevelSequence = skipeolsequence;
         }
-        public IslandLevel(IGameFile parent, XElement e) : this(parent, e.GetAttribute("id"), e.GetAttribute("name"), e.GetAttribute("text"), 
-            e.GetAttribute("ocd"), e.GetAttribute("depends"), e.GetAttribute("cutscene"), e.GetAttribute("oncomplete"), 
-            e.GetAttribute("skipeolsequence") == R.True)
+        public IslandLevel(IGameFile parent, XElement e)
+            : this(parent, e.GetAttributeValue("id"), e.GetAttributeValue("name"), e.GetAttributeValue("text"),
+                   e.GetAttributeValue("ocd"), e.GetAttributeValue("depends"), e.GetAttributeValue("cutscene"),
+                   e.GetAttributeValue("oncomplete"), e.GetAttributeValue("skipeolsequence") == R.True)
         {
         }
 
@@ -990,7 +1017,8 @@ namespace Mygod.WorldOfGoo
         public string OCD { get { return ocd; } set { ocd = value; OnPropertyChanged("OCD"); } }
         public string Depends { get { return depends; } set { depends = value; OnPropertyChanged("Depends"); } }
         public string Cutscene { get { return cutscene; } set { cutscene = value; OnPropertyChanged("Cutscene"); } }
-        public string OnComplete { get { return onComplete; } set { onComplete = value; OnPropertyChanged("OnComplete"); } }
+        public string OnComplete
+            { get { return onComplete; } set { onComplete = value; OnPropertyChanged("OnComplete"); } }
         public bool SkipEndOfLevelSequence
         {
             get { return skipEndOfLevelSequence; } 
@@ -1005,12 +1033,14 @@ namespace Mygod.WorldOfGoo
 
         public XElement GetElement()
         {
-            var result = new XElement("level", new XAttribute("id", ID), new XAttribute("name", Name), new XAttribute("text", Text));
+            var result = new XElement("level", new XAttribute("id", ID), new XAttribute("name", Name),
+                                      new XAttribute("text", Text));
             if (!string.IsNullOrWhiteSpace(OCD)) result.Add(new XAttribute("ocd", OCD));
             if (!string.IsNullOrWhiteSpace(Depends)) result.Add(new XAttribute("depends", Depends));
             if (!string.IsNullOrWhiteSpace(Cutscene)) result.Add(new XAttribute("cutscene", Cutscene));
             if (!string.IsNullOrWhiteSpace(OnComplete)) result.Add(new XAttribute("oncomplete", OnComplete));
-            if (SkipEndOfLevelSequence) result.Add(new XAttribute("skipeolsequence", SkipEndOfLevelSequence ? R.True : R.False));
+            if (SkipEndOfLevelSequence)
+                result.Add(new XAttribute("skipeolsequence", SkipEndOfLevelSequence ? R.True : R.False));
             return result;
         }
     }

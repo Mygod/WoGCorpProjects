@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -11,7 +11,7 @@
     </AppDesignerFolder>
     <RootNamespace>Mygod.WorldOfGoo</RootNamespace>
     <AssemblyName>WoGModifier</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -95,10 +95,11 @@
     <StartupObject>Mygod.WorldOfGoo.Modifier.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>WoGModifierKeyPair.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -135,10 +136,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL" />
+    <Reference Include="IronPython">
+      <HintPath>..\..\..\DotNet\IronPython\IronPython.dll</HintPath>
+    </Reference>
     <Reference Include="IronRuby, Version=1.1.3.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\IronRuby\bin\IronRuby.dll</HintPath>
+      <HintPath>..\..\..\DotNet\IronRuby\bin\IronRuby.dll</HintPath>
     </Reference>
     <Reference Include="irrKlang.NET4, Version=1.0.4534.25937, Culture=neutral, PublicKeyToken=a854741bd80517c7, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -146,7 +149,7 @@
     </Reference>
     <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\IronPython\Microsoft.Scripting.dll</HintPath>
+      <HintPath>..\..\..\DotNet\IronPython\Microsoft.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -240,7 +243,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Resrc.cs" />
-    <None Include="WoGModifierKeyPair.pfx" />
     <Page Include="Modifier\UI\Dialogs\AboutDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -369,14 +371,14 @@
     </Compile>
     <None Include="App.manifest" />
     <AppDesigner Include="\" />
-    <None Include="Scripts\AddSides.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Resources\Scripts\AddSides.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\Initialization.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Resources\Scripts\Initialization.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\RemoveSides.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Resources\Scripts\RemoveSides.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -409,19 +411,27 @@
   <ItemGroup>
     <None Include="Resources\Features.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Main.ico" />
-    <Resource Include="Resources\Mygod.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\GooBall.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Other\ExtendedWPFToolkitSolution\Src\WPFToolkit.Extended\WPFToolkit.Extended.csproj">
+    <ProjectReference Include="..\..\..\DotNet\Other\ExtendedWPFToolkitSolution\Src\WPFToolkit.Extended\WPFToolkit.Extended.csproj">
       <Project>{72e591d6-8f83-4d8c-8f67-9c325e623234}</Project>
       <Name>WPFToolkit.Extended</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DotNet\Windows API Code Pack 1.1\source\WindowsAPICodePack\Core\Core.csproj">
+      <Project>{2e1fb0df-f9bb-4909-9f32-2d9d022a8e57}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DotNet\Windows API Code Pack 1.1\source\WindowsAPICodePack\Shell\Shell.csproj">
+      <Project>{aa0c00cb-8699-4f37-bfae-40ca87acc06d}</Project>
+      <Name>Shell</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\MygodLibrary.csproj">
       <Project>{D915CED8-AC3F-40D6-8C95-4D176C924A61}</Project>
@@ -506,16 +516,17 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Initialization.rb">
+    <None Include="Resources\Scripts\Initialization.rb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>M:
-cd $(SolutionDir)
-cd $(MSBuildProjectName)
-copy /y Resources\Texts.xaml bin\Release\Resources\Texts.xaml</PostBuildEvent>
+    <PostBuildEvent>copy /y $(ProjectDir)Resources\Texts.xaml $(TargetDir)Resources\Texts.xaml
+move /y $(TargetDir)*.dll $(TargetDir)Resources\Libraries
+move /y $(TargetDir)*.pdb $(TargetDir)Resources\Libraries
+del /f /q $(TargetDir)*.xml
+move /y $(TargetDir)Resources\Libraries\WoGModifier.pdb $(TargetDir)WoGModifier.pdb</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

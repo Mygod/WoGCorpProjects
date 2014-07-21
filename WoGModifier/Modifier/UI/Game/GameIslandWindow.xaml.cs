@@ -28,7 +28,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         }
 
         private readonly Island island;
-        private IEnumerable<IslandLevel> SelectedLevels { get { return IslandLevelGrid.SelectedItems.OfType<IslandLevel>(); } }
+        private IEnumerable<IslandLevel> SelectedLevels
+            { get { return IslandLevelGrid.SelectedItems.OfType<IslandLevel>(); } }
 
         private void IslandLevelSelected(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -60,14 +61,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void EditIslandLevelsText(object sender, ExecutedRoutedEventArgs e)
         {
             var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().Text,
-                                     list: SubtitleColumn.ItemsSource, displayMemberPath: SubtitleColumn.DisplayMemberPath);
+                                     list: SubtitleColumn.ItemsSource,
+                                     displayMemberPath: SubtitleColumn.DisplayMemberPath);
             if (value != null) foreach (var level in SelectedLevels) level.Text = value;
         }
 
         private void EditIslandLevelsOCD(object sender, ExecutedRoutedEventArgs e)
         {
             var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().OCD, list: OCDColumn.ItemsSource, 
-                                                                        filterMode: AutoCompleteFilterMode.StartsWith);
+                                     filterMode: AutoCompleteFilterMode.StartsWith);
             if (value != null) foreach (var level in SelectedLevels) level.OCD = value;
         }
 
@@ -85,7 +87,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void EditIslandLevelsOnComplete(object sender, ExecutedRoutedEventArgs e)
         {
-            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().OnComplete, list: OnCompleteColumn.ItemsSource);
+            var value = Dialog.Input(Resrc.EnterNewValueTitle, SelectedLevels.First().OnComplete,
+                                     list: OnCompleteColumn.ItemsSource);
             if (value != null) foreach (var level in SelectedLevels) level.OnComplete = value;
         }
 
@@ -98,7 +101,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void AddIslandLevel(object sender, ExecutedRoutedEventArgs e)
         {
-            var id = Dialog.Input(Resrc.EnterIDTitle, validCheck: i => !island.Contains(i), list: island.Parent.GameParent.Res.Levels);
+            var id = Dialog.Input(Resrc.EnterIDTitle, validCheck: i => !island.Contains(i),
+                                  list: island.Parent.GameParent.Res.Levels);
             if (id != null) island.Add(new IslandLevel(island, id));
         }
 
@@ -106,7 +110,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var level = SelectedLevels.First();
             if (level == null) return;
-            var id = Dialog.Input(Resrc.EnterIDTitle, level.ID, validCheck: i => !island.Contains(i), list: island.Parent.GameParent.Res.Levels);
+            var id = Dialog.Input(Resrc.EnterIDTitle, level.ID, validCheck: i => !island.Contains(i),
+                                  list: island.Parent.GameParent.Res.Levels);
             if (id != null) island.Add(new IslandLevel(level, id));
         }
 
@@ -117,13 +122,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void DisplayNameText(object sender, RoutedEventArgs e)
         {
-            foreach (var level in SelectedLevels.Where(level => island.Parent.GameParent.Properties.Text.Contains(level.Name)))
+            foreach (var level in SelectedLevels
+                .Where(level => island.Parent.GameParent.Properties.Text.Contains(level.Name)))
                 Program.App.MainWindow.DisplayText(island.Parent.GameParent, level.Name);
         }
 
         private void DisplayTextText(object sender, RoutedEventArgs e)
         {
-            foreach (var level in SelectedLevels.Where(level => island.Parent.GameParent.Properties.Text.Contains(level.Text)))
+            foreach (var level in SelectedLevels
+                .Where(level => island.Parent.GameParent.Properties.Text.Contains(level.Text)))
                 Program.App.MainWindow.DisplayText(island.Parent.GameParent, level.Text);
         }
 

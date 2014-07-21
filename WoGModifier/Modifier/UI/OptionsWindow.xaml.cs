@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Mygod.Windows.Dialogs;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.WorldOfGoo.IO;
 
 namespace Mygod.WorldOfGoo.Modifier.UI
@@ -14,10 +14,12 @@ namespace Mygod.WorldOfGoo.Modifier.UI
     {
         public OptionsWindow()
         {
+            openProgramDialog.Filters.Add(Resrc.OpenProgramFilter);
             InitializeComponent();
-            RecentPathsCapacity.Text = Settings.RecentPathsCapacity.ToString();
-            ThumbnailMaxHeight.Text = Settings.ThumbnailMaxHeight.ToString();
-            Settings.ThumbnailMaxHeightData.DataChanged += (sender, e) => ThumbnailMaxHeight.Text = Settings.ThumbnailMaxHeight.ToString();
+            RecentPathsCapacity.Text = Settings.RecentPathsCapacity.ToString(CultureInfo.InvariantCulture);
+            ThumbnailMaxHeight.Text = Settings.ThumbnailMaxHeight.ToString(CultureInfo.InvariantCulture);
+            Settings.ThumbnailMaxHeightData.DataChanged += (sender, e) =>
+                ThumbnailMaxHeight.Text = Settings.ThumbnailMaxHeight.ToString(CultureInfo.InvariantCulture);
             LoadGooBallThumbnail.IsChecked = Settings.LoadGooBallThumbnail;
             ConsoleDebuggerEnabled.IsChecked = Settings.ConsoleDebuggerEnabled;
             var themePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, R.ThemeDirectory);
@@ -25,17 +27,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                                  let name = i.Name.ToLower() where name.EndsWith(R.Baml) || name.EndsWith(R.Xaml)
                                  select i.Name.Substring(0, i.Name.Length - 5)).Distinct();
             LanguageBox.ItemsSource = CultureInfo.GetCultures(CultureTypes.AllCultures).OrderBy(info => info.Name);
-            watcher = new FileSystemWatcher(themePath, R.ThemeWatcherFilter);
+            var watcher = new FileSystemWatcher(themePath, R.ThemeWatcherFilter);
             watcher.Created += UpdateThemes;
             watcher.Deleted += UpdateThemes;
             watcher.Renamed += UpdateThemes;
             watcher.EnableRaisingEvents = true;
+            GC.KeepAlive(watcher);
             Theme.SelectedItem = Settings.Theme;
             LanguageBox.SelectedItem = new CultureInfo(Settings.Language);
             BinFileEditor.Text = Settings.BinFileEditor;
         }
-
-        private readonly FileSystemWatcher watcher;
 
         private void UpdateThemes(object sender, FileSystemEventArgs e)
         {
@@ -84,12 +85,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Settings.BinFileEditor = BinFileEditor.Text;
         }
 
-        private readonly OpenFileDialog openProgramDialog = new OpenFileDialog
-            { Title = Resrc.OpenProgramTitle, Filter = Resrc.OpenProgramFilter, CheckFileExists = true };
+        private readonly CommonOpenFileDialog openProgramDialog = new CommonOpenFileDialog
+            { Title = Resrc.OpenProgramTitle, EnsureFileExists = true };
 
         private void BrowseBinFileEditor(object sender, RoutedEventArgs e)
         {
-            if (openProgramDialog.ShowDialog() == true) BinFileEditor.Text = openProgramDialog.FileName;
+            if (openProgramDialog.ShowDialog() == CommonFileDialogResult.Ok)
+                BinFileEditor.Text = openProgramDialog.FileName;
         }
     }
 }
