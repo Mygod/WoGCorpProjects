@@ -44,6 +44,7 @@
     <s:String x:Key="BatchProcessWarning">But some/all of the {0}s are not processed successfully.</s:String>
     <s:String x:Key="CopyBackupsConfirm">There are some backups in the directory. Would you like to copy them to the new directory?</s:String>
     <s:String x:Key="CopyFailed">Failed to copy files. Please retry.</s:String>
+    <s:String x:Key="CheckForUpdatesFailed">Failed to check for updates.</s:String>
     <s:String x:Key="DecryptDataError">The file isn't a legal XML file.</s:String>
     <s:String x:Key="DefaultModifiedXml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;Modified /&gt;</s:String>
     <s:String x:Key="DeleteBackupConfirm">Make sure to delete</s:String>
@@ -108,6 +109,7 @@
     <s:String x:Key="SearchProfileFinished">Following profiles are found, please select which to be loaded:</s:String>
     <s:String x:Key="TestSelectedGooBalls">Test selected goo balls</s:String>
     <s:String x:Key="UsedTime">Time used:</s:String>
+    <s:String x:Key="UpdatesUnavailable">Updates unavaiable.</s:String>
     <s:String x:Key="WelcomeUseTitle">Welcome to Use</s:String>
     <s:String x:Key="XslTransformFailed">Unable to transform XSL.</s:String>
 
@@ -131,7 +133,7 @@
     <!-- Jump List -->
     <s:String x:Key="JumpListCategory">Utilities</s:String>
     <s:String x:Key="JumpListSelectBinFiles">Edit .bin files</s:String>
-    <s:String x:Key="JumpListTechSupport">Check for updates</s:String>
+    <s:String x:Key="JumpListTechSupport">Tech Support</s:String>
 
     <!-- Exceptions -->
     <s:String x:Key="ExceptionFeaturesXmlVersionIncorrect">The version of Features.xml is incorrect. The current version only support Version {0}.</s:String>
@@ -485,7 +487,8 @@
     <s:String x:Key="Save">&amp;Save</s:String>
     <s:String x:Key="ScaleToFit">Scale to _fit</s:String>
     <s:String x:Key="SetBackupsDirectory">Set _backup store directory</s:String>
-    <s:String x:Key="TechSupportCheckForUpdates">_Tech support &amp; check for updates</s:String>
+    <s:String x:Key="TechSupport">_Tech support</s:String>
+    <s:String x:Key="CheckForUpdates">_Check for Updates</s:String>
     <s:String x:Key="Test">_Test</s:String>
     <s:String x:Key="VisualDebugEnabled">_Enable Visual Debug</s:String>
     <s:String x:Key="Yes">&amp;Yes</s:String>

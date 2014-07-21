@@ -44,6 +44,7 @@
     <s:String x:Key="BatchProcessWarning">但是修改部分{0}/全部{0}时发生了警告</s:String>
     <s:String x:Key="CopyBackupsConfirm">原文件夹下还有备份，是否要复制备份到新文件夹？</s:String>
     <s:String x:Key="CopyFailed">复制时出错，请重试。</s:String>
+    <s:String x:Key="CheckForUpdatesFailed">检查更新失败。</s:String>
     <s:String x:Key="DecryptDataError">不是正确的xml文件。</s:String>
     <s:String x:Key="DefaultModifiedXml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;Modified /&gt;</s:String>
     <s:String x:Key="DeleteBackupConfirm">确认删除</s:String>
@@ -107,6 +108,7 @@
     <s:String x:Key="SearchProfileFailed">无法在默认存档路径任何存档，请手动定位！</s:String>
     <s:String x:Key="SearchProfileFinished">找到以下存档，请选择要加载的存档：</s:String>
     <s:String x:Key="TestSelectedGooBalls">测试选中粘粘球</s:String>
+    <s:String x:Key="UpdatesUnavailable">暂无可用更新。</s:String>
     <s:String x:Key="UsedTime">已用时间：</s:String>
     <s:String x:Key="WelcomeUseTitle">欢迎使用</s:String>
     <s:String x:Key="XslTransformFailed">无法转换 XSL。</s:String>
@@ -131,7 +133,7 @@
     <!-- Jump List -->
     <s:String x:Key="JumpListCategory">实用工具箱</s:String>
     <s:String x:Key="JumpListSelectBinFiles">打开 .bin 文件</s:String>
-    <s:String x:Key="JumpListTechSupport">技术支持 &amp; 检查更新</s:String>
+    <s:String x:Key="JumpListTechSupport">技术支持</s:String>
     
     <!-- Exceptions -->
     <s:String x:Key="ExceptionFeaturesXmlVersionIncorrect">Features.xml版本不正确，当前修改器版本仅支持版本{0}。</s:String>
@@ -437,7 +439,8 @@
     <s:String x:Key="Save">保存(&amp;S)</s:String>
     <s:String x:Key="ScaleToFit">填满窗口(_F)</s:String>
     <s:String x:Key="SetBackupsDirectory">设置备份存放位置</s:String>
-    <s:String x:Key="TechSupportCheckForUpdates">技术支持 &amp; 检查更新(_T)</s:String>
+    <s:String x:Key="TechSupport">技术支持(_T)</s:String>
+    <s:String x:Key="CheckForUpdates">检查更新(_C)</s:String>
     <s:String x:Key="Test">测试(_T)</s:String>
     <s:String x:Key="VisualDebugEnabled">启动可视化调试(_E)</s:String>
     <s:String x:Key="Yes">是(&amp;Y)</s:String>

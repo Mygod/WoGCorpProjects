@@ -69,6 +69,7 @@ namespace Mygod.WorldOfGoo
         public static string BatchProcessWarning { get { return GetString("BatchProcessWarning"); } }
         public static string CopyBackupsConfirm { get { return GetString("CopyBackupsConfirm"); } }
         public static string CopyFailed { get { return GetString("CopyFailed"); } }
+        public static string CheckForUpdatesFailed { get { return GetString("CheckForUpdatesFailed"); } }
         public static string DecryptDataError { get { return GetString("DecryptDataError"); } }
         public static string DefaultModifiedXml { get { return GetString("DefaultModifiedXml"); } }
         public static string DeleteBackupConfirm { get { return GetString("DeleteBackupConfirm"); } }
@@ -136,6 +137,7 @@ namespace Mygod.WorldOfGoo
         public static string SearchProfileFinished { get { return GetString("SearchProfileFinished"); } }
         public static string SearchProfileText { get { return GetString("SearchProfileText"); } }
         public static string TestSelectedGooBalls { get { return GetString("TestSelectedGooBalls"); } }
+        public static string UpdatesUnavailable { get { return GetString("UpdatesUnavailable"); } }
         public static string UsedTime { get { return GetString("UsedTime"); } }
         public static string WelcomeUseTitle { get { return GetString("WelcomeUseTitle"); } }
         public static string WelcomeUse { get { return GetString("WelcomeUse"); } }

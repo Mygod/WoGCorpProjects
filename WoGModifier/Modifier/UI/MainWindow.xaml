@@ -69,7 +69,8 @@
                 <MenuItem Header="{StaticResource MenuQuickHelp}" Command="Help" />
                 <MenuItem Header="{StaticResource MenuGetHelp}" Command="ui:Commands.DetailedHelp" />
                 <Separator />
-                <MenuItem Header="{StaticResource TechSupportCheckForUpdates}" Click="TechSupportCheckForUpdates" />
+                <MenuItem Header="{StaticResource TechSupport}" Click="TechSupport" />
+                <MenuItem Header="{StaticResource CheckForUpdates}" Click="CheckForUpdates" />
                 <MenuItem Header="{StaticResource MenuHelpAbout}" Command="ui:Commands.About" />
             </MenuItem>
         </Menu>

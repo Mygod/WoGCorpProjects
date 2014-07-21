@@ -161,7 +161,7 @@ namespace Mygod.WorldOfGoo.Modifier
             catch (COMException e)
             {
                 Log.Error.Write(e); // sometimes get the error but still succeed... THAT'S INTERSTING!
-                // Dialog.Error(null, Resrc.CopyFailed, e: e);
+                Dialog.Error(null, Resrc.CopyFailed, e: e);
             }
         }
         

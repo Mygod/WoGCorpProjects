@@ -13,6 +13,7 @@ using System.Windows.Shell;
 using System.Xml.Linq;
 using IrrKlang;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Mygod.Net;
 using Mygod.Windows;
 using Mygod.WorldOfGoo.IO;
 using Mygod.WorldOfGoo.Modifier.IO;
@@ -631,9 +632,15 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                                string.Format(Resrc.WelcomeUse, Resrc.Title), Resrc.WelcomeUseTitle);
         }
 
-        private void TechSupportCheckForUpdates(object sender, RoutedEventArgs e)
+        private void TechSupport(object sender, RoutedEventArgs e)
         {
             Process.Start(R.TechSupportUrl);
+        }
+
+        private void CheckForUpdates(object sender, RoutedEventArgs e)
+        {
+            WebsiteManager.CheckForUpdates(() => Dialog.Information(this, Resrc.UpdatesUnavailable),
+                                           exc => Dialog.Error(this, Resrc.CheckForUpdatesFailed, e: exc));
         }
 
         private void About(object sender, ExecutedRoutedEventArgs e)
