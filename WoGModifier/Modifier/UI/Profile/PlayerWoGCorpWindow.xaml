@@ -62,7 +62,7 @@
                         <Grid Name="Ground" x:FieldModifier="private" Height="107.206" IsHitTestVisible="False"
                               m:DragCanvas.CanBeDragged="False" Panel.ZIndex="-2">
                             <Grid.Background>
-                                <ImageBrush ImageSource="pack://application:,,,/WoGModifier;component/Resources/Ground.png"
+                                <ImageBrush ImageSource="/Resources/Ground.png"
                                             TileMode="FlipX" ViewportUnits="Absolute" Stretch="Fill" />
                             </Grid.Background>
                         </Grid>
