@@ -102,36 +102,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\IO\IniFile.cs">
-      <Link>[References]\IniFile.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\Windows\Controls\WorldOfGooCursor.cs">
-      <Link>[References]\WorldOfGooCursor.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\Windows\CurrentApp.cs">
-      <Link>[References]\CurrentApp.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\Windows\CursorWindow.cs">
-      <Link>[References]\CursorWindow.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\Windows\GlassWindow.cs">
-      <Link>[References]\GlassWindow.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\GitHub\MygodLibrary\MygodLibrary\Windows\Input\SystemCursor.cs">
-      <Link>[References]\SystemCursor.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MygodLibrary\MygodLibrary\Helper.cs">
-      <Link>[References]\Helper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MygodLibrary\MygodLibrary\Windows\Controls\AlignableWrapPanel.cs">
-      <Link>[References]\AlignableWrapPanel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MygodLibrary\MygodLibrary\Windows\StartupManager.cs">
-      <Link>[References]\StartupManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MygodLibrary\MygodLibrary\Windows\TreeHelper.cs">
-      <Link>[References]\TreeHelper.cs</Link>
-    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -167,12 +137,6 @@
     <None Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DotNet\Other\ExtendedWPFToolkitSolution\Src\WPFToolkit.Extended\WPFToolkit.Extended.csproj">
-      <Project>{72e591d6-8f83-4d8c-8f67-9c325e623234}</Project>
-      <Name>WPFToolkit.Extended</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
@@ -193,6 +157,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MygodLibrary\MygodLibrary\MygodLibrary.csproj">
+      <Project>{d915ced8-ac3f-40d6-8c95-4d176c924a61}</Project>
+      <Name>MygodLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
