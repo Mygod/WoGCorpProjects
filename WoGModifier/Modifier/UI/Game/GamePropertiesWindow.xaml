@@ -47,8 +47,8 @@
         <Label Content="{StaticResource GamePropertiesUIInset}" Grid.Row="2" Target="{Binding ElementName=UIInset}"  />
         <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" MinWidth="50" Value="{Binding UIInset}"
                             VerticalAlignment="Center" HorizontalAlignment="Left" />
-        
-        <Button Content="{StaticResource Save}" Click="Save" Grid.Row="4" Grid.ColumnSpan="2"
+
+        <Button Content="{StaticResource ContextMenuSave}" Click="Save" Grid.Row="4" Grid.ColumnSpan="2"
                 HorizontalAlignment="Center" />
     </Grid>
 </Window>

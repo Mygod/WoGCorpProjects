@@ -174,8 +174,8 @@
     <s:String x:Key="PlayerPropertiesPlayerName">Player _Name:</s:String>
     <s:String x:Key="PlayerPropertiesTotalPlayTime">Gameplay _time:</s:String>
     <s:String x:Key="PlayerPropertiesiOSFeature">iOS Features (the following data will be lost in PC profile format)</s:String>
-    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">Game Centre Player _Key:</s:String>
-    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">Game Centre _Player Name:</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">G_ame Centre Player Key:</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">Ga_me Centre Player Name:</s:String>
     <s:String x:Key="ProfilePropertiesCountryCode">_Country code:</s:String>
     <s:String x:Key="XslTransformerSource">_Source:</s:String>
     <s:String x:Key="XslTransformerResult">_Result:</s:String>
@@ -206,7 +206,7 @@
     <s:String x:Key="ContextMenuSave">_Save</s:String>
     <s:String x:Key="ContextMenuSaveAs">Save _as...</s:String>
     <s:String x:Key="ContextMenuEditProfile">_Edit profile...</s:String>
-    <s:String x:Key="ContextMenuEditMemory">_Edit memory</s:String>
+    <s:String x:Key="ContextMenuEditMemory">Edit mem_ory</s:String>
     <s:String x:Key="ContextMenuBrowseInExplorer">_View in Explorer</s:String>
     <s:String x:Key="ContextMenuBrowseLevels">Browse _levels</s:String>
     <s:String x:Key="ContextMenuBrowseGooBalls">_Browse goo balls</s:String>
@@ -234,8 +234,8 @@
     <s:String x:Key="ContextMenuEditLevelSceneBin">Edit _scene.bin</s:String>
     <s:String x:Key="ContextMenuEditLevelLevelBin">Edit _level.bin</s:String>
     <s:String x:Key="ContextMenuEditLevelResrcBin">Edit resrc._bin</s:String>
-    <s:String x:Key="ContextMenuCopyLevels">C_opy the display names of the selected levels</s:String>
-    <s:String x:Key="ContextMenuSortLevels">So_rt</s:String>
+    <s:String x:Key="ContextMenuCopyLevels">Cop_y the display names of the selected levels</s:String>
+    <s:String x:Key="ContextMenuSortLevels">S_ort</s:String>
     <s:String x:Key="ContextMenuSearchLevel">Se_arch level...</s:String>
     <s:String x:Key="ContextMenuDeleteLevels">_Delete selected levels...</s:String>
 
@@ -245,7 +245,7 @@
     <s:String x:Key="ContextMenuAddGooBallsToTestLeft" xml:space="preserve">Add </s:String>
     <s:String x:Key="ContextMenuAddGooBallsToTestRight" xml:space="preserve"> of this kind of goo balls to t_est</s:String>
     <s:String x:Key="ContextMenuEditGooBallBallsXmlBin">Edit _balls.xml.bin</s:String>
-    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">Edit _resources.xml.bin</s:String>
+    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">Edit resources._xml.bin</s:String>
     <s:String x:Key="ContextMenuCopyGooBalls">Copy the _IDs of the selected goo balls</s:String>
     <s:String x:Key="ContextMenuDeleteGooBalls">_Delete selected goo balls...</s:String>
 

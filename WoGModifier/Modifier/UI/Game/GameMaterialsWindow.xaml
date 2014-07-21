@@ -104,7 +104,7 @@
         </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="{StaticResource Save}" Command="Save" />
+                <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />
                 <MenuItem Header="{StaticResource ContextMenuEditMaterialsXml}" Click="EditMaterialsXml" />
                 <MenuItem Header="{StaticResource ContextMenuTestMaterial}" Click="TestMaterial" />
                 <Separator />

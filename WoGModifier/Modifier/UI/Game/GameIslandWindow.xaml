@@ -176,7 +176,7 @@
         </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="{StaticResource Save}" Command="Save" />
+                <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />
                 <MenuItem Header="{StaticResource ContextMenuEditIslandXml}" Click="EditIslandXml" />
                 <Separator />
                 <MenuItem Header="{StaticResource ContextMenuEditIslandLevelsName}" Command="ui:Commands.EditItem1" />

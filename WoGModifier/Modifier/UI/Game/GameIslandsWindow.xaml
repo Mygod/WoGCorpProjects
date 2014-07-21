@@ -86,7 +86,7 @@
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuBrowseLevels}" Command="ui:Commands.ControlDefault" />
-                <MenuItem Header="{StaticResource Save}" Command="Save" />
+                <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />
                 <MenuItem Header="{StaticResource ContextMenuEditIslandsXml}" Click="EditIslandsXml" />
                 <Separator />
                 <MenuItem Header="{StaticResource ContextMenuEditIslandsName}" Command="ui:Commands.EditItem1" />

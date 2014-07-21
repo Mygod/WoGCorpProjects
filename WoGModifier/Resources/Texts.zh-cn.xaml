@@ -174,8 +174,8 @@
     <s:String x:Key="PlayerPropertiesPlayerName">玩家名称：(_N)</s:String>
     <s:String x:Key="PlayerPropertiesTotalPlayTime">游戏时长：(_T)</s:String>
     <s:String x:Key="PlayerPropertiesiOSFeature">iOS 功能（以下数据在存储在 PC 格式的存档中时会丢失）</s:String>
-    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">Game Centre 玩家 _ID：</s:String>
-    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">_Game Centre 玩家名：</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerKey">G_ame Centre 玩家 ID：</s:String>
+    <s:String x:Key="PlayerPropertiesGameCentrePlayerName">Ga_me Centre 玩家名：</s:String>
     <s:String x:Key="ProfilePropertiesCountryCode">国家代码：(_C)</s:String>
     <s:String x:Key="XslTransformerSource">原 X_ML：</s:String>
     <s:String x:Key="XslTransformerResult">结果：(_R)</s:String>
@@ -206,7 +206,7 @@
     <s:String x:Key="ContextMenuSave">保存(_S)</s:String>
     <s:String x:Key="ContextMenuSaveAs">另存为(_A)...</s:String>
     <s:String x:Key="ContextMenuEditProfile">手动修改存档内容(_E)</s:String>
-    <s:String x:Key="ContextMenuEditMemory">修改内存(_E)</s:String>
+    <s:String x:Key="ContextMenuEditMemory">修改内存(_O)</s:String>
     <s:String x:Key="ContextMenuBrowseInExplorer">在资源管理器中浏览(_V)</s:String>
     <s:String x:Key="ContextMenuBrowseLevels">浏览关卡(_L)</s:String>
     <s:String x:Key="ContextMenuBrowseGooBalls">浏览粘粘球(_B)</s:String>
@@ -234,8 +234,8 @@
     <s:String x:Key="ContextMenuEditLevelSceneBin">手动修改_scene.bin</s:String>
     <s:String x:Key="ContextMenuEditLevelLevelBin">手动修改_level.bin</s:String>
     <s:String x:Key="ContextMenuEditLevelResrcBin">手动修改resrc._bin</s:String>
-    <s:String x:Key="ContextMenuCopyLevels">复制选中关卡显示名(_O)</s:String>
-    <s:String x:Key="ContextMenuSortLevels">排序/取消排序(_R)</s:String>
+    <s:String x:Key="ContextMenuCopyLevels">复制选中关卡显示名(_Y)</s:String>
+    <s:String x:Key="ContextMenuSortLevels">排序/取消排序(_O)</s:String>
     <s:String x:Key="ContextMenuSearchLevel">搜索关卡(_A)...</s:String>
     <s:String x:Key="ContextMenuDeleteLevels">删除选中关卡(_D)...</s:String>
 
@@ -245,7 +245,7 @@
     <s:String x:Key="ContextMenuAddGooBallsToTestLeft" xml:space="preserve">增加 </s:String>
     <s:String x:Key="ContextMenuAddGooBallsToTestRight" xml:space="preserve"> 个一起同时测试(_E)</s:String>
     <s:String x:Key="ContextMenuEditGooBallBallsXmlBin">手动修改_balls.xml.bin</s:String>
-    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">手动修改_resources.xml.bin</s:String>
+    <s:String x:Key="ContextMenuEditGooBallResourcesXmlBin">手动修改resources._xml.bin</s:String>
     <s:String x:Key="ContextMenuCopyGooBalls">复制选中粘粘球的_ID</s:String>
     <s:String x:Key="ContextMenuDeleteGooBalls">删除选中粘粘球(_D)...</s:String>
 

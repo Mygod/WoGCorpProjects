@@ -34,7 +34,7 @@
         </ListBox.CommandBindings>
         <ListBox.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="{StaticResource Save}" Command="Save" />
+                <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />
                 <MenuItem Header="{StaticResource ContextMenuEditTextXml}" Click="EditTextXml" />
                 <MenuItem Header="{StaticResource ContextMenuProcessTextItem}" Command="ui:Commands.ControlDefault"
                           FontWeight="Bold" />
