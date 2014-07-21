@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoGModifier", "WoGModifier\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MygodLibrary", "..\MygodLibrary\MygodLibrary\MygodLibrary.csproj", "{D915CED8-AC3F-40D6-8C95-4D176C924A61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFToolkit.Extended", "..\..\DotNet\Other\ExtendedWPFToolkitSolution\Src\WPFToolkit.Extended\WPFToolkit.Extended.csproj", "{72E591D6-8F83-4D8C-8F67-9C325E623234}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoGCursor", "WoGCursor\WoGCursor.csproj", "{2AB19B94-FBD6-4BEF-963C-896A78DDC45A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoGCursorInstaller", "WoGCursorInstaller\WoGCursorInstaller.csproj", "{92F32C46-5D71-4890-B286-DF90E1821AAC}"
@@ -75,24 +73,6 @@ Global
 		{D915CED8-AC3F-40D6-8C95-4D176C924A61}.Release|x64.ActiveCfg = Release|Any CPU
 		{D915CED8-AC3F-40D6-8C95-4D176C924A61}.Release|x86.ActiveCfg = Release|x86
 		{D915CED8-AC3F-40D6-8C95-4D176C924A61}.Release|x86.Build.0 = Release|x86
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|Any CPU.Build.0 = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|x64.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.CodeAnalysisDebug|x86.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|x64.ActiveCfg = Release|Any CPU
-		{72E591D6-8F83-4D8C-8F67-9C325E623234}.Release|x86.ActiveCfg = Release|Any CPU
 		{2AB19B94-FBD6-4BEF-963C-896A78DDC45A}.CodeAnalysisDebug|Any CPU.ActiveCfg = Debug|x86
 		{2AB19B94-FBD6-4BEF-963C-896A78DDC45A}.CodeAnalysisDebug|Mixed Platforms.ActiveCfg = Debug|x86
 		{2AB19B94-FBD6-4BEF-963C-896A78DDC45A}.CodeAnalysisDebug|Mixed Platforms.Build.0 = Debug|x86

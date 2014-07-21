@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Closing="BlockClosing"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="510" SizeToContent="Height"
         xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" xmlns:io="clr-namespace:Mygod.WorldOfGoo.IO"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Icon="{x:Static m:CurrentApp.MainIcon}">
+        Icon="{x:Static m:CurrentApp.MainIcon}">
     <Window.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource PlayerPropertiesWindowTitle}" />
@@ -39,17 +39,17 @@
         </TextBox>
         <Label Content="{StaticResource PlayerPropertiesTotalPlayTime}" Grid.Row="1"
                Target="{Binding ElementName=TotalPlaySecondsBox}" />
-        <xctk:IntegerUpDown Name="TotalPlaySecondsBox" x:FieldModifier="private" Grid.Row="1" Grid.Column="1"
-                            VerticalAlignment="Center" Value="{Binding TotalPlaySeconds}" Minimum="0"
-                            IsReadOnly="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled},
-                                                                  Converter={StaticResource NotConverter}}" />
+        <m:IntegerUpDown Name="TotalPlaySecondsBox" x:FieldModifier="private" Grid.Row="1" Grid.Column="1"
+                         VerticalAlignment="Center" Value="{Binding TotalPlaySeconds}" Minimum="0"
+                         IsReadOnly="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled},
+                                                               Converter={StaticResource NotConverter}}" />
         <Label Content="{StaticResource Seconds}" Grid.Row="1" Grid.Column="2" />
         <Label Content="{StaticResource PlayerPropertiesNewlyCollectedGooBalls}" Grid.Row="2"
                Target="{Binding ElementName=NewlyCollectedGooBallsBox}" />
-        <xctk:IntegerUpDown Name="NewlyCollectedGooBallsBox" x:FieldModifier="private" Grid.Row="2" Grid.Column="1"
-                            Grid.ColumnSpan="2" VerticalAlignment="Center" Value="{Binding NewlyCollectedGooBalls}"
-                            IsReadOnly="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled},
-                                Converter={StaticResource NotConverter}}" />
+        <m:IntegerUpDown Name="NewlyCollectedGooBallsBox" x:FieldModifier="private" Grid.Row="2" Grid.Column="1"
+                         Grid.ColumnSpan="2" VerticalAlignment="Center" Value="{Binding NewlyCollectedGooBalls}"
+                         IsReadOnly="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled},
+                                                               Converter={StaticResource NotConverter}}" />
         <Label Content="{StaticResource PlayerPropertiesOnlinePlayerKey}" Grid.Row="3"
                Target="{Binding ElementName=OnlinePlayerKeyBox}" />
         <Grid Row="3" Column="1" ColumnSpan="2">

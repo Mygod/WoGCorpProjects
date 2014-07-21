@@ -2,7 +2,7 @@
                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="600" Width="1000"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Icon="{x:Static m:CurrentApp.MainIcon}"
                xmlns:ui="clr-namespace:Mygod.WorldOfGoo.Modifier.UI" xmlns:io="clr-namespace:Mygod.WorldOfGoo.IO"
-               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Closing="BlockClosing" Loaded="OnLoad">
+               Closing="BlockClosing" Loaded="OnLoad">
     <m:GlassWindow.Title>
         <MultiBinding Converter="{StaticResource TitleAliasFileNameConverter}">
             <Binding Source="{StaticResource PlayerWoGCorpWindowTitle}" />
@@ -154,9 +154,9 @@
             </StackPanel.Resources>
             <Button Click="ScaleToFit" Content="{StaticResource ScaleToFit}" />
             <Button Click="ScaleTo100" Content="_100%" />
-            <xctk:DoubleUpDown MinWidth="50" VerticalAlignment="Center"
-                               Value="{Binding ElementName=ZoomPaner, Path=ContentScale,
-                                               Converter={StaticResource PercentConverter}}" />
+            <m:DoubleUpDown MinWidth="50" VerticalAlignment="Center"
+                            Value="{Binding ElementName=ZoomPaner, Path=ContentScale,
+                                            Converter={StaticResource PercentConverter}}" />
             <TextBlock VerticalAlignment="Center" Text="%" Effect="{DynamicResource GlowingEffect}" />
             <Button Command="ui:Commands.ZoomOut" Content="-" MinWidth="23" />
             <Slider Minimum="1" LargeChange="20" TickFrequency="10" Maximum="200" SmallChange="10"

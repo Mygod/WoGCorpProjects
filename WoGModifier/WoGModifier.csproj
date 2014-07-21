@@ -421,10 +421,6 @@
     <Resource Include="Resources\GooBall.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DotNet\Other\ExtendedWPFToolkitSolution\Src\WPFToolkit.Extended\WPFToolkit.Extended.csproj">
-      <Project>{72e591d6-8f83-4d8c-8f67-9c325e623234}</Project>
-      <Name>WPFToolkit.Extended</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\DotNet\Windows API Code Pack 1.1\source\WindowsAPICodePack\Core\Core.csproj">
       <Project>{2e1fb0df-f9bb-4909-9f32-2d9d022a8e57}</Project>
       <Name>Core</Name>
