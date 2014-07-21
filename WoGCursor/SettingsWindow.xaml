@@ -78,7 +78,7 @@
             <Button Content="Reset _Settings" Click="ResetToDefault" Margin="4,0" />
             <Button Click="Uninstall">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding UACIcon}" Height="16" />
+                    <Image Source="{Binding UacIcon}" Height="16" />
                     <AccessText Text=" _Uninstall" />
                 </StackPanel>
             </Button>

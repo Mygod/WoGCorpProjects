@@ -36,13 +36,13 @@ namespace Mygod.WorldOfGoo.Cursor
             ShrinkRateData.DataChanged += OnPropertyChanged;
             ShowOriginalCursorData.DataChanged += OnPropertyChanged;
             SmootherCurveData.DataChanged += OnPropertyChanged;
-            UACIcon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.SystemIcons.Shield.Handle, Int32Rect.Empty,
+            UacIcon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.SystemIcons.Shield.Handle, Int32Rect.Empty,
                                                           BitmapSizeOptions.FromEmptyOptions());
         }
 
         private static readonly ColorData ForegroundData, BorderData;
-        private static readonly DoubleData ExhaledRadiusData, InhaledRadiusData, BorderThicknessData, BreathDurationData,
-                                           ShrinkRateData;
+        private static readonly DoubleData ExhaledRadiusData, InhaledRadiusData, BorderThicknessData,
+                                           BreathDurationData, ShrinkRateData;
         public static readonly DoubleData RefreshRateData;
         private static readonly Int32Data LengthData;
         public static readonly YesNoData ShowOriginalCursorData;
@@ -50,16 +50,21 @@ namespace Mygod.WorldOfGoo.Cursor
 
         public static Color Foreground { get { return ForegroundData.Get(); } set { ForegroundData.Set(value); } }
         public static Color Border { get { return BorderData.Get(); } set { BorderData.Set(value); } }
-        public static double ExhaledRadius { get { return ExhaledRadiusData.Get(); } set { ExhaledRadiusData.Set(value); } }
-        public static double InhaledRadius { get { return InhaledRadiusData.Get(); } set { InhaledRadiusData.Set(value); } }
-        public static double BorderThickness { get { return BorderThicknessData.Get(); } set { BorderThicknessData.Set(value); } }
-        public static double BreathDuration { get { return BreathDurationData.Get(); } set { BreathDurationData.Set(value); } }
+        public static double ExhaledRadius
+            { get { return ExhaledRadiusData.Get(); } set { ExhaledRadiusData.Set(value); } }
+        public static double InhaledRadius
+            { get { return InhaledRadiusData.Get(); } set { InhaledRadiusData.Set(value); } }
+        public static double BorderThickness
+            { get { return BorderThicknessData.Get(); } set { BorderThicknessData.Set(value); } }
+        public static double BreathDuration
+            { get { return BreathDurationData.Get(); } set { BreathDurationData.Set(value); } }
         public static double ShrinkRate { get { return ShrinkRateData.Get(); } set { ShrinkRateData.Set(value); } }
         public static double RefreshRate { get { return RefreshRateData.Get(); } set { RefreshRateData.Set(value); } }
         public static int Length { get { return LengthData.Get(); } set { LengthData.Set(value); } }
         public static bool ShowOriginalCursor
             { get { return ShowOriginalCursorData.Get(); } set { ShowOriginalCursorData.Set(value); } }
-        public static bool SmootherCurve { get { return SmootherCurveData.Get(); } set { SmootherCurveData.Set(value); } }
+        public static bool SmootherCurve
+            { get { return SmootherCurveData.Get(); } set { SmootherCurveData.Set(value); } }
 
         public static bool AutoStartup
         {
@@ -67,7 +72,7 @@ namespace Mygod.WorldOfGoo.Cursor
             set { StartupManager.SetStartAtWindowsStartup("WoGCursor", value); OnPropertyChanged("AutoStartup"); }
         }
 
-        public static BitmapSource UACIcon { get; private set; }
+        public static BitmapSource UacIcon { get; private set; }
 
         public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
         private static void OnPropertyChanged(string propertyName)

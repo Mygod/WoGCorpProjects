@@ -25,14 +25,16 @@ namespace Mygod.WorldOfGoo.Cursor
             if (e == null || e is ThreadAbortException) return;
             var msg = e.GetMessage();
             File.WriteAllText("crash.log", msg);
-            MessageBox.Show("Something really TERRIBLE happened! Here are the details: (you can see it later in crash.log)"
-                            + Environment.NewLine + msg, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                "Something really TERRIBLE happened! Here are the details: (you can see it later in crash.log)" +
+                Environment.NewLine + msg, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
     public sealed class Program : WindowsFormsApplicationBase
     {
-        private static readonly string RegistryKey = "EnableSecureUIAPaths", RegistryKeyBackup = RegistryKey + "_WoGCursor";
+        private static readonly string RegistryKey = "EnableSecureUIAPaths",
+                                       RegistryKeyBackup = RegistryKey + "_WoGCursor";
 
         [STAThread]
         public static void Main(string[] args)
@@ -58,9 +60,16 @@ namespace Mygod.WorldOfGoo.Cursor
             return false;
         }
 
+        private static readonly string[] Files =
+        {
+            "crash.log", "MygodLibrary.dll", "MygodLibrary.pdb", "Settings.ini",
+            "World of Goo Cursor.exe", "World of Goo Cursor.pdb"
+        };
+
         public static void Uninstall()
         {
-            using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", true))
+            using (var key = Registry.LocalMachine.OpenSubKey
+                                (@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", true))
             {
                 var val = (int)key.GetValue(RegistryKeyBackup, -1);
                 key.DeleteValue(RegistryKeyBackup, false);
@@ -72,12 +81,10 @@ namespace Mygod.WorldOfGoo.Cursor
             store.Remove(new X509Certificate2(CurrentApp.ReadResourceBytes("/Mygod.cer")));
             store.Close();
             MessageBox.Show(@"Uninstallation finished.
-Some files are not deleted. You can delete them manually:"
-                                + ("crash.log,Settings.ini,World of Goo Cursor.exe,World of Goo Cursor.pdb,WPFToolkit.Extended.dll,"
-                                    + "WPFToolkit.Extended.pdb").Split(',')
-                                    .Where(file => File.Exists(Path.Combine(CurrentApp.Directory, file)))
-                                    .Aggregate(string.Empty, (s, n) => s + Environment.NewLine + n),
-                            "Uninstall", MessageBoxButton.OK, MessageBoxImage.Information);
+Some files are not deleted. You can delete them manually:" + 
+                Files.Where(file => File.Exists(Path.Combine(CurrentApp.Directory, file)))
+                     .Aggregate(string.Empty, (s, n) => s + Environment.NewLine + n),
+                "Uninstall", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private static void OnUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
