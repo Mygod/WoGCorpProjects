@@ -67,11 +67,13 @@
   <ItemGroup>
     <Resource Include="World of Goo Cursor.exe" />
     <Resource Include="World of Goo Cursor.pdb" />
-    <Resource Include="WPFToolkit.Extended.dll" />
-    <Resource Include="WPFToolkit.Extended.pdb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MygodLibrary.dll" />
+    <Resource Include="MygodLibrary.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

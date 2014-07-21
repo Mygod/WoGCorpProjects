@@ -17,7 +17,7 @@ namespace Mygod.WorldOfGoo.Cursor.Installer
         private static string Title { get { return Name + " V" + Version; } }
         private static readonly string RegistryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
                                        RegistryKey = "EnableSecureUIAPaths",
-                                       MainProgram = "World of Goo Cursor.exe", Dll = "WPFToolkit.Extended.dll", Pdb = ".pdb";
+                                       MainProgram = "World of Goo Cursor.exe", Dll = "MygodLibrary.dll", Pdb = ".pdb";
 
         private static Stream GetResourceStream(string path)
         {
@@ -52,7 +52,8 @@ The following changes will be applied:
     3. Our awesome certificate will be installed to the Trusted Root Certificate Authority.
 You can revert the changes by clicking Uninstall in the application.
 
-Now press Enter to start install, or press any key else to abort.", (Console.Title = Title).Replace(" Installer", string.Empty));
+Now press Enter to start install, or press any key else to abort.",
+                          (Console.Title = Title).Replace(" Installer", string.Empty));
             var ch = Console.ReadKey().Key;
             Console.WriteLine();
             if (ch != ConsoleKey.Enter)
@@ -66,7 +67,8 @@ Now press Enter to start install, or press any key else to abort.", (Console.Tit
             ExtractResource(Dll);
             ExtractResource(Path.GetFileNameWithoutExtension(Dll) + Pdb);
             Console.WriteLine("Disabling the annoying security setting...");
-            using (var key = Registry.LocalMachine.OpenSubKey(RegistryPath, true) ?? Registry.LocalMachine.CreateSubKey(RegistryPath))
+            using (var key = Registry.LocalMachine.OpenSubKey(RegistryPath, true) ??
+                             Registry.LocalMachine.CreateSubKey(RegistryPath))
             {
                 var val = (int) key.GetValue(RegistryKey, -1);
                 if (val != 0)
