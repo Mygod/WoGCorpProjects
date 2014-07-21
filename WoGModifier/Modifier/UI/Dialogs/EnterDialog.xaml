@@ -9,7 +9,9 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <m:AutoCompleteBox Name="EnterBox" TextChanged="CheckValid" />
-            <Button Content="{StaticResource Browse}" Click="Browse" Visibility="Collapsed" Name="BrowseButton"
+            <m:IntegerUpDown Name="Int32Box" ValueChanged="CheckValid" />
+            <m:DoubleUpDown Name="DoubleBox" ValueChanged="CheckValid" />
+            <Button Content="{StaticResource Browse}" Click="Browse" Name="BrowseButton"
                     Margin="4,0,0,0" Grid.Column="1" />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4">

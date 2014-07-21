@@ -8,6 +8,7 @@
     <s:String x:Key="Backup">备份</s:String>
     <s:String x:Key="Balls">球</s:String>
     <s:String x:Key="Byte">字节</s:String>
+    <s:String x:Key="Cancel">取消</s:String>
     <s:String x:Key="DefaultText">默认文本（英语）</s:String>
     <s:String x:Key="Details">详细信息</s:String>
     <s:String x:Key="Error">错误</s:String>
@@ -348,7 +349,7 @@
     <s:String x:Key="EnterBackupsDirectoryTitle">请选择备份存放文件夹：</s:String>
     <s:String x:Key="EnterBackupNameTitle">请输入备份名：</s:String>
     <s:String x:Key="EnterIDTitle">请输入ID：</s:String>
-    <s:String x:Key="EnterIslandToCopyNumber">请输入要复制到的岛屿序号：（1-5且不能与原岛屿相同）</s:String>
+    <s:String x:Key="EnterIslandToCopyNumber">请输入要复制到的岛屿序号：</s:String>
     <s:String x:Key="EnterNewValueTitle">请输入新值：</s:String>
     
     <!-- ToolTips -->

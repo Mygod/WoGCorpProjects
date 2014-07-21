@@ -96,12 +96,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var island = SelectedIslands.FirstOrDefault();
             if (island == null) return;
-            var str = Dialog.Input(Resrc.EnterIslandToCopyNumber, island.Number.ToString(CultureInfo.InvariantCulture),
+            var str = Dialog.Input(Resrc.EnterIslandToCopyNumber,
+                                   (island.Number % 5 + 1).ToString(CultureInfo.InvariantCulture),
                                    EnterType.Int32, s =>
             {
                 var i = int.Parse(s);
                 return i >= 1 && i <= 5 && i != island.Number;
-            });
+            }, min: island.Number == 1 ? 2 : 1, max: island.Number == 5 ? 4 : 5);
             if (str == null) return;
             var value = int.Parse(str);
             var t = game.Res.Islands[value];

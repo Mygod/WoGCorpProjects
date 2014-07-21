@@ -8,6 +8,7 @@
     <s:String x:Key="Byte">Bytes</s:String>
     <s:String x:Key="Backup">Backup</s:String>
     <s:String x:Key="Balls">balls</s:String>
+    <s:String x:Key="Cancel">Cancel</s:String>
     <s:String x:Key="DefaultText">Default text (English)</s:String>
     <s:String x:Key="Details">Details</s:String>
     <s:String x:Key="Error">Error</s:String>
@@ -348,7 +349,7 @@
     <s:String x:Key="EnterBackupsDirectoryTitle">Please select backup storage directory:</s:String>
     <s:String x:Key="EnterBackupNameTitle">Please enter the name of the backup:</s:String>
     <s:String x:Key="EnterIDTitle">Please enter the ID:</s:String>
-    <s:String x:Key="EnterIslandToCopyNumber">Please enter the number of the island you are going to copy to: (1-5 and can't be same as the source)</s:String>
+    <s:String x:Key="EnterIslandToCopyNumber">Please enter the number of the island you are going to copy to:</s:String>
     <s:String x:Key="EnterNewValueTitle">Please enter the new value:</s:String>
 
     <!-- ToolTips -->

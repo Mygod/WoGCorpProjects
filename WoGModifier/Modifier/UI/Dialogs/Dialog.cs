@@ -64,23 +64,32 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
         internal static string Input(string title, string defaultValue = null, EnterType enterType = EnterType.String, 
                                      Func<string, bool> validCheck = null, IEnumerable list = null,
                                      string displayMemberPath = null, 
-                                     AutoCompleteFilterMode filterMode = AutoCompleteFilterMode.Contains)
+                                     AutoCompleteFilterMode filterMode = AutoCompleteFilterMode.Contains,
+                                     int? min = null, int? max = null)
         {
             var dialog = new EnterDialog
             {
-                Title = title, Accepted = false, Type = enterType, Check = validCheck, 
+                Title = title, Accepted = false, Type = enterType, Check = validCheck, Value = defaultValue,
                 EnterBox =
                 {
-                    Text = defaultValue, ItemsSource = list, FilterMode = filterMode, 
-                    ItemTemplate = DataGridAutoCompleteColumn.GetItemTemplate(displayMemberPath)
-                }, 
+                    ItemsSource = list, FilterMode = filterMode, 
+                    ItemTemplate = DataGridAutoCompleteColumn.GetItemTemplate(displayMemberPath),
+                    Visibility = enterType == EnterType.Int32 || enterType == EnterType.Double
+                                    ? Visibility.Visible : Visibility.Collapsed
+                },
+                Int32Box =
+                {
+                    Visibility = enterType == EnterType.Int32 ? Visibility.Visible : Visibility.Collapsed,
+                    Minimum = min, Maximum = max
+                },
+                DoubleBox = { Visibility = enterType == EnterType.Double ? Visibility.Visible : Visibility.Collapsed },
                 BrowseButton =
                 {
                     Visibility = enterType == EnterType.Directory ? Visibility.Visible : Visibility.Collapsed
                 }
             };
             dialog.ShowDialog();
-            return dialog.Accepted ? dialog.EnterBox.Text : null;
+            return dialog.Accepted ? dialog.Value : null;
         }
 
         public static bool YesNoQuestion(Window parent, string instruction, string text = null, string title = null,
