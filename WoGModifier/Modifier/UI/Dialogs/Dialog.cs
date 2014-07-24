@@ -24,7 +24,8 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             Information(parent, instruction, text, Resrc.Finish);
         }
 
-        public static void Error(Window parent, string pos, string details = null, Exception e = null)
+        public static void Error(Window parent, string pos, string details = null, Exception e = null,
+                                 EventHandler<TaskDialogHyperlinkClickedEventArgs> linkClicked = null)
         {
             Log.Error.Write(e);
             var dialog = new TaskDialog
@@ -36,6 +37,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             {
                 dialog.DetailsCollapsedLabel = dialog.DetailsExpandedLabel = Resrc.ErrorDetailsLabel;
                 dialog.DetailsExpandedText = e.Message;
+            }
+            if (linkClicked != null)
+            {
+                dialog.HyperlinksEnabled = true;
+                dialog.HyperlinkClick += linkClicked;
             }
             dialog.Show();
         }

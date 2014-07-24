@@ -686,8 +686,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var game = Tree.SelectedItem as Game;
             if (game != null)
             {
-                if (!Kernel.Execute((Game)Tree.SelectedItem))
-                    Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
+                Kernel.Execute((Game)Tree.SelectedItem);
                 return;
             }
             var player = Tree.SelectedItem as ProfilePlayer;

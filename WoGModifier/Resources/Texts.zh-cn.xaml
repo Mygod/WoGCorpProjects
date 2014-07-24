@@ -63,6 +63,8 @@
     <s:String x:Key="FeaturesParseError">对不起，读取 Features.xml 时出错！</s:String>
     <s:String x:Key="FeaturesParseErrorDetails">请检查当前根目录下中的 Resources 文件夹中是否存在正确的 Features.xml，否则请重新下载本软件：http://mygod.tk/product/wogmodifier/</s:String>
     <s:String x:Key="GameAlreadyRunning">游戏已经运行，你不能同时启动两个游戏！</s:String>
+    <s:String x:Key="GameVersionObsolete">游戏版本过旧，不支持运行关卡！</s:String>
+    <s:String x:Key="GameVersionObsoleteDetails">请将您的游戏版本更新到 1.20 或更高。您可以&lt;a&gt;点击这里下载并安装 1.30 补丁包&lt;/a&gt;。</s:String>
     <s:String x:Key="GarbageCleanupDone">垃圾清理完成！</s:String>
     <s:String x:Key="GarbageCleanupDetails">共清理了 {0} 垃圾。</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">服务器返回空响应，请稍后再试。</s:String>

@@ -42,8 +42,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void ExecuteLevel(object sender, RoutedEventArgs e)
         {
-            if (!Kernel.Execute(game, SelectedLevels.FirstOrDefault()))
-                Dialog.Information(this, Resrc.GameAlreadyRunning, title: Resrc.Failed);
+            Kernel.Execute(game, SelectedLevels.FirstOrDefault());
         }
 
         private void LevelsOperation(OperationType type)

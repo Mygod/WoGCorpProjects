@@ -47,12 +47,47 @@ namespace Mygod.WorldOfGoo.Modifier
             }
         }
 
-        public static bool Execute(Game game, Level level = null)
+        private static readonly Dictionary<string, bool> VersionCheckedGamePaths = new Dictionary<string, bool>();
+
+        private static bool CheckVersion(string gamePath)
         {
-            var p = game.Execute(Settings.ConsoleDebuggerEnabled, level);
-            if (p == null) return false;
-            if (Settings.ConsoleDebuggerEnabled) new GameDebuggingWindow(game, p).Show();
-            return true;
+            using (var stream = new FileStream(gamePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var buffer = new BufferedStream(stream))
+            using (var reader = new BinaryReader(buffer, Encoding.ASCII))
+            {
+                var length = stream.Length;
+                var c = reader.ReadCharExtended(length);
+                while (c >= 0)  // simplified ac automaton
+                {
+                    var pre = c;
+                    c = reader.ReadCharExtended(length);
+                test:
+                    if (pre != '1' || c != '.') continue;
+                    c = reader.ReadCharExtended(length);
+                    if (c != '0' && c != '1') continue;
+                    pre = c;
+                    if ((c = reader.ReadCharExtended(length)) != '0') goto test;
+                    if ((c = reader.ReadCharExtended(length)) != 'w') continue;
+                    if ((c = reader.ReadCharExtended(length)) != 'i') continue;
+                    if ((c = reader.ReadCharExtended(length)) == 'n') return true;
+                }
+                return false;
+            }
+        }
+
+        public static void Execute(Game game, Level level = null)
+        {
+            if (level != null && (VersionCheckedGamePaths.ContainsKey(game.FilePath)
+                ? VersionCheckedGamePaths[game.FilePath]
+                : (VersionCheckedGamePaths[game.FilePath] = CheckVersion(game.FilePath))))
+                Dialog.Error(null, Resrc.GameVersionObsolete, Resrc.GameVersionObsoleteDetails, linkClicked:
+                    (sender, e) => Process.Start("http://goofans.com/download/utility/world-of-goo-update"));
+            else
+            {
+                var p = game.Execute(Settings.ConsoleDebuggerEnabled, level);
+                if (p == null) Dialog.Information(null, Resrc.GameAlreadyRunning, title: Resrc.Failed);
+                else if (Settings.ConsoleDebuggerEnabled) new GameDebuggingWindow(game, p).Show();
+            }
         }
 
         internal static bool BatchProcessLevel(Level level, IEnumerable<Subfeature> subfeatures, XDocument doc,

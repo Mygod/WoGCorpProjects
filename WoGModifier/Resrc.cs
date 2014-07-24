@@ -90,6 +90,8 @@ namespace Mygod.WorldOfGoo
         public static string FeaturesParseError { get { return GetString("FeaturesParseError"); } }
         public static string FeaturesParseErrorDetails { get { return GetString("FeaturesParseErrorDetails"); } }
         public static string GameAlreadyRunning { get { return GetString("GameAlreadyRunning"); } }
+        public static string GameVersionObsolete { get { return GetString("GameVersionObsolete"); } }
+        public static string GameVersionObsoleteDetails { get { return GetString("GameVersionObsoleteDetails"); } }
         public static string GarbageCleanupDone { get { return GetString("GarbageCleanupDone"); } }
         public static string GarbageCleanupDetails { get { return GetString("GarbageCleanupDetails"); } }
         public static string GenerateOnlinePlayerKeyEmptyResponse

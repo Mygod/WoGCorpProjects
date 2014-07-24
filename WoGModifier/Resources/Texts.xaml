@@ -63,6 +63,8 @@
     <s:String x:Key="FeaturesParseError">Unable to read Features.xml!</s:String>
     <s:String x:Key="FeaturesParseErrorDetails">Please check the file Resources/Features.xml or redownload it here: http://goofans.com/download/utility/world-of-goo-modifier</s:String>
     <s:String x:Key="GameAlreadyRunning">The game is already running! You can't start two games at the same time!</s:String>
+    <s:String x:Key="GameVersionObsolete">The game version is too old to launch levels directly.</s:String>
+    <s:String x:Key="GameVersionObsoleteDetails">Please update your game to 1.20 or later version. You can also &lt;a&gt;click here to download and install 1.30 patch&lt;/a&gt;.</s:String>
     <s:String x:Key="GarbageCleanupDone">Garbage clean-up completed!</s:String>
     <s:String x:Key="GarbageCleanupDetails">{0} garbages has been cleaned.</s:String>
     <s:String x:Key="GenerateOnlinePlayerKeyEmptyResponse">The server returns nothing.</s:String>
