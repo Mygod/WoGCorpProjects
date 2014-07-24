@@ -40,7 +40,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Features.GooBallTestHelper.CreateAt(game.Res.Balls, TestGooBallBox.Text,
                                                 (double) TestGooBallBox.Text.Split(',').LongLength / 20);
             Kernel.Execute(game, Features.GooBallTester.CreateAt
-                (game.Res.Levels, new object[] { Settings.GooBallTesterVisualDebugEnabled }));
+                (game.Res.Levels, new object[] { Settings.GooBallTesterVisualDebugEnabled ? R.True : R.False }));
         }
 
         private void CheckTestGooBall(object sender, RoutedEventArgs e)
