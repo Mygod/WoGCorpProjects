@@ -39,12 +39,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                                                         velocities = new Dictionary<WoGCorpBall, Image>();
         private readonly Dictionary<WoGCorpStrand, Image> strands = new Dictionary<WoGCorpStrand, Image>();
 
-        private void RefreshView()
+        private void RefreshView(bool noShrink = false)
         {
             var strandBalls = player.WoGCorpStrands.Count(strand => strand.IsBall);
             BallCount.Text = (player.WoGCorpStrands.Select(strand => strand.StartPoint)
                 .Union(player.WoGCorpStrands.Select(strand => strand.EndPoint)).Count() + strandBalls) +
                 " / " + (player.WoGCorpBalls.Count + strandBalls);
+            double ix = minX, iy = minY, ax = maxX, ay = maxY;
             if (player.WoGCorpBalls.Count > 0)
             {
                 minY = minX = double.MaxValue;
@@ -67,6 +68,13 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             minY = Math.Min(minY, 0) - Bounds;
             maxX += Bounds;
             maxY = Math.Max(maxY, 0) + Bounds;
+            if (noShrink)
+            {
+                if (minX > ix) minX = ix;
+                if (maxX < ax) maxX = ax;
+                if (minY > iy) minY = iy;
+                if (maxY < ay) maxY = ay;
+            }
             Shower.Width = Math.Abs(maxX - minX);
             Shower.Height = Math.Abs(maxY - minY);
             Ground.Width = Shower.Width;
@@ -243,7 +251,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     var point = e.GetPosition(Shower);
                     ball.CoordinateX = point.X + minX;
                     ball.CoordinateY = Shower.Height - point.Y + minY;
-                    RefreshView();
+                    RefreshView(true);
                     if (Math.Abs(minX - ix) > 1e-4 || Math.Abs(minY - iy) > 1e-4 ||
                         Math.Abs(maxX - ax) > 1e-4 || Math.Abs(maxY - ay) > 1e-4) break;
                     point = image.TranslatePoint(new Point(16, 16), Scroller);
