@@ -785,7 +785,7 @@
 				<Strand gb1="goo3" gb2="goo2" />
 				<Strand gb1="goo9" gb2="goo10" />
 				<Strand gb1="goo4" gb2="goo5" />
-				<BallInstance angle="0" id="gooPopper" type="WogmGooBallTestHelper" x="762.65" y="166.07" />
+				<BallInstance angle="0" id="gooPopper" type="WogmGooBallTestHelper" x="100" y="752.5" />
 			</level>
 		</Level>
 		<Scene>
@@ -810,6 +810,8 @@
 				<rectangle height="57.16" id="geometry4" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" tag="break=1" width="253.54" x="-426.6" y="397.7" />
 				<rectangle height="57.16" id="geometry5" image="IMAGE_UPPERSHAFT_BLASTWALL" imagerot="1.58249003278" rotation="0.0" static="true" width="253.54" x="-421.05" y="247.04" />
 				<line anchor="-31.14,2027.52" id="" normal="0,-1" />
+				<rectangle contacts="false" height="1" id="spawner" mass="100" rotation="0.0" static="false" tag="ballbuster" width="1" x="100" y="755" />
+				<rectangle contacts="false" height="1" id="killer" rotation="0.0" static="true" tag="geomkiller" width="1" x="100" y="750" />
 			</scene>
 		</Scene>
 		<Resrc>
@@ -833,7 +835,7 @@
 	<GooBallTestHelper>
 		<Balls>
 			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
-			<ball contains="{0}" popduration="{1}" mass="30" name="WogmGooBallTestHelper" popparticles="splash" popsound="SOUND_BALL_GENERIC_GLEE1" shape="circle,30" strands="0" walkspeed="0" />
+			<ball contains="{0}" popduration="{1}" popdelay="0.25,0.25" mass="30" name="WogmGooBallTestHelper" popparticles="splash" popsound="SOUND_BALL_GENERIC_GLEE1" shape="circle,30" strands="0" walkspeed="0" />
 		</Balls>
 		<Resources>
 			<!-- This file was created by World of Goo Modifier. Get it now: http://mygod.tk/product/wogmodifier/ -->
