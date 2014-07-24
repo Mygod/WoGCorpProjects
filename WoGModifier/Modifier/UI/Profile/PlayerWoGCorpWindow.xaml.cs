@@ -84,10 +84,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                             Width = 32, Tag = ball, Stretch = Stretch.Fill,
                             RenderTransform = new RotateTransform { CenterX = 16 }
                         };
+                        Panel.SetZIndex(newDs, -1);
                         newDs.PreviewMouseLeftButtonDown += OnBallPress;
                         newDs.PreviewMouseLeftButtonUp += OnBallRelease;
                         velocities.Add(ball, newDs);
-                        Shower.Children.Add(newDs);
+                        if (!Shower.Children.Contains(newDs)) Shower.Children.Add(newDs);
                     }
                     var ds = velocities[ball];
                     Canvas.SetLeft(ds, ball.CoordinateX - 16 - minX);
@@ -96,7 +97,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     transform.Angle = 90 - Math.Atan2(ball.VelocityY, ball.VelocityX) * 180 / Math.PI;
                     transform.CenterY = ds.Height =
                         10 * Math.Sqrt(ball.VelocityX * ball.VelocityX + ball.VelocityY * ball.VelocityY);
-                    Shower.Children.Add(ds);
+                    if (!Shower.Children.Contains(ds)) Shower.Children.Add(ds);
                 }
                 if (!balls.ContainsKey(ball))
                 {
@@ -284,6 +285,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                     var point = e.GetPosition(image);
                     ball.VelocityX = (point.X - 16) / 10;
                     ball.VelocityY = (16 - point.Y) / 10;
+                    image.ReleaseMouseCapture();
                     RefreshView();
                     break;
                 }
