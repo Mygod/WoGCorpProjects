@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -47,16 +46,29 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             }
         }
 
-        private void Load(object sender, RoutedEventArgs e)
+        private void Load(object sender, EventArgs e)
         {
-            EnterBox.SelectAll();
-            EnterBox.Focus();
+            switch (Type)
+            {
+                case EnterType.Int32:
+                    Int32Box.SelectAll();
+                    Int32Box.Focus();
+                    break;
+                case EnterType.Double:
+                    DoubleBox.SelectAll();
+                    DoubleBox.Focus();
+                    break;
+                default:
+                    EnterBox.SelectAll();
+                    EnterBox.Focus();
+                    break;
+            }
         }
 
         private void Accept(object sender, RoutedEventArgs e)
         {
             CheckValid(sender, e);
-            if (!IsValid()) return;
+            if (!ValidCheck) return;
             Accepted = true;
             Close();
         }
@@ -81,17 +93,10 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             }
         }
 
-        private bool IsValid()
-        {
-            if (Type == EnterType.Directory && !Directory.Exists(EnterBox.Text)) return false;
-            return ValidCheck;
-        }
-
         private void CheckValid(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (Type == EnterType.Directory) new DirectoryInfo(EnterBox.Text).GetAccessControl();
                 if (!ValidCheck) throw new FormatException(Resrc.IncorrectInput);
                 OKButton.IsEnabled = true;
                 ErrorMessage.Text = null;

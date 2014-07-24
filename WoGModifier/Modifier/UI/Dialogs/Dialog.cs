@@ -81,7 +81,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
                     ItemsSource = list, FilterMode = filterMode, 
                     ItemTemplate = DataGridAutoCompleteColumn.GetItemTemplate(displayMemberPath),
                     Visibility = enterType == EnterType.Int32 || enterType == EnterType.Double
-                                    ? Visibility.Visible : Visibility.Collapsed
+                                    ? Visibility.Collapsed : Visibility.Visible
                 },
                 Int32Box =
                 {

@@ -189,7 +189,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                                              EnterType.Directory);
                 if (directoryName == null) return;
             }
-            while (new DirectoryInfo(directoryName).Root.FullName ==
+            while (SelectedProfile != null && new DirectoryInfo(directoryName).Root.FullName ==
                    new DirectoryInfo(SelectedProfileDirectory).Root.FullName &&
                    !Dialog.YesNoQuestion(this, Resrc.BackupSameVolume, Resrc.BackupSameVolumeDetails,
                                          yesText: Resrc.Continue, noText: Resrc.Reselect));
@@ -198,6 +198,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                 foreach (Backup backup in BackupList.Items)
                     backup.Info.MoveTo(Path.Combine(directoryName, backup.Info.Name));
             Settings.ProfileBackupsDirectory = directoryName;
+            RefreshFiles();
             Dialog.Finish(window, Resrc.EditBackupsDirectorySuccessfully);
         }
 
