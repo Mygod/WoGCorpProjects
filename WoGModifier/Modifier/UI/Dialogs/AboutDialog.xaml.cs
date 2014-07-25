@@ -21,16 +21,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
                 Logo.Source = new BitmapImage(new Uri("/Resources/Birthday.png", UriKind.Relative));
         }
 
-        private void TechSupport(object sender, RoutedEventArgs e)
-        {
-            Process.Start(R.TechSupportUrl);
-        }
-
-        private void OK(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void EasterEgg(object sender, MouseButtonEventArgs e)
         {
             var random = new Random();
