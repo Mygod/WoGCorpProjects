@@ -638,7 +638,7 @@ TREE_LEVEL_SCENE.add_elements( [
         describe_element( 'slider', groups = 'physic', attributes = [
             reference_attribute( 'body1', mandatory = True,
                 reference_family = 'geometry', reference_world = WORLD_LEVEL ),
-            reference_attribute( 'body2',mandatory = True,
+            reference_attribute( 'body2',
                 reference_family = 'geometry', reference_world = WORLD_LEVEL ),
             dxdy_attribute('axis', mandatory=True),
             real_attribute( 'bounce', allow_empty=True,remove_empty=True),
