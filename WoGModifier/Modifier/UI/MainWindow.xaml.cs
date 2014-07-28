@@ -479,37 +479,46 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void SearchProfile(object sender, ExecutedRoutedEventArgs e)
         {
             string np = Profile.NewVersionProfilePath, op = Profile.OldVersionProfilePath;
-            TaskDialogCommandLink
-                n = np == null ? null : new TaskDialogCommandLink("n", Resrc.ProfileNewVersion + '\n' + np),
-                o = op == null ? null : new TaskDialogCommandLink("o", Resrc.ProfileOldVersion + '\n' + op);
-            if (n == null && o == null) Dialog.Information(this, Resrc.SearchProfileFailed, Resrc.SearchProfileText);
-            else
+            if (np == null && op == null)
             {
-                var dialog = new TaskDialog
+                Dialog.Information(this, Resrc.SearchProfileFailed, Resrc.SearchProfileText);
+                return;
+            }
+            var dialog = new TaskDialog
+            {
+                InstructionText = Resrc.SearchProfileFinished, OwnerWindowHandle = this.GetHwnd(), 
+                Cancelable = true, StandardButtons = TaskDialogStandardButtons.Cancel,
+                Caption = Resrc.Information, Text = Resrc.SearchProfileText
+            };
+            if (np != null)
+            {
+                var link = new TaskDialogCommandLink("n", Resrc.ProfileNewVersion, np);
+                dialog.Controls.Add(link);
+                link.Click += (a, b) => dialog.Close(TaskDialogResult.Yes);
+            }
+            if (op != null)
+            {
+                var link = new TaskDialogCommandLink("o", Resrc.ProfileOldVersion, op);
+                dialog.Controls.Add(link);
+                link.Click += (a, b) => dialog.Close(TaskDialogResult.No);
+                if (np != null)
                 {
-                    InstructionText = Resrc.SearchProfileFinished, OwnerWindowHandle = this.GetHwnd(), 
-                    Cancelable = true, StandardButtons = TaskDialogStandardButtons.Cancel,
-                    Caption = Resrc.Information, Text = Resrc.SearchProfileText
-                };
-                if (n != null)
-                {
-                    dialog.Controls.Add(n);
-                    n.Click += (a, b) => dialog.Close(TaskDialogResult.Yes);
+                    dialog.Controls.Add(link = new TaskDialogCommandLink("b", Resrc.ProfileLoadBoth));
+                    link.Click += (a, b) => dialog.Close(TaskDialogResult.Ok);
                 }
-                if (o != null)
-                {
-                    dialog.Controls.Add(o);
-                    o.Click += (a, b) => dialog.Close(TaskDialogResult.No);
-                }
-                switch (dialog.Show())
-                {
-                    case TaskDialogResult.Yes:
-                        ProcessFile(np);
-                        break;
-                    case TaskDialogResult.No:
-                        ProcessFile(op);
-                        break;
-                }
+            }
+            switch (dialog.Show())
+            {
+                case TaskDialogResult.Yes:
+                    ProcessFile(np);
+                    break;
+                case TaskDialogResult.No:
+                    ProcessFile(op);
+                    break;
+                case TaskDialogResult.Ok:
+                    ProcessFile(np);
+                    ProcessFile(op);
+                    break;
             }
         }
 
