@@ -964,8 +964,8 @@ TREE_BALL_MAIN.add_elements( [
                 bool_attribute( 'eye',category='Eyes', init = 'true',allow_empty=True,remove_empty=True),
                 reference_attribute( 'pupil',category='Eyes', reference_family = 'image', reference_world = WORLD_BALL,allow_empty=True,remove_empty=True),
                 int_attribute( 'pupilinset', category='Eyes',min_value=0, init = '13',allow_empty=True,remove_empty=True),  # [10-116] Median:13 Samples: 13 | 12 | 10 | 14 | 50
-                reallist_attribute( 'xrange', category='Eyes',components=2, init = '-18,0', error_message='Must be in the form MIN,MAX  where Min and Max are both real numbers', allow_empty=True,remove_empty=True),  # Samples: -18,0 | 0,18 | -20,-10 | 10,20 | -90,-70,
-                reallist_attribute( 'yrange', category='Eyes',components=2, init = '-12,12',error_message='Must be in the form MIN,MAX  where Min and Max are both real numbers',allow_empty=True,remove_empty=True),  # Samples: -12,12 | 20,40 | -6,6 | -8,8 | -115,-35
+                reallist_attribute( 'xrange', components=2, init = '-18,0', error_message='Must be in the form MIN,MAX  where Min and Max are both real numbers', allow_empty=True,remove_empty=True),  # Samples: -18,0 | 0,18 | -20,-10 | 10,20 | -90,-70,
+                reallist_attribute( 'yrange', components=2, init = '-12,12',error_message='Must be in the form MIN,MAX  where Min and Max are both real numbers',allow_empty=True,remove_empty=True),  # Samples: -12,12 | 20,40 | -6,6 | -8,8 | -115,-35
             ] ),
             describe_element( 'particles', groups = 'particles', min_occurrence=0, attributes = [
                 reference_attribute( 'effect',  mandatory = True,map_to='id', reference_family = 'effect', reference_world = WORLD_GLOBAL ),
