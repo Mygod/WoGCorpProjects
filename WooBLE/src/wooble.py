@@ -1419,7 +1419,7 @@ class BallWorld(ThingWorld):
 
         if (root.get_native('autoattach',False)) and (root.get_native('strands',0)>0):
             strand = root.find('strand')
-            if strand is None:
+            if False and strand is None: # TODO: Learn how this works...
                 self.addBallError(521,None)
         #low towermass glitch
         if abs(root.get_native('towermass',10))<1:
