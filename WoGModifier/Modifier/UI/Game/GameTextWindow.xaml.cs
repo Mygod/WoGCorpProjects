@@ -40,13 +40,16 @@ namespace Mygod.WorldOfGoo.Modifier.UI
 
         private void ProcessTextItem(object sender, RoutedEventArgs e)
         {
-            foreach (var item in SelectedTextItems) ProcessTextItem(item);
+            foreach (var item in SelectedTextItems)
+            {
+                ProcessTextItem(item);
+                e.Handled = true;
+            }
         }
         public void ProcessTextItem(TextItem item)
         {
             if (!windows.ContainsKey(item)) windows.Add(item, new GameTextItemWindow(item));
             windows[item].Show();
-            windows[item].Activate();
         }
 
         private void SaveText(object sender, ExecutedRoutedEventArgs e)

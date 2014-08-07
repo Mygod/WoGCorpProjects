@@ -58,7 +58,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             {
                 if (!gameIslandWindows.ContainsKey(island)) gameIslandWindows.Add(island, new GameIslandWindow(island));
                 gameIslandWindows[island].Show();
-                gameIslandWindows[island].Activate();
+                e.Handled = true;
             }
         }
 

@@ -620,7 +620,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void Options(object sender, ExecutedRoutedEventArgs e)
         {
             OptionsWindow.Show();
-            OptionsWindow.Activate();
         }
 
         #endregion
@@ -632,7 +631,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void Help(object sender, ExecutedRoutedEventArgs e)
         {
             HelpWindow.Show();
-            HelpWindow.Activate();
         }
         
         private void QuickHelp(object sender, ExecutedRoutedEventArgs e)
@@ -734,11 +732,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var game = Tree.SelectedItem as Game;
             if (game != null)
             {
-                if (gamePropertiesWindows.ContainsKey(game))
-                {
-                    gamePropertiesWindows[game].Show();
-                    gamePropertiesWindows[game].Activate();
-                }
+                if (gamePropertiesWindows.ContainsKey(game)) gamePropertiesWindows[game].Show();
                 else
                 {
                     var win = new GamePropertiesWindow(game);
@@ -750,11 +744,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var profile = Tree.SelectedItem as Profile;
             if (profile != null)
             {
-                if (profilePropertiesWindows.ContainsKey(profile))
-                {
-                    profilePropertiesWindows[profile].Show();
-                    profilePropertiesWindows[profile].Activate();
-                }
+                if (profilePropertiesWindows.ContainsKey(profile)) profilePropertiesWindows[profile].Show();
                 else
                 {
                     var win = new ProfilePropertiesWindow(profile);
@@ -765,11 +755,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             }
             var player = Tree.SelectedItem as ProfilePlayer;
             if (player == null) return;
-            if (playerPropertiesWindows.ContainsKey(player))
-            {
-                playerPropertiesWindows[player].Show();
-                playerPropertiesWindows[player].Activate();
-            }
+            if (playerPropertiesWindows.ContainsKey(player)) playerPropertiesWindows[player].Show();
             else
             {
                 var win = new PlayerPropertiesWindow(player);
@@ -787,11 +773,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             var game = Tree.SelectedItem as Game;
             if (game != null)
             {
-                if (gameLevelsWindows.ContainsKey(game))
-                {
-                    gameLevelsWindows[game].Show();
-                    gameLevelsWindows[game].Activate();
-                }
+                if (gameLevelsWindows.ContainsKey(game)) gameLevelsWindows[game].Show();
                 else
                 {
                     game.Tag = BooleanBox.True;
@@ -812,11 +794,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             {
                 var player = Tree.SelectedItem as ProfilePlayer;
                 if (player == null) return;
-                if (playerLevelsWindows.ContainsKey(player))
-                {
-                    playerLevelsWindows[player].Show();
-                    playerLevelsWindows[player].Activate();
-                }
+                if (playerLevelsWindows.ContainsKey(player)) playerLevelsWindows[player].Show();
                 else
                 {
                     var win = new PlayerLevelsWindow(player);
@@ -839,7 +817,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
                         var win = new GameLevelsWindow(game);
                         gameLevelsWindows.Add(game, win);
                         win.Show();
-                        win.Activate();
                         win.SelectLevel(levels);
                     });
                 });
@@ -847,7 +824,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             else
             {
                 gameLevelsWindows[game].Show();
-                gameLevelsWindows[game].Activate();
                 gameLevelsWindows[game].SelectLevel(levels);
             }
         }
@@ -889,11 +865,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void BrowseGooBalls(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
-            if (gameGooBallsWindows.ContainsKey(game))
-            {
-                gameGooBallsWindows[game].Show();
-                gameGooBallsWindows[game].Activate();
-            }
+            if (gameGooBallsWindows.ContainsKey(game)) gameGooBallsWindows[game].Show();
             else
             {
                 game.Tag = BooleanBox.True;
@@ -916,11 +888,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void BrowseIslands(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
-            if (gameIslandsWindows.ContainsKey(game))
-            {
-                gameIslandsWindows[game].Show();
-                gameIslandsWindows[game].Activate();
-            }
+            if (gameIslandsWindows.ContainsKey(game)) gameIslandsWindows[game].Show();
             else
             {
                 game.Tag = BooleanBox.True;
@@ -943,11 +911,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void BrowseMaterials(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
-            if (gameMaterialsWindows.ContainsKey(game))
-            {
-                gameMaterialsWindows[game].Show();
-                gameMaterialsWindows[game].Activate();
-            }
+            if (gameMaterialsWindows.ContainsKey(game)) gameMaterialsWindows[game].Show();
             else
             {
                 game.Tag = BooleanBox.True;
@@ -969,11 +933,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void BrowseText(object sender, ExecutedRoutedEventArgs e)
         {
             var game = (Game)Tree.SelectedItem;
-            if (gameTextWindows.ContainsKey(game))
-            {
-                gameTextWindows[game].Show();
-                gameTextWindows[game].Activate();
-            }
+            if (gameTextWindows.ContainsKey(game)) gameTextWindows[game].Show();
             else
             {
                 game.Tag = BooleanBox.True;
@@ -1067,7 +1027,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         private void BackupProfile(object sender, ExecutedRoutedEventArgs e)
         {
             BackupProfileWindow.Show();
-            BackupProfileWindow.Activate();
         }
 
         private void EditProfile(object sender, RoutedEventArgs e)
@@ -1123,11 +1082,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         {
             var player = Tree.SelectedItem as ProfilePlayer;
             if (player == null) return;
-            if (playerWoGCorpWindows.ContainsKey(player))
-            {
-                playerWoGCorpWindows[player].Show();
-                playerWoGCorpWindows[player].Activate();
-            }
+            if (playerWoGCorpWindows.ContainsKey(player)) playerWoGCorpWindows[player].Show();
             else
             {
                 var win = new PlayerWoGCorpWindow(player);

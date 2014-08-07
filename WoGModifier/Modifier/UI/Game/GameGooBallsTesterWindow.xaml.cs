@@ -140,7 +140,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             foreach (var ball in ids) TestGooBallBox.Text += numbers + ball + ',';
             CheckTestGooBall();
             Show();
-            Activate();
         }
     }
 }

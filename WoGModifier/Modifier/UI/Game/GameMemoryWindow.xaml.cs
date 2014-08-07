@@ -34,7 +34,6 @@ namespace Mygod.WorldOfGoo.Modifier.UI
         public void Show(Game game)
         {
             Show();
-            Activate();
             FileName.Text = Path.GetFileName(game.FilePath);
             EditEnabled = false;
             timer.IsEnabled = true;
