@@ -9,6 +9,14 @@
             <Binding Path="FilePath" Converter="{StaticResource FileName}" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="Save" Executed="SaveText" />
+        <CommandBinding Command="ui:Commands.ControlDefault" Executed="ProcessTextItem" />
+        <CommandBinding Command="Search" Executed="SearchTextItem" />
+        <CommandBinding Command="ui:Commands.Insert" Executed="AddTextItem" />
+        <CommandBinding Command="Copy" Executed="CopyTextItem" />
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveTextItems" />
+    </Window.CommandBindings>
     <ListBox Name="TextItemList" SelectionMode="Extended" x:FieldModifier="private">
         <ListBox.Resources>
             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
@@ -24,14 +32,6 @@
                 </TextBlock>
             </DataTemplate>
         </ListBox.ItemTemplate>
-        <ListBox.CommandBindings>
-            <CommandBinding Command="Save" Executed="SaveText" />
-            <CommandBinding Command="ui:Commands.ControlDefault" Executed="ProcessTextItem" />
-            <CommandBinding Command="Search" Executed="SearchTextItem" />
-            <CommandBinding Command="ui:Commands.Insert" Executed="AddTextItem" />
-            <CommandBinding Command="Copy" Executed="CopyTextItem" />
-            <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveTextItems" />
-        </ListBox.CommandBindings>
         <ListBox.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />

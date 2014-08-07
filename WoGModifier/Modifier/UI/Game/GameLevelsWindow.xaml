@@ -9,6 +9,18 @@
             <Binding Path="FilePath" Converter="{StaticResource FileName}" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="ui:Commands.Process" Executed="ProcessLevels" />
+        <CommandBinding Command="Undo" Executed="ReverseLevels" />
+        <CommandBinding Command="ui:Commands.Restore" Executed="RestoreLevels" />
+        <CommandBinding Command="ui:Commands.Default" Executed="ExecuteLevel" />
+        <CommandBinding Command="ui:Commands.PlayMusic" Executed="PlayMusic" />
+        <CommandBinding Command="Properties" Executed="LevelsProperties" />
+        <CommandBinding Command="Copy" Executed="CopyLevels" />
+        <CommandBinding Command="ui:Commands.Sort" Executed="SortLevels" />
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteLevels" />
+        <CommandBinding Command="Search" Executed="SearchLevel" />
+    </Window.CommandBindings>
     <ListBox Name="LevelList" SelectionMode="Extended" x:FieldModifier="private">
         <ListBox.Resources>
             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
@@ -23,18 +35,6 @@
                 </TextBlock>
             </DataTemplate>
         </ListBox.ItemTemplate>
-        <ListBox.CommandBindings>
-            <CommandBinding Command="ui:Commands.Process" Executed="ProcessLevels" />
-            <CommandBinding Command="Undo" Executed="ReverseLevels" />
-            <CommandBinding Command="ui:Commands.Restore" Executed="RestoreLevels" />
-            <CommandBinding Command="ui:Commands.Default" Executed="ExecuteLevel" />
-            <CommandBinding Command="ui:Commands.PlayMusic" Executed="PlayMusic" />
-            <CommandBinding Command="Properties" Executed="LevelsProperties" />
-            <CommandBinding Command="Copy" Executed="CopyLevels" />
-            <CommandBinding Command="ui:Commands.Sort" Executed="SortLevels" />
-            <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteLevels" />
-            <CommandBinding Command="Search" Executed="SearchLevel" />
-        </ListBox.CommandBindings>
         <ListBox.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuProcessLevels}" Command="ui:Commands.Process" />

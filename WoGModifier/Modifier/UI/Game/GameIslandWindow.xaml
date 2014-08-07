@@ -11,6 +11,27 @@
             <Binding Path="Number" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="Save" Executed="SaveIsland" CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem1" Executed="EditIslandLevelsName"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem2" Executed="EditIslandLevelsText"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem3" Executed="EditIslandLevelsOCD"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem4" Executed="EditIslandLevelsDepends"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem5" Executed="EditIslandLevelsCutscene"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem6" Executed="EditIslandLevelsOnComplete"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem7" Executed="EditIslandLevelsSkipEndOfLevelSequence"
+                        CanExecute="IslandLevelSelected" />
+        <CommandBinding Command="ui:Commands.Insert" Executed="AddIslandLevel" />
+        <CommandBinding Command="Copy" Executed="CopyIslandLevel" CanExecute="SingleIslandLevelSelected" />
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveIslandLevels"
+                        CanExecute="IslandLevelSelected" />
+    </Window.CommandBindings>
     <DataGrid Name="IslandLevelGrid" x:FieldModifier="private" AutoGenerateColumns="False">
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True">
@@ -153,27 +174,6 @@
                 </DataGridCheckBoxColumn.HeaderStyle>
             </DataGridCheckBoxColumn>
         </DataGrid.Columns>
-        <DataGrid.CommandBindings>
-            <CommandBinding Command="Save" Executed="SaveIsland" CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem1" Executed="EditIslandLevelsName"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem2" Executed="EditIslandLevelsText"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem3" Executed="EditIslandLevelsOCD"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem4" Executed="EditIslandLevelsDepends"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem5" Executed="EditIslandLevelsCutscene"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem6" Executed="EditIslandLevelsOnComplete"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.EditItem7" Executed="EditIslandLevelsSkipEndOfLevelSequence"
-                            CanExecute="IslandLevelSelected" />
-            <CommandBinding Command="ui:Commands.Insert" Executed="AddIslandLevel" />
-            <CommandBinding Command="Copy" Executed="CopyIslandLevel" CanExecute="SingleIslandLevelSelected" />
-            <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveIslandLevels"
-                            CanExecute="IslandLevelSelected" />
-        </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />

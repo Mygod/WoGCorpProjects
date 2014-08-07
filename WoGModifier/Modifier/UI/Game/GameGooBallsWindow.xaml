@@ -13,16 +13,16 @@
         <ui:GooBallThumbnailConverter x:Key="Thumbnail" />
         <ui:GooBallThumbnailHeightConverter x:Key="ThumbnailHeight" />
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ui:Commands.Process" Executed="ProcessGooBalls" />
+        <CommandBinding Command="Undo" Executed="ReverseGooBalls" />
+        <CommandBinding Command="ui:Commands.Restore" Executed="RestoreGooBalls" />
+        <CommandBinding Command="Properties" Executed="GooBallsProperties" />
+        <CommandBinding Command="Copy" Executed="CopyGooBalls" />
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteBalls" />
+    </Window.CommandBindings>
     <ListBox Name="GooBallList" SelectionMode="Extended" x:FieldModifier="private"
              PreviewMouseWheel="GooBallListMouseWheel">
-        <ListBox.CommandBindings>
-            <CommandBinding Command="ui:Commands.Process" Executed="ProcessGooBalls" />
-            <CommandBinding Command="Undo" Executed="ReverseGooBalls" />
-            <CommandBinding Command="ui:Commands.Restore" Executed="RestoreGooBalls" />
-            <CommandBinding Command="Properties" Executed="GooBallsProperties" />
-            <CommandBinding Command="Copy" Executed="CopyGooBalls" />
-            <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteBalls" />
-        </ListBox.CommandBindings>
         <ListBox.Template>
             <ControlTemplate>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

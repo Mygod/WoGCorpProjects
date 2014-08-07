@@ -15,6 +15,16 @@
         <ui:NoDisplayNegativeConverter x:Key="NoDisplayNegative" />
         <ui:LevelsTotalConverter x:Key="LevelsTotal" />
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMostGoos" CanExecute="PlayedLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem2" Executed="EditFewestMoves" CanExecute="PlayedLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem3" Executed="EditFewestSeconds" CanExecute="PlayedLevelSelected" />
+        <CommandBinding Command="ui:Commands.EditItem4" Executed="SkipLevels" CanExecute="PlayedLevelSelected" />
+        <CommandBinding Command="ui:Commands.Insert" Executed="AddPlayedLevel" />
+        <CommandBinding Command="Copy" Executed="CopyPlayedLevel" CanExecute="SinglePlayedLevelSelected" />
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="RemovePlayedLevel"
+                        CanExecute="PlayedLevelSelected" />
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -89,20 +99,6 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
-            <DataGrid.CommandBindings>
-                <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMostGoos"
-                                CanExecute="PlayedLevelSelected" />
-                <CommandBinding Command="ui:Commands.EditItem2" Executed="EditFewestMoves"
-                                CanExecute="PlayedLevelSelected" />
-                <CommandBinding Command="ui:Commands.EditItem3" Executed="EditFewestSeconds"
-                                CanExecute="PlayedLevelSelected" />
-                <CommandBinding Command="ui:Commands.EditItem4" Executed="SkipLevels"
-                                CanExecute="PlayedLevelSelected" />
-                <CommandBinding Command="ui:Commands.Insert" Executed="AddPlayedLevel" />
-                <CommandBinding Command="Copy" Executed="CopyPlayedLevel" CanExecute="SinglePlayedLevelSelected" />
-                <CommandBinding Command="ApplicationCommands.Delete" Executed="RemovePlayedLevel"
-                                CanExecute="PlayedLevelSelected" />
-            </DataGrid.CommandBindings>
             <DataGrid.ContextMenu>
                 <ContextMenu Visibility="{Binding Source={x:Static io:Settings.CheatingFeaturesEnabled},
                                                                    Converter={StaticResource VisibleWhileTrue}}">

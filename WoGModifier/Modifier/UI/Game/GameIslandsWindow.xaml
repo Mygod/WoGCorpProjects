@@ -9,6 +9,16 @@
             <Binding Path="FilePath" Converter="{StaticResource FileName}" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="ui:Commands.ControlDefault" Executed="BrowseIslandLevels"
+                        CanExecute="IslandSelected" />
+        <CommandBinding Command="Save" Executed="SaveIslands" CanExecute="IslandSelected" />
+        <CommandBinding Command="ui:Commands.EditItem1" Executed="EditIslandsName" CanExecute="IslandSelected" />
+        <CommandBinding Command="ui:Commands.EditItem2" Executed="EditIslandsMap" CanExecute="IslandSelected" />
+        <CommandBinding Command="ui:Commands.EditItem3" Executed="EditIslandsIcon" CanExecute="IslandSelected" />
+        <CommandBinding Command="Copy" Executed="CopyIsland" CanExecute="SingleIslandSelected" />
+        <CommandBinding Command="Replace" Executed="SwapIslands" CanExecute="MultipleIslandSelected" />
+    </Window.CommandBindings>
     <DataGrid Name="IslandGrid" x:FieldModifier="private" AutoGenerateColumns="False">
         <DataGrid.Columns>
             <DataGridTextColumn Header="{StaticResource IslandNumber}" Binding="{Binding Number}" IsReadOnly="True">
@@ -73,16 +83,6 @@
                 </m:DataGridAutoCompleteColumn.HeaderStyle>
             </m:DataGridAutoCompleteColumn>
         </DataGrid.Columns>
-        <DataGrid.CommandBindings>
-            <CommandBinding Command="ui:Commands.ControlDefault" Executed="BrowseIslandLevels"
-                            CanExecute="IslandSelected" />
-            <CommandBinding Command="Save" Executed="SaveIslands" CanExecute="IslandSelected" />
-            <CommandBinding Command="ui:Commands.EditItem1" Executed="EditIslandsName" CanExecute="IslandSelected" />
-            <CommandBinding Command="ui:Commands.EditItem2" Executed="EditIslandsMap" CanExecute="IslandSelected" />
-            <CommandBinding Command="ui:Commands.EditItem3" Executed="EditIslandsIcon" CanExecute="IslandSelected" />
-            <CommandBinding Command="Copy" Executed="CopyIsland" CanExecute="SingleIslandSelected" />
-            <CommandBinding Command="Replace" Executed="SwapIslands" CanExecute="MultipleIslandSelected" />
-        </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuBrowseLevels}" Command="ui:Commands.ControlDefault" />

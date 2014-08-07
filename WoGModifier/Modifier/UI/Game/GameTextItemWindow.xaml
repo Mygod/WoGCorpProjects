@@ -9,6 +9,11 @@
             <Binding Path="Parent.Parent.GameParent.FileName" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="ui:Commands.Insert" Executed="AddSpecificLanguageString" />
+        <CommandBinding Command="ApplicationCommands.Delete" CanExecute="SpecificLanguageStringSelected"
+                        Executed="RemoveSpecificLanguageStrings" />
+    </Window.CommandBindings>
     <DataGrid Name="SpecificLanguageStringGrid" x:FieldModifier="private" AutoGenerateColumns="False">
         <DataGrid.Columns>
             <DataGridTextColumn Header="{StaticResource LanguageID}" Binding="{Binding Language}" IsReadOnly="True">
@@ -44,11 +49,6 @@
                 </DataGridTextColumn.HeaderStyle>
             </DataGridTextColumn>
         </DataGrid.Columns>
-        <DataGrid.CommandBindings>
-            <CommandBinding Command="ui:Commands.Insert" Executed="AddSpecificLanguageString" />
-            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="SpecificLanguageStringSelected"
-                            Executed="RemoveSpecificLanguageStrings" />
-        </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuAddSpecificLanguageString}" Command="ui:Commands.Insert" />

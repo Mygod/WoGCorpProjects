@@ -9,6 +9,19 @@
             <Binding Path="FilePath" Converter="{StaticResource FileName}" />
         </MultiBinding>
     </Window.Title>
+    <Window.CommandBindings>
+        <CommandBinding Command="Save" Executed="SaveMaterials" />
+        <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMaterialsFriction"
+                        CanExecute="MaterialSelected" />
+        <CommandBinding Command="ui:Commands.EditItem2" Executed="EditMaterialsBounce" CanExecute="MaterialSelected" />
+        <CommandBinding Command="ui:Commands.EditItem3" Executed="EditMaterialsMinimumBounceVelocity"
+                        CanExecute="MaterialSelected" />
+        <CommandBinding Command="ui:Commands.EditItem4" Executed="EditMaterialsStickiness"
+                        CanExecute="MaterialSelected" />
+        <CommandBinding Command="ui:Commands.Insert" Executed="AddMaterial" />
+        <CommandBinding Command="Copy" Executed="CopyMaterial" CanExecute="SingleMaterialSelected" />
+        <CommandBinding Command="ApplicationCommands.Delete" CanExecute="MaterialSelected" Executed="RemoveMaterials" />
+    </Window.CommandBindings>
     <DataGrid Name="MaterialGrid" x:FieldModifier="private" AutoGenerateColumns="False">
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True">
@@ -87,21 +100,6 @@
                 </DataGridTextColumn.HeaderStyle>
             </DataGridTextColumn>
         </DataGrid.Columns>
-        <DataGrid.CommandBindings>
-            <CommandBinding Command="Save" Executed="SaveMaterials" />
-            <CommandBinding Command="ui:Commands.EditItem1" Executed="EditMaterialsFriction"
-                            CanExecute="MaterialSelected" />
-            <CommandBinding Command="ui:Commands.EditItem2" Executed="EditMaterialsBounce"
-                            CanExecute="MaterialSelected" />
-            <CommandBinding Command="ui:Commands.EditItem3" Executed="EditMaterialsMinimumBounceVelocity"
-                            CanExecute="MaterialSelected" />
-            <CommandBinding Command="ui:Commands.EditItem4" Executed="EditMaterialsStickiness"
-                            CanExecute="MaterialSelected" />
-            <CommandBinding Command="ui:Commands.Insert" Executed="AddMaterial" />
-            <CommandBinding Command="Copy" Executed="CopyMaterial" CanExecute="SingleMaterialSelected" />
-            <CommandBinding Command="ApplicationCommands.Delete" CanExecute="MaterialSelected"
-                            Executed="RemoveMaterials" />
-        </DataGrid.CommandBindings>
         <DataGrid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="{StaticResource ContextMenuSave}" Command="Save" />
