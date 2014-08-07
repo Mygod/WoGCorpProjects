@@ -31,6 +31,7 @@ namespace Mygod.WorldOfGoo.Modifier.UI.Dialogs
             var s = new Storyboard {Duration = new Duration(TimeSpan.FromSeconds(1))};
             s.Children.Add(animation);
             s.Begin();
+            if (e.ClickCount >= 5) Logo.Source = Resources["WorldOfGooIcon"] as ImageSource;
         }
     }
 }
