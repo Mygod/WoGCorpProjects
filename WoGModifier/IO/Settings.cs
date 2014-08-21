@@ -27,6 +27,7 @@ namespace Mygod.WorldOfGoo.IO
             ThumbnailMaxHeightData = new DoubleData(settingsSection, "ThumbnailMaxHeight", 48);
             GooBallTesterVisualDebugEnabledData = new BooleanData(settingsSection, "GooBallTesterVisualDebugEnabled",
                                                                   false);
+            SkipFadingOutAnimationData = new BooleanData(settingsSection, "SkipFadingOutAnimation", false);
             ConsoleDebuggerEnabledData = new BooleanData(settingsSection, "ConsoleDebuggerEnabled", false);
             LoadGooBallThumbnailData = new BooleanData(settingsSection, "LoadGooBallThumbnail", true);
             QuickHelpViewedData = new BooleanData(settingsSection, "QuickHelpViewed", false);
@@ -42,8 +43,8 @@ namespace Mygod.WorldOfGoo.IO
         private static readonly StringListData GamePathsData, ProfilePathsData;
         internal static readonly Int32Data RecentPathsCapacityData;
         internal static readonly DoubleData ThumbnailMaxHeightData;
-        private static readonly BooleanData GooBallTesterVisualDebugEnabledData, ConsoleDebuggerEnabledData,
-                                            QuickHelpViewedData;
+        private static readonly BooleanData GooBallTesterVisualDebugEnabledData, SkipFadingOutAnimationData,
+                                            ConsoleDebuggerEnabledData, QuickHelpViewedData;
         internal static readonly BooleanData LoadGooBallThumbnailData;
         internal static readonly StringData ProfileBackupsDirectoryData;
         private static readonly StringData ThemeData, LanguageData, BinFileEditorData;
@@ -65,6 +66,8 @@ namespace Mygod.WorldOfGoo.IO
         }
         internal static bool LoadGooBallThumbnail
             { get { return LoadGooBallThumbnailData.Get(); } set { LoadGooBallThumbnailData.Set(value); } }
+        internal static bool SkipFadingOutAnimation
+            { get { return SkipFadingOutAnimationData.Get(); } set { SkipFadingOutAnimationData.Set(value); } }
         internal static bool ConsoleDebuggerEnabled
             { get { return ConsoleDebuggerEnabledData.Get(); } set { ConsoleDebuggerEnabledData.Set(value); } }
         internal static bool QuickHelpViewed

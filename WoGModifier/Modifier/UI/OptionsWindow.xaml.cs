@@ -65,6 +65,11 @@ namespace Mygod.WorldOfGoo.Modifier.UI
             Settings.LoadGooBallThumbnail = LoadGooBallThumbnail.IsChecked == true;
         }
 
+        private void SkipFadingOutAnimationChanged(object sender, RoutedEventArgs e)
+        {
+            Settings.SkipFadingOutAnimation = SkipFadingOutAnimation.IsChecked == true;
+        }
+
         private void ConsoleDebuggerEnabledChanged(object sender, RoutedEventArgs e)
         {
             Settings.ConsoleDebuggerEnabled = ConsoleDebuggerEnabled.IsChecked == true;

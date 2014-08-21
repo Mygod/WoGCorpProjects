@@ -195,6 +195,7 @@
     <s:String x:Key="MemoryShowBallsInTank">_Show goo balls in the right tank</s:String>
     <s:String x:Key="GooBallTesterVisualDebugEnabled">Enable _visual debugging</s:String>
     <s:String x:Key="OptionsLoadGooBallThumbnail">_Load goo ball thumbnails</s:String>
+    <s:String x:Key="OptionsSkipFadingOutAnimation">_Skip loading texts fading out animation</s:String>
     <s:String x:Key="OptionsConsoleDebuggerEnabled">_Enable console debugger</s:String>
     <s:String x:Key="PlayerPropertiesDeliveranceUnlocked">Unloc_k Deliverance</s:String>
     <s:String x:Key="PlayerPropertiesOnlinePlayEnabled">_Enable online tower building</s:String>

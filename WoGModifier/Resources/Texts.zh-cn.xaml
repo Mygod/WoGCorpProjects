@@ -195,6 +195,7 @@
     <s:String x:Key="MemoryPaused">暂停(_P)</s:String>
     <s:String x:Key="MemoryShowBallsInTank">在右方蓄水池中显示粘粘球(_B)</s:String>
     <s:String x:Key="OptionsLoadGooBallThumbnail">加载粘粘球缩略图(_L)</s:String>
+    <s:String x:Key="OptionsSkipFadingOutAnimation">跳过加载文字淡出动画(_S)</s:String>
     <s:String x:Key="OptionsConsoleDebuggerEnabled">启用控制台调试器(_E)</s:String>
     <s:String x:Key="PlayerPropertiesDeliveranceUnlocked">解禁解救数据(_K)</s:String>
     <s:String x:Key="PlayerPropertiesOnlinePlayEnabled">启用在线搭塔(_E)</s:String>

@@ -84,7 +84,7 @@ namespace Mygod.WorldOfGoo.Modifier
                     (sender, e) => Process.Start("http://goofans.com/download/utility/world-of-goo-update"));
             else
             {
-                var p = game.Execute(Settings.ConsoleDebuggerEnabled, level);
+                var p = game.Execute(Settings.SkipFadingOutAnimation, Settings.ConsoleDebuggerEnabled, level);
                 if (p == null) Dialog.Information(null, Resrc.GameAlreadyRunning, title: Resrc.Failed);
                 else if (Settings.ConsoleDebuggerEnabled) new GameDebuggingWindow(game, p).Show();
             }

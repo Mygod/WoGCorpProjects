@@ -53,6 +53,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Description" />
@@ -67,7 +68,11 @@
                               Checked="LoadGooBallThumbnailChanged" Unchecked="LoadGooBallThumbnailChanged"
                               Content="{StaticResource OptionsLoadGooBallThumbnail}" />
 
-                    <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Name="ConsoleDebuggerEnabled" x:FieldModifier="private"
+                    <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Name="SkipFadingOutAnimation" x:FieldModifier="private"
+                              Checked="SkipFadingOutAnimationChanged" Unchecked="SkipFadingOutAnimationChanged"
+                              Content="{StaticResource OptionsSkipFadingOutAnimation}" />
+
+                    <CheckBox Grid.Row="3" Grid.ColumnSpan="2" Name="ConsoleDebuggerEnabled" x:FieldModifier="private"
                               Checked="ConsoleDebuggerEnabledChanged" Unchecked="ConsoleDebuggerEnabledChanged"
                               Content="{StaticResource OptionsConsoleDebuggerEnabled}" />
                 </Grid>

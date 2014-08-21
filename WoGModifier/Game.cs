@@ -106,12 +106,13 @@ namespace Mygod.WorldOfGoo
             }
         }
 
-        public Process Execute(bool outputConsole = false, Level levelToExecute = null)
+        public Process Execute(bool skipFadingOut = false, bool outputConsole = false, Level levelToExecute = null)
         {
             var fileName = Path.GetFileNameWithoutExtension(FilePath) ?? string.Empty;
             if (Process.GetProcessesByName(fileName).LongLength > 0) return null;
             return Process.Start(new ProcessStartInfo("cmd", "/c \"" + FilePath + "\" " +
                 (levelToExecute == null ? string.Empty : levelToExecute.ID) +
+                (skipFadingOut ? " -fastload" : string.Empty) +
                 (outputConsole ? '>' + R.ConsoleOutput : string.Empty))
                     { WorkingDirectory = DirectoryPath, CreateNoWindow = true, UseShellExecute = false });
         }
