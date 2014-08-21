@@ -168,7 +168,7 @@
     <s:String x:Key="GamePropertiesUIInset">_UI inset:</s:String>
     <s:String x:Key="GameGooBallsTesterGooBallsToTest">_Goo balls to test:</s:String>
     <s:String x:Key="MovesUsed" xml:space="preserve">Moves used: </s:String>
-    <s:String x:Key="OptionsRecentPathsCapacity">Recent paths capacity: </s:String>
+    <s:String x:Key="OptionsRecentPathsCapacity">_Recent paths capacity: </s:String>
     <s:String x:Key="OptionsThumbnailMaxHeight">Maximum _height of the thumbnail:</s:String>
     <s:String x:Key="OptionsTheme">_Theme: (reboot is needed)</s:String>
     <s:String x:Key="OptionsLanguage">_Language: (reboot is needed)</s:String>
