@@ -172,7 +172,7 @@
     <s:String x:Key="OptionsThumbnailMaxHeight">缩略图最大高度：(_H)</s:String>
     <s:String x:Key="OptionsTheme">主题：(_T)（重新启动生效）</s:String>
     <s:String x:Key="OptionsLanguage">语言：(_L)（重新启动生效）</s:String>
-    <s:String x:Key="OptionsBinFileEditor">._bin文件编辑器：</s:String>
+    <s:String x:Key="OptionsBinFileEditor">.bi_n 文件编辑器：</s:String>
     <s:String x:Key="PlayerPropertiesNewlyCollectedGooBalls">新收集的粘粘球：(_C)</s:String>
     <s:String x:Key="PlayerPropertiesOnlinePlayerKey">玩家在线认证码：(_O)</s:String>
     <s:String x:Key="PlayerPropertiesGenerateOnlinePlayerKey">生成玩家在线认证码(_G)</s:String>

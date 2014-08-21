@@ -172,7 +172,7 @@
     <s:String x:Key="OptionsThumbnailMaxHeight">Maximum _height of the thumbnail:</s:String>
     <s:String x:Key="OptionsTheme">_Theme: (reboot is needed)</s:String>
     <s:String x:Key="OptionsLanguage">_Language: (reboot is needed)</s:String>
-    <s:String x:Key="OptionsBinFileEditor">._bin file editor:</s:String>
+    <s:String x:Key="OptionsBinFileEditor">.bi_n file editor:</s:String>
     <s:String x:Key="PlayerPropertiesNewlyCollectedGooBalls">Newly _collected goo balls:</s:String>
     <s:String x:Key="PlayerPropertiesOnlinePlayerKey">_Online player key:</s:String>
     <s:String x:Key="PlayerPropertiesGenerateOnlinePlayerKey">_Generate Online player key</s:String>
