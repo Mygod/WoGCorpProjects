@@ -3423,12 +3423,7 @@ class MainWindow(QtGui.QMainWindow):
         self.mdiArea.setViewMode(QtGui.QMdiArea.TabbedView)
         for thing in self.mdiArea.findChildren(QtGui.QTabBar):
             thing.setTabsClosable(True)
-            self.connect ( thing, QtCore.SIGNAL("tabCloseRequested(int)"), self.on_closeTab )
         self.setCentralWidget(self.mdiArea)
-
-    def on_closeTab(self,index):
-        sub = self.mdiArea.subWindowList()[index]
-        sub.close()
 
     def createActions(self):
         self.changeWOGDirAction = qthelper.action( self, handler = self.changeWOGDir,
