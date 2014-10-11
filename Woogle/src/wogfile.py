@@ -160,7 +160,7 @@ def make_aes_cipher():
         return ''.join( binary_key )
     
     binary_key = key_as_binary( key )
-    cipher = AES.new(binary_key, AES.MODE_CBC)
+    cipher = AES.new(binary_key, AES.MODE_CBC, b'\0' * AES.block_size)
     return cipher
 
 def encrypt_file_data( output_path, xml_data ):
