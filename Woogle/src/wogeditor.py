@@ -56,7 +56,7 @@ APP_NAME_UPPER = 'WOOGLE'
 APP_NAME_LOWER = 'woogle'
 APP_NAME_PROPER = 'WooGLE'
 STR_DIR_STUB='levels'
-CURRENT_VERSION = "v0.78 RC6"
+CURRENT_VERSION = "v0.78 RC7"
 CREATED_BY = '<!-- Created by ' + APP_NAME_PROPER + ' ' + CURRENT_VERSION + ' -->\n'
 ISSUE_LEVEL_NONE = 0
 ISSUE_LEVEL_ADVICE = 1
@@ -2850,7 +2850,7 @@ class MainWindow(QtGui.QMainWindow):
             dialog = QtGui.QDialog()
             ui = newleveldialog_ui.Ui_NewLevelDialog()
             ui.setupUi( dialog )
-            reg_ex = QtCore.QRegExp( '[A-Za-z][0-9A-Za-z][0-9A-Za-z]+' )
+            reg_ex = QtCore.QRegExp( '[0-9A-Za-z_]+' )
             validator = QtGui.QRegExpValidator( reg_ex, dialog )
             ui.levelName.setValidator( validator )
             if is_cloning:
