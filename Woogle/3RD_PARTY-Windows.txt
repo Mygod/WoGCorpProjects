@@ -1,22 +1,29 @@
 Below is a list of all the third-parties useful to develop on World of Goo Level Editor (WooGLE)
 
-All binary are 32bits Windows executable for python 2.6
+All binary are 32bits Windows executable for python 2.x
 
 This includes (listed in installation order):
-* Python 2.6.5
-  python-2.6.5.msi: from http://www.python.org
+* Microsoft Visual C++ 2008 Redistributable Package (x86)
+  http://www.microsoft.com/en-us/download/details.aspx?id=29
 
-* pycrypto libraries
-	 pycrypto-2.0.1.win32-py2.6.exe
-	 http://www.amk.ca/
+* Python 2.x
+  https://www.python.org/downloads/
 
-* PyQt v4.7.3
-  	PyQt-Py2.6-gpl-4.7.3-2.exe
-        from http://www.riverbankcomputing.co.uk/software/pyqt/download
+* py2exe
+  http://sourceforge.net/projects/py2exe/files/py2exe/
+
+* PyCrypto for Python 2.x
+  http://www.voidspace.org.uk/python/modules.shtml#pycrypto
+
+* PyQt4 for Python 2.x
+  http://sourceforge.net/projects/pyqt/files/PyQt4/
 
 Running from source:
 cd src
 python wogeditor.py
+
+Q: `error: [Errno 2] No such file or directory: 'MSVCP90.dll'`
+A: Copy `msvc?90.dll` in `%programfiles%\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT` or `%windir%\winsxs\x86_microsoft.vc90.crt_*` to `<Python 2.x Path>\DLLs`.
 
 
 Compiling source to exe
