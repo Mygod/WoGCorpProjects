@@ -244,6 +244,8 @@ TREE_LEVEL_GAME.add_elements( [
         rgb_attribute( 'cursor2color', default = (255,255,255) ),
         rgb_attribute( 'cursor3color', default = (255,255,255) ),
         rgb_attribute( 'cursor4color', default = (255,255,255) ),
+        real_attribute( 'retrytime', default = 0 ,allow_empty = True,remove_empty=True ),
+        real_attribute( 'zoomoutlimit', default = 0 ,allow_empty = True,remove_empty=True ),
         ],
         elements = [
         describe_element( 'camera', exact_occurrence = 2, groups = 'camera', attributes = [
