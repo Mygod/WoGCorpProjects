@@ -42,5 +42,5 @@ class Ui_NewLevelDialog(object):
     def retranslateUi(self, NewLevelDialog):
         NewLevelDialog.setWindowTitle(QtGui.QApplication.translate("NewLevelDialog", "Create New Level", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("NewLevelDialog", "&New level name (directory name):", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("NewLevelDialog", "(Letters, Numbers and \"_\" only - Must begin with a letter)", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("NewLevelDialog", "(Letters, Numbers and \"_\" only)", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -37,7 +37,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>(Letters, Numbers and "_" only - Must begin with a letter)</string>
+      <string>(Letters, Numbers and "_" only)</string>
      </property>
     </widget>
    </item>
