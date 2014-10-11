@@ -138,7 +138,7 @@ namespace Mygod.WorldOfGoo.Modifier
                 MainWindow.ActivateAndLoadPaths(false, true);
                 MainWindow.Show();
             }
-            else MainWindow.ActivateAndLoadPaths();
+            else if (MainWindow != null) MainWindow.ActivateAndLoadPaths();
         }
 
         private void ErrorOccurred(object sender, DispatcherUnhandledExceptionEventArgs e)
