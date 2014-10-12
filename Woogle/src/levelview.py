@@ -2398,9 +2398,10 @@ class LevelGraphicView(QtGui.QGraphicsView):
 
         for element in self.__lines:
             item = self._sceneLineBuilder( scene, element )
-            item.setData( KEY_ELEMENT, QtCore.QVariant( element ) )
-            item.setFlag( QtGui.QGraphicsItem.ItemIsSelectable, True )
-            self._items_by_element[element] = item
+            if item is not None:
+                item.setData( KEY_ELEMENT, QtCore.QVariant( element ) )
+                item.setFlag( QtGui.QGraphicsItem.ItemIsSelectable, True )
+                self._items_by_element[element] = item
         
         # Select currently selected item if any
         self._on_selection_change( self.__world.selected_elements, set(), set() )
@@ -2998,22 +2999,8 @@ class LevelGraphicView(QtGui.QGraphicsView):
         """An unbounded physic line. We bound it to the scene bounding rectangle."""
         anchor = self._elementV2Pos( element, 'anchor' )
         normal = self._elementV2Pos( element, 'normal' )
-        # Get scene bounds, compute center point
-        scene_element = self.__world.scene_root
-        scene_center = [(scene_element.get_native('minx',-10000)+scene_element.get_native('maxx',10000))*0.5,
-                 (scene_element.get_native('miny',-10000)+scene_element.get_native('maxy',10001))*0.5]
-        #Compare direction from anchor to scene_center
-        #against Normal
-        anchor2scene = [scene_center[0]-anchor[0],scene_center[1]+anchor[1]]
-        a2slength=vector2d_length(anchor2scene[0],anchor2scene[1])
-        n2length = vector2d_length(normal[0],normal[1])
-        a2sdotn2 = (anchor2scene[0]*normal[0] - anchor2scene[1]*normal[1]) / (a2slength*n2length)
-        #If Normal Points AWAY from scene_center draw in RED
-        if a2sdotn2<0:
-            pen = QtGui.QPen( QtGui.QColor( 255, 0, 0 ) )
-        else:
-            pen = QtGui.QPen( QtGui.QColor( 0, 64, 255 ) )
-            
+        if normal[0] == 0 and normal[1] == 0: return
+        pen = QtGui.QPen( QtGui.QColor( 0, 64, 255 ) )
         pen.setWidth( 5 )
         direction = normal[1], -normal[0]
         scene_rect = scene.sceneRect()

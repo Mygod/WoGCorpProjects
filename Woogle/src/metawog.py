@@ -588,7 +588,7 @@ TREE_LEVEL_SCENE.add_elements( [
             string_attribute( 'id', display_id = True, mandatory = True, 
                               allow_empty = True, init='' ),
             xy_attribute( 'anchor', mandatory = True, init = '0,0' ,position=True),
-            dxdy_attribute( 'normal', mandatory = True, init = '1,0' ),
+            dxdy_attribute( 'normal', mandatory = True, init = '1,0', zero_acceptable=False ),
             reference_attribute( 'material', reference_family = 'material', reference_world = WORLD_GLOBAL,
                                  init = '', allow_empty=True,remove_empty=True ),
            # bool_attribute( 'static', init = 'true' ),

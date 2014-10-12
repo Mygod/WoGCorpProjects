@@ -441,18 +441,27 @@ class ColorAttributeMeta(ComponentsAttributeMeta):
         return None
 
 class Vector2DAttributeMeta(ComponentsAttributeMeta):
-    def __init__( self, name, attribute_type, min_value = None, position = False, **kwargs ):
+    def __init__( self, name, attribute_type, min_value = None, position = False, zero_acceptable = True, **kwargs ):
         ComponentsAttributeMeta.__init__( self, name, attribute_type, error_message =
             'Value must be of the form "X,Y" were X and Y are real number',
             components = 2, **kwargs )
         self.min_value = min_value
         self.position = position
+        self.zero_acceptable = zero_acceptable
         
     def _get_native_component(self, component):
         """Returns a component converted to its python native type.
            The caller handle ValueError conversion error.
         """
         return float(component)
+
+    def  is_valid_value( self, text, world ): #IGNORE:W0613
+        status = ComponentsAttributeMeta.is_valid_value(self, text, world)
+        if status is None and text:
+            values = text.split(',')
+            if float(values[0]) == 0 and float(values[1]) == 0:
+                status = 'Zero vector is not acceptable', {}
+        return status
 
     def  _is_component_valid( self, index, component, world ): #IGNORE:W0613
         try:
