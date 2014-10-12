@@ -45,6 +45,7 @@ ERROR_INFO={0:[ISSUE_LEVEL_NONE,''],
     112:[ISSUE_LEVEL_ADVICE,'Gooballs start above the <tt>targetheight</tt>'],
     113:[ISSUE_LEVEL_CRITICAL,'Signpost %s uses an Ambient Particle effect <tt>%s</tt>'],
     114:[ISSUE_LEVEL_CRITICAL,'Fire object uses an Ambient Particle effect <tt>%s</tt>'],
+    115:[ISSUE_LEVEL_ADVICE,'Using timebug BallInstance might not work properly'],
 
 #Resource Errors
     201:[ISSUE_LEVEL_WARNING,'Image file extensions must be png (lowercase) %s'],

@@ -1607,6 +1607,8 @@ class LevelWorld(ThingWorld):
             x,y = ball.get_native('pos')
             if y>max_ball_height:
                 max_ball_height = y
+            if ball.get('type') == 'TimeBug':
+                self.addLevelError(115, None)
 
         problem_balls=set()
         for strand in root.findall('Strand'):
