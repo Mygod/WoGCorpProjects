@@ -3046,12 +3046,6 @@ class MainWindow(QtGui.QMainWindow):
             minx,maxx = model.scene_root.get_native('minx'),model.scene_root.get_native('maxx')
             miny,maxy = model.scene_root.get_native('miny'),model.scene_root.get_native('maxy')
             #find closest "wall"
-            if exit_posx > maxx or exit_posx<minx or exit_posy>maxy or exit_posy<miny:
-                # exit outside scene bounds warning
-               QtGui.QMessageBox.warning(self, self.tr("Level Exit Outside Scene Bounds!"),
-                              self.tr('The Level Exit is outside the limits of the scene\n'
-                                      'You should correct this, by moving the exit or changing the scene bounds.' ) )
-               return
            
             pipe_element = model.level_root.find('pipe')
             if pipe_element is None:
