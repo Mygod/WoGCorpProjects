@@ -3426,6 +3426,11 @@ class MainWindow(QtGui.QMainWindow):
         self.setCentralWidget(self.mdiArea)
 
     def createActions(self):
+        self.reloadWOGAction = qthelper.action( self, handler = self._reloadGameModel,
+            text = "&Reload World of Goo",
+            shortcut = QtGui.QKeySequence.Refresh,
+            status_tip = "Reload FX, material, global text & resources, balls, levels, etc." )
+
         self.changeWOGDirAction = qthelper.action( self, handler = self.changeWOGDir,
             icon = ":/images/open.png",
             text = "&Change World of Goo directory...",
@@ -3781,6 +3786,7 @@ class MainWindow(QtGui.QMainWindow):
         self.fileMenu.addAction(self.saveAction)
         self.fileMenu.addAction(self.playAction)
         self.fileMenu.addSeparator()
+        self.fileMenu.addAction(self.reloadWOGAction)
         self.fileMenu.addAction(self.changeWOGDirAction)
         self.separatorRecent = self.fileMenu.addSeparator()
         for recentaction in self.recentfile_actions:
