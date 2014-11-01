@@ -1,3 +1,13 @@
+- version 0.78 RC7
+*Fixed: /scene/slider/@body2 is mandatory
+*Added: Allowing '_' in level ID
+*Added: /level/@retrytime, /level/@zoomoutlimit
+*Fixed: Two tabs closed at the same time
+*Added: Reload World of Goo
+*Removed: Check for lines (as it might be expected and can cause some weird bugs)
+*Removed: Check if levelexit is in the bound when making autopipes (as it might be expected)
+*Added: Warning when BallInstance/@type=TimeBug
+
 - version 0.78 RC6
 *Fixed: Error while packing a goomod with new goo balls or Fish in it
 

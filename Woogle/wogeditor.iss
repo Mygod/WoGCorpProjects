@@ -1,6 +1,6 @@
 [Setup]
 AppName=World of Goo Level Editor
-AppVerName=World of Goo Level Editor 0.78 RC6
+AppVerName=World of Goo Level Editor 0.78 RC7
 PrivilegesRequired=poweruser
 DefaultDirName={pf}\WOGCorp\WoGEditor
 DefaultGroupName=WOGCorp
@@ -12,7 +12,7 @@ VersionInfoDescription=World of Goo Level Editor
 ; Mygod EDIT: Compiler forced me to do this
 MinVersion=0,5.0
 SetupIconFile=src\images\wogedit.ico
-OutputBaseFilename=WooGLE-0.78-rc6-setup
+OutputBaseFilename=WooGLE-0.78-rc7-setup
 AlwaysRestart=false
 CreateAppDir=true
 DirExistsWarning=no
