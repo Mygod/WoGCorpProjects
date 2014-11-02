@@ -459,7 +459,7 @@ class Vector2DAttributeMeta(ComponentsAttributeMeta):
         status = ComponentsAttributeMeta.is_valid_value(self, text, world)
         if status is None and text:
             values = text.split(',')
-            if float(values[0]) == 0 and float(values[1]) == 0:
+            if not self.zero_acceptable and float(values[0]) == 0 and float(values[1]) == 0:
                 status = 'Zero vector is not acceptable', {}
         return status
 
